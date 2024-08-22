@@ -1,4 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-dashboard-admin',
@@ -6,10 +10,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-admin.component.css']
 })
 export class DashboardAdminComponent implements OnInit {
+  messageErr= ""
+  public userType: string = '';
+  statistique:any = []; 
+  admindata:any;
 
-  constructor() { }
+  appointement_count: any
+  patient_count: any
+  BLogs_count: any
+  constructor( private route: Router , private auth: AuthService,private usersService: AdminService ) { }
 
   ngOnInit(): void {
-  }
+    this.admindata = JSON.parse( sessionStorage.getItem('admindata') !) ;
+    this.userType = sessionStorage.getItem('user_type') || 'Guest';
 
+    this.usersService.statistique().subscribe(data => {
+      
+      this.statistique = data;
+      this.appointement_count =  this.statistique.apointements;
+      this.patient_count = this.statistique.patients;
+      this.BLogs_count =  this.statistique.blogs;
+    }, (err: HttpErrorResponse) => {
+      this.messageErr = "We don't found any demande in our database";
+    });
+  }
 }

@@ -1,0 +1,11 @@
+.description-content {
+  white-space: normal; /* Allows the text to wrap */
+  word-wrap: break-word; /* Ensures long words or URLs are wrapped */
+  max-width: 200px; /* Limits the width of the description area */
+  padding: 5px; /* Reduces padding for a smaller look */
+  background-color: #f9f9f9; /* Optional: Adds a background color to the description */
+  font-size: 0.875rem; /* Smaller font size for compact appearance */
+  overflow: hidden; /* Hides any overflow text */
+  text-overflow: ellipsis; /* Adds ellipsis (...) to truncated text */
+  line-height: 1.2; /* Adjust line height for compact text */
+}
