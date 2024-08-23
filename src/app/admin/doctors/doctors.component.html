@@ -1,6 +1,9 @@
 <div class="main-wrapper">
     <app-header-admin></app-header-admin>
     <app-sidebar-admin></app-sidebar-admin>
+    <app-spinner [isLoading]="isLoading"></app-spinner>
+    <ng-progress #progressBar></ng-progress>
+    
     <div class="page-wrapper">
         <div class="content">
 
@@ -8,76 +11,99 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard </a></li>
+                            <li class="breadcrumb-item"><a href="doctors.html">Doctors </a></li>
                             <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
-                            <li class="breadcrumb-item active">Admin Dashboard</li>
+                            <li class="breadcrumb-item active">Doctors List</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <div class="good-morning-blk">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="morning-user">
-                            <h2>Good Morning, <span>Mr {{admindata.firstname}} {{admindata.lastname}}</span></h2>
-                            <p>you  are logged in  as <span style="color: #2e37a4;">  <b> {{userType}}  </b></span>Have a nice day at work.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 position-blk">
-                        <div class="morning-img">
-                            <img src="../../../assets/img/morning-img-01.png" alt>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row">
-                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                    <div class="dash-widget">
-                        <div class="dash-boxs comman-flex-center">
-                            <img src="../../../assets/img/icons/calendar.svg" alt>
-                        </div>
-                        <div class="dash-content dash-count">
-                            <h4>Appointments</h4>
-                            <h2><span class="counter-up">{{appointement_count}}</span></h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                    <div class="dash-widget">
-                        <div class="dash-boxs comman-flex-center">
-                            <img src="../../../assets/img/icons/profile-add.svg" alt>
-                        </div>
-                        <div class="dash-content dash-count">
-                            <h4>New Patients</h4>
-                            <h2><span class="counter-up">{{patient_count}}</span></h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                    <div class="dash-widget">
-                        <div class="dash-boxs comman-flex-center">
-                            <img src="../../../assets/img/icons/scissor.svg" alt>
-                        </div>
-                        <div class="dash-content dash-count">
-                            <h4>Analysed Image with IA</h4>
-                            <h2><span class="counter-up">56</span></h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                    <div class="dash-widget">
-                        <div class="dash-boxs comman-flex-center">
-                            <img src="../../../assets/img/icons/empty-wallet.svg" alt>
-                        </div>
-                        <div class="dash-content dash-count">
-                            <h4>Blogs</h4>
-                            <h2><span class="counter-up"> {{BLogs_count}}</span></h2>
+                <div class="col-sm-12">
+                    <div class="card card-table show-entire">
+                        <div class="card-body">
+
+                            <div class="page-table-header mb-2">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <div class="doctor-table-blk">
+                                            <h3>Doctors List</h3>
+                                            <div class="doctor-search-blk">
+                                                <div class="top-nav-search table-search-blk">
+
+                                                    
+                                                    <form>
+                                                        <input type="text" name="role" class="form-control" [(ngModel)]="searchedKeyword"
+                                                            placeholder="Search here">
+                                                        <a class="btn"><img src="assets/img/icons/search-normal.svg"
+                                                                alt></a>
+                                                    </form>
+                                                </div>
+                                                <div class="add-group">
+                                                    <a href="add-doctor.html"
+                                                        class="btn btn-primary add-pluss ms-2"><img
+                                                            src="assets/img/icons/plus.svg" alt></a>
+                                                            <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2" (click)="refreshDoctors()">
+                                                                <img src="assets/img/icons/re-fresh.svg" alt>
+                                                            </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table  *ngIf="!isLoading" class="table border-0 custom-table comman-table datatable mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Location</th>
+                                            <th>Description</th>
+                                            <th>Fix Number</th>
+                                            <th>Email</th>
+                                            <th>Joining Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr  *ngFor="let item of doctors | paginate: { itemsPerPage: 10, currentPage: p }| filter:searchedKeyword; index as i">
+                                            <td class="profile-image"><a><img width="28"
+                                                        height="28" src="{{item.user_image_url}}"
+                                                        class="rounded-circle m-r-5" alt> Dr.  {{item.firstname}} {{item.lastname}}</a></td>
+                                            <td>{{item.location}}</td>
+                                            <td class="description-content">{{item.description}}</td>
+                                            <td><a *ngIf="item.phone_number" href="javascript:;">+{{item.phone_number}}</a>
+                                                <a *ngIf="!item.phone_number" href="javascript:;"> <span style="text-align: center;"> - </span> </a>
+                                            </td>
+                                            <td><a href="mailto:'{{item.email}}'"
+                                                    class="__cf_email__"
+                                                    data-cfemail="e4819c8589948881a48189858d88ca878b89">[email&#160;protected]</a>
+                                            </td>
+                                            <td>{{item.created_at}}</td>
+                                            <td class="text-end">
+                                                <div class="dropdown dropdown-action">
+                                                    <a href="#" class="action-icon dropdown-toggle"
+                                                        data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                            class="fa fa-ellipsis-v"></i></a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <a class="dropdown-item"  (click)="delete(item.id, i)"><i
+                                                                class="fa fa-trash-alt m-r-5"></i> Archiver</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="text-align:right;">
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="notification-box">
             <div class="msg-sidebar notifications msg-noti">
@@ -278,7 +304,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li> 
+                        <li>
                             <a href="chat.html">
                                 <div class="list-item">
                                     <div class="list-left">
@@ -302,5 +328,18 @@
             </div>
         </div>
     </div>
+    <div id="delete_patient" class="modal fade delete-modal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <img src="assets/img/sent.png" alt width="50" height="46">
+                    <h3>Are you sure want to delete this ?</h3>
+                    <div class="m-t-20"> <a href="#" class="btn btn-white" data-bs-dismiss="modal">Close</a>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-overlay" data-reff></div>
 </div>
-<div class="sidebar-overlay" data-reff></div>
