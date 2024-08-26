@@ -13,7 +13,7 @@
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="doctors.html">Doctors </a></li>
                             <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
-                            <li class="breadcrumb-item active">Doctors List</li>
+                            <li class="breadcrumb-item active">Doctors  </li>
                         </ul>
                     </div>
                 </div>
@@ -34,19 +34,21 @@
 
                                                     
                                                     <form>
-                                                        <input type="text" name="role" class="form-control" [(ngModel)]="searchedKeyword"
+                                                        <input type="text" name="role" class="form-control" 
+                                                        [(ngModel)]="searchedKeyword"
+                                                        (ngModelChange)="searchDoctors()"
                                                             placeholder="Search here">
                                                         <a class="btn"><img src="assets/img/icons/search-normal.svg"
                                                                 alt></a>
                                                     </form>
                                                 </div>
                                                 <div class="add-group">
-                                                    <a href="add-doctor.html"
-                                                        class="btn btn-primary add-pluss ms-2"><img
-                                                            src="assets/img/icons/plus.svg" alt></a>
-                                                            <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2" (click)="refreshDoctors()">
-                                                                <img src="assets/img/icons/re-fresh.svg" alt>
-                                                            </a>
+                                                    <a href="javascript:;"  (click)="opendataCSV()" class="btn btn-primary add-pluss ms-2">
+                                                        <img src="assets/img/icons/plus.svg" alt>
+                                                    </a>
+                                                    <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2" (click)="refreshDoctors()">
+                                                        <img src="assets/img/icons/re-fresh.svg" alt>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -68,7 +70,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr  *ngFor="let item of doctors | paginate: { itemsPerPage: 10, currentPage: p }| filter:searchedKeyword; index as i">
+                                        <tr  *ngFor="let item of filteredDoctors | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                                             <td class="profile-image"><a><img width="28"
                                                         height="28" src="{{item.user_image_url}}"
                                                         class="rounded-circle m-r-5" alt> Dr.  {{item.firstname}} {{item.lastname}}</a></td>
