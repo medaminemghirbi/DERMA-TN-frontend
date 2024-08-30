@@ -11,9 +11,9 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="doctors.html">Doctors </a></li>
+                            <li class="breadcrumb-item"><a href="Patients.html">Patients </a></li>
                             <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
-                            <li class="breadcrumb-item active">Doctors  </li>
+                            <li class="breadcrumb-item active">Patients  </li>
                         </ul>
                     </div>
                 </div>
@@ -24,39 +24,30 @@
                     <div class="card card-table show-entire">
                         <div class="card-body">
 
-                            <p *ngIf="last_import.last_run">Last import: {{ last_import.last_run }}</p>
 
                             <div class="page-table-header mb-2">
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <div class="doctor-table-blk">
-                                            <h3>Doctors List</h3>
+                                            <h3>Patients List</h3>
                                             <div class="doctor-search-blk">
                                                 <div class="top-nav-search table-search-blk">
                                                     <form>
                                                         <input type="text" name="role" class="form-control" 
                                                         [(ngModel)]="searchedKeyword"
-                                                        (ngModelChange)="searchDoctors()"
+                                                        (ngModelChange)="searchpatients()"
                                                             placeholder="Search here">
                                                         <a class="btn"><img src="assets/img/icons/search-normal.svg"
                                                                 alt></a>
                                                     </form>
                                                 </div>
                                                 <div class="add-group">
-                                                    <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2" (click)="refreshDoctors()">
+                                                    <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2" (click)="refreshpatients()">
                                                         <img src="assets/img/icons/re-fresh.svg" alt>
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-auto text-end float-end ms-auto download-grp">
-                                        <div class="add-group">
-                                            <a href="javascript:;"  (click)="opendataCSV()" class="btn btn-primary add-pluss ms-2">
-                                                <img src="assets/img/icons/plus.svg" alt>
-                                            </a>    
-
-                                        </div>                                
                                     </div>
                                 </div>
                             </div>
@@ -70,43 +61,19 @@
                                             (click)="sortByName()">
                                                 <img src="assets/img/icons/sort-icon-01.svg" alt>
                                                 <img src="assets/img/icons/sort-icon-02.svg" alt>Name</th>
-                                            <th  (click)="sortByName()">
-                                                <img src="assets/img/icons/sort-icon-01.svg" alt>
-                                                <img src="assets/img/icons/sort-icon-02.svg" alt>
-                                                Location</th>
-                                            <th>Location Description</th>
-                                            <th>Fix Number</th>
+
+                                            <th>Phone Number</th>
                                             <th>Email</th>
                                             <th>Email Confirmed</th>
-
-                                            <th (click)="sortByCreatedAt()">
-                                                <img src="assets/img/icons/sort-icon-01.svg" alt>
-                                                <img src="assets/img/icons/sort-icon-02.svg" alt>Joining Date
-                                            </th>
+                                            <th> Joining Date</th>
                                         </tr>
                                     </thead> 
                                     <tbody>
-                                        <tr  *ngFor="let item of filteredDoctors | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                        <tr  *ngFor="let item of filterdPatients | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                                             <td class="profile-image"><a><img width="28"
                                                         height="28" src="{{item.user_image_url}}"
-                                                        class="rounded-circle m-r-5" alt> Dr.  {{item.firstname}} {{item.lastname}}</a></td>
-                                            <td>{{item.location}}</td>
-                                            <td>
-                                                <div class="accord-btn">
-                                                  <!-- Button to toggle collapse -->
-                                                  <a class="btn btn-primary mb-3" data-bs-toggle="collapse" [attr.href]="'#collapseExample' + i" [attr.aria-expanded]="false" [attr.aria-controls]="'collapseExample' + i">
-                                                    Display Description
-                                                  </a>
-                                                  <!-- Collapsible content -->
-                                                  <div class="collapse" id="collapseExample{{i}}">
-                                                    <div class="card">
-                                                      <div class="description-content">
-                                                        {{item.description}}
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </td>
+                                                        class="rounded-circle m-r-5" alt>  {{item.firstname}} {{item.lastname}}</a></td>
+
                                             <td><a *ngIf="item.phone_number" href="javascript:;">+{{item.phone_number}}</a>
                                                 <a *ngIf="!item.phone_number" href="javascript:;"> <span style="text-align: center;"> - </span> </a>
                                             </td>
