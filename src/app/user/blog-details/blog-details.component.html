@@ -1,0 +1,81 @@
+<div class="main-wrapper">
+    <app-header-admin></app-header-admin>
+    <app-sidebar-admin></app-sidebar-admin>
+    <ng-progress #progressBar></ng-progress>
+    <div class="main-wrapper">
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="blog-view">
+                            <article class="blog blog-single-post">
+                                <h3 class="blog-title">{{ blogDetail?.title }}</h3>
+    
+                                <div class="blog-image">
+                                    <div class="card">
+                                        <div class="card-body card-buttons">
+                                            <div class="blog-content">
+                                                <div class="blog-grp-blk">
+                                                    <div class="blog-img-blk">
+                                                        <a [routerLink]="['/profile', blogDetail?.doctor?.id]">
+                                                            <img class="img-fluid"
+                                                                [src]="blogDetail?.doctor?.user_image_url"
+                                                                alt="Doctor Image">
+                                                        </a>
+                                                        <div class="content-blk-blog ms-2">
+                                                            <h4>
+                                                                <a [routerLink]="['/profile', blogDetail?.doctor?.id]">
+                                                                    Dr. {{ blogDetail?.doctor?.firstname }} {{
+                                                                    blogDetail?.doctor?.lastname }}
+                                                                </a>
+                                                            </h4>
+                                                            <h5>Dermatologue</h5>
+                                                        </div>
+                                                    </div>
+                                                    <span><i class="feather-calendar me-1"></i>{{ blogDetail?.created_at |
+                                                        date:'dd MMM yyyy' }}</span>
+                                                </div>
+                                            </div>
+    
+                                            <div id="carouselExampleIndicators" class="carousel slide carousel-fade"
+                                                data-bs-ride="carousel">
+                                                <ol class="carousel-indicators">
+                                                    <li *ngFor="let image of blogDetail?.image_urls; let i = index"
+                                                        [class.active]="i === 0" [attr.data-bs-slide-to]="i"></li>
+                                                </ol>
+                                                <div class="carousel-inner" role="listbox">
+                                                    <div *ngFor="let image of blogDetail?.image_urls; let i = index"
+                                                        [class.active]="i === 0" class="carousel-item">
+                                                        <img class="d-block img-fluid" [src]="image"
+                                                            alt="Slide {{ i + 1 }}">
+                                                    </div>
+                                                </div>
+                                                <a class="carousel-control-prev" href="#carouselExampleIndicators"
+                                                    role="button" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#carouselExampleIndicators"
+                                                    role="button" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    <p>{{ blogDetail?.content }}</p>
+                                </div>
+                            </article>
+                        </div>
+    
+    
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

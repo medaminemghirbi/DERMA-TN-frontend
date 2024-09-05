@@ -17,6 +17,12 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from "ngx-progressbar/http";
+import { PatientsComponent } from './admin/patients/patients.component';
+import { PlanningComponent } from './admin/planning/planning.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ForumsComponent } from './admin/forums/forums.component';
+import { BlogDetailsComponent } from './user/blog-details/blog-details.component';
+import { BlogsComponent } from './admin/blogs/blogs.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +31,12 @@ import { NgProgressHttpModule } from "ngx-progressbar/http";
     HeaderAdminComponent,
     SidebarAdminComponent,
     DoctorsComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    PatientsComponent,
+    PlanningComponent,
+    ForumsComponent,
+    BlogDetailsComponent,
+    BlogsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +47,8 @@ import { NgProgressHttpModule } from "ngx-progressbar/http";
     NgxPaginationModule,
     Ng2SearchPipeModule,
     NgProgressModule,
+    FullCalendarModule,
+
     NgProgressModule.withConfig({
       color: "#003d99"
     }),

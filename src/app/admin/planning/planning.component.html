@@ -1,0 +1,113 @@
+<div class="main-wrapper">
+    <app-header-admin></app-header-admin>
+    <app-sidebar-admin></app-sidebar-admin>
+
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-8 col-4">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <i class="feather-chevron-right"></i>
+                        </li>
+                        <li class="breadcrumb-item active">All System Appointments</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="staff-search-table">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-xl-4">
+                        <div class="input-block local-forms cal-icon">
+                            <select class="form-control" [(ngModel)]="selectedLocation" id="department"
+                                (ngModelChange)="getDoctorsByLocation($event)">
+                                <option hidden value="" selected>Select Gouvernement</option>
+                                <option *ngFor="let item of locations" [value]="item">{{item}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div *ngIf="doctors.length" class="col-12 col-md-6 col-xl-4">
+                        <div class="input-block local-forms cal-icon">
+                            <select class="form-control" [(ngModel)]="selectedDoctorId" id="doctor"
+                                (ngModelChange)="onDoctorChange($event)">
+                                <option hidden value="" selected>Select Doctor in {{selectedLocation}}</option>
+                                <option *ngFor="let doctor of doctors" [value]="doctor.id">
+                                    Dr. {{doctor.firstname}} {{doctor.lastname}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <h3 *ngIf="selectedDoctorName">All Consultations of {{selectedDoctorName}}</h3>
+
+                <table class="table border-0 custom-table comman-table datatable mb-0">
+                    <thead>
+                        <tr>
+                            <th>Rendez Vous Date</th>
+                            <th>Doctor </th>
+                            <th>Patient</th>
+                            <th> Phone Number</th>
+                            <th>Created Date</th>
+                            <th>Refus Reason</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of doctorAppointements; index as i">
+                            <td class="description-content"><a>{{item.appointment}}</a></td>
+                            <td class="profile-image"><a><img width="28" height="28"
+                                        src="{{item.doctor.user_image_url}}" class="rounded-circle m-r-5" alt> Dr.
+                                    {{item.doctor.firstname}} {{item.doctor.lastname}}
+                                </a></td>
+                            <td class="profile-image"><a><img width="28" height="28"
+                                        src="{{item.patient.user_image_url}}" class="rounded-circle m-r-5" alt>Mr(s)
+                                    {{item.patient.firstname}} {{item.patient.lastname}}
+                                </a></td>
+                            <td>patient : {{item.patient.phone_number}}<br>
+                                doctor : <span *ngIf="item.doctor.phone_number"> {{item.doctor.phone_number}} </span>
+                                <span style="color: rgb(255, 9, 9);" *ngIf="!item.doctor.phone_number">
+
+                                    <i style="color: rgb(255, 9, 9);" class="fa fa-ban" data-bs-toggle="tooltip"
+                                        title="fa fa-check"></i>
+                                    Not Provided </span>
+                            </td>
+                            <td class="description-content"><a>{{item.created_at}}</a></td>
+                            <td class="description-reason"><a *ngIf="item.refus_reason">{{item.refus_reason}}</a>
+                                <a *ngIf="!item.refus_reason">-</a>
+                            </td>
+
+                            <td>
+                                <button *ngIf="item.status =='approved'"
+                                    class="custom-badge status-green ">Accepted</button>
+                                <button *ngIf="item.status =='pending'"
+                                    class="custom-badge status-orange ">Pending</button>
+                                <button *ngIf="item.status =='rejected'"
+                                    class="custom-badge status-red ">Rejected</button>
+                            </td>
+                            <td class="text-end">
+                                <div class="dropdown dropdown-action">
+                                    <a class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                        aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" (click)="downloadPDF(item)" href="javascript:;"><i
+                                                class="feather-download m-r-5"></i> Download Report</a>
+                                        <a class="dropdown-item" *ngIf="!(item.status =='approved')"
+                                            (click)="delete(item.id, i)">
+                                            <i class="fa fa-trash-alt m-r-5"></i>
+                                            Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

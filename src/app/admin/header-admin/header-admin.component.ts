@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header-admin',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderAdminComponent implements OnInit {
 
-  constructor() { }
+  currentuser :any
+  userType :any
+  constructor(  private Auth: AuthService) {
+    this.currentuser = this.Auth.getcurrentuser();
+    this.userType = sessionStorage.getItem('user_type') || 'Guest';
+  }
 
   ngOnInit(): void {
   }
