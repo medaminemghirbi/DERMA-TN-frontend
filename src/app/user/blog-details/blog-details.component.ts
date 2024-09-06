@@ -11,7 +11,6 @@ import { AdminService } from 'src/app/services/admin.service';
 export class BlogDetailsComponent implements OnInit {
   blogDetail: any = [];
   messageErr = '';
-  currentuser: any;
 
   constructor(
     private usersService: AdminService,

@@ -5,7 +5,69 @@
     <div class="page-wrapper">
         <div class="content">
 
-            <p>it works</p>
+            <div class="layout-wrapper layout-content-navbar">
+                <div class="layout-container">
+                    <div class="layout-page">
+                        <div class="content-wrapper">
+                            <div class="container-xxl flex-grow-1 container-p-y">
+
+                                <br>
+                                <div>
+                                    <div id="remote-container">
+                                    </div>
+                                    <div id="local-container">
+                                    </div>
+                                </div>
+                                <main class="content">
+                                    <div class="container p-0">
+                                        <div class="row g-0">
+                                            <div class="col-12 col-lg-7 col-xl-9">
+                                                <div class="widget blog-comments clearfix">
+                                                    <h3>RealTime</h3>
+                                                    <ul class="comments-list">
+                                                        <li *ngFor="let message of messages">
+                                                            <div class="comment">
+                                                                <div class="comment-author">
+                                                                    <a href="profile.html"><img class="avatar" alt
+                                                                            src="{{message.sender.user_image_url}}"></a>
+                                                                </div>
+                                                                <div class="comment-block">
+                                                                    <div class="comment-by">
+                                                                        <div class="week-group">
+                                                                            <h5 class="blog-author-name">{{ message.sender.firstname }} {{ message.sender.lastname }}</h5>
+                                                                            <span class="week-list">{{ message.created_at | date: 'yyyy-MM-dd HH:mm:ss' }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <p>{{ message.body }}</p>
+                                                                    <div *ngIf="(message.images && message.images.length > 0) || (message.message_image_urls && message.message_image_urls.length > 0)">
+                                                                        <img *ngFor="let image of (message.images || message.message_image_urls)" [src]="image" alt="message image" class="img-fluid">
+                                                                    </div>
+                                                                </div>                                                                
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="flex-grow-0 py-3 px-4 border-top">
+                                                    <div class="input-group">
+                                                        <form (submit)="handleSubmit($event)">
+                                                            <input type="text" name="message" #messageInput>
+                                                            <input type="file" (change)="onFilesSelected($event)" multiple #fileInput>
+                                                            <button type="submit">Submit</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </main>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>

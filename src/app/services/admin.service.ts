@@ -70,4 +70,8 @@ export class AdminService {
       const body = { is_verified: true };
       return this.http.patch(url, body);
     }
+
+    get_user_data(id:any){
+      return this.http.get(environment.urlBackend + 'api/v1/users/'+ id);
+    }
 }
