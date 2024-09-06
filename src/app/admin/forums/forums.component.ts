@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,9 +10,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ForumsComponent implements OnInit {
   @ViewChild('messagesContainer') messagesContainer!: ElementRef;
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
   messages: any[] = [];
+  selectedFiles: File[] = [];
   currentuser: any;
-  addmessage: FormGroup;
+  addmessage = this.fb.group({
+    text: ['', [Validators.required]],
+  });
   ws: WebSocket | undefined;
 
   constructor(
@@ -22,9 +27,6 @@ export class ForumsComponent implements OnInit {
     private Auth: AuthService
   ) {
     this.currentuser = this.Auth.getcurrentuser();
-    this.addmessage = this.fb.group({
-      text: ['', [Validators.required]],
-    });
   }
 
   ngOnInit(): void {
@@ -37,7 +39,6 @@ export class ForumsComponent implements OnInit {
 
     this.ws = new WebSocket('ws://localhost:3000/cable');
     this.ws.onopen = () => {
-      console.log('Connected to WebSocket server');
       this.ws?.send(JSON.stringify({
         command: 'subscribe',
         identifier: JSON.stringify({ channel: 'MessagesChannel' })
@@ -47,12 +48,23 @@ export class ForumsComponent implements OnInit {
     this.ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
       if (data.type === 'ping' || data.type === 'welcome' || data.type === 'confirm_subscription') return;
-
+    
       const message = data.message;
-      if (message && !this.messages.some(m => m.id === message.id)) {
-        this.setMessagesAndScrollDown([...this.messages, message]);
+      if (message) {
+        console.log('Received message:', message); // Log message data
+        console.log('Message image URLs:', message.message_image_urls); // Log image URLs
+        if (!this.messages.some(m => m.id === message.id)) {
+          this.setMessagesAndScrollDown([...this.messages, message]);
+        }
       }
     };
+  }
+
+  onFilesSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.selectedFiles = Array.from(input.files);
+    }
   }
 
   async handleSubmit(e: Event) {
@@ -61,20 +73,35 @@ export class ForumsComponent implements OnInit {
     const body = target['message'].value;
     target['message'].value = '';
 
-    const sender_id = this.currentuser.id;
-    await this.http.post('http://localhost:3000/api/v1/messages', {
-      message: { body, sender_id }
-    }).toPromise();
+    const formData = new FormData();
+    formData.append('message[body]', body);
+    this.selectedFiles.forEach((file) => {
+      formData.append('message[images][]', file);
+    });
+    formData.append('message[sender_id]', this.currentuser.id);
+
+    try {
+      await this.http.post('http://localhost:3000/api/v1/messages', formData).toPromise();
+      this.selectedFiles = []; // Clear selected files array
+      this.fileInput.nativeElement.value = ''; // Reset file input
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
   }
 
   async fetchMessages() {
     const url = `http://localhost:3000/api/v1/messages`;
-    const data = await this.http.get<any[]>(url).toPromise();
-    this.setMessagesAndScrollDown(data || []);
+    try {
+      const data = await this.http.get<any[]>(url).toPromise();
+      this.setMessagesAndScrollDown(data || []);
+    } catch (error) {
+      console.error('Error fetching messages:', error);
+    }
   }
 
   setMessagesAndScrollDown(data: any[]) {
     this.messages = data;
+    console.log(this.messages);
     this.resetScroll();
     this.cdr.detectChanges();
   }
