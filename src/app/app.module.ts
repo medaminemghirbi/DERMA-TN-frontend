@@ -20,9 +20,18 @@ import { NgProgressHttpModule } from "ngx-progressbar/http";
 import { PatientsComponent } from './admin/patients/patients.component';
 import { PlanningComponent } from './admin/planning/planning.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { ForumsComponent } from './admin/forums/forums.component';
+import { ForumsComponent } from './shared/spinner/forums/forums.component';
 import { BlogDetailsComponent } from './user/blog-details/blog-details.component';
 import { BlogsComponent } from './admin/blogs/blogs.component';
+import { DashboardDoctorComponent } from './doctor/dashboard-doctor/dashboard-doctor.component';
+import { PlanningDoctorComponent } from './doctor/planning-doctor/planning-doctor.component';
+import { DoctorHeaderComponent } from './doctor/doctor-header/doctor-header.component';
+import { DoctorSidebarComponent } from './doctor/doctor-sidebar/doctor-sidebar.component';
+import { ToastrModule } from 'ngx-toastr';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { AnalyzeImageComponent } from './doctor/analyze-image/analyze-image.component';
+import { MaladieComponent } from './admin/maladie/maladie.component';
+import { DoctorBlogsComponent } from './doctor/doctor-blogs/doctor-blogs.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +45,15 @@ import { BlogsComponent } from './admin/blogs/blogs.component';
     PlanningComponent,
     ForumsComponent,
     BlogDetailsComponent,
-    BlogsComponent
+    BlogsComponent,
+    DashboardDoctorComponent,
+    PlanningDoctorComponent,
+    DoctorHeaderComponent,
+    DoctorSidebarComponent,
+    UnauthorizedComponent,
+    AnalyzeImageComponent,
+    MaladieComponent,
+    DoctorBlogsComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +68,12 @@ import { BlogsComponent } from './admin/blogs/blogs.component';
 
     NgProgressModule.withConfig({
       color: "#003d99"
+    }),
+    ToastrModule.forRoot({ // ToastrModule added
+      timeOut: 1500,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      closeButton: true,
     }),
     NgProgressHttpModule,
     ReactiveFormsModule

@@ -3,7 +3,7 @@
     <app-sidebar-admin></app-sidebar-admin>
     <app-spinner [isLoading]="isLoading"></app-spinner>
     <ng-progress #progressBar></ng-progress>
-    
+
     <div class="page-wrapper">
         <div class="content">
 
@@ -13,7 +13,7 @@
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="doctors.html">Doctors </a></li>
                             <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
-                            <li class="breadcrumb-item active">Doctors  </li>
+                            <li class="breadcrumb-item active">Doctors </li>
                         </ul>
                     </div>
                 </div>
@@ -34,16 +34,16 @@
                                             <div class="doctor-search-blk">
                                                 <div class="top-nav-search table-search-blk">
                                                     <form>
-                                                        <input type="text" name="role" class="form-control" 
-                                                        [(ngModel)]="searchedKeyword"
-                                                        (ngModelChange)="searchDoctors()"
-                                                            placeholder="Search here">
+                                                        <input type="text" name="role" class="form-control"
+                                                            [(ngModel)]="searchedKeyword"
+                                                            (ngModelChange)="searchDoctors()" placeholder="Search here">
                                                         <a class="btn"><img src="assets/img/icons/search-normal.svg"
                                                                 alt></a>
                                                     </form>
                                                 </div>
                                                 <div class="add-group">
-                                                    <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2" (click)="refreshDoctors()">
+                                                    <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2"
+                                                        (click)="refreshDoctors()">
                                                         <img src="assets/img/icons/re-fresh.svg" alt>
                                                     </a>
                                                 </div>
@@ -52,85 +52,121 @@
                                     </div>
                                     <div class="col-auto text-end float-end ms-auto download-grp">
                                         <div class="add-group">
-                                            <a href="javascript:;"  (click)="opendataCSV()" class="btn btn-primary add-pluss ms-2">
+                                            <a href="javascript:;" (click)="opendataCSV()"
+                                                class="btn btn-primary add-pluss ms-2">
                                                 <img src="assets/img/icons/plus.svg" alt>
-                                            </a>    
+                                            </a>
 
-                                        </div>                                
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
 
                             <div class="table-responsive">
-                                <table  *ngIf="!isLoading" class="table border-0 custom-table comman-table datatable mb-0">
+                                <table *ngIf="!isLoading"
+                                    class="table border-0 custom-table comman-table datatable mb-0">
                                     <thead>
                                         <tr>
-                                            <th
-                                            (click)="sortByName()">
+                                            <th (click)="sortByName()">
                                                 <img src="assets/img/icons/sort-icon-01.svg" alt>
-                                                <img src="assets/img/icons/sort-icon-02.svg" alt>Name</th>
-                                            <th  (click)="sortByName()">
+                                                <img src="assets/img/icons/sort-icon-02.svg" alt>Name
+                                            </th>
+                                            <th (click)="sortByName()">
                                                 <img src="assets/img/icons/sort-icon-01.svg" alt>
                                                 <img src="assets/img/icons/sort-icon-02.svg" alt>
-                                                Location</th>
+                                                Location
+                                            </th>
                                             <th>Location Description</th>
                                             <th>Fix Number</th>
                                             <th>Email</th>
                                             <th>Email Confirmed</th>
+                                            <th>IA Plan</th>
 
                                             <th (click)="sortByCreatedAt()">
                                                 <img src="assets/img/icons/sort-icon-01.svg" alt>
                                                 <img src="assets/img/icons/sort-icon-02.svg" alt>Joining Date
                                             </th>
                                         </tr>
-                                    </thead> 
+                                    </thead>
                                     <tbody>
-                                        <tr  *ngFor="let item of filteredDoctors | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-                                            <td class="profile-image"><a><img width="28"
-                                                        height="28" src="{{item.user_image_url}}"
-                                                        class="rounded-circle m-r-5" alt> Dr.  {{item.firstname}} {{item.lastname}}</a></td>
+                                        <tr
+                                            *ngFor="let item of filteredDoctors | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                            <td class="profile-image"><a><img width="28" height="28"
+                                                        src="{{item.user_image_url}}" class="rounded-circle m-r-5" alt>
+                                                    Dr. {{item.firstname}} {{item.lastname}}</a></td>
                                             <td>{{item.location}}</td>
                                             <td>
                                                 <div class="accord-btn">
-                                                  <!-- Button to toggle collapse -->
-                                                  <a class="btn btn-primary mb-3" data-bs-toggle="collapse" [attr.href]="'#collapseExample' + i" [attr.aria-expanded]="false" [attr.aria-controls]="'collapseExample' + i">
-                                                    Display Description
-                                                  </a>
-                                                  <!-- Collapsible content -->
-                                                  <div class="collapse" id="collapseExample{{i}}">
-                                                    <div class="card">
-                                                      <div class="description-content">
-                                                        {{item.description}}
-                                                      </div>
+                                                    <!-- Button to toggle collapse -->
+                                                    <a class="btn btn-primary mb-3" data-bs-toggle="collapse"
+                                                        [attr.href]="'#collapseExample' + i"
+                                                        [attr.aria-expanded]="false"
+                                                        [attr.aria-controls]="'collapseExample' + i">
+                                                        Display Description
+                                                    </a>
+                                                    <!-- Collapsible content -->
+                                                    <div class="collapse" id="collapseExample{{i}}">
+                                                        <div class="card">
+                                                            <div class="description-content">
+                                                                {{item.description}}
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                  </div>
                                                 </div>
-                                              </td>
-                                            <td><a *ngIf="item.phone_number" href="javascript:;">+{{item.phone_number}}</a>
-                                                <a *ngIf="!item.phone_number" href="javascript:;"> <span style="text-align: center;"> - </span> </a>
+                                            </td>
+                                            <td><a *ngIf="item.phone_number"
+                                                    href="javascript:;">+{{item.phone_number}}</a>
+                                                <a *ngIf="!item.phone_number" href="javascript:;"> <span
+                                                        style="text-align: center;"> - </span> </a>
                                             </td>
                                             <td>{{item.email}}
                                             </td>
                                             <td *ngIf="item.email_confirmed == true">
-                                                <i style="color: green;" class="fa fa-check" data-bs-toggle="tooltip" title="fa fa-check"></i>
+                                                <i style="color: green;" class="fa fa-check" data-bs-toggle="tooltip"
+                                                    title="fa fa-check"></i>
                                             </td>
                                             <td *ngIf="item.email_confirmed == false">
-    
-                                                <i  style="color: red;" class="fa fa-close" data-bs-toggle="tooltip" title="fa fa-window-close"></i>
+
+                                                <i style="color: red;" class="fa fa-close" data-bs-toggle="tooltip"
+                                                    title="fa fa-window-close"></i>
                                             </td>
-                                            <td>{{item.created_at}}</td>
+                                            <td>
+                                                <button *ngIf="item.plan == 'no_plan'" type="button"
+                                                class="btn btn-rounded btn-warning">{{item.plan}}</button>
+                                                <button *ngIf="item.plan == 'basic'" type="button"
+                                                    class="btn btn-rounded btn-info">{{item.plan}}</button>
+                                                    <p *ngIf="item.plan == 'basic'">
+                                                        3 times a day </p>
+                                                <button *ngIf="item.plan == 'premium'" type="button"
+                                                    class="btn btn-rounded btn-primary">{{item.plan}}</button>
+                                                    <p *ngIf="item.plan == 'premium'">
+                                                        unlimited </p>
+                                                <button *ngIf="item.plan == 'custom'" type="button"
+                                                    class="btn btn-rounded btn-success">{{item.plan}}
+                                                </button>
+                                                <p *ngIf="item.plan == 'custom'">
+                                                    {{item.custom_limit}} times a day </p>
+                                            </td>
+                                            <td>{{item.created_at | date: 'yyyy-MM-dd'}}</td>
                                             <td class="text-end">
                                                 <div class="dropdown dropdown-action">
                                                     <a href="#" class="action-icon dropdown-toggle"
                                                         data-bs-toggle="dropdown" aria-expanded="false"><i
                                                             class="fa fa-ellipsis-v"></i></a>
                                                     <div class="dropdown-menu dropdown-menu-end">
-                                                        <a class="dropdown-item"  (click)="delete(item.id, i)"><i
+                                                        <a class="dropdown-item" (click)="delete(item.id, i)"><i
                                                                 class="fa fa-trash-alt m-r-5"></i> Archiver</a>
-                                                        <a *ngIf="item.email_confirmed == false" class="dropdown-item" (click)="activateCompte(item.id)">
+                                                        <a *ngIf="item.email_confirmed == false" class="dropdown-item"
+                                                            (click)="activateCompte(item.id)">
                                                             <i class="fa fa-toggle-on m-r-5"></i>
-                                                        Activate Now</a>
+                                                            Activate Now</a>
+                                                        <a class="dropdown-item" data-bs-toggle="modal"
+                                                            data-bs-target="#con-close-modal" (click)="bind_data(item)">
+                                                            <img src="assets/img/icons/menu-icon-04.svg" alt> Upgrade
+                                                            Plan
+                                                        </a>
+
                                                     </div>
                                                 </div>
                                             </td>
@@ -188,6 +224,63 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Doctor Plan</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="form-horizontal" [formGroup]="updateForm" (ngSubmit)="update_plan()">
+                <div class="modal-body p-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="firstname" class="form-label">First Name</label>
+                                <input readonly style="cursor: not-allowed; background-color: #f0f0f0; color: #6c757d;"
+                                    type="text" class="form-control" id="firstname" formControlName="firstname"
+                                    placeholder="John">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="lastname" class="form-label">Last Name</label>
+                                <input readonly style="cursor: not-allowed; background-color: #f0f0f0; color: #6c757d;"
+                                    type="text" class="form-control" id="lastname" formControlName="lastname"
+                                    placeholder="Doe">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="plan" class="form-label">Plan</label>
+                                <select class="form-control" id="plan" formControlName="plan"
+                                    (change)="onPlanChange($event)">
+                                    <option value="basic">Basic</option>
+                                    <option value="premium">Premium</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="iscustomLimit">
+                            <div class="mb-3">
+                                <label for="customLimit" class="form-label">Custom Plan Number</label>
+                                <input type="number" class="form-control" id="customLimit" formControlName="customLimit"
+                                    placeholder="Enter number" min="5">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

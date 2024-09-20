@@ -32,9 +32,11 @@ export class AuthService {
         return JSON.parse(userData);
       }
     }
-
-    // If no user is found, return null or handle the case where no user is logged in
     return null;
+  }
+
+  getRole(){
+    return  sessionStorage.getItem('user_type');
   }
 
   getToken() {

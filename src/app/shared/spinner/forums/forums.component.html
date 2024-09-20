@@ -1,0 +1,134 @@
+<div class="main-wrapper">
+    <div *ngIf="role =='Admin'">
+        <app-header-admin></app-header-admin>
+        <app-sidebar-admin></app-sidebar-admin>
+    </div>
+    <div *ngIf="role =='Doctor'">
+        <app-doctor-header></app-doctor-header>
+        <app-doctor-sidebar></app-doctor-sidebar>
+    </div>
+    <div></div>
+
+
+    <ng-progress #progressBar></ng-progress>
+    <div class="page-wrapper">
+        <div class="content">
+
+            <div class="layout-wrapper layout-content-navbar">
+                <div class="layout-container">
+                    <div class="layout-page">
+                        <div class="content-wrapper">
+                            <div class="container-xxl flex-grow-1 container-p-y">
+
+                                <br>
+                                <div>
+                                    <div id="remote-container">
+                                    </div>
+                                    <div id="local-container">
+                                    </div>
+                                </div>
+                                <main class="content">
+                                    <div class="container p-0">
+                                        <div class="row g-0">
+                                            <div class="col-12 col-lg-7 col-xl-9">
+                                                <div class="widget blog-comments clearfix">
+                                                    <h3 class="d-inline-block">RealTime Chat</h3>
+                                                    <div *ngIf="role =='Admin'"
+                                                        class="dropdown d-inline-block float-end">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                            id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                                            aria-expanded="false">
+                                                            Options
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="dropdownMenuButton">
+                                                            <li>
+                                                                <button class="dropdown-item"
+                                                                    (click)="delete_all()">Delete All</button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <ul class="comments-list">
+                                                        <li *ngFor="let message of messages; let i = index">
+                                                            <div class="comment">
+                                                                <div class="comment-author">
+                                                                    <a href="profile.html">
+                                                                        <img class="avatar" alt
+                                                                            src="{{message.sender.user_image_url}}">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="comment-block">
+                                                                    <div class="comment-by">
+                                                                        <div class="week-group">
+                                                                            <h5 class="blog-author-name">{{
+                                                                                message.sender.firstname }} {{
+                                                                                message.sender.lastname }}</h5>
+                                                                            <span class="week-list">{{
+                                                                                message.created_at | date: 'yyyy-MM-dd
+                                                                                HH:mm:ss' }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="text-end">
+                                                                        <div class="dropdown dropdown-action">
+                                                                            <a href="#"
+                                                                                class="action-icon dropdown-toggle"
+                                                                                data-bs-toggle="dropdown"
+                                                                                aria-expanded="false">
+                                                                                <i class="fa fa-ellipsis-v"></i>
+                                                                            </a>
+                                                                            <div
+                                                                                class="dropdown-menu dropdown-menu-end">
+                                                                                <a class="dropdown-item"
+                                                                                    (click)="delete(message.id, i)">
+                                                                                    <i style="color: rgb(255, 0, 0);"
+                                                                                        class="fa fa-trash-alt m-r-5"
+                                                                                        data-bs-toggle="tooltip"
+                                                                                        title="fa fa-check"></i>
+                                                                                    Delete Message
+                                                                                </a>
+                                                                                <div *ngIf="combinedImages(message)">
+                                                                                    <button
+                                                                                        *ngFor="let image of combinedImages(message)"
+                                                                                        (click)="downloadImage(message.id, image.id)">Download
+                                                                                        Image</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <p>{{ message.body }}</p>
+                                                                    <div *ngIf="combinedImages(message)">
+                                                                        <img *ngFor="let image of combinedImages(message)"
+                                                                            [src]="image.url" alt="message image"
+                                                                            class="img-fluid">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+
+                                                <div class="flex-grow-0 py-3 px-4 border-top">
+                                                    <div class="input-group">
+                                                        <form (submit)="handleSubmit($event)">
+
+                                                            <input type="text" name="message" #messageInput>
+                                                            <input type="file" (change)="onFilesSelected($event)"
+                                                                multiple #fileInput>
+                                                            <button class="btn btn-primary btn-lg"
+                                                                type="submit">Submit</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </main>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
