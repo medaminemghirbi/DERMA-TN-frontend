@@ -1,0 +1,97 @@
+<div class="main-wrapper"></div>
+<app-header-admin></app-header-admin>
+<app-sidebar-admin></app-sidebar-admin>
+<ng-progress #progressBar></ng-progress>
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row" id="card-drag-area">
+            <div *ngFor="let maladie of maladies" class="col-md-4 draggable">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">
+                                <li *ngIf="maladie"><strong style="color: #390d74;">{{ maladie.order }} - {{ maladie.maladie_name }}</strong></li>
+                            </h5>
+                            <div class="dropdown dropdown-action">
+                                <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a data-bs-toggle="modal" data-bs-target="#con-close-modal" class="dropdown-item" (click)="getdata(maladie)">
+                                        <i style="color: green;" class="fa fa-cog" data-bs-toggle="tooltip" title="Update Information"></i>
+                                        Update Information
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <img [src]="maladie.diseas_image_url" width="450" height="200" />
+                    </div>
+                    <div class="card-body">
+                        <p>{{ maladie.maladie_description }}</p>
+                        <ul>
+                            <li>Causes: {{ maladie.causes }} </li>
+                            <li>Symptoms: {{ maladie.symptoms }} </li>
+                            <li>Synonyms: {{ maladie.synonyms }} </li>
+                            <li>Prevention: {{ maladie.prevention }} </li>
+                            <li>Treatment: {{ maladie.treatments }} </li>
+                        </ul>
+                        <li>
+                            Reference: 
+                            <a style="color: blue;" href="{{ maladie.references }}">{{ maladie.references }}</a>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for updating maladie -->
+    <div class="modal fade" id="con-close-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Information for: <strong>{{ dataMaladie.maladie_name }}</strong></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="update" (ngSubmit)="updateMaladie()">
+                        <div class="form-group">
+                            <label for="maladie_name">Name</label>
+                            <input type="text" id="maladie_name" formControlName="maladie_name" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="maladie_description">Description</label>
+                            <textarea id="maladie_description" formControlName="maladie_description" class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="causes">Causes</label>
+                            <textarea id="causes" formControlName="causes" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="symptoms">Symptoms</label>
+                            <textarea id="symptoms" formControlName="symptoms" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="prevention">Prevention</label>
+                            <textarea id="prevention" formControlName="prevention" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="treatments">Treatments</label>
+                            <textarea id="treatments" formControlName="treatments" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="references">References</label>
+                            <input type="url" id="references" formControlName="references" class="form-control" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

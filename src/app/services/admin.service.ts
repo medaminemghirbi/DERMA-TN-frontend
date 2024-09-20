@@ -5,73 +5,104 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminService {
   private apiUrl = environment.urlBackend + 'api/v1/blogs/';
 
-  constructor(private http : HttpClient , public router: Router) { }
+  constructor(private http: HttpClient, public router: Router) {}
 
   /////////////////////// Dcotors  */////////////////
 
-  statistique(){
-    return this.http.get(`${environment.urlBackend}`+'api/v1/statistique/')
+  statistique() {
+    return this.http.get(`${environment.urlBackend}` + 'api/v1/statistique/');
   }
-  getDoctors(){
-    return this.http.get(`${environment.urlBackend}`+'api/v1/doctors/')
+  getDoctors() {
+    return this.http.get(`${environment.urlBackend}` + 'api/v1/doctors/');
   }
-  last_run(){
-    return this.http.get(`${environment.urlBackend}`+'api/v1/last_run/')
+  last_run() {
+    return this.http.get(`${environment.urlBackend}` + 'api/v1/last_run/');
   }
   reloadData() {
-    return this.http.get<any>(`${environment.urlBackend}`+'api/v1/reload_data/')
+    return this.http.get<any>(
+      `${environment.urlBackend}` + 'api/v1/reload_data/'
+    );
   }
-  ArchiveDoctor(id:any){
-    return this.http.delete(environment.urlBackend+'api/v1/doctors/' + id )
+  ArchiveDoctor(id: any) {
+    return this.http.delete(environment.urlBackend + 'api/v1/doctors/' + id);
   }
   activateCompte(id: any) {
-    return this.http.post<any>(`${environment.urlBackend}api/v1/doctors/${id}/activate_compte`, {});
+    return this.http.post<any>(
+      `${environment.urlBackend}api/v1/doctors/${id}/activate_compte`,
+      {}
+    );
   }
 
   /////////////////////// Patients  */////////////////
-  getPatients(){
-    return this.http.get(`${environment.urlBackend}`+'api/v1/patients/')
+  getPatients() {
+    return this.http.get(`${environment.urlBackend}` + 'api/v1/patients/');
   }
-  ArchivePatient(id:any){
-    return this.http.delete(environment.urlBackend+'api/v1/patients/' + id )
+  ArchivePatient(id: any) {
+    return this.http.delete(environment.urlBackend + 'api/v1/patients/' + id);
   }
 
-    /////////////////////// Apointements  */////////////////
-    getAllLocations(){
-      return this.http.get(`${environment.urlBackend}`+'api/v1/all_locations/')
-    }
-    getDoctorsByLocation(location:any){
-      return this.http.get(environment.urlBackend + 'api/v1/get_doctors_by_locations/' +location);
-    }  
-    getDoctorDetails(doctor_id: string): Observable<any> {
-      return this.http.get<any>(environment.urlBackend + 'api/v1/doctor_consultations/' +doctor_id);
-    }
-    ArchiverAppointement(id:any){
-      return this.http.delete(environment.urlBackend+'api/v1/consultations/' + id )
-    }
+  /////////////////////// Apointements  */////////////////
+  getAllLocations() {
+    return this.http.get(`${environment.urlBackend}` + 'api/v1/all_locations/');
+  }
+  getDoctorsByLocation(location: any) {
+    return this.http.get(
+      environment.urlBackend + 'api/v1/get_doctors_by_locations/' + location
+    );
+  }
+  getDoctorDetails(doctor_id: string): Observable<any> {
+    return this.http.get<any>(
+      environment.urlBackend + 'api/v1/doctor_consultations/' + doctor_id
+    );
+  }
+  ArchiverAppointement(id: any) {
+    return this.http.delete(
+      environment.urlBackend + 'api/v1/consultations/' + id
+    );
+  }
 
-    /////////////////////// Blogs */////////////////////
-    getBlog(id:any){
-      return this.http.get(environment.urlBackend + 'api/v1/blogs/'+ id);
-    }
-    getAllBlogs(){
-      return this.http.get(environment.urlBackend + 'api/v1/blogs/');
-    }
-    getBlogMessages(id:any){
-      return this.http.get(environment.urlBackend + 'api/v1/get_message_by_blog/'+ id);
-    }
-    addVerification(id: any): Observable<any> {
-      const url = `${this.apiUrl}${id}`;
-      const body = { is_verified: true };
-      return this.http.patch(url, body);
-    }
+  /////////////////////// Blogs */////////////////////
+  getBlog(id: any) {
+    return this.http.get(environment.urlBackend + 'api/v1/blogs/' + id);
+  }
+  getAllBlogs() {
+    return this.http.get(environment.urlBackend + 'api/v1/blogs/');
+  }
+  getBlogMessages(id: any) {
+    return this.http.get(
+      environment.urlBackend + 'api/v1/get_message_by_blog/' + id
+    );
+  }
+  addVerification(id: any): Observable<any> {
+    const url = `${this.apiUrl}${id}`;
+    const body = { is_verified: true };
+    return this.http.patch(url, body);
+  }
 
-    get_user_data(id:any){
-      return this.http.get(environment.urlBackend + 'api/v1/users/'+ id);
-    }
+  get_user_data(id: any) {
+    return this.http.get(environment.urlBackend + 'api/v1/users/' + id);
+  }
+
+  ArchiverMessage(id: any) {
+    return this.http.delete(environment.urlBackend + 'api/v1/messages/' + id);
+  }
+  downloadImage(messageId: number, imageId: number): Observable<Blob> {
+    const url = `${environment.urlBackend}api/v1/messages/${messageId}/images/${imageId}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
+  ///////******MALADIES */*////////////////////
+  getAllIAdiseas() {
+    return this.http.get(environment.urlBackend + 'api/v1/maladies/');
+  }
+  updateDiseas(data:any){
+    debugger
+    return this.http.patch(`${environment.urlBackend}api/v1/maladies/${data.id}`, data);
+  }
+
 }

@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { User } from '../model/user.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-index',
@@ -26,7 +27,7 @@ export class IndexComponent  implements OnInit {
     password:'',
   }
 
-  constructor(private Auth:AuthService,private route:Router) { }
+  constructor(private Auth:AuthService,private route:Router,     private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -79,6 +80,7 @@ export class IndexComponent  implements OnInit {
       sessionStorage.setItem(`${type.toLowerCase()}data`, JSON.stringify(user));
       sessionStorage.setItem('access_token', token);
       sessionStorage.setItem('user_type', type);
+      this.toastr.success('Vous êtes maintenant connecté.');
       this.route.navigate([userTypes[type]]);
     } else {
       this.showError('Email or Password is incorrect!');

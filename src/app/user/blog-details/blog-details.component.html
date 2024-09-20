@@ -10,7 +10,7 @@
                         <div class="blog-view">
                             <article class="blog blog-single-post">
                                 <h3 class="blog-title">{{ blogDetail?.title }}</h3>
-    
+                                <h6>Maladie : {{ blogDetail?.maladie?.maladie_name }}</h6>
                                 <div class="blog-image">
                                     <div class="card">
                                         <div class="card-body card-buttons">
@@ -32,11 +32,11 @@
                                                             <h5>Dermatologue</h5>
                                                         </div>
                                                     </div>
-                                                    <span><i class="feather-calendar me-1"></i>{{ blogDetail?.created_at |
+                                                    <span><i class="feather-calendar me-1"></i>{{ blogDetail?.created_at
+                                                        |
                                                         date:'dd MMM yyyy' }}</span>
                                                 </div>
                                             </div>
-    
                                             <div id="carouselExampleIndicators" class="carousel slide carousel-fade"
                                                 data-bs-ride="carousel">
                                                 <ol class="carousel-indicators">
@@ -66,16 +66,26 @@
                                 </div>
                                 <div class="blog-content">
                                     <p>{{ blogDetail?.content }}</p>
+                                    <p>{{ blogDetail?.maladie?.maladie_description }}</p>
+                                    <ul>
+                                        <li>Causes : {{ blogDetail?.maladie?.causes }} </li>
+                                        <li>Symptomes : {{ blogDetail?.maladie?.symptoms }} </li>
+
+                                        <li> Synonyms : {{ blogDetail?.maladie?.synonyms }} </li>
+
+                                        <li> Prevention : {{ blogDetail?.maladie?.prevention }} </li>
+                                        <li> Treatement : {{ blogDetail?.maladie?.treatments }} </li>
+                                    </ul>
+                                    <li> Read More: <a style="color: blue;"
+                                            href="{{ blogDetail?.maladie?.references }}">{{
+                                            blogDetail?.maladie?.references }}</a>
+                                    </li>
                                 </div>
                             </article>
                         </div>
-    
-    
                     </div>
-    
                 </div>
             </div>
         </div>
     </div>
 </div>
-

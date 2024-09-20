@@ -1,0 +1,124 @@
+<div class="main-wrapper">
+    <app-doctor-header></app-doctor-header>
+    <app-doctor-sidebar></app-doctor-sidebar>
+    <div class="page-wrapper">
+        <div class="content">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard </a></li>
+                            <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
+                            <li class="breadcrumb-item active">Doctor Dashboard</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="good-morning-blk">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="morning-user">
+                            <h2>Good Morning, <span>Dr. {{currentuser.lastname}} {{currentuser.firstname}}</span></h2>
+                            <p>Have a nice day at work</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 position-blk">
+                        <div class="morning-img">
+                            <img src="assets/img/morning-img-02.png" alt>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="doctor-list-blk">
+                <div class="row">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="doctor-widget border-right-bg">
+                            <div class="doctor-box-icon flex-shrink-0">
+                                <img src="assets/img/icons/doctor-dash-01.svg" alt>
+                            </div>
+                            <div class="doctor-content dash-count flex-grow-1">
+                                <h4><span class="counter-up">30</span>
+                                    <span></span><span></span>
+                                </h4>
+                                <h5>Appointments</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6">
+                        <div class="doctor-widget border-right-bg">
+                            <div class="doctor-box-icon flex-shrink-0">
+                                <img src="assets/img/icons/doctor-dash-03.svg" alt>
+                            </div>
+                            <div class="doctor-content dash-count flex-grow-1">
+                                <h4><span class="counter-up">12</span><span></span></h4>
+                                <h5>Analyzed Image with IA</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="doctor-widget">
+                            <div class="doctor-box-icon flex-shrink-0">
+                                <img src="assets/img/icons/doctor-dash-02.svg" alt>
+                            </div>
+                            <div class="doctor-content dash-count flex-grow-1">
+                                <h4><span class="counter-up">530</span><span></span></h4>
+                                <h5>Anaylzed Image With IA</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-12  col-xl-7">
+                    <div class="row">
+                        <div class="col-12 col-md-12  col-xl-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title d-inline-block">Today Appointments</h4> <a
+                                        href="appointments.html" class="patient-views float-end">Show all</a>
+                                </div>
+                                <div class="card-body p-0 table-dash">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0 border-0 custom-table">
+                                            <tbody>
+                                                <tr *ngFor="let appointment of AppointmentOfTheDay let i = index">
+                                                    <td class="table-image appoint-doctor">
+                                                        <img width="28" height="28" class="rounded-circle"
+                                                            src="{{appointment.patient.user_image_url}}" alt>
+                                                        <h2>Mr. {{appointment.patient.firstname}}{{appointment.patient.lastname}} </h2>
+                                                    </td>
+                                                    <td class="appoint-time text-center">
+                                                        <h6>Today at {{appointment.seance}}</h6>
+                                                    </td>
+                                                </tr>
+                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12  col-xl-4 d-flex">
+                            <div class="card wallet-widget">
+                                <div class="circle-bar circle-bar2">
+                                    <div class="circle-graph2" data-percent="66">
+                                        <b><img src="assets/img/icons/timer.svg" alt></b>
+                                    </div>
+                                </div>
+                                <div class="main-limit">
+                                    <p>Next Appointment in</p>
+                                    <h4>02h:12m</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

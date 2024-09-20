@@ -39,6 +39,18 @@
                             </select>
                         </div>
                     </div>
+                    <div  *ngIf="doctors.length"  class="col-12 col-md-6 col-xl-4">
+                        <div class="input-block local-forms cal-icon">
+                            <select class="form-control" [(ngModel)]="selectedDate" (ngModelChange)="filterByDate($event)">
+                                <option hidden value="" selected>Select Date</option>
+                                <option value="">All Dates</option>
+                                <option *ngFor="let date of availableDates" [value]="date">
+                                   Le {{ date }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="table-responsive">
@@ -50,7 +62,7 @@
                             <th>Rendez Vous Date</th>
                             <th>Doctor </th>
                             <th>Patient</th>
-                            <th> Phone Number</th>
+                            <th>Phone Number</th>
                             <th>Created Date</th>
                             <th>Refus Reason</th>
                             <th>Status</th>
@@ -58,8 +70,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of doctorAppointements; index as i">
-                            <td class="description-content"><a>{{item.appointment}}</a></td>
+                        <tr *ngFor="let item of filteredAppointments; index as i">
+                            <td class="description-content"><a>
+                                <ul>
+                                    <li style="color: rgb(15, 15, 105);"><u>seance n° {{item.seance}} : <br> </u></li>
+                                </ul>
+                                {{item.appointment}} at  {{item.start_at | date:'HH:mm'}}  {{item.end_at | date:'HH:mm'}}
+    
+                            
+                            </a></td>
                             <td class="profile-image"><a><img width="28" height="28"
                                         src="{{item.doctor.user_image_url}}" class="rounded-circle m-r-5" alt> Dr.
                                     {{item.doctor.firstname}} {{item.doctor.lastname}}
