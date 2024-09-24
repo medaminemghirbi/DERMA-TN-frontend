@@ -16,7 +16,6 @@ export class SidebarAdminComponent implements OnInit {
 
   logout(){
     this.auth.logout();
-    this.route.navigate(['']);
   }
 
 }

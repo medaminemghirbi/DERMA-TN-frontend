@@ -18,6 +18,9 @@ export class DashboardAdminComponent implements OnInit {
   appointement_count: any
   patient_count: any
   BLogs_count: any
+  doctors_count: any
+  scanned_count: any
+  maladies_count: any
   constructor( private route: Router , private auth: AuthService,private usersService: AdminService ) { }
 
   ngOnInit(): void {
@@ -25,11 +28,16 @@ export class DashboardAdminComponent implements OnInit {
     this.userType = sessionStorage.getItem('user_type') || 'Guest';
 
     this.usersService.statistique().subscribe(data => {
-      
       this.statistique = data;
       this.appointement_count =  this.statistique.apointements;
       this.patient_count = this.statistique.patients;
       this.BLogs_count =  this.statistique.blogs;
+      this.doctors_count =  this.statistique.doctors;
+
+      this.scanned_count =  this.statistique.scanned;
+
+      this.maladies_count =  this.statistique.maladies;
+
     }, (err: HttpErrorResponse) => {
       this.messageErr = "We don't found any demande in our database";
     });

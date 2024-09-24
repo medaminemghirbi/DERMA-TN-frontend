@@ -14,7 +14,7 @@ export class GuardGuard implements CanActivate {
 		if (this.auth.getcurrentuser() != null )
       return true;
     else
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     return false;
   }
 }

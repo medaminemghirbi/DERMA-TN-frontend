@@ -32,6 +32,8 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { AnalyzeImageComponent } from './doctor/analyze-image/analyze-image.component';
 import { MaladieComponent } from './admin/maladie/maladie.component';
 import { DoctorBlogsComponent } from './doctor/doctor-blogs/doctor-blogs.component';
+import { LandingComponent } from './landing/landing.component';
+import { RegistrationComponent } from './registration/registration.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +56,8 @@ import { DoctorBlogsComponent } from './doctor/doctor-blogs/doctor-blogs.compone
     AnalyzeImageComponent,
     MaladieComponent,
     DoctorBlogsComponent,
+    LandingComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,

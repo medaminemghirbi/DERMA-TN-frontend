@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,14 +8,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class DoctorSidebarComponent implements OnInit {
 
-  constructor(private route: Router , private auth: AuthService) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
   logout(){
     this.auth.logout();
-    this.route.navigate(['']);
   }
 
 }
