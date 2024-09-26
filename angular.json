@@ -13,6 +13,16 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "core-js",
+              "raf",
+              "rgbcolor",
+              "jspdf",
+              "dompurify",
+              "html2canvas",
+              "moment",
+              "sweetalert2"
+            ],
             "outputPath": "dist/pfe2025-front",
             "index": "src/index.html",
             "main": "src/main.ts",

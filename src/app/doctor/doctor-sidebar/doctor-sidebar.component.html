@@ -3,37 +3,43 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li>
-                    <a  routerLink="/doctor/dashboard">
-                        <span class="menu-side"><img src="../../../assets/img/icons/menu-icon-01.svg"alt></span>
+                    <a routerLink="/doctor/dashboard">
+                        <span class="menu-side"><img src="../../../assets/img/icons/menu-icon-01.svg" alt></span>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li>
                     <a routerLink="/doctor/planning">
-                        <span class="menu-side"><img src="../../../assets/img/icons/menu-icon-04.svg"alt></span>
+                        <span class="menu-side"><img src="../../../assets/img/icons/menu-icon-04.svg" alt></span>
                         <span>Appointments</span>
                     </a>
                 </li>
                 <li>
-                    <a routerLink="/forums"><span class="menu-side"><img src="../../../assets/img/icons/menu-icon-10.svg"
-                                alt></span> <span>Forum</span></a>
+                    <a routerLink="/forums"><span class="menu-side"><img
+                                src="../../../assets/img/icons/menu-icon-10.svg" alt></span> <span>Forum</span></a>
                 </li>
 
                 <li>
-                    <a routerLink="/doctor/blogs"><span class="menu-side"><img src="../../../assets/img/icons/menu-icon-13.svg"
-                                alt></span> <span>Blogs</span></a>
+                    <a routerLink="/doctor/blogs"><span class="menu-side"><img
+                                src="../../../assets/img/icons/menu-icon-13.svg" alt></span> <span>Blogs</span></a>
                 </li>
                 <li>
-
-                    <a routerLink="/doctor/analyze-image"><span class="menu-side"><img src="../../../assets/img/icons/menu-icon-13.svg"
-                                alt></span> <span>Analyze With IA</span></a>
+                    <a (click)="verifier_plan(); $event.preventDefault();">
+                        <span class="menu-side">
+                            <img src="../../../assets/img/icons/menu-icon-13.svg" alt="">
+                        </span>
+                        <span>Analyze With IA</span>
+                    </a>
                 </li>
-                
             </ul>
             <div class="logout-btn">
-                <a (click)="logout()" href=""><span class="menu-side"><img src="../../../assets/img/icons/logout.svg" alt></span>
-                    <span>Logout</span></a>
+                <a href="#" (click)="logout(); $event.preventDefault();">
+                    <span class="menu-side">
+                        <img src="../../../assets/img/icons/logout-svgrepo-com.svg" alt="Logout Icon">
+                    </span>
+                    <span>Logout</span>
+                </a>
             </div>
         </div>
     </div>

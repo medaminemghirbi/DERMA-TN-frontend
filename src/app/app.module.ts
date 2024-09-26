@@ -34,6 +34,10 @@ import { MaladieComponent } from './admin/maladie/maladie.component';
 import { DoctorBlogsComponent } from './doctor/doctor-blogs/doctor-blogs.component';
 import { LandingComponent } from './landing/landing.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { DoctorSettingsComponent } from './doctor/doctor-settings/doctor-settings.component';
+import { FirstKeyValuePipe } from './first-key-value.pipe';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +62,9 @@ import { RegistrationComponent } from './registration/registration.component';
     DoctorBlogsComponent,
     LandingComponent,
     RegistrationComponent,
+    DoctorSettingsComponent,
+    FirstKeyValuePipe,
+    
   ],
   imports: [
     BrowserModule,
@@ -69,7 +76,6 @@ import { RegistrationComponent } from './registration/registration.component';
     Ng2SearchPipeModule,
     NgProgressModule,
     FullCalendarModule,
-
     NgProgressModule.withConfig({
       color: "#003d99"
     }),
@@ -80,8 +86,8 @@ import { RegistrationComponent } from './registration/registration.component';
       closeButton: true,
     }),
     NgProgressHttpModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    FullCalendarModule
   ],
   providers: [
     {

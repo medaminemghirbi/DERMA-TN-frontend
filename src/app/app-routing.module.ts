@@ -18,6 +18,8 @@ import { MaladieComponent } from './admin/maladie/maladie.component';
 import { DoctorBlogsComponent } from './doctor/doctor-blogs/doctor-blogs.component';
 import { LandingComponent } from './landing/landing.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { DoctorSettingsComponent } from './doctor/doctor-settings/doctor-settings.component';
+import { PlanningDoctorComponent } from './doctor/planning-doctor/planning-doctor.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -36,6 +38,8 @@ const routes: Routes = [
   { path: 'doctor/dashboard', canActivate: [DoctorGuard], component: DashboardDoctorComponent },
   { path: 'doctor/analyze-image', canActivate: [DoctorGuard], component: AnalyzeImageComponent },
   { path: 'doctor/blogs', canActivate: [DoctorGuard], component: DoctorBlogsComponent },
+  { path: 'doctor/settings', canActivate: [DoctorGuard], component: DoctorSettingsComponent },
+  { path: 'doctor/planning', canActivate: [DoctorGuard], component: PlanningDoctorComponent },
 
   // Shared components
   { path: 'forums', component: ForumsComponent },

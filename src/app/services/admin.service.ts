@@ -73,6 +73,12 @@ export class AdminService {
   getAllBlogs() {
     return this.http.get(environment.urlBackend + 'api/v1/blogs/');
   }
+  getVerfiedBlogs() {
+    return this.http.get(environment.urlBackend + 'api/v1/verified_blogs/');
+  }
+  getMyBlogs(id: any) {
+    return this.http.get(environment.urlBackend + 'api/v1/my_blogs/' + id);
+  }
   getBlogMessages(id: any) {
     return this.http.get(
       environment.urlBackend + 'api/v1/get_message_by_blog/' + id

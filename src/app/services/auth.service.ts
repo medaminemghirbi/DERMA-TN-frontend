@@ -12,19 +12,15 @@ export class AuthService {
   public connecte: boolean = false;
   public logged_in: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   // Login method, assumes backend sets token in response
   login(data: any): Observable<any> {
     return this.http.post(environment.urlBackend + 'sessions', data);
   }
-
-  // Logout method, clears session storage and redirects to login page
-  logout(): Observable<any> {
+  logout() {
     this.connecte = false;
-    this.logged_in = false;
     sessionStorage.clear();
-    this.router.navigate(['/login']);
     return this.http.delete(environment.urlBackend + 'logout/');
   }
 

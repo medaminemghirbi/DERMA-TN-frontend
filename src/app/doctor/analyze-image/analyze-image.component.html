@@ -5,25 +5,12 @@
 
 <div class="page-wrapper">
   <div class="content container-fluid">
-    <div class="page-header">
-      <div class="row">
-        <div class="col-sm-12">
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-            <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
-            <li class="breadcrumb-item active">File Upload</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
     <div class="upload-container">
       <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)">
         <div class="panel panel-default">
           <br>
           <div class="panel-body text-center">
-            <input type="file" class="form-control" (change)="fileChange($event)"
-              formControlName="file" required>
+            <input type="file" class="form-control" (change)="fileChange($event)" formControlName="file" required>
           </div>
           <br>
           <div *ngIf="imageUrl" class="text-center">
@@ -31,12 +18,12 @@
           </div>
           <br>
           <div style="text-align: center;">
-            <button type="submit" class="btn btn-primary px-4"
-              style="background-color: rgb(38, 8, 158);">Anaylze Image With IA</button>
+            <button type="submit" class="btn btn-primary px-4" style="background-color: rgb(38, 8, 158);">Anaylze Image
+              With IA</button>
           </div>
         </div>
       </form>
-      
+
       <!-- Loading Indicator -->
       <div *ngIf="loading" class="loading-indicator">
         <p>Loading...</p>

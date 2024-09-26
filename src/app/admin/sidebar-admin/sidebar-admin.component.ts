@@ -9,13 +9,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SidebarAdminComponent implements OnInit {
 
-  constructor(private route: Router , private auth: AuthService) { }
+  constructor(private router: Router , private auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
   logout(){
     this.auth.logout();
+    this.router.navigate(['/login']);
   }
 
 }

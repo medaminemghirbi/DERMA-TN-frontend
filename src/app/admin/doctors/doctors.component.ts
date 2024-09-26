@@ -92,18 +92,20 @@ export class DoctorsComponent implements OnInit {
     const trimmedKeyword = this.searchedKeyword ? this.searchedKeyword.trim() : '';
   
     if (trimmedKeyword) {
-      this.filteredDoctors = this.doctors.filter((doctor: { firstname: string, location:string, lastname:string  }) =>
-        doctor.firstname.toLowerCase().includes(trimmedKeyword.toLowerCase()) ||
-        doctor.location.toLowerCase().includes(trimmedKeyword.toLowerCase()) ||
-        doctor.lastname.toLowerCase().includes(trimmedKeyword.toLowerCase())
-
-      );
+      this.filteredDoctors = this.doctors.filter((doctor: { firstname: string, location: string, lastname: string }) => {
+        const firstNameMatches = doctor.firstname && doctor.firstname.toLowerCase().includes(trimmedKeyword.toLowerCase());
+        const lastNameMatches = doctor.lastname && doctor.lastname.toLowerCase().includes(trimmedKeyword.toLowerCase());
+        const locationMatches = doctor.location && doctor.location.toLowerCase().includes(trimmedKeyword.toLowerCase());
+        
+        return firstNameMatches || lastNameMatches || locationMatches;
+      });
     } else {
       this.filteredDoctors = [...this.doctors];
     }
   
-    this.p = 1;
+    this.p = 1; // Reset pagination when searching
   }
+  
   activateCompte(id: any) {
     Swal.fire({
       title: 'Are you sure?',
