@@ -99,7 +99,7 @@
                                 <div class="card-header">
                                     <h4 class="card-title d-inline-block">Today Appointments {{this.now |
                                                     date:'dd MMM yyyy'}}</h4> <a
-                                        href="appointments.html" class="patient-views float-end">Show all</a>
+                                        routerLink="/doctor/planning" class="patient-views float-end">Show all</a>
                                 </div>
                                 <div class="card-body p-0 table-dash">
                                     <div class="table-responsive">
@@ -112,8 +112,7 @@
                                                         <h2>Mr. {{appointment.patient.firstname}}{{appointment.patient.lastname}} </h2>
                                                     </td>
                                                     <td class="appoint-time text-center">
-                                                        <h6>Today from {{ appointment.seance.start_time | date: 'HH:mm' }}
-                                                            to  {{ appointment.seance.end_time | date: 'HH:mm' }}
+                                                        <h6>Today at {{ appointment.appointment | date: 'HH:mm' }}
 
                                                         </h6>
                                                     </td>

@@ -107,7 +107,6 @@ export class AdminService {
     return this.http.get(environment.urlBackend + 'api/v1/maladies/');
   }
   updateDiseas(data:any){
-    debugger
     return this.http.patch(`${environment.urlBackend}api/v1/maladies/${data.id}`, data);
   }
 

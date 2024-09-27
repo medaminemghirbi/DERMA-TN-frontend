@@ -1,16 +1,18 @@
 <div class="main-wrapper">
-    <app-doctor-header></app-doctor-header>
-    <app-doctor-sidebar></app-doctor-sidebar>
-    <div class="page-wrapper">
-        <div class="content">
-            <div class='demo-app-main'>
-                <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
-                    <ng-template #eventContent let-arg>
-                        <b>{{ arg.timeText }}</b>
-                        <i>{{ arg.event.title }}</i>
-                    </ng-template>
-                </full-calendar>
-            </div>
-        </div>
+  <app-doctor-header></app-doctor-header>
+  <app-doctor-sidebar></app-doctor-sidebar>
+  <div class="page-wrapper">
+    <div class="content">
+      <div class='demo-app-main'>
+        <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
+          <ng-template #eventContent let-arg>
+            <b>{{ arg.timeText }}</b>
+            <i>{{ arg.event.title }}</i>
+          </ng-template>
+        </full-calendar>
+      </div>
     </div>
+  </div>
 </div>
+
+

@@ -39,9 +39,24 @@ export class DoctorService {
   createBlog(data: FormData): Observable<any> {
     return this.http.post(`${environment.urlBackend}api/v1/blogs`, data);
   }
-  getDayOfTheYear() {
-    return this.http.get(`${environment.urlBackend}api/v1/all_dates_in_year`);
+  fetchDoctorConsultations(doctor_id:any) {
+    return this.http.get<any[]>(`${environment.urlBackend}api/v1/doctor_consultations/${doctor_id}`);
   }
+  ArchiveConsultation(id: any) {
+    return this.http.delete(environment.urlBackend + 'api/v1/consultations/' + id);
+  }
+
+  doctor_appointments(doctor_id:any) {
+    return this.http.get<any[]>(`${environment.urlBackend}api/v1/doctor_appointments/${doctor_id}`);
+  }
+
+  updateAppointment(id:string,newdata:any){
+    return this.http.patch(environment.urlBackend+'api/v1/consultations/' + id , newdata )
+  }
+  update_location(id: string, newdata: FormData) {
+    return this.http.patch(`${environment.urlBackend}api/v1/update_location/${id}`, newdata);
+  }
+  
 
   
 }

@@ -1,0 +1,138 @@
+<div class="main-wrapper">
+    <app-doctor-header></app-doctor-header>
+    <app-doctor-sidebar></app-doctor-sidebar>
+    <div class="page-wrapper">
+        <div class="content">
+
+            <div class="card-body">
+                <h4 class="header-title mb-4">All Patients Requests</h4>
+                <div class="row mb-3">
+                    <!-- Search Input (Left side) -->
+                    <div class="col-md-6">
+                        <div class="input-group input-group-sm">
+                            <input type="text" name="role" class="form-control form-control-sm" 
+                                [(ngModel)]="searchedKeyword" placeholder="Search for...">
+                        </div>
+                    </div>
+                
+                    <!-- Status Dropdown (Right side) -->
+                    <div class="col-md-6">
+                        <select class="form-control form-control-sm" id="statusDropdown" [(ngModel)]="selectedStatus">
+                            <option hidden value="" selected>Filter By State</option>
+                            <option value="pending">En Cours</option>
+                            <option value="approved">Accepted</option>
+                            <option value="rejected">Refused</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <table class="table border-0 custom-table comman-table datatable mb-0">
+                    <thead>
+                        <tr>
+                            <th>Rendez Vous Date</th>
+                            <th>Rendez vous type</th>
+                            <th>Doctor </th>
+                            <th>Patient</th>
+                            <th>Phone Number</th>
+                            <th>Created Date</th>
+                            <th>Status</th>
+                            <th>Update</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                        *ngFor="let item of allConsultations | paginate: { itemsPerPage: 10, currentPage: p } | filter: searchedKeyword | filterByStatus: selectedStatus; index as i">
+                        <td class="description-content">
+                            <a>
+                                {{ item.appointment | date: 'EEEE'}}<br>
+                                {{ item.appointment | date: 'dd'}}
+                                {{ item.appointment | date: 'MMMM'}}
+                                {{ item.appointment | date: 'yyyy'}}<br>
+                                at {{ item.appointment | date: 'HH:mm'}}
+                            </a>
+                        </td>
+                        <td>coming soon</td>
+                        <td class="profile-image">
+                            <a><img width="28" height="28" src="{{item.doctor.user_image_url}}" class="rounded-circle m-r-5" alt>
+                                Dr. {{item.doctor.firstname}} {{item.doctor.lastname}}
+                            </a>
+                        </td>
+                        <td class="profile-image">
+                            <a><img width="28" height="28" src="{{item.patient.user_image_url}}" class="rounded-circle m-r-5" alt>
+                                Mr(s) {{item.patient.firstname}} {{item.patient.lastname}}
+                            </a>
+                        </td>
+                        <td>
+                            patient: {{item.patient.phone_number}}<br>
+                            doctor: <span *ngIf="item.doctor.phone_number">{{item.doctor.phone_number}}</span>
+                            <span style="color: rgb(255, 9, 9);" *ngIf="!item.doctor.phone_number">
+                                <i style="color: rgb(255, 9, 9);" class="fa fa-ban" data-bs-toggle="tooltip" title="fa fa-check"></i>
+                                Not Provided
+                            </span>
+                        </td>
+                        <td class="description-content">
+                            <a>{{item.created_at}}</a>
+                        </td>
+                        <td>
+                            <button *ngIf="item.status == 'approved'" class="custom-badge status-green">Accepted</button>
+                            <button *ngIf="item.status == 'pending'" class="custom-badge status-orange">Pending</button>
+                            <button *ngIf="item.status == 'rejected'" class="custom-badge status-red">Rejected</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-secondary rounded-pill" [disabled]="item.status !== 'pending'" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                                (click)="handleClick(item.status, item.refus_reason, item.id)">
+                                Update
+                            </button>
+                        </td>
+                    </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align:right;">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Update Demande</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="update" #f="ngForm" (ngSubmit)="updatedemande(f); f.reset()">
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="nameBackdrop" class="form-label">Status Name</label>
+
+                                        <select class="form-control" id="exampleFormControlSelect1"
+                                            [(ngModel)]="datademande.status" required formControlName="status">
+                                            <option value="pending">En Cours</option>
+                                            <option value="approved">accepted</option>
+                                            <option value="rejected">refus</option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="datademande.status === 'rejected'" class="ol mb-3">
+                                        <label class="col-form-label">Leave Reason <span
+                                                class="text-danger">*</span></label>
+                                        <textarea rows="4" formControlName="refus_reason"
+                                            [(ngModel)]="datademande.refus_reason" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

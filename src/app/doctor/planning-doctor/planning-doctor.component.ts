@@ -1,13 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { DoctorService } from 'src/app/services/doctor.service';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import { INITIAL_EVENTS } from './event-utils';
+import { AuthService } from 'src/app/services/auth.service';
+import { DoctorService } from 'src/app/services/doctor.service';
 
 @Component({
   selector: 'app-planning-doctor',
@@ -16,82 +15,65 @@ import { INITIAL_EVENTS } from './event-utils';
 })
 export class PlanningDoctorComponent implements OnInit {
   calendarVisible = true;
-  today = new Date(); // Get today's date
+  consultations: any;
+  currentUser: any;
+  today = new Date(); 
   calendarOptions: CalendarOptions = {
-    plugins: [
-      interactionPlugin,
-      dayGridPlugin,
-      timeGridPlugin,
-      listPlugin,
-    ],
+    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'timeGridDay,timeGridWeek'
+      right: 'timeGridDay,timeGridWeek',
     },
-    initialView: 'timeGridDay', // Set default view to daily time grid
-    weekends: false, // Hide weekends if you only want weekdays
-    editable: true,
-    selectable: true,
-    slotDuration: '00:30:00', // 30-minute slots
-    slotLabelInterval: '00:30:00', // Show labels every 30 minutes
+    initialView: 'timeGridDay',
+    weekends: false,
+    slotDuration: '00:30:00', // Keep 30 minutes slots
+    slotLabelInterval: '00:30:00', // Labels every 30 minutes
     slotMinTime: '09:00:00',
     slotMaxTime: '17:00:00',
     dayMaxEvents: true,
-    height: 'auto', // Set height to auto or a specific value, like '600px'
-    validRange: { start: this.formatDate(this.today) }, // Disable past dates
-    select: this.handleDateSelect.bind(this),
-    eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this),
-    allDaySlot: false, // Disable all-day slots
+    height: 'auto',
+    validRange: { start: this.formatDate(this.today) },
+    allDaySlot: false,
   };
   
   currentEvents: EventApi[] = [];
+  messageErr = "";
 
-  constructor(private changeDetector: ChangeDetectorRef) {}
+  constructor(
+    private doctorSerivce: DoctorService,
+    private auth: AuthService
+  ) {}
 
-  ngOnInit(): void {}
-
-  handleCalendarToggle() {
-    this.calendarVisible = !this.calendarVisible;
-  }
-
-  handleWeekendsToggle() {
-    const { calendarOptions } = this;
-    calendarOptions.weekends = !calendarOptions.weekends;
-  }
-
-  handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
-    const calendarApi = selectInfo.view.calendar;
-
-    calendarApi.unselect(); // clear date selection
-
-    if (title) {
-      calendarApi.addEvent({
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-      });
-    }
-  }
-
-  handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
-    }
-  }
-
-  handleEvents(events: EventApi[]) {
-    this.currentEvents = events;
-    this.changeDetector.detectChanges();
-  }
-
-  // Helper function to format the date as YYYY-MM-DD
-  private formatDate(date: Date): string {
+  ngOnInit(): void {
+    this.currentUser = this.auth.getcurrentuser();
+    this.doctorSerivce.fetchDoctorConsultations(this.currentUser.id).subscribe(
+      (consultations) => {   
+        const events = consultations.map(consultation => ({
+          title: `Consultation with Mr ${consultation.patient.firstname} ${consultation.patient.lastname}`, 
+          start: consultation.appointment, 
+          end: this.addMinutesToDate(new Date(consultation.appointment), 30), 
+          id: consultation.id,
+          extendedProps: { 
+            patient: consultation.patient // Add the full consultation data in extendedProps
+          }
+        }));
+    
+        this.calendarOptions.events = events;
+      },
+      (err: HttpErrorResponse) => {
+        console.error('Error fetching consultations:', err);
+        this.messageErr = "We don't found this blog in our database";
+      }
+    );
+  }    
+  formatDate(date: Date): string {
     const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
     const dd = String(date.getDate()).padStart(2, '0');
     return `${yyyy}-${mm}-${dd}`;
+  }
+  addMinutesToDate(date: Date, minutes: number): Date {
+    return new Date(date.getTime() + minutes * 60000);
   }
 }

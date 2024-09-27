@@ -69,22 +69,22 @@ export class DashboardDoctorComponent implements OnInit {
       return appointmentDate.isSame(now, 'day'); // Check if the appointment is today
     });
 
-    // Use start_at from consultation for upcoming appointments
+    // Use appointment from consultation for upcoming appointments
     const upcomingAppointments = todayAppointments
-      .filter((app: { start_at: string; }) => {
-        const appointmentTime = moment(app.start_at);
+      .filter((app: { appointment: string; }) => {
+        const appointmentTime = moment(app.appointment);
         console.log("Appointment start time:", appointmentTime.format()); // Debug log
 
         // Check if the appointment time is after the current time
         return appointmentTime.isAfter(now); // Check if appointment time is after the current time
       })
-      .sort((a: { start_at: string; }, b: { start_at: string; }) => {
-        return moment(a.start_at).diff(moment(b.start_at)); // Sort by start time
+      .sort((a: { appointment: string; }, b: { appointment: string; }) => {
+        return moment(a.appointment).diff(moment(b.appointment)); // Sort by start time
       });
 
     if (upcomingAppointments.length > 0) {
       this.nextAppointment = upcomingAppointments[0];
-      this.calculateRemainingTime(this.nextAppointment.start_at);
+      this.calculateRemainingTime(this.nextAppointment.appointment);
     } else {
       this.nextAppointment = null;
       this.show = true

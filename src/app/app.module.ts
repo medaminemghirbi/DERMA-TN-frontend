@@ -36,6 +36,10 @@ import { LandingComponent } from './landing/landing.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DoctorSettingsComponent } from './doctor/doctor-settings/doctor-settings.component';
 import { FirstKeyValuePipe } from './first-key-value.pipe';
+import { AppointmentRequestsComponent } from './doctor/appointment-requests/appointment-requests.component';
+import { FilterByStatusPipe } from './filter-by-status.pipe';
+import { MapPickerComponent } from './map-picker/map-picker.component';
+import { MyLocationComponent } from './doctor/my-location/my-location.component';
 
 
 @NgModule({
@@ -64,6 +68,10 @@ import { FirstKeyValuePipe } from './first-key-value.pipe';
     RegistrationComponent,
     DoctorSettingsComponent,
     FirstKeyValuePipe,
+    AppointmentRequestsComponent,
+    FilterByStatusPipe,
+    MapPickerComponent,
+    MyLocationComponent,
     
   ],
   imports: [

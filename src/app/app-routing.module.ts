@@ -20,6 +20,8 @@ import { LandingComponent } from './landing/landing.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DoctorSettingsComponent } from './doctor/doctor-settings/doctor-settings.component';
 import { PlanningDoctorComponent } from './doctor/planning-doctor/planning-doctor.component';
+import { AppointmentRequestsComponent } from './doctor/appointment-requests/appointment-requests.component';
+import { MyLocationComponent } from './doctor/my-location/my-location.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -40,6 +42,8 @@ const routes: Routes = [
   { path: 'doctor/blogs', canActivate: [DoctorGuard], component: DoctorBlogsComponent },
   { path: 'doctor/settings', canActivate: [DoctorGuard], component: DoctorSettingsComponent },
   { path: 'doctor/planning', canActivate: [DoctorGuard], component: PlanningDoctorComponent },
+  { path: 'doctor/appointment-request', canActivate: [DoctorGuard], component: AppointmentRequestsComponent },
+  { path: 'doctor/settings/my-location', canActivate: [DoctorGuard], component: MyLocationComponent },
 
   // Shared components
   { path: 'forums', component: ForumsComponent },
