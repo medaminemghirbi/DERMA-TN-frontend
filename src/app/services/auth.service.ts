@@ -63,4 +63,15 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!sessionStorage.getItem('access_token');
   }
+  updatepassword(id:string, password: string, newPassword: string, confirmPassword: string): Observable<any>{
+    const body = { password, newPassword, confirmPassword};
+    return this.http.patch(environment.urlBackend+'api/v1/updatepassword/' + id , body )
+  }
+  updateEmailNotificationPreference(userId: string, isEmailable: boolean) {
+    return this.http.put(environment.urlBackend+`api/v1/users/${userId}/email_notifications`, { is_emailable: isEmailable });
+}
+
+updateSystemNotificationPreference(userId: string, isNotifiable: boolean) {
+    return this.http.put(environment.urlBackend+`api/v1/users/${userId}/system_notifications`, { is_notifiable: isNotifiable });
+}
 }

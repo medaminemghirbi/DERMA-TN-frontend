@@ -57,6 +57,10 @@ export class DoctorService {
     return this.http.patch(`${environment.urlBackend}api/v1/update_location/${id}`, newdata);
   }
   
-
-  
+  updatedoctorimage (id:string,newprofile:any){
+    return this.http.patch(environment.urlBackend+'api/v1/updatedoctorimage/' + id , newprofile )
+  }
+  updatedoctorprofil(id:string,newprofile:any){
+    return this.http.patch(environment.urlBackend+'api/v1/updatedoctor/' + id , newprofile )
+  }
 }

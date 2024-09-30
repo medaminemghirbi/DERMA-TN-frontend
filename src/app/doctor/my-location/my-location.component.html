@@ -3,23 +3,7 @@
     <app-doctor-sidebar></app-doctor-sidebar>
     <div class="page-wrapper">
         <div class="content">
-            <div class="settings-menu-links">
-                <ul class="nav nav-tabs menu-tabs">
-                    <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="/doctor/settings">General Settings</a>
-                    </li>
-            
-                    <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="/doctor/settings/social-media">Social Links</a>
-                    </li>
-                    <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="/doctor/settings/my-location">My Location</a>
-                    </li>
-                    <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" routerLink="/doctor/settings/reset-password">Change Password</a>
-                    </li>
-                </ul>
-            </div>            
+            <app-header-settings></app-header-settings>
             <app-map-picker></app-map-picker>
         </div>
     </div>

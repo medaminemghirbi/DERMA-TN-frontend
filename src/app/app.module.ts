@@ -40,6 +40,9 @@ import { AppointmentRequestsComponent } from './doctor/appointment-requests/appo
 import { FilterByStatusPipe } from './filter-by-status.pipe';
 import { MapPickerComponent } from './map-picker/map-picker.component';
 import { MyLocationComponent } from './doctor/my-location/my-location.component';
+import { HeaderSettingsComponent } from './doctor/header-settings/header-settings.component';
+import { SocialMediaComponent } from './doctor/social-media/social-media.component';
+import { NotificationSettingsComponent } from './doctor/notification-settings/notification-settings.component';
 
 
 @NgModule({
@@ -72,6 +75,9 @@ import { MyLocationComponent } from './doctor/my-location/my-location.component'
     FilterByStatusPipe,
     MapPickerComponent,
     MyLocationComponent,
+    HeaderSettingsComponent,
+    SocialMediaComponent,
+    NotificationSettingsComponent,
     
   ],
   imports: [
