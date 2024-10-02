@@ -69,14 +69,36 @@ export class NotifiacationAlertComponent implements OnInit {
   // Handle incoming notifications
   handleNewNotification(data: any): void {
     if (data.message && data.message.consultation) {
-      const notificationMessage = `New consultation created see apointment requests page`;
-      this.toastr.info(notificationMessage, '', {
-        timeOut: 4000 // Display for 3 seconds
-      });
-      
-      this.cdr.detectChanges();
+        const consultation = data.message.consultation; // Assuming this contains the consultation details
+        let notificationMessage = `Notification System. See the appointment requests page.`;
+        let notificationColor: 'info' | 'success' | 'error' = 'info'; // Default to info
+
+        // Check the status of the consultation
+        switch (consultation.status) {
+            case 'pending':
+                notificationColor = 'info'; // Blue or info color for pending
+                break;
+            case 'approved':
+                notificationColor = 'success'; // Green for accepted
+                notificationMessage = `Appointment accepted! ${notificationMessage}`;
+                break;
+            case 'rejected':
+                notificationColor = 'error'; // Red for refused
+                notificationMessage = `Appointment refused! ${notificationMessage}`;
+                break;
+            default:
+                notificationColor = 'info'; // Default to info if no valid status
+        }
+
+        // Display the notification
+        this.toastr[notificationColor](notificationMessage, '', {
+            timeOut: 4000 // Display for 4 seconds
+        });
+        
+        this.cdr.detectChanges();
     }
-  }
+}
+
   saveNotification(notification: any) {
     this.http.post(environment.urlBackend+'/api/notifications', notification).subscribe(response => {
       console.log('Notification saved', response);
