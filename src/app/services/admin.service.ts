@@ -23,11 +23,13 @@ export class AdminService {
   last_run() {
     return this.http.get(`${environment.urlBackend}` + 'api/v1/last_run/');
   }
+
   reloadData() {
     return this.http.get<any>(
       `${environment.urlBackend}` + 'api/v1/reload_data/'
     );
   }
+
   ArchiveDoctor(id: any) {
     return this.http.delete(environment.urlBackend + 'api/v1/doctors/' + id);
   }

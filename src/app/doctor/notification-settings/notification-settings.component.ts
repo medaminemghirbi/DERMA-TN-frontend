@@ -20,7 +20,9 @@ export class NotificationSettingsComponent implements OnInit {
 
     // Call your service to update the user's preference in the backend
     this.auth.updateEmailNotificationPreference(this.currentUser.id, isChecked).subscribe({
+
         next: (response) => {
+            sessionStorage.setItem('doctordata', JSON.stringify(response));
             console.log('Email notification preference updated successfully!', response);
         },
         error: (error) => {
@@ -36,6 +38,7 @@ toggleSystemNotifications(event: Event) {
     // Call your service to update the user's preference in the backend
     this.auth.updateSystemNotificationPreference(this.currentUser.id, isChecked).subscribe({
         next: (response) => {
+            sessionStorage.setItem('doctordata', JSON.stringify(response));
             console.log('System notification preference updated successfully!', response);
         },
         error: (error) => {

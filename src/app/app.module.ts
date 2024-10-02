@@ -43,6 +43,7 @@ import { MyLocationComponent } from './doctor/my-location/my-location.component'
 import { HeaderSettingsComponent } from './doctor/header-settings/header-settings.component';
 import { SocialMediaComponent } from './doctor/social-media/social-media.component';
 import { NotificationSettingsComponent } from './doctor/notification-settings/notification-settings.component';
+import { NotifiacationAlertComponent } from './shared/notifiacation-alert/notifiacation-alert.component';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { NotificationSettingsComponent } from './doctor/notification-settings/no
     HeaderSettingsComponent,
     SocialMediaComponent,
     NotificationSettingsComponent,
+    NotifiacationAlertComponent,
     
   ],
   imports: [

@@ -38,30 +38,38 @@ export class MapPickerComponent implements OnInit {
   loadMap() {
     // Retrieve the current user
     this.currenUser = this.auth.getcurrentuser();
-    
-    // Check if currentUser has valid latitude and longitude
-    const userLatLng = this.currenUser && this.currenUser.latitude && this.currenUser.longitude 
-      ? { lat: this.currenUser.latitude, lng: this.currenUser.longitude } 
-      : { lat: 35.8283971, lng: 10.5768549 }; // Default location if no valid location exists
+    const geocoder = new google.maps.Geocoder();
   
-    const mapOptions: google.maps.MapOptions = {
-      center: userLatLng,
-      zoom: 15,
-    };
+    // Ensure currentUser has an address
+    if (this.currenUser && this.currenUser.address) {
+      geocoder.geocode({ address: this.currenUser.address }, (results, status) => {
+        if (status === google.maps.GeocoderStatus.OK) {
+          const addressLatLng = results![0].geometry.location;
   
-    this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+          const mapOptions: google.maps.MapOptions = {
+            center: addressLatLng,
+            zoom: 15,
+          };
   
-    // Set a marker at the user's location
-    this.setMarker(userLatLng); // Set marker from currentUser
+          this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
   
-    // Add click event listener to map
-    this.map.addListener('click', (event: google.maps.MapMouseEvent) => {
-      if (event.latLng) {
-        this.showLocationConfirmation(event.latLng);  // Show confirmation before setting marker
-      }
-    });
+          // Set a marker at the geocoded address
+          this.setMarker(addressLatLng); // Set marker for the address
+  
+          // Add click event listener to map
+          this.map.addListener('click', (event: google.maps.MapMouseEvent) => {
+            if (event.latLng) {
+              this.showLocationConfirmation(event.latLng); // Show confirmation before setting marker
+            }
+          });
+        } else {
+          console.error("Geocode was not successful for the following reason: " + status);
+        }
+      });
+    } else {
+      console.error("No valid address found for the current user.");
+    }
   }
-  
   showLocationConfirmation(location: google.maps.LatLng | google.maps.LatLngLiteral) {
     // Check if the new location is different from the current one
     const newLatitude = location.lat instanceof Function ? location.lat() : location.lat;

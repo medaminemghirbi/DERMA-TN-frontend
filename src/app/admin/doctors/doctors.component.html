@@ -13,7 +13,8 @@
                     <div class="card card-table show-entire">
                         <div class="card-body">
 
-                            <p *ngIf="last_import.last_run">Last import With Data Scrapping: {{ last_import.last_run }}</p>
+                            <p *ngIf="last_import.last_run">Last import With Data Scrapping: {{ last_import.last_run }}
+                            </p>
 
                             <div class="page-table-header mb-2">
                                 <div class="row align-items-center">
@@ -22,14 +23,19 @@
                                             <h3>Doctors List</h3>
                                             <div class="doctor-search-blk">
                                                 <div class="top-nav-search table-search-blk">
-                                                    <form>
+                                                    <form class="d-flex">
                                                         <input type="text" name="role" class="form-control"
                                                             [(ngModel)]="searchedKeyword"
-                                                            (ngModelChange)="searchDoctors()" placeholder="Search here">
+                                                            (ngModelChange)="searchDoctors()"
+                                                            placeholder="Search for a Doctor">
                                                         <a class="btn"><img src="assets/img/icons/search-normal.svg"
                                                                 alt></a>
                                                     </form>
                                                 </div>
+
+                                                <!-- Department Dropdown (Placed in the Middle) -->
+
+
                                                 <div class="add-group">
                                                     <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2"
                                                         (click)="refreshDoctors()">
@@ -45,17 +51,18 @@
                                                 class="btn btn-primary add-pluss ms-2">
                                                 <img src="assets/img/icons/plus.svg" alt>
                                             </a>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
 
+
                             <div class="table-responsive">
                                 <table *ngIf="!isLoading"
                                     class="table border-0 custom-table comman-table datatable mb-0">
                                     <thead>
+
                                         <tr>
                                             <th (click)="sortByName()">
                                                 <img src="assets/img/icons/sort-icon-01.svg" alt>
@@ -81,9 +88,16 @@
                                     <tbody>
                                         <tr
                                             *ngFor="let item of filteredDoctors | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-                                            <td class="profile-image"><a><img width="28" height="28"
-                                                        src="{{item.user_image_url}}" class="rounded-circle m-r-5" alt>
-                                                    Dr. {{item.firstname}} {{item.lastname}}</a></td>
+
+                                            <td class="profil-content">
+                                                <a>
+                                                    <img width="28" height="28" src="{{item.user_image_url}}"
+                                                        class="rounded-circle" alt>
+                                                    <span>Dr. {{item.firstname}} {{item.lastname}}</span>
+                                                </a>
+                                            </td>
+
+
                                             <td>{{item.location}}</td>
                                             <td>
                                                 <div class="accord-btn">
@@ -98,7 +112,7 @@
                                                     <div class="collapse" id="collapseExample{{i}}">
                                                         <div class="card">
                                                             <div class="description-content">
-                                                                {{item.description}}
+                                                                {{item.address}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -122,20 +136,20 @@
                                             </td>
                                             <td>
                                                 <button *ngIf="item.plan == 'no_plan'" type="button"
-                                                class="btn btn-rounded btn-warning">{{item.plan}}</button>
+                                                    class="btn btn-rounded btn-warning">{{item.plan}}</button>
                                                 <button *ngIf="item.plan == 'basic'" type="button"
                                                     class="btn btn-rounded btn-info">{{item.plan}}</button>
-                                                    <p *ngIf="item.plan == 'basic'">
-                                                        3 times a day </p>
+                                                <p *ngIf="item.plan == 'basic'">
+                                                    3 times </p>
                                                 <button *ngIf="item.plan == 'premium'" type="button"
                                                     class="btn btn-rounded btn-primary">{{item.plan}}</button>
-                                                    <p *ngIf="item.plan == 'premium'">
-                                                        unlimited </p>
+                                                <p *ngIf="item.plan == 'premium'">
+                                                    unlimited </p>
                                                 <button *ngIf="item.plan == 'custom'" type="button"
                                                     class="btn btn-rounded btn-success">{{item.plan}}
                                                 </button>
                                                 <p *ngIf="item.plan == 'custom'">
-                                                    {{item.custom_limit}} times a day </p>
+                                                    {{item.custom_limit}} times </p>
                                             </td>
                                             <td>{{item.created_at | date: 'yyyy-MM-dd'}}</td>
                                             <td class="text-end">

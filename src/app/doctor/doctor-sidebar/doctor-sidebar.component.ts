@@ -34,4 +34,8 @@ export class DoctorSidebarComponent implements OnInit {
       this.toastr.error('You Can\'t Access It!', 'Fonctionality not Allowed Please Contact DocPro!');
     }
   }
+  alert(){
+    this.toastr.info('coming soon', 'Fonctionality will be added stay tuned!');
+
+  }
 }
