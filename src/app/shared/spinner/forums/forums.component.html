@@ -69,14 +69,14 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="text-end">
-                                                                        <div class="dropdown dropdown-action">
+                                                                        <div *ngIf="this.currentuser.id == message.sender.id" class="dropdown dropdown-action">
                                                                             <a href="#"
                                                                                 class="action-icon dropdown-toggle"
                                                                                 data-bs-toggle="dropdown"
                                                                                 aria-expanded="false">
                                                                                 <i class="fa fa-ellipsis-v"></i>
                                                                             </a>
-                                                                            <div
+                                                                            <div  
                                                                                 class="dropdown-menu dropdown-menu-end">
                                                                                 <a class="dropdown-item"
                                                                                     (click)="delete(message.id, i)">
@@ -112,9 +112,10 @@
                                                     <div class="input-group">
                                                         <form (submit)="handleSubmit($event)">
 
-                                                            <input type="text" name="message" #messageInput>
-                                                            <input type="file" (change)="onFilesSelected($event)"
-                                                                multiple #fileInput>
+                                                            <input name="message" #messageInput type="text"
+                                                                placeholder="Enter your message" required=""> <input
+                                                                type="file" (change)="onFilesSelected($event)" multiple
+                                                                #fileInput>
                                                             <button class="btn btn-primary btn-lg"
                                                                 type="submit">Submit</button>
                                                         </form>

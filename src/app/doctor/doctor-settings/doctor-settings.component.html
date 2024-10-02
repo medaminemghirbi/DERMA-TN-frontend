@@ -1,0 +1,90 @@
+<div class="main-wrapper">
+    <app-doctor-header></app-doctor-header>
+    <app-doctor-sidebar></app-doctor-sidebar>
+    <div class="page-wrapper">
+        <div class="content">
+            <app-header-settings></app-header-settings>
+            <app-notifiacation-alert></app-notifiacation-alert>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-header">
+                                <h5 class="card-title">Doctor Image Details</h5>
+                            </div>
+                            <div  class="card-body pt-0">
+                                <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)">
+                                    <p class="settings-label">Logo <span class="star-red">*</span></p>
+                                    <div class="settings-btn">
+                                        <input type="file" accept="image/*" formControlName="avatar" id="file"
+                                            (change)="fileChange($event)" class="hide-input" />
+                                        <label for="file" class="upload">
+                                            <i class="feather-upload"></i>
+                                        </label>
+                                    </div>
+                                    <h6 class="settings-size">Recommended image size is <span>150px x 150px</span></h6>
+                                    <div class="upload-images">
+                                        <img [src]="currentUser.user_image_url || 'assets/img/logo-dark.png'"
+                                            alt="Image" />
+                                        <a href="javascript:void(0);" class="btn-icon logo-hide-btn">
+                                            <i class="feather-x-circle"></i>
+                                        </a>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <button type="submit" class="btn btn-primary px-4"
+                                            style="background-color: rgb(38, 8, 158);">Update Image</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Address Details From Google Maps</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <form>
+                                <div class="settings-form">
+                                    <div class="input-block">
+                                        <label>Address <span class="star-red">*</span></label>
+                                        <input disabled="true" type="text" name="addressLine1"
+                                            [(ngModel)]="addressLine1" class="form-control"
+                                            placeholder="Enter Address Line 1">
+                                    </div>
+                                    <div class="input-block">
+                                        <label>Location <span class="star-red">*</span></label>
+                                        <textarea disabled="true" class="form-control" name="address"
+                                            [(ngModel)]="currentUser.address" rows="4"></textarea>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-block">
+                                                <label>Zip/Postal Code <span class="star-red">*</span></label>
+                                                <input disabled="true" type="text" class="form-control" name="zipCode"
+                                                    [(ngModel)]="currentUserLocation.zipCode">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-block">
+                                                <label>City <span class="star-red">*</span></label>
+                                                <input disabled="true" type="text" class="form-control" name="city"
+                                                    [(ngModel)]="currentUserLocation.city">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

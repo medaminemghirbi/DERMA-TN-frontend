@@ -16,32 +16,47 @@ import { AdminGuard } from './guards/admin.guard';
 import { AnalyzeImageComponent } from './doctor/analyze-image/analyze-image.component';
 import { MaladieComponent } from './admin/maladie/maladie.component';
 import { DoctorBlogsComponent } from './doctor/doctor-blogs/doctor-blogs.component';
+import { LandingComponent } from './landing/landing.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { DoctorSettingsComponent } from './doctor/doctor-settings/doctor-settings.component';
+import { PlanningDoctorComponent } from './doctor/planning-doctor/planning-doctor.component';
+import { AppointmentRequestsComponent } from './doctor/appointment-requests/appointment-requests.component';
+import { MyLocationComponent } from './doctor/my-location/my-location.component';
+import { SocialMediaComponent } from './doctor/social-media/social-media.component';
+import { NotificationSettingsComponent } from './doctor/notification-settings/notification-settings.component';
 
 const routes: Routes = [
-  ///////////////****** Page Index *****///////////////////////
-  {path:'',component:IndexComponent},
+  { path: '', component: LandingComponent },
+  { path: 'login', component: IndexComponent },
+  { path: 'inscription', component: RegistrationComponent },
 
-  ///////////////****** Admin Components *****///////////////////////
+  // Admin routes with guards
+  { path: 'admin/dashboard', canActivate: [AdminGuard], component: DashboardAdminComponent },
+  { path: 'admin/doctors', canActivate: [AdminGuard], component: DoctorsComponent },
+  { path: 'admin/patients', canActivate: [AdminGuard], component: PatientsComponent },
+  { path: 'admin/planning', canActivate: [AdminGuard], component: PlanningComponent },
+  { path: 'admin/blogs', canActivate: [AdminGuard], component: BlogsComponent },
+  { path: 'admin/maladies', canActivate: [AdminGuard], component: MaladieComponent },
 
-  {path:'admin/dashboard',canActivate:[AdminGuard],component:DashboardAdminComponent},
-  {path:'admin/doctors',canActivate:[AdminGuard],component:DoctorsComponent},
-  {path:'admin/patients',canActivate:[AdminGuard],component:PatientsComponent},
-  {path:'admin/planning',canActivate:[AdminGuard],component:PlanningComponent},
-  {path:'forums',component:ForumsComponent},
-  {path:'admin/blogs',canActivate:[AdminGuard],component:BlogsComponent},
-  {path:'admin/diseas',canActivate:[AdminGuard],component:MaladieComponent},
-    ///////////////****** Doctor Components *****///////////////////////
-  {path:'doctor/dashboard',canActivate:[DoctorGuard],component:DashboardDoctorComponent},
-  {path:'doctor/analyze-image',canActivate:[DoctorGuard],component:AnalyzeImageComponent},
-  {path:'doctor/blogs',canActivate:[DoctorGuard],component:DoctorBlogsComponent},
+  // Doctor routes with guards
+  { path: 'doctor/dashboard', canActivate: [DoctorGuard], component: DashboardDoctorComponent },
+  { path: 'doctor/analyze-image', canActivate: [DoctorGuard], component: AnalyzeImageComponent },
+  { path: 'doctor/blogs', canActivate: [DoctorGuard], component: DoctorBlogsComponent },
+  { path: 'doctor/planning', canActivate: [DoctorGuard], component: PlanningDoctorComponent },
+  { path: 'doctor/appointment-request', canActivate: [DoctorGuard], component: AppointmentRequestsComponent },
+
+  { path: 'doctor/settings', canActivate: [DoctorGuard], component: DoctorSettingsComponent },
+  { path: 'doctor/settings/my-location', canActivate: [DoctorGuard], component: MyLocationComponent },
+  { path: 'doctor/settings/social-media', canActivate: [DoctorGuard], component: SocialMediaComponent },
+  { path: 'doctor/settings/notifications', canActivate: [DoctorGuard], component: NotificationSettingsComponent },
 
 
-  /////////////////// *SHARED COMPONENT *//////////////////////////////////
-  {path:'blog/:id',component:BlogDetailsComponent},
+  // Shared components
+  { path: 'forums', component: ForumsComponent },
+  { path: 'blog/:id', component: BlogDetailsComponent },
 
   // Wildcard route
-  { path: '**',  component: UnauthorizedComponent }
-
+  { path: '**', component: UnauthorizedComponent } // or PageNotFoundComponent for 404 scenarios
 ];
 
 @NgModule({

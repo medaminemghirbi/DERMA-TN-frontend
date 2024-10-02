@@ -14,11 +14,13 @@ export class DoctorGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const user = this.auth.getcurrentuser();
+
+    // Check if user is logged in and has the role 'Doctor'
     if (user && this.auth.getRole() === 'Doctor') {
       return true;
     } else {
-      this.router.navigate(['/']);
-      return false;
+      // Redirect to login page
+      return this.router.parseUrl('/login');
     }
   }
 }

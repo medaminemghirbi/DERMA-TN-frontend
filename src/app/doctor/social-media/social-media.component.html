@@ -1,0 +1,103 @@
+<div class="main-wrapper">
+    <app-doctor-header></app-doctor-header>
+    <app-doctor-sidebar></app-doctor-sidebar>
+    <div class="page-wrapper">
+        <div class="content">
+            <app-header-settings></app-header-settings>
+            <app-notifiacation-alert></app-notifiacation-alert>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Social Link Settings</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <form [formGroup]="upadate" #f="ngForm" (ngSubmit)="updateadminprofil(f)">
+                                <div class="settings-form">
+                                    <div class="links-info">
+                                        <div class="row form-row links-cont">
+                                            <div class="input-block form-placeholder d-flex">
+                                                <button class="btn social-icon">
+                                                    <i class="feather-facebook"></i>
+                                                </button>
+                                                <input type="text" class="form-control"
+                                                [(ngModel)]="currentUser.facebook"
+                                                formControlName="facebook"
+                                                    placeholder="https://www.facebook.com/">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="links-info">
+                                        <div class="row form-row links-cont">
+                                            <div class="input-block form-placeholder d-flex">
+                                                <button class="btn social-icon">
+                                                    <i class="feather-twitter"></i>
+                                                </button>
+                                                <input type="text" class="form-control"
+                                                [(ngModel)]="currentUser.twitter"
+                                                formControlName="twitter"
+                                                    placeholder="https://www.twitter.com/">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="links-info">
+                                        <div class="row form-row links-cont">
+                                            <div class="input-block form-placeholder d-flex">
+                                                <button class="btn social-icon">
+                                                    <i class="feather-youtube"></i>
+                                                </button>
+                                                <input type="text" class="form-control"
+                                                [(ngModel)]="currentUser.youtube"
+                                                formControlName="youtube"
+                                                    placeholder="https://www.youtube.com/">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="links-info">
+                                        <div class="row form-row links-cont">
+                                            <div class="input-block form-placeholder d-flex">
+                                                <button class="btn social-icon">
+                                                    <i class="feather-linkedin"></i>
+                                                </button>
+                                                <input type="text" class="form-control"
+                                                [(ngModel)]="currentUser.linkedin"
+                                                formControlName="linkedin"
+                                                    placeholder="https://www.linkedin.com/">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="links-info">
+                                        <div class="row form-row links-cont">
+                                            <div class="input-block form-placeholder d-flex">
+                                                <button class="btn social-icon">
+                                                    <i class="feather-folder"></i>
+                                                </button>
+                                                <input type="text" class="form-control"
+                                                [(ngModel)]="currentUser.website"
+                                                formControlName="website"
+                                                    placeholder="https://www.your-site.com/">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-block text-end">
+                                    <a href="javascript:void(0);" class="btn add-links">
+                                        <i class="fa fa-plus me-1"></i> Add More
+                                    </a>
+                                </div>
+                                <div class="input-block mb-0">
+                                    <div class="settings-btns">
+                                        <button type="submit" class="border-0 btn-primary px-4 btn-rounded"
+                                            style="background-color: rgb(38, 8, 158);"
+                                            class="border-0 btn btn-primary btn-gradient-primary btn-rounded">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

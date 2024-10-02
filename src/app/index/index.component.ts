@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
-import { User } from '../model/user.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
@@ -12,34 +11,22 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent  implements OnInit {
-  public connecte : boolean = false ;
+export class IndexComponent implements OnInit {
+  public connecte: boolean = false;
+  messageError: any;
 
-  messageError:any
+  // Define the form group with validation
+  registerForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),  // Email field with required and email format validation
+    password: new FormControl('', [Validators.required, Validators.minLength(6)])  // Password field with required and min length validation
+  });
 
-  registerForm =  new FormGroup({
-    email:new FormControl(),
-    password:new FormControl()
-  })
+  constructor(private Auth: AuthService, private route: Router, private toastr: ToastrService) {}
 
-  user : User ={
-    email:'',
-    password:'',
-  }
+  ngOnInit(): void {}
 
-  constructor(private Auth:AuthService,private route:Router,     private toastr: ToastrService) { }
-
-  ngOnInit(): void {
-  }
+  // Login method
   login() {
-    const data = {
-      user :{
-        email:this.user.email,
-        password:this.user.password,
-      }
-
-
-    };
     if (this.registerForm.invalid) {
       Swal.fire({
         icon: 'error',
@@ -48,7 +35,15 @@ export class IndexComponent  implements OnInit {
       });
       return;
     }
-
+  
+    // Non-null assertion operator (!) to ensure the controls exist
+    const data = {
+      user: {
+        email: this.registerForm.get('email')!.value,  // Use `!` to assert that it's not null
+        password: this.registerForm.get('password')!.value  // Use `!` to assert that it's not null
+      }
+    };
+  
     this.Auth.login(data).subscribe(
       (response: any) => {
         if (response.status === 401) {
@@ -60,14 +55,14 @@ export class IndexComponent  implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-
         this.messageError = error.error;
-        console.log(error)
         this.showError('An error occurred. Please try again.');
       }
     );
   }
+  
 
+  // Handle successful login
   private handleLoginSuccess(response: any): void {
     const { logged_in, type, user, token } = response;
     const userTypes: { [key: string]: string } = {
@@ -87,6 +82,7 @@ export class IndexComponent  implements OnInit {
     }
   }
 
+  // Show error with SweetAlert
   private showError(message: string): void {
     Swal.fire({
       icon: 'error',

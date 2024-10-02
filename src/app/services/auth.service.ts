@@ -8,23 +8,24 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  access_token: any = null;
+  access_token: string | null = null;
   public connecte: boolean = false;
-  logged_in: boolean = false;
-  constructor(private http: HttpClient, public router: Router) {}
+  public logged_in: boolean = false;
 
+  constructor(private http: HttpClient) {}
+
+  // Login method, assumes backend sets token in response
   login(data: any): Observable<any> {
-    this.logged_in = true;
-    this.connecte = true;
     return this.http.post(environment.urlBackend + 'sessions', data);
   }
-
   logout() {
     this.connecte = false;
     sessionStorage.clear();
     return this.http.delete(environment.urlBackend + 'logout/');
   }
-  getcurrentuser() {
+
+  // Get current logged-in user data based on user type (Admin, Doctor, Patient)
+  getcurrentuser(): any {
     const userTypeKeys = ['admindata', 'doctordata', 'patientdata'];
     for (const key of userTypeKeys) {
       const userData = sessionStorage.getItem(key);
@@ -35,12 +36,42 @@ export class AuthService {
     return null;
   }
 
-  getRole(){
-    return  sessionStorage.getItem('user_type');
+  // Get user role from session storage (Admin, Doctor, Patient)
+  getRole(): string | null {
+    return sessionStorage.getItem('user_type');
   }
 
-  getToken() {
-    this.access_token = sessionStorage.getItem('access_token');
+  // Token retrieval function
+  getToken(): string | null {
+    if (!this.access_token) {
+      this.access_token = sessionStorage.getItem('access_token');
+    }
     return this.access_token;
   }
+
+  // Helper function to set login data in session storage after successful login
+  setLoginData(userData: any, userType: string, token: string): void {
+    // Set user data based on type (admin, doctor, patient)
+    sessionStorage.setItem(`${userType.toLowerCase()}data`, JSON.stringify(userData));
+    sessionStorage.setItem('user_type', userType);
+    sessionStorage.setItem('access_token', token);
+    this.logged_in = true;
+    this.connecte = true;
+  }
+
+  // Check if user is logged in
+  isLoggedIn(): boolean {
+    return !!sessionStorage.getItem('access_token');
+  }
+  updatepassword(id:string, password: string, newPassword: string, confirmPassword: string): Observable<any>{
+    const body = { password, newPassword, confirmPassword};
+    return this.http.patch(environment.urlBackend+'api/v1/updatepassword/' + id , body )
+  }
+  updateEmailNotificationPreference(userId: string, isEmailable: boolean) {
+    return this.http.put(environment.urlBackend+`api/v1/users/${userId}/email_notifications`, { is_emailable: isEmailable });
+}
+
+updateSystemNotificationPreference(userId: string, isNotifiable: boolean) {
+    return this.http.put(environment.urlBackend+`api/v1/users/${userId}/system_notifications`, { is_notifiable: isNotifiable });
+}
 }

@@ -1,20 +1,10 @@
 <div class="main-wrapper">
     <app-doctor-header></app-doctor-header>
     <app-doctor-sidebar></app-doctor-sidebar>
+    <app-notifiacation-alert></app-notifiacation-alert>
+
     <div class="page-wrapper">
         <div class="content">
-
-            <div class="page-header">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard </a></li>
-                            <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
-                            <li class="breadcrumb-item active">Doctor Dashboard</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
 
             <div class="good-morning-blk">
                 <div class="row">
@@ -32,40 +22,71 @@
                 </div>
             </div>
             <div class="doctor-list-blk">
-                <div class="row">
-                    <div class="col-xl-4 col-md-6">
-                        <div class="doctor-widget border-right-bg">
-                            <div class="doctor-box-icon flex-shrink-0">
-                                <img src="assets/img/icons/doctor-dash-01.svg" alt>
-                            </div>
-                            <div class="doctor-content dash-count flex-grow-1">
-                                <h4><span class="counter-up">30</span>
-                                    <span></span><span></span>
-                                </h4>
-                                <h5>Appointments</h5>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row mb-4 clearfix">
 
-                    <div class="col-xl-4 col-md-6">
-                        <div class="doctor-widget border-right-bg">
-                            <div class="doctor-box-icon flex-shrink-0">
-                                <img src="assets/img/icons/doctor-dash-03.svg" alt>
-                            </div>
-                            <div class="doctor-content dash-count flex-grow-1">
-                                <h4><span class="counter-up">12</span><span></span></h4>
-                                <h5>Analyzed Image with IA</h5>
+                    <div class="col-xl-4 col-lg-12 col-md-12 feature-block">
+                        <div class="feature-block-two">
+                            <div class="inner-box">
+                                <div class="pattern">
+                                    <div class="pattern-1"
+                                        style="background-image: url(../../../assets/images1/shape/shape-83.png);">
+                                    </div>
+                                    <div class="pattern-2"
+                                        style="background-image: url(../../../assets/images1/shape/shape-84.png);">
+                                    </div>
+                                </div>
+                                <div class="icon-box"> <img class="icon-image" src="../../../assets/img/icons/calendar.svg"
+                                        alt></div>
+                                        <h3>{{DoctorStats?.consultation}}</h3>
+                                        <h5>Total Appointments</h5>
+                                <p>Scheduled patient appointments today.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-md-6">
-                        <div class="doctor-widget">
-                            <div class="doctor-box-icon flex-shrink-0">
-                                <img src="assets/img/icons/doctor-dash-02.svg" alt>
+                    <div class="col-xl-4 col-lg-12 col-md-12 feature-block">
+                        <div class="feature-block-two">
+                            <div class="inner-box">
+                                <div class="pattern">
+                                    <div class="pattern-1"
+                                        style="background-image: url(../../../assets/images1/shape/shape-5.png);">
+                                    </div>
+                                    <div class="pattern-2"
+                                        style="background-image: url(../../../assets/images1/shape/shape-9.png);">
+                                    </div>
+                                </div>
+                                <div class="icon-box"> <img class="icon-image" src="../../../assets/img/icons/scissor.svg"
+                                        alt>
+                                </div>
+                                <h3 *ngIf="currentuser.plan == 'no_plan'">-</h3>
+                                <h3 *ngIf="currentuser.plan == 'basic'"> 3 time</h3>
+
+                                <h3 *ngIf="currentuser.plan == 'premium'"> +  <i class="fas fa-solid fa-infinity"></i></h3>
+                                <h3 *ngIf="currentuser.plan == 'custom'">{{currentuser.custom_limit}} time</h3>
+                                <br>
+                                <h5 *ngIf="currentuser.plan == 'no_plan'">You dont have  IA Plan </h5>
+                                <h5 *ngIf="currentuser.plan == 'basic'">Your IA Plan is  <u style="color: blue;"><b>Basic</b></u>   </h5>
+                                <h5 *ngIf="currentuser.plan == 'premium'"> Your IA Plan is  <u style="color: blue;"><b>Premium</b></u> </h5>
+                                <h5 *ngIf="currentuser.plan == 'custom'"> Your IA Plan is <u style="color: blue;"><b>custom</b></u> </h5>
+                                <p>Images processed with AI system.</p>
                             </div>
-                            <div class="doctor-content dash-count flex-grow-1">
-                                <h4><span class="counter-up">530</span><span></span></h4>
-                                <h5>Anaylzed Image With IA</h5>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-12 col-md-12 feature-block">
+                        <div class="feature-block-two">
+                            <div class="inner-box">
+                                <div class="pattern">
+                                    <div class="pattern-1"
+                                        style="background-image: url(../../../assets/images1/shape/shape-7.png);">
+                                    </div>
+                                    <div class="pattern-2"
+                                        style="background-image: url(../../../assets/images1/shape/shape-11.png);">
+                                    </div>
+                                </div>
+                                <div class="icon-box"> <img class="icon-image"
+                                        src="../../../assets/img/icons/dep-icon-04.svg" alt></div>
+                                <h3>{{DoctorStats?.ia_usage}}</h3>
+                                <h5>Disease Count for IA Plan</h5>
+                                <p>Procced Image by AI.</p><br>
                             </div>
                         </div>
                     </div>
@@ -78,8 +99,9 @@
                         <div class="col-12 col-md-12  col-xl-8">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title d-inline-block">Today Appointments</h4> <a
-                                        href="appointments.html" class="patient-views float-end">Show all</a>
+                                    <h4 class="card-title d-inline-block">Today Appointments {{this.now |
+                                                    date:'dd MMM yyyy'}}</h4> <a
+                                        routerLink="/doctor/planning" class="patient-views float-end">Show all</a>
                                 </div>
                                 <div class="card-body p-0 table-dash">
                                     <div class="table-responsive">
@@ -92,17 +114,22 @@
                                                         <h2>Mr. {{appointment.patient.firstname}}{{appointment.patient.lastname}} </h2>
                                                     </td>
                                                     <td class="appoint-time text-center">
-                                                        <h6>Today at {{appointment.seance}}</h6>
+                                                        <h6>Today at {{ appointment.appointment | date: 'HH:mm' }}
+
+                                                        </h6>
+                                                    </td>
+                                                    <td *ngIf="show">
+                                                        <i style="color: green;" class="fa fa-check" data-bs-toggle="tooltip"
+                                                            title="fa fa-check"></i>
                                                     </td>
                                                 </tr>
-                                               
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-12  col-xl-4 d-flex">
+                        <div class="col-12 col-md-12 col-xl-4 d-flex">
                             <div class="card wallet-widget">
                                 <div class="circle-bar circle-bar2">
                                     <div class="circle-graph2" data-percent="66">
@@ -111,7 +138,12 @@
                                 </div>
                                 <div class="main-limit">
                                     <p>Next Appointment in</p>
-                                    <h4>02h:12m</h4>
+                                    <h4 *ngIf="nextAppointment; else noAppointment">
+                                        {{ remainingHours }}h:{{ remainingMinutes }}m
+                                    </h4>
+                                    <ng-template #noAppointment>
+                                        <p>No upcoming appointments</p>
+                                    </ng-template>
                                 </div>
                             </div>
                         </div>

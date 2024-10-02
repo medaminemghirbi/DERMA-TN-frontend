@@ -61,8 +61,14 @@ export class PlanningComponent implements OnInit {
           this.selectedDoctorName = '';
           this.doctorAppointements = null;
           this.doctors = data;
-          this.doctors.sort((a: any, b: any) => a.name.localeCompare(b.name));
-
+    
+          // Sort doctors safely
+          this.doctors.sort((a: any, b: any) => {
+            const nameA = a.name || ''; // Default to empty string if undefined
+            const nameB = b.name || ''; // Default to empty string if undefined
+            return nameA.localeCompare(nameB);
+          });
+    
           if (this.doctors.length === 0) {
             this.doctorAppointements = null;
             this.message = "No doctors available for the selected location.";
@@ -74,7 +80,7 @@ export class PlanningComponent implements OnInit {
           this.doctors = [];
         }
       );
-    } else {
+    }else {
       this.doctors = [];
       this.doctorAppointements = null;
       this.selectedDoctorName = '';

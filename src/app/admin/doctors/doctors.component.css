@@ -9,3 +9,29 @@
   text-overflow: ellipsis; /* Adds ellipsis (...) to truncated text */
   line-height: 1.2; /* Adjust line height for compact text */
 }
+.profil-content {
+  display: flex; /* Use flexbox to align items */
+  align-items: center; /* Align image and text vertically */
+  max-width: 200px; /* Limit the width of the container */
+  padding: 5px; /* Reduce padding for a smaller look */
+  background-color: #f9f9f9; /* Optional: Adds a background color to the description */
+  font-size: 0.875rem; /* Smaller font size for a compact appearance */
+  overflow: hidden; /* Hides any overflow text */
+}
+
+.profil-content a {
+  display: flex; /* Use flex to keep image and text in line */
+  align-items: center; /* Vertically center image and text */
+  width: 100%; /* Ensure the link takes full width */
+}
+
+.profil-content img {
+  margin-right: 5px; /* Space between image and text */
+}
+
+.profil-content span {
+  white-space: normal; /* Allow the text to wrap */
+  overflow: hidden; /* Hides overflow text */
+  text-overflow: ellipsis; /* Adds ellipsis (...) to truncated text */
+  display: inline-block; /* Allows the text to behave like a block element for wrapping */
+}

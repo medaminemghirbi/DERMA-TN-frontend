@@ -44,9 +44,7 @@ export class DoctorsComponent implements OnInit {
 
     this.usersService.last_run().subscribe(data => {
       this.last_import = data;
-      console.log(this.last_import)
     }, error => {
-      console.error('Error fetching doctors', error);
     });
 
   }
@@ -58,10 +56,10 @@ export class DoctorsComponent implements OnInit {
     this.isLoading = true;
     this.usersService.getDoctors().subscribe(data => {
       this.doctors = data;
+      console.log(this.doctors)
       this.filteredDoctors = data;
       this.isLoading = false;
     }, error => {
-      console.error('Error fetching doctors', error);
       this.isLoading = false;
     });
   }
@@ -92,18 +90,20 @@ export class DoctorsComponent implements OnInit {
     const trimmedKeyword = this.searchedKeyword ? this.searchedKeyword.trim() : '';
   
     if (trimmedKeyword) {
-      this.filteredDoctors = this.doctors.filter((doctor: { firstname: string, location:string, lastname:string  }) =>
-        doctor.firstname.toLowerCase().includes(trimmedKeyword.toLowerCase()) ||
-        doctor.location.toLowerCase().includes(trimmedKeyword.toLowerCase()) ||
-        doctor.lastname.toLowerCase().includes(trimmedKeyword.toLowerCase())
-
-      );
+      this.filteredDoctors = this.doctors.filter((doctor: { firstname: string, location: string, lastname: string }) => {
+        const firstNameMatches = doctor.firstname && doctor.firstname.toLowerCase().includes(trimmedKeyword.toLowerCase());
+        const lastNameMatches = doctor.lastname && doctor.lastname.toLowerCase().includes(trimmedKeyword.toLowerCase());
+        const locationMatches = doctor.location && doctor.location.toLowerCase().includes(trimmedKeyword.toLowerCase());
+        
+        return firstNameMatches || lastNameMatches || locationMatches;
+      });
     } else {
       this.filteredDoctors = [...this.doctors];
     }
   
-    this.p = 1;
+    this.p = 1; // Reset pagination when searching
   }
+  
   activateCompte(id: any) {
     Swal.fire({
       title: 'Are you sure?',
@@ -142,7 +142,8 @@ export class DoctorsComponent implements OnInit {
       title: 'Attention !',
       html: `
         <strong>Cettre action va scrapper des informations sur les docteurs et les importer depuis un fichier CSV.</strong><br/>
-        <span style="font-size: larger;">Cela pourrait prendre un certain temps. <br> Êtes-vous sûr de vouloir continuer ?</span>
+        <span style="font-size: larger;">Cela pourrait prendre un certain temps. <br> Êtes-vous sûr de vouloir continuer ?</span><br/><br/>
+      
       `,
       icon: 'warning',
       showDenyButton: true,
@@ -153,10 +154,12 @@ export class DoctorsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.isLoading = true;
+        
+        // Pass the selectedOption to your backend or use it in some way
         this.usersService.reloadData().subscribe(
           (data) => {
             this.isLoading = false;
-            this.doctors = data.doctor; // Supposant que `doctor` est un champ dans `data`
+            this.doctors = data.doctor; // Assuming `doctor` is a field in `data`
             Swal.fire({
               title: 'Succès !',
               text: 'Les docteurs ont été importés avec succès !',
@@ -164,7 +167,7 @@ export class DoctorsComponent implements OnInit {
               confirmButtonText: 'OK',
               width: '400px',
             }).then(() => {
-              // Recharger la page après l'importation réussie
+              // Reload the page after the successful import
               window.location.reload();
             });
           },
@@ -187,6 +190,7 @@ export class DoctorsComponent implements OnInit {
         });
       }
     });
+    
     
 
   }
@@ -255,7 +259,6 @@ export class DoctorsComponent implements OnInit {
   async update_plan() {
     const formData = this.updateForm.value;
     // Logic to update the doctor's plan based on formData
-    console.log('Updated plan data:', formData);
     
     try {
       debugger
@@ -265,7 +268,6 @@ export class DoctorsComponent implements OnInit {
       // Option 2: Refresh the relevant part of the view
       // For example, if you are using Angular, you might call a method to refresh the data:
     } catch (error) {
-      console.error('Error sending data:', error);
     }
   }
   

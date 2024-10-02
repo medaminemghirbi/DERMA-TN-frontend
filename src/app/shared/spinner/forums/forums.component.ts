@@ -120,6 +120,7 @@ export class ForumsComponent implements OnInit {
 
   setMessagesAndScrollDown(data: any[]) {
     this.messages = data;
+    console.log(this.messages)
     console.log(this.messages);
     this.resetScroll();
     this.cdr.detectChanges();

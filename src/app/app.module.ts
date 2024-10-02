@@ -32,6 +32,20 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { AnalyzeImageComponent } from './doctor/analyze-image/analyze-image.component';
 import { MaladieComponent } from './admin/maladie/maladie.component';
 import { DoctorBlogsComponent } from './doctor/doctor-blogs/doctor-blogs.component';
+import { LandingComponent } from './landing/landing.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { DoctorSettingsComponent } from './doctor/doctor-settings/doctor-settings.component';
+import { FirstKeyValuePipe } from './first-key-value.pipe';
+import { AppointmentRequestsComponent } from './doctor/appointment-requests/appointment-requests.component';
+import { FilterByStatusPipe } from './filter-by-status.pipe';
+import { MapPickerComponent } from './map-picker/map-picker.component';
+import { MyLocationComponent } from './doctor/my-location/my-location.component';
+import { HeaderSettingsComponent } from './doctor/header-settings/header-settings.component';
+import { SocialMediaComponent } from './doctor/social-media/social-media.component';
+import { NotificationSettingsComponent } from './doctor/notification-settings/notification-settings.component';
+import { NotifiacationAlertComponent } from './shared/notifiacation-alert/notifiacation-alert.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +68,19 @@ import { DoctorBlogsComponent } from './doctor/doctor-blogs/doctor-blogs.compone
     AnalyzeImageComponent,
     MaladieComponent,
     DoctorBlogsComponent,
+    LandingComponent,
+    RegistrationComponent,
+    DoctorSettingsComponent,
+    FirstKeyValuePipe,
+    AppointmentRequestsComponent,
+    FilterByStatusPipe,
+    MapPickerComponent,
+    MyLocationComponent,
+    HeaderSettingsComponent,
+    SocialMediaComponent,
+    NotificationSettingsComponent,
+    NotifiacationAlertComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -65,7 +92,6 @@ import { DoctorBlogsComponent } from './doctor/doctor-blogs/doctor-blogs.compone
     Ng2SearchPipeModule,
     NgProgressModule,
     FullCalendarModule,
-
     NgProgressModule.withConfig({
       color: "#003d99"
     }),
@@ -76,8 +102,8 @@ import { DoctorBlogsComponent } from './doctor/doctor-blogs/doctor-blogs.compone
       closeButton: true,
     }),
     NgProgressHttpModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    FullCalendarModule
   ],
   providers: [
     {

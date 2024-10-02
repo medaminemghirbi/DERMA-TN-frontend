@@ -12,9 +12,10 @@ export class GuardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		if (this.auth.getcurrentuser() != null )
+      
       return true;
     else
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
     return false;
   }
 }

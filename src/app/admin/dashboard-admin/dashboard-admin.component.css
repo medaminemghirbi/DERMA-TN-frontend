@@ -1,0 +1,6 @@
+.icon-box .icon-image {
+    width: 80px; /* Decrease the width */
+    height: auto; /* Maintain the aspect ratio */
+    display: block;
+    margin: 10px auto 0; /* Add 20px space at the top */
+}

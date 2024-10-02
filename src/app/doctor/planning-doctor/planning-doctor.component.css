@@ -1,0 +1,29 @@
+.fullcalendar {
+  max-height: 600px; /* Adjust as needed */
+  overflow-y: auto; /* Enable vertical scrolling if necessary */
+}
+
+/* Increase height of each time slot */
+.fc-timegrid-slot {
+  height: 100px !important; /* Increase this value to adjust the cell height */
+}
+
+/* Ensure event height is the same as the slot */
+.fc-event {
+  height: 100px !important; /* Adjust to match the slot height */
+  min-width: 90%; /* Allow some margin */
+
+}
+.fc-event:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
+  color: #333; /* Change text color on hover */
+  cursor: default; /* Ensure the cursor stays default */
+}
+/* Center the text within the event */
+.fc-timegrid-event {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px; /* Increase font size for better readability */
+  padding: 5px; /* Optional padding */
+}
