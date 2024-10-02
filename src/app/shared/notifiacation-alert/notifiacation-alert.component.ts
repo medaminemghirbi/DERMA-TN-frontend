@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-notifiacation-alert',
@@ -68,9 +69,20 @@ export class NotifiacationAlertComponent implements OnInit {
   // Handle incoming notifications
   handleNewNotification(data: any): void {
     if (data.message && data.message.consultation) {
-      const notificationMessage = `New consultation created see apointment dashboard`;
-      this.toastr.info(notificationMessage);
+      const notificationMessage = `New consultation created see apointment requests page`;
+      this.toastr.info(notificationMessage, '', {
+        timeOut: 4000 // Display for 3 seconds
+      });
+      
       this.cdr.detectChanges();
     }
   }
+  saveNotification(notification: any) {
+    this.http.post(environment.urlBackend+'/api/notifications', notification).subscribe(response => {
+      console.log('Notification saved', response);
+    }, error => {
+      console.error('Error saving notification', error);
+    });
+  }
+  
 }

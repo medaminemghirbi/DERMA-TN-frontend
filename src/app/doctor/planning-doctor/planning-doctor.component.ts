@@ -49,7 +49,10 @@ export class PlanningDoctorComponent implements OnInit {
     this.currentUser = this.auth.getcurrentuser();
     this.doctorSerivce.fetchDoctorConsultations(this.currentUser.id).subscribe(
       (consultations) => {   
+        debugger
+
         const events = consultations.map(consultation => ({
+          
           title: `Consultation with Mr ${consultation.patient.firstname} ${consultation.patient.lastname}`, 
           start: consultation.appointment, 
           end: this.addMinutesToDate(new Date(consultation.appointment), 30), 
@@ -58,7 +61,6 @@ export class PlanningDoctorComponent implements OnInit {
             patient: consultation.patient // Add the full consultation data in extendedProps
           }
         }));
-    
         this.calendarOptions.events = events;
       },
       (err: HttpErrorResponse) => {
