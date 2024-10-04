@@ -18,6 +18,10 @@ export class AuthService {
   login(data: any): Observable<any> {
     return this.http.post(environment.urlBackend + 'sessions', data);
   }
+
+  register(data: any): Observable<any> {
+    return this.http.post(environment.urlBackend + 'registrations', data);
+  }
   logout() {
     this.connecte = false;
     sessionStorage.clear();

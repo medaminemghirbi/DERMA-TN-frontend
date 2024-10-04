@@ -7,92 +7,106 @@
                         <div class="pattern" style="background-image: url(../../assets/images1/shape/shape-1.png);">
                         </div>
                         <div class="bg-color"></div>
-                        <figure class="logo"><a routerLink="/"><img src="../../assets/images1/logo.png" alt=""></a>
+                        <figure class="logo"><a><img routerLink="" src="../../assets/images1/logo.png" alt=""></a>
                         </figure>
                     </div>
                     <div class="btn-box"><a routerLink="/login" class="theme-btn-one"><i class="icon-image"></i>Login /
-                            Sign Up </a></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="main-wrapper login-body">
-            <div class="container-fluid px-0">
-                <div class="row">
-
-                    <div class="col-lg-6 login-wrap">
-                        <div class="login-sec">
-                            <div class="log-img">
-                                <img class="img-fluid" src="assets/img/login-02.png" alt="Logo">
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-lg-6 login-wrap-bg">
-                        <div class="login-wrapper">
-                            <div class="loginbox">
-                                <div class="login-right">
-                                    <div class="login-right-wrap">
-                                        <h2>Getting Started</h2>
-
-                                        <form
-                                            action="https://preclinic.dreamstechnologies.com/html/template/login.html">
-                                            <div class="input-block">
-                                                <label>Full Name <span class="login-danger">*</span></label>
-                                                <input autocomplete="new-fullname" class="form-control" type="text">
-                                            </div>
-                                            <div class="input-block">
-                                                <label>Email <span class="login-danger">*</span></label>
-                                                <input autocomplete="new-email" class="form-control" type="text">
-                                            </div>
-                                            <div class="input-block">
-                                                <label>Password <span class="login-danger">*</span></label>
-                                                <input autocomplete="new-password" class="form-control pass-input"
-                                                    type="password">
-                                            </div>
-                                            <div class="input-block">
-                                                <label>Confirm Password <span class="login-danger">*</span></label>
-                                                <input autocomplete="new-confirm-password"
-                                                    class="form-control pass-input-confirm" type="password">
-                                            </div>
-                                            <div class="input-block">
-                                                <select class="form-control"  id="department">
-                                                <option hidden value="" selected>Select Gouvernement</option>
-                                                <option *ngFor="let item of locations" [value]="item">{{item}}</option>
-                                            </select>
-                                            </div>
-                                            <div class="input-block">
-                                                <p class="pay-cont">Stripe Option</p>
-                                                <label class="custom_radio me-4">
-                                                    <input type="radio" name="budget" value="Yes" checked>
-                                                    <span class="checkmark"></span> Sandbox
-                                                </label>
-                                                <label class="custom_radio">
-                                                    <input type="radio" name="budget" value="Yes">
-                                                    <span class="checkmark"></span> Live
-                                                </label>
-                                            </div>
-                                            <div class="input-block login-btn">
-                                                <button class="btn btn-primary btn-block" type="submit">Sign up</button>
-                                            </div>
-                                        </form>
-
-                                        <div class="next-sign">
-                                            <p class="account-subtitle">Already have account? <a
-                                                    href="login.html">Login</a>
-                                            </p>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                            Sign Up</a></div>
                 </div>
             </div>
         </div>
     </header>
+    <section class="registration-section bg-color-3">
+        <div class="pattern">
+            <div class="pattern-1" style="background-image: url(../../assets/images1/shape/shape-85.png);"></div>
+            <div class="pattern-2" style="background-image: url(../../assets/images1/shape/shape-86.png);"></div>
+        </div>
+        <div class="auto-container">
+            <div class="inner-box">
+                <div class="content-box">
+                    <div class="title-box">
+                        <h3>New Here ?</h3>
+                    </div>
+                    <div class="inner">
+                        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                                <label>First name</label>
+                                <input autocomplete="new-firstname" type="text" formControlName="firstname"
+                                    placeholder="Enter your name">
+                                <div class="alert alert-danger"
+                                    *ngIf="registrationForm.get('firstname')?.invalid && registrationForm.get('firstname')?.touched">
+                                    First name is required
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Last name</label>
+                                <input autocomplete="new-lastname" type="text" formControlName="lastname"
+                                    placeholder="Enter your name">
+                                <div class="alert alert-danger"
+                                    *ngIf="registrationForm.get('lastname')?.invalid && registrationForm.get('lastname')?.touched">
+                                    Last name is required
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input autocomplete="new-email" type="email" formControlName="email"
+                                    placeholder="Enter your email">
+                                <div class="alert alert-danger"
+                                    *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+                                    Valid email is required
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input autocomplete="new-password" type="password" formControlName="password"
+                                    placeholder="Your password">
+                                <div class="alert alert-danger"
+                                    *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+                                    Password is required (minimum 6 characters)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <input autocomplete="new-password-confirmation" type="password"
+                                    formControlName="password_confirmation" placeholder="Confirm password">
+                                <div class="alert alert-danger"
+                                    *ngIf="registrationForm.errors?.['passwordMismatch'] && registrationForm.get('password_confirmation')?.touched">
+                                    Passwords do not match
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Role</label>
+                                <select class="form-select" formControlName="type" required
+                                    aria-label=".form-select-lg example">
+                                    <option hidden value="" selected> Your are a  </option>
+                                    <option value="Doctor">Doctor</option>
+                                    <option value="Patient">Patient</option>
+                                </select>
+                            </div>
+                            <!-- Gouvernement -->
+                            <div class="form-group">
+                                <label>Gouvernament</label>
+                                <select class="form-control" formControlName="location">
+                                    <option hidden value="" selected>Select Your Gouvernement</option>
+                                    <option *ngFor="let item of locations" [value]="item">{{ item }}</option>
+                                </select>
+                            </div>
+                            <button id="registerButton" type="submit" class="btn btn-primary">Register</button>
+                            <script>
+                                document.getElementById('register-btn').addEventListener('click', (event) => {
+                                    const button = event.target;
+                                    button.disabled = true;
+                                    button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...';
+                                });
+                            </script>
+                        </form>
+                        <div class="text"><span>or</span></div>
+                        <div class="login-now">
+                            <p>Already have an account? <a routerLink="/login">Login Now</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

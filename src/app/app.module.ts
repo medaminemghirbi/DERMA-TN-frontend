@@ -44,6 +44,7 @@ import { HeaderSettingsComponent } from './doctor/header-settings/header-setting
 import { SocialMediaComponent } from './doctor/social-media/social-media.component';
 import { NotificationSettingsComponent } from './doctor/notification-settings/notification-settings.component';
 import { NotifiacationAlertComponent } from './shared/notifiacation-alert/notifiacation-alert.component';
+import { ViewProfilComponent } from './doctor/view-profil/view-profil.component';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { NotifiacationAlertComponent } from './shared/notifiacation-alert/notifi
     SocialMediaComponent,
     NotificationSettingsComponent,
     NotifiacationAlertComponent,
+    ViewProfilComponent,
     
   ],
   imports: [

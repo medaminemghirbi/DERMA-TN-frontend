@@ -63,4 +63,7 @@ export class DoctorService {
   updatedoctorprofil(id:string,newprofile:any){
     return this.http.patch(environment.urlBackend+'api/v1/updatedoctor/' + id , newprofile )
   }
+  updatedoctorinformations(id:string,newprofile:any){
+    return this.http.patch(environment.urlBackend+'api/v1/update_uesr_informations/' + id , newprofile )
+  }
 }

@@ -24,6 +24,7 @@ import { AppointmentRequestsComponent } from './doctor/appointment-requests/appo
 import { MyLocationComponent } from './doctor/my-location/my-location.component';
 import { SocialMediaComponent } from './doctor/social-media/social-media.component';
 import { NotificationSettingsComponent } from './doctor/notification-settings/notification-settings.component';
+import { ViewProfilComponent } from './doctor/view-profil/view-profil.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'doctor/blogs', canActivate: [DoctorGuard], component: DoctorBlogsComponent },
   { path: 'doctor/planning', canActivate: [DoctorGuard], component: PlanningDoctorComponent },
   { path: 'doctor/appointment-request', canActivate: [DoctorGuard], component: AppointmentRequestsComponent },
+  { path: 'doctor/view-profil', canActivate: [DoctorGuard], component: ViewProfilComponent },
 
   { path: 'doctor/settings', canActivate: [DoctorGuard], component: DoctorSettingsComponent },
   { path: 'doctor/settings/my-location', canActivate: [DoctorGuard], component: MyLocationComponent },
