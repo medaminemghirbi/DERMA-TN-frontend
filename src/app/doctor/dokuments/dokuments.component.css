@@ -1,0 +1,11 @@
+.bibliography-wrapper {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #fff;
+}
+
+.preview-wrapper {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #f9f9f9;
+}

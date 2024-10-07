@@ -46,6 +46,7 @@ import { NotificationSettingsComponent } from './doctor/notification-settings/no
 import { NotifiacationAlertComponent } from './shared/notifiacation-alert/notifiacation-alert.component';
 import { ViewProfilComponent } from './doctor/view-profil/view-profil.component';
 import { MyPhoneNumbersComponent } from './doctor/my-phone-numbers/my-phone-numbers.component';
+import { DokumentsComponent } from './doctor/dokuments/dokuments.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import { MyPhoneNumbersComponent } from './doctor/my-phone-numbers/my-phone-numb
     NotifiacationAlertComponent,
     ViewProfilComponent,
     MyPhoneNumbersComponent,
+    DokumentsComponent,
     
   ],
   imports: [

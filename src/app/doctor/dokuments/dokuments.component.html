@@ -1,0 +1,97 @@
+<div class="main-wrapper">
+    <app-doctor-header></app-doctor-header>
+    <app-doctor-sidebar></app-doctor-sidebar>
+    <div class="page-wrapper">
+        <div class="content">
+            <app-notifiacation-alert></app-notifiacation-alert>
+
+            <!-- Button to trigger modal, now aligned to the right -->
+            <div class="text-end mb-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadDocumentModal">
+                    Upload New Document
+                </button>
+            </div>
+
+            <!-- Modal for uploading documents -->
+            <div class="modal fade" id="uploadDocumentModal" tabindex="-1" aria-labelledby="uploadDocumentLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="uploadDocumentLabel">Upload New Document</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form (ngSubmit)="onSubmit()" #uploadForm="ngForm">
+                                <div class="form-group">
+                                    <label for="title">Document Title</label>
+                                    <input type="text" id="title" [(ngModel)]="document.title" name="title" class="form-control" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="file">Choose PDF/Image</label>
+                                    <input type="file" id="file" (change)="onFileSelected($event)" class="form-control" required>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" [disabled]="!uploadForm.form.valid">Upload</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="bibliography-wrapper" style="overflow-y: auto; height: 75vh;">
+                        <h3>My Documents</h3><br>
+                        <table class="table table-bordered" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>File Type</th>
+                                    <th>File Size</th>
+
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let document of documents; index as i">
+                                    <td>
+                                        <a href="#" (click)="togglePreview(document, $event)">{{ document.title }}</a>
+                                    </td>
+                                    <td>
+                                        <p>{{ document.file_type }}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ document.size }} kb</p>
+                                    </td>
+                                    <td>
+                                        <a [href]="document.document_url" download="{{ document.title }}" class="btn btn-link">Download</a>
+
+                                        <a (click)="delete(document.id)" class="btn btn-link">delete </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="preview-wrapper" *ngIf="selectedDocument" style="height: 75vh; border: 1px solid #ccc; padding: 10px; overflow: auto;">
+                        <h4>Document Preview</h4>
+                        <div *ngIf="previewUrl">
+                            <div *ngIf="fileType.includes('image')">
+                                <img [src]="previewUrl" alt="Image Preview" style="max-width: 100%; height: auto;" />
+                            </div>
+                            <iframe *ngIf="fileType === 'application/pdf'" [src]="previewUrl" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                        </div>
+                        <div *ngIf="!previewUrl">
+                            <p>Select a document to preview.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
