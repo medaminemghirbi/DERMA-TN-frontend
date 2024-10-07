@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DoctorService {
   private apiUrl = environment.urlBackend + 'api/v1/blogs/';
+  deletePhoneNumber: any;
 
   constructor(private http: HttpClient, public router: Router) {}
   /////////////////////// Blogs */////////////////////
@@ -49,7 +50,33 @@ export class DoctorService {
   doctor_appointments(doctor_id:any) {
     return this.http.get<any[]>(`${environment.urlBackend}api/v1/doctor_appointments/${doctor_id}`);
   }
+  getMyPhoneNumbers(doctorId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.urlBackend}/api/v1/phone_numbers?doctor_id=${doctorId}`);
+  }
+  createPhoneNumber(doctorId: string, phoneNumberData: { number: string; phone_type: string }) {
+    return this.http.post<any>(`${environment.urlBackend}api/v1/phone_numbers`, {
+      phone_number: {
+        doctor_id: doctorId,
+        number: phoneNumberData.number,
+        phone_type: phoneNumberData.phone_type
+      }
+    });
+  }
 
+  ArchivePhone(phoneId: any) {
+
+    return this.http.delete<any>(`${environment.urlBackend}api/v1/phone_numbers/${phoneId}`);
+  }
+  updatePhoneNumber(phoneId: number, phoneNumber: { number: string, phone_type: string }): Observable<any> {
+    const body = {
+      phone_number: {
+        number: phoneNumber.number,
+        phone_type: phoneNumber.phone_type
+      }
+    };
+
+    return this.http.put<any>(`${environment.urlBackend}api/v1/phone_numbers/${phoneId}`, body);
+  }
   updateAppointment(id:string,newdata:any){
     return this.http.patch(environment.urlBackend+'api/v1/consultations/' + id , newdata )
   }

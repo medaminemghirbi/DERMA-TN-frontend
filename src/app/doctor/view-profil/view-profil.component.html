@@ -41,9 +41,11 @@
                                             </li>
                                             <li>
                                                 <span class="title">Birthday:</span>
-                                                <span *ngIf="currentUser.birtday"
-                                                    class="text">{{currentUser.birtday}}</span>
-                                                <span *ngIf="!currentUser.birtday" class="text">-</span>
+                                                <span *ngIf="currentUser.birthday" class="text">
+                                                    {{ currentUser.birthday | date: 'EEEE, dd MMMM yyyy' }}
+                                                  </span>
+                                                  
+                                                <span *ngIf="!currentUser.birthday" class="text">-</span>
 
                                             </li>
                                             <li>

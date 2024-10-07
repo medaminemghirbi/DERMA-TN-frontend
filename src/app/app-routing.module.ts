@@ -25,6 +25,7 @@ import { MyLocationComponent } from './doctor/my-location/my-location.component'
 import { SocialMediaComponent } from './doctor/social-media/social-media.component';
 import { NotificationSettingsComponent } from './doctor/notification-settings/notification-settings.component';
 import { ViewProfilComponent } from './doctor/view-profil/view-profil.component';
+import { MyPhoneNumbersComponent } from './doctor/my-phone-numbers/my-phone-numbers.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -51,7 +52,9 @@ const routes: Routes = [
   { path: 'doctor/settings/my-location', canActivate: [DoctorGuard], component: MyLocationComponent },
   { path: 'doctor/settings/social-media', canActivate: [DoctorGuard], component: SocialMediaComponent },
   { path: 'doctor/settings/notifications', canActivate: [DoctorGuard], component: NotificationSettingsComponent },
+  { path: 'doctor/settings/my-phone-numbers', canActivate: [DoctorGuard], component: MyPhoneNumbersComponent },
 
+  
 
   // Shared components
   { path: 'forums', component: ForumsComponent },
