@@ -1,6 +1,13 @@
 <div class="main-wrapper">
-    <app-header-admin></app-header-admin>
-    <app-sidebar-admin></app-sidebar-admin>
+    <div *ngIf="role =='Admin'">
+        <app-header-admin></app-header-admin>
+        <app-sidebar-admin></app-sidebar-admin>
+    </div>
+    <div *ngIf="role =='Doctor'">
+        <app-doctor-header></app-doctor-header>
+        <app-doctor-sidebar></app-doctor-sidebar>
+    </div>
+    <div></div>
     <ng-progress #progressBar></ng-progress>
     <div class="main-wrapper">
         <div class="page-wrapper">
@@ -65,9 +72,14 @@
                                     </div>
                                 </div>
                                 <div class="blog-content">
-                                    <p>{{ blogDetail?.content }}</p>
+          
+                                    <h1>{{ blogDetail?.content }}</h1><br>
                                     <p>{{ blogDetail?.maladie?.maladie_description }}</p>
                                     <ul>
+                                        <li>
+                                            is cancer : <span *ngIf="blogDetail?.maladie?.is_cancer">Yes</span><span
+                                                *ngIf="!blogDetail?.maladie?.is_cancer">No</span>
+                                        </li>
                                         <li>Causes : {{ blogDetail?.maladie?.causes }} </li>
                                         <li>Symptomes : {{ blogDetail?.maladie?.symptoms }} </li>
 

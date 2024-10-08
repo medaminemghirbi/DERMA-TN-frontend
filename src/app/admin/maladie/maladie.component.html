@@ -11,15 +11,19 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="card-title mb-0">
-                                <li *ngIf="maladie"><strong style="color: #390d74;">{{ maladie.order }} - {{ maladie.maladie_name }}</strong></li>
+                                <li *ngIf="maladie"><strong style="color: #390d74;">{{ maladie.order }} - {{
+                                        maladie.maladie_name }}</strong></li>
                             </h5>
                             <div class="dropdown dropdown-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     <i class="fa fa-ellipsis-v"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a data-bs-toggle="modal" data-bs-target="#con-close-modal" class="dropdown-item" (click)="getdata(maladie)">
-                                        <i style="color: green;" class="fa fa-cog" data-bs-toggle="tooltip" title="Update Information"></i>
+                                    <a data-bs-toggle="modal" data-bs-target="#con-close-modal" class="dropdown-item"
+                                        (click)="getdata(maladie)">
+                                        <i style="color: green;" class="fa fa-cog" data-bs-toggle="tooltip"
+                                            title="Update Information"></i>
                                         Update Information
                                     </a>
                                 </div>
@@ -31,6 +35,12 @@
                     <div class="card-body">
                         <p>{{ maladie.maladie_description }}</p>
                         <ul>
+                            <li>
+                                is cancer : <span *ngIf="maladie.is_cancer">Yes</span><span
+                                    *ngIf="!maladie.is_cancer">No</span>
+                            </li>
+
+
                             <li>Causes: {{ maladie.causes }} </li>
                             <li>Symptoms: {{ maladie.symptoms }} </li>
                             <li>Synonyms: {{ maladie.synonyms }} </li>
@@ -38,7 +48,7 @@
                             <li>Treatment: {{ maladie.treatments }} </li>
                         </ul>
                         <li>
-                            Reference: 
+                            Reference:
                             <a style="color: blue;" href="{{ maladie.references }}">{{ maladie.references }}</a>
                         </li>
                     </div>
@@ -48,7 +58,8 @@
     </div>
 
     <!-- Modal for updating maladie -->
-    <div class="modal fade" id="con-close-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="con-close-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -59,11 +70,13 @@
                     <form [formGroup]="update" (ngSubmit)="updateMaladie()">
                         <div class="form-group">
                             <label for="maladie_name">Name</label>
-                            <input type="text" id="maladie_name" formControlName="maladie_name" class="form-control" required />
+                            <input type="text" id="maladie_name" formControlName="maladie_name" class="form-control"
+                                required />
                         </div>
                         <div class="form-group">
                             <label for="maladie_description">Description</label>
-                            <textarea id="maladie_description" formControlName="maladie_description" class="form-control" rows="3" required></textarea>
+                            <textarea id="maladie_description" formControlName="maladie_description"
+                                class="form-control" rows="3" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="causes">Causes</label>
@@ -75,11 +88,13 @@
                         </div>
                         <div class="form-group">
                             <label for="prevention">Prevention</label>
-                            <textarea id="prevention" formControlName="prevention" class="form-control" rows="3"></textarea>
+                            <textarea id="prevention" formControlName="prevention" class="form-control"
+                                rows="3"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="treatments">Treatments</label>
-                            <textarea id="treatments" formControlName="treatments" class="form-control" rows="3"></textarea>
+                            <textarea id="treatments" formControlName="treatments" class="form-control"
+                                rows="3"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="references">References</label>

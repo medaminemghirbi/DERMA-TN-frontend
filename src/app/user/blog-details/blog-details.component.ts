@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-blog-details',
@@ -11,14 +12,16 @@ import { AdminService } from 'src/app/services/admin.service';
 export class BlogDetailsComponent implements OnInit {
   blogDetail: any = [];
   messageErr = '';
-
+  role : any
   constructor(
     private usersService: AdminService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute, 
+    private Auth :AuthService
   ) {}
 
   ngOnInit(): void {
+    this.role = this.Auth.getRole();
 
 
 

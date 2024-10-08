@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./appointment-requests.component.css']
 })
 export class AppointmentRequestsComponent implements OnInit {
+  isLoading: boolean = false;
   currentUser : any
   searchedKeyword!:string;
   selectedStatus: string = ''; 
@@ -42,10 +43,13 @@ export class AppointmentRequestsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.auth.getcurrentuser();
+    this.isLoading = true;
     this.doctorService.doctor_appointments(this.currentUser.id).subscribe(
+      
       (consultations) => {   
         this.allConsultations = consultations
         console.log(this.allConsultations)
+        this.isLoading = false;
       },
       (err: HttpErrorResponse) => {
         console.error('Error fetching consultations:', err);
