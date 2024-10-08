@@ -1,6 +1,8 @@
 .input-block {
-    position: relative; /* Make input-block relative for absolute positioning */
-    margin-bottom: 20px; /* Add spacing below input blocks */
+    position: relative;
+    /* Make input-block relative for absolute positioning */
+    margin-bottom: 20px;
+    /* Add spacing below input blocks */
 }
 
 .input-block label {
@@ -8,25 +10,83 @@
     color: #333448;
     font-weight: 500;
     position: absolute;
-    top: -10px; /* Adjust this value to move the label up */
-    left: 10px; /* Adjust left position */
+    top: -10px;
+    /* Adjust this value to move the label up */
+    left: 10px;
+    /* Adjust left position */
     margin-bottom: 0;
     padding: 0 5px;
-    background-color: white; /* Optional: Add background color to make label more readable */
-    transition: all 0.2s; /* Smooth transition for focus state */
+    background-color: white;
+    /* Optional: Add background color to make label more readable */
+    transition: all 0.2s;
+    /* Smooth transition for focus state */
 }
 
 .input-block input {
-    width: 100%; /* Ensure input takes full width */
-    padding: 10px; /* Add padding for better spacing */
-    border: 1px solid #ccc; /* Add border */
-    border-radius: 4px; /* Optional: Rounded corners */
+    width: 100%;
+    /* Ensure input takes full width */
+    padding: 10px;
+    /* Add padding for better spacing */
+    border: 1px solid #ccc;
+    /* Add border */
+    border-radius: 4px;
+    /* Optional: Rounded corners */
 }
 
-.input-block input:focus + label,
-.input-block input:not(:placeholder-shown) + label {
-    top: -20px; /* Move label up when input is focused or filled */
-    left: 5px; /* Adjust left position when focused */
-    font-size: 10px; /* Reduce font size when focused */
-    color: #007bff; /* Optional: Change label color on focus */
+.input-block input:focus+label,
+.input-block input:not(:placeholder-shown)+label {
+    top: -20px;
+    /* Move label up when input is focused or filled */
+    left: 5px;
+    /* Adjust left position when focused */
+    font-size: 10px;
+    /* Reduce font size when focused */
+    color: #007bff;
+    /* Optional: Change label color on focus */
+}
+
+input[type="radio"] {
+    appearance: none;
+}
+
+input[type="radio"]+label {
+    cursor: pointer;
+    position: relative;
+    padding-left: 30px;
+    line-height: 20px;
+}
+
+input[type="radio"]+label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    aspect-ratio: 1;
+    border: 1px solid #686de0;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    opacity: 1;
+    transition: all 0.3s;
+}
+
+input[type="radio"]+label::after {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    aspect-ratio: 1;
+    border: 1px solid #686de0;
+    background: #686de0;
+    border-radius: 50%;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+input[type="radio"]:checked+label::after {
+    opacity: 1;
 }

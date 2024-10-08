@@ -36,7 +36,9 @@ export class DoctorSettingsComponent implements OnInit {
       avatar: new FormControl('', [Validators.required]),
     });
     this.upadate = new FormGroup({
-      website: new FormControl('', [Validators.required]),
+      civil_status: new FormControl('', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
+      birthday: new FormControl('', [Validators.required])
     });
   }
 
@@ -141,6 +143,36 @@ export class DoctorSettingsComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
     this.doctorService.updatedoctorprofil(this.currentUser.id,formData).subscribe(
+      (response) => {
+        sessionStorage.setItem('doctordata', JSON.stringify(response));
+        window.location.reload();
+      },
+      (err: HttpErrorResponse) => {})
+        Swal.fire('Saved!', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+  }
+
+  updateinformations(f:any){
+    let data=f.value
+    const formData = new FormData();
+    formData.append('gender', this.upadate.value.gender);
+    formData.append('civil_status', this.upadate.value.civil_status);
+    formData.append('birthday', this.upadate.value.birthday);
+
+
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+    this.doctorService.updatedoctorinformations(this.currentUser.id,formData).subscribe(
       (response) => {
         sessionStorage.setItem('doctordata', JSON.stringify(response));
         window.location.reload();

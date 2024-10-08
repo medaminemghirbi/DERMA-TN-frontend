@@ -12,11 +12,11 @@
                     <!-- Search Input (Left side) -->
                     <div class="col-md-6">
                         <div class="input-group input-group-sm">
-                            <input type="text" name="role" class="form-control form-control-sm" 
+                            <input type="text" name="role" class="form-control form-control-sm"
                                 [(ngModel)]="searchedKeyword" placeholder="Search for...">
                         </div>
                     </div>
-                
+
                     <!-- Status Dropdown (Right side) -->
                     <div class="col-md-6">
                         <select class="form-control form-control-sm" id="statusDropdown" [(ngModel)]="selectedStatus">
@@ -26,7 +26,7 @@
                             <option value="rejected">Refused</option>
                         </select>
                     </div>
-                    
+
                 </div>
                 <table class="table border-0 custom-table comman-table datatable mb-0">
                     <thead>
@@ -44,51 +44,75 @@
                     </thead>
                     <tbody>
                         <tr
-                        *ngFor="let item of allConsultations | paginate: { itemsPerPage: 10, currentPage: p } | filter: searchedKeyword | filterByStatus: selectedStatus; index as i">
-                        <td class="description-content">
-                            <a>
-                                {{ item.appointment | date: 'EEEE'}}<br>
-                                {{ item.appointment | date: 'dd'}}
-                                {{ item.appointment | date: 'MMMM'}}
-                                {{ item.appointment | date: 'yyyy'}}<br>
-                                at {{ item.appointment | date: 'HH:mm'}}
-                            </a>
-                        </td>
-                        <td>coming soon</td>
-                        <td class="profile-image">
-                            <a><img width="28" height="28" src="{{item.doctor.user_image_url}}" class="rounded-circle m-r-5" alt>
-                                Dr. {{item.doctor.firstname}} {{item.doctor.lastname}}
-                            </a>
-                        </td>
-                        <td class="profile-image">
-                            <a><img width="28" height="28" src="{{item.patient.user_image_url}}" class="rounded-circle m-r-5" alt>
-                                Mr(s) {{item.patient.firstname}} {{item.patient.lastname}}
-                            </a>
-                        </td>
-                        <td>
-                            patient: {{item.patient.phone_number}}<br>
-                            doctor: <span *ngIf="item.doctor.phone_number">{{item.doctor.phone_number}}</span>
-                            <span style="color: rgb(255, 9, 9);" *ngIf="!item.doctor.phone_number">
-                                <i style="color: rgb(255, 9, 9);" class="fa fa-ban" data-bs-toggle="tooltip" title="fa fa-check"></i>
-                                Not Provided
-                            </span>
-                        </td>
-                        <td class="description-content">
-                            <a>{{item.created_at}}</a>
-                        </td>
-                        <td>
-                            <button *ngIf="item.status == 'approved'" class="custom-badge status-green">Accepted</button>
-                            <button *ngIf="item.status == 'pending'" class="custom-badge status-orange">Pending</button>
-                            <button *ngIf="item.status == 'rejected'" class="custom-badge status-red">Rejected</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-outline-secondary rounded-pill" [disabled]="item.status !== 'pending'" data-bs-toggle="modal" data-bs-target="#exampleModal1"
-                                (click)="handleClick(item.status, item.refus_reason, item.id)">
-                                Update
-                            </button>
-                        </td>
-                    </tr>
-                    
+                            *ngFor="let item of allConsultations | paginate: { itemsPerPage: 10, currentPage: p } | filter: searchedKeyword | filterByStatus: selectedStatus; index as i">
+                            <td class="description-content">
+                                <a>
+                                    {{ item.appointment | date: 'EEEE'}}<br>
+                                    {{ item.appointment | date: 'dd'}}
+                                    {{ item.appointment | date: 'MMMM'}}
+                                    {{ item.appointment | date: 'yyyy'}}<br>
+                                    at {{ item.appointment | date: 'HH:mm'}}
+                                </a>
+                            </td>
+                            <td>coming soon</td>
+                            <td class="profile-image">
+                                <a><img width="28" height="28" src="{{item.doctor.user_image_url}}"
+                                        class="rounded-circle m-r-5" alt>
+                                    Dr. {{item.doctor.firstname}} {{item.doctor.lastname}}
+                                </a>
+                            </td>
+                            <td class="profile-image">
+                                <a><img width="28" height="28" src="{{item.patient.user_image_url}}"
+                                        class="rounded-circle m-r-5" alt>
+                                    Mr(s) {{item.patient.firstname}} {{item.patient.lastname}}
+                                </a>
+                            </td>
+                            <td>
+                                patient: {{item.patient.phone_number}}<br>
+                                doctor: <div *ngIf="item.doctor.phone_numbers && item.doctor.phone_numbers.length > 0">
+                                    <div *ngFor="let phone of item.doctor.phone_numbers" class="phone-number-item">
+                                        <i *ngIf="phone.is_primary" class="fas" [ngClass]="{
+                                            'fa-mobile-alt': phone.phone_type === 'personal', 
+                                            'fa-home': phone.phone_type === 'home', 
+                                            'fa-briefcase': phone.phone_type === 'fax'
+                                        }"></i>
+                                        <span *ngIf="phone.is_primary" class="ms-2">{{ phone.number }}</span>
+                                    </div>
+                                </div>
+                                <span *ngIf="!item.doctor.phone_numbers || item.doctor.phone_numbers.length === 0" style="color: rgb(255, 9, 9);">
+                                    <i class="fa fa-ban" data-bs-toggle="tooltip" title="Not Provided"></i>
+                                    Not Provided
+                                </span>
+                                
+                            </td>
+                            <td class="description-content">
+                                <a>{{item.created_at}}</a>
+                            </td>
+                            <td>
+                                <button *ngIf="item.status == 'approved'"
+                                    class="custom-badge status-green">Accepted</button>
+                                <button *ngIf="item.status == 'pending'"
+                                    class="custom-badge status-orange">Pending</button>
+                                <button *ngIf="item.status == 'rejected'"
+                                    class="custom-badge status-red">Rejected</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-secondary rounded-pill"
+                                    [disabled]="item.status !== 'pending'" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal1"
+                                    (click)="handleClick(item.status, item.refus_reason, item.id)">
+                                    Update
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="allConsultations?.length == 0" class="no-appointment-row">
+                            <td colspan="8" class="description-content no-appointment-text">
+                                No Appointment Request yet
+                            </td>
+                        </tr>
+
+
+
                     </tbody>
                 </table>
             </div>

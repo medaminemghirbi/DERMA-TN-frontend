@@ -15,14 +15,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#My-Blogs" data-bs-toggle="tab" aria-expanded="true"
-                        class="nav-link active">
+                    <a href="#My-Blogs" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
                         My Blogs
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#Create-blogs" data-bs-toggle="tab" aria-expanded="false"
-                        class="nav-link">
+                    <a href="#Create-blogs" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                         Create New Blog
                     </a>
                 </li>
@@ -31,33 +29,41 @@
                 <div class="tab-pane" id="All-Blogs">
                     <div class="row">
                         <div class="col-sm-6 col-md-4"
-                        *ngFor="let item of allBlogs | paginate: { itemsPerPage: 6, currentPage: p }; let i = index">
+                            *ngFor="let item of allBlogs | paginate: { itemsPerPage: 6, currentPage: p }; let i = index">
                             <div class="blog grid-blog">
                                 <div class="blog-image">
                                     <a [routerLink]="['/blog', item.id]">
-                                        <img class="img-fluid custom-image-size" [src]="item?.image_urls[0]" alt="First image">
+                                        <img class="img-fluid custom-image-size" [src]="item?.image_urls[0]"
+                                            alt="First image">
                                     </a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="blog-grp-blk">
                                         <div class="blog-img-blk">
                                             <a [routerLink]="['/doctor-profile', item.doctor.id]">
-                                                <img class="img-fluid" [src]="item.doctor.user_image_url" alt="Doctor's Image">
+                                                <img class="img-fluid" [src]="item.doctor.user_image_url"
+                                                    alt="Doctor's Image">
                                             </a>
                                             <div class="content-blk-blog ms-2">
                                                 <h4>
-                                                    <a [routerLink]="['/doctor-profile', item.doctor.id]">Dr. {{item.doctor.firstname}} {{item.doctor.lastname}}</a>
+                                                    <a [routerLink]="['/doctor-profile', item.doctor.id]">Dr.
+                                                        {{item.doctor.firstname}} {{item.doctor.lastname}}</a>
                                                 </h4>
                                                 <h5>Dermatologue</h5>
                                             </div>
                                         </div>
                                         <span>
-                                            <i class="feather-calendar me-1"></i>{{ item.created_at | date:'dd MMM yyyy' }}
+                                            <i class="feather-calendar me-1"></i>{{ item.created_at | date:'dd MMM yyyy'
+                                            }}
                                             <a *ngIf="item.is_verified">
-                                                <img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1upSumdTFAax-_epYIu5Es1GAb6hDvWyhDw&s" alt="Verified">
+                                                <img class="img-fluid"
+                                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1upSumdTFAax-_epYIu5Es1GAb6hDvWyhDw&s"
+                                                    alt="Verified">
                                             </a>
                                             <a *ngIf="!item.is_verified">
-                                                <img class="img-fluid" src="https://banner2.cleanpng.com/20190303/aqu/kisspng-logo-brand-font-product-line-your-home-for-health-achhadoctor-in-1713903467251.webp" alt="Not Verified">
+                                                <img class="img-fluid"
+                                                    src="https://banner2.cleanpng.com/20190303/aqu/kisspng-logo-brand-font-product-line-your-home-for-health-achhadoctor-in-1713903467251.webp"
+                                                    alt="Not Verified">
                                             </a>
                                         </span>
                                     </div>
@@ -65,7 +71,8 @@
                                         <a [routerLink]="['/blog', item.id]">{{item.title}}</a>
                                     </h3>
                                     <p>{{item.content}}</p>
-                                    <a [routerLink]="['/blog', item.id]" class="read-more d-flex"> Read more <i class="fa fa-long-arrow-right ms-2"></i></a>
+                                    <a [routerLink]="['/blog', item.id]" class="read-more d-flex"> Read more <i
+                                            class="fa fa-long-arrow-right ms-2"></i></a>
                                 </div>
                             </div>
 
@@ -75,38 +82,45 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="tab-pane show active" id="My-Blogs">
                     <div class="tab-pane" id="All-Blogs">
                         <div class="row">
-                            <div class="col-sm-6 col-md-4"
-                            *ngFor="let item of myBlogs">
+                            <div class="col-sm-6 col-md-4" *ngFor="let item of myBlogs">
                                 <div class="blog grid-blog">
                                     <div class="blog-image">
                                         <a [routerLink]="['/blog', item.id]">
-                                            <img class="img-fluid custom-image-size" [src]="item?.image_urls[0]" alt="First image">
+                                            <img class="img-fluid custom-image-size" [src]="item?.image_urls[0]"
+                                                alt="First image">
                                         </a>
                                     </div>
                                     <div class="blog-content">
                                         <div class="blog-grp-blk">
                                             <div class="blog-img-blk">
                                                 <a [routerLink]="['/doctor-profile', item.doctor.id]">
-                                                    <img class="img-fluid" [src]="item.doctor.user_image_url" alt="Doctor's Image">
+                                                    <img class="img-fluid" [src]="item.doctor.user_image_url"
+                                                        alt="Doctor's Image">
                                                 </a>
                                                 <div class="content-blk-blog ms-2">
                                                     <h4>
-                                                        <a [routerLink]="['/doctor-profile', item.doctor.id]">Dr. {{item.doctor.firstname}} {{item.doctor.lastname}}</a>
+                                                        <a [routerLink]="['/doctor-profile', item.doctor.id]">Dr.
+                                                            {{item.doctor.firstname}} {{item.doctor.lastname}}</a>
                                                     </h4>
                                                     <h5>Dermatologue</h5>
                                                 </div>
                                             </div>
                                             <span>
-                                                <i class="feather-calendar me-1"></i>{{ item.created_at | date:'dd MMM yyyy' }}
+                                                <i class="feather-calendar me-1"></i>{{ item.created_at | date:'dd MMM
+                                                yyyy' }}
                                                 <a *ngIf="item.is_verified">
-                                                    <img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1upSumdTFAax-_epYIu5Es1GAb6hDvWyhDw&s" alt="Verified">
+                                                    <img class="img-fluid"
+                                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1upSumdTFAax-_epYIu5Es1GAb6hDvWyhDw&s"
+                                                        alt="Verified">
                                                 </a>
                                                 <a *ngIf="!item.is_verified">
-                                                    <img class="img-fluid" src="https://banner2.cleanpng.com/20190303/aqu/kisspng-logo-brand-font-product-line-your-home-for-health-achhadoctor-in-1713903467251.webp" alt="Not Verified">
+                                                    <img class="img-fluid"
+                                                        src="https://banner2.cleanpng.com/20190303/aqu/kisspng-logo-brand-font-product-line-your-home-for-health-achhadoctor-in-1713903467251.webp"
+                                                        alt="Not Verified">
                                                 </a>
                                             </span>
                                         </div>
@@ -114,10 +128,11 @@
                                             <a [routerLink]="['/blog', item.id]">{{item.title}}</a>
                                         </h3>
                                         <p>{{item.content}}</p>
-                                        <a [routerLink]="['/blog', item.id]" class="read-more d-flex"> Read more <i class="fa fa-long-arrow-right ms-2"></i></a>
+                                        <a [routerLink]="['/blog', item.id]" class="read-more d-flex"> Read more <i
+                                                class="fa fa-long-arrow-right ms-2"></i></a>
                                     </div>
                                 </div>
-    
+
                             </div>
                         </div>
                     </div>
@@ -129,30 +144,31 @@
                             <div class="input-block local-forms">
                                 <select formControlName="maladieId" class="form-control" required>
                                     <option hidden value="">Select Disease</option>
-                                    <option *ngFor="let item of allMaladies" [value]="item.id">{{ item.maladie_name }}</option>
+                                    <option *ngFor="let item of allMaladies" [value]="item.id">{{ item.maladie_name }}
+                                    </option>
                                 </select>
                             </div>
-                
+
                             <div class="input-block local-forms">
-                                <input type="text" formControlName="title" class="form-control" placeholder="Blog Title" required>
+                                <input type="text" formControlName="title" class="form-control" placeholder="Blog Title"
+                                    required>
                             </div>
-                
+
                             <div class="input-block local-forms">
-                                <textarea formControlName="content" class="form-control" rows="5" placeholder="Write your content here..." required></textarea>
+                                <textarea formControlName="content" class="form-control" rows="5"
+                                    placeholder="Write your content here..." required></textarea>
                             </div>
-                
+
                             <div class="input-block local-forms">
                                 <input type="file" (change)="onFileChange($event)" multiple class="form-control-file">
                             </div>
-                
+
                             <div class="input-block local-forms">
                                 <button type="submit" class="btn btn-primary">Create Blog</button>
                             </div>
                         </form>
                     </div>
                 </div>
-                
-                
             </div>
         </div>
     </div>

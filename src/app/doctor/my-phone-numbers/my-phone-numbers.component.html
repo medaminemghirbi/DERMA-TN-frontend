@@ -1,0 +1,79 @@
+<div class="main-wrapper">
+    <app-doctor-header></app-doctor-header>
+    <app-doctor-sidebar></app-doctor-sidebar>
+    <div class="page-wrapper">
+        <div class="content">
+            <app-header-settings></app-header-settings>
+            <app-notifiacation-alert></app-notifiacation-alert>
+            <br>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card shadow-sm">
+                        <h3 class="text-center mb-4">My Phone Numbers</h3>
+                        <form (ngSubmit)="editingPhoneIndex >= 0 ? updatePhoneNumber() : createPhoneNumbers()" #phoneForm="ngForm">
+                            <div class="input-block row mb-3">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-3" *ngFor="let phone of newPhoneNumbers; let i = index">
+                                        <div class="input-group-prepend">
+                                            <select class="form-select" [(ngModel)]="phone.phone_type" name="phoneType{{i}}">
+                                                <option value="personal">
+                                                    <i class="fas fa-mobile-alt"></i> Mobile
+                                                </option>
+                                                <option value="home">
+                                                    <i class="fas fa-home"></i> Office
+                                                </option>
+                                                <option value="fax">
+                                                    <i class="fas fa-fax"></i> Work
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="phone-input">
+                                            <i class="fas fa-phone"></i>
+                                            <input type="text" id="phoneNumber" [(ngModel)]="newPhoneNumbers[i].number"
+                                                name="number{{i}}" required class="form-control"
+                                                placeholder="Enter phone number" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary" (click)="addNewPhoneNumberField()">Add Another Phone Number</button>
+                                <button  type="submit" class="btn btn-primary">{{ editingPhoneIndex >= 0 ? 'Update Phone Number' : 'Save Phone Numbers' }}</button>
+                            </div>
+                        </form>
+                        <div *ngIf="messageErr" class="alert alert-danger mt-3">{{ messageErr }}</div>
+                        <h4 class="mt-4">Existing Phone Numbers:</h4><br>
+                        <ul class="list-group">
+                            <li *ngFor="let phone of my_phones; let j = index" class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas" [ngClass]="{
+                                           'fa-mobile-alt': phone.phone_type === 'personal', 
+                                           'fa-home': phone.phone_type === 'home', 
+                                           'fa-briefcase': phone.phone_type === 'fax'
+                                       }"></i>
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="ms-2">{{ phone.number }}</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="status-toggle d-flex align-items-center me-3">
+                                        <span>Default</span>
+                                        <input type="checkbox" 
+                                               id="status_{{j}}" 
+                                               class="check ms-2" 
+                                               [checked]="phone.is_primary" 
+                                               (change)="togglePrimary(j, phone.is_primary)">
+                                        <label for="status_{{j}}" class="checktoggle ms-1">Checkbox</label>
+                                    </div>
+                                    <button type="button" class="btn btn-warning btn-sm me-2" (click)="editPhone(j)">Update</button>
+                                    <button type="button" class="btn btn-danger btn-sm" (click)="deletePhone(j)">Delete</button>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

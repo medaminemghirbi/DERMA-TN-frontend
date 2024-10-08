@@ -48,77 +48,84 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <ul class="comments-list">
-                                                        <li *ngFor="let message of messages; let i = index">
-                                                            <div class="comment">
-                                                                <div class="comment-author">
-                                                                    <a href="profile.html">
-                                                                        <img class="avatar" alt
-                                                                            src="{{message.sender.user_image_url}}">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="comment-block">
-                                                                    <div class="comment-by">
-                                                                        <div class="week-group">
-                                                                            <h5 class="blog-author-name">{{
-                                                                                message.sender.firstname }} {{
-                                                                                message.sender.lastname }}</h5>
-                                                                            <span class="week-list">{{
-                                                                                message.created_at | date: 'yyyy-MM-dd
-                                                                                HH:mm:ss' }}</span>
-                                                                        </div>
+                                                    <div class="comments-container">
+
+                                                        <ul class="comments-list">
+                                                            <li *ngFor="let message of messages; let i = index">
+                                                                <div class="comment">
+                                                                    <div class="comment-author">
+                                                                        <a href="profile.html">
+                                                                            <img class="avatar" alt
+                                                                                src="{{message.sender.user_image_url}}">
+                                                                        </a>
                                                                     </div>
-                                                                    <div class="text-end">
-                                                                        <div *ngIf="this.currentuser.id == message.sender.id" class="dropdown dropdown-action">
-                                                                            <a href="#"
-                                                                                class="action-icon dropdown-toggle"
-                                                                                data-bs-toggle="dropdown"
-                                                                                aria-expanded="false">
-                                                                                <i class="fa fa-ellipsis-v"></i>
-                                                                            </a>
-                                                                            <div  
-                                                                                class="dropdown-menu dropdown-menu-end">
-                                                                                <a class="dropdown-item"
-                                                                                    (click)="delete(message.id, i)">
-                                                                                    <i style="color: rgb(255, 0, 0);"
-                                                                                        class="fa fa-trash-alt m-r-5"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        title="fa fa-check"></i>
-                                                                                    Delete Message
+                                                                    <div class="comment-block">
+                                                                        <div class="comment-by">
+                                                                            <div class="week-group">
+                                                                                <h5 class="blog-author-name">{{
+                                                                                    message.sender.firstname }} {{
+                                                                                    message.sender.lastname }}</h5>
+                                                                                <span class="week-list">{{
+                                                                                    message.created_at | date:
+                                                                                    'yyyy-MM-dd
+                                                                                    HH:mm:ss' }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="text-end">
+                                                                            <div *ngIf="this.currentuser.id == message.sender.id"
+                                                                                class="dropdown dropdown-action">
+                                                                                <a href="#"
+                                                                                    class="action-icon dropdown-toggle"
+                                                                                    data-bs-toggle="dropdown"
+                                                                                    aria-expanded="false">
+                                                                                    <i class="fa fa-ellipsis-v"></i>
                                                                                 </a>
-                                                                                <div *ngIf="combinedImages(message)">
-                                                                                    <button
-                                                                                        *ngFor="let image of combinedImages(message)"
-                                                                                        (click)="downloadImage(message.id, image.id)">Download
-                                                                                        Image</button>
+                                                                                <div
+                                                                                    class="dropdown-menu dropdown-menu-end">
+                                                                                    <a class="dropdown-item"
+                                                                                        (click)="delete(message.id, i)">
+                                                                                        <i style="color: rgb(255, 0, 0);"
+                                                                                            class="fa fa-trash-alt m-r-5"
+                                                                                            data-bs-toggle="tooltip"
+                                                                                            title="fa fa-check"></i>
+                                                                                        Delete Message
+                                                                                    </a>
+                                                                                    <div
+                                                                                        *ngIf="combinedImages(message)">
+                                                                                        <button
+                                                                                            *ngFor="let image of combinedImages(message)"
+                                                                                            (click)="downloadImage(message.id, image.id)">Download
+                                                                                            Image</button>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <p>{{ message.body }}</p>
-                                                                    <div *ngIf="combinedImages(message)">
-                                                                        <img *ngFor="let image of combinedImages(message)"
-                                                                            [src]="image.url" alt="message image"
-                                                                            class="img-fluid">
+                                                                        <p>{{ message.body }}</p>
+                                                                        <div *ngIf="combinedImages(message)">
+                                                                            <img *ngFor="let image of combinedImages(message)"
+                                                                                [src]="image.url" alt="message image"
+                                                                                class="img-fluid">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
 
                                                 <div class="flex-grow-0 py-3 px-4 border-top">
                                                     <div class="input-group">
-                                                        <form (submit)="handleSubmit($event)">
-
-                                                            <input name="message" #messageInput type="text"
-                                                                placeholder="Enter your message" required=""> <input
-                                                                type="file" (change)="onFilesSelected($event)" multiple
-                                                                #fileInput>
-                                                            <button class="btn btn-primary btn-lg"
+                                                        <form (submit)="handleSubmit($event)"
+                                                            class="d-flex align-items-center">
+                                                            <input class="form-control form-control-sm me-2"
+                                                                name="message" #messageInput type="text"
+                                                                placeholder="Enter your message" required>
+                                                            <input type="file" class="form-control form-control-sm me-2"
+                                                                (change)="onFilesSelected($event)" multiple #fileInput>
+                                                            <button class="btn btn-primary"
                                                                 type="submit">Submit</button>
                                                         </form>
+
                                                     </div>
                                                 </div>
                                             </div>

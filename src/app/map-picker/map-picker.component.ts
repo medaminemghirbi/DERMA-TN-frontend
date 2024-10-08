@@ -29,6 +29,8 @@ export class MapPickerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initializeMarkerFromSession(); // Initialize marker on component load
+
   }
 
   ngAfterViewInit(): void {
@@ -54,7 +56,7 @@ export class MapPickerComponent implements OnInit {
           this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
   
           // Set a marker at the geocoded address
-          this.setMarker(addressLatLng); // Set marker for the address
+          this.initializeMarkerFromSession(); 
   
           // Add click event listener to map
           this.map.addListener('click', (event: google.maps.MapMouseEvent) => {
@@ -140,4 +142,50 @@ export class MapPickerComponent implements OnInit {
     // Manually trigger change detection to update the view
     this.changeDetectorRef.detectChanges();
   }
+
+  initializeMarkerFromSession() {
+    const storedDoctorData = sessionStorage.getItem('doctordata');
+    if (storedDoctorData) {
+      const doctorData = JSON.parse(storedDoctorData);
+      const storedLatitude = doctorData.latitude; // Assuming latitude is a property in doctordata
+      const storedLongitude = doctorData.longitude; // Assuming longitude is a property in doctordata
+      const storedLocation = doctorData.location; // Assuming location is a property in doctordata
+      
+      // Check if both latitude and longitude are available
+      if (storedLatitude && storedLongitude) {
+        const storedLatLng = {
+          lat: parseFloat(storedLatitude),
+          lng: parseFloat(storedLongitude),
+        };
+  
+        // Set marker using stored coordinates
+        this.setMarker(storedLatLng);
+        return; // Exit the function after setting the marker
+      }
+  
+      // If latitude and longitude are not available, check for location
+      if (storedLocation) {
+        const geocoder = new google.maps.Geocoder();
+  
+        // Geocode the location string
+        geocoder.geocode({ address: storedLocation }, (results, status) => {
+          if (status === google.maps.GeocoderStatus.OK && results && results.length > 0) {
+            const location = results[0].geometry.location;
+            const latLng = {
+              lat: location.lat(),
+              lng: location.lng(),
+            };
+  
+            // Set the marker using the geocoded location
+            this.setMarker(latLng);
+          } else {
+            console.error('Geocoding failed: ' + status);
+          }
+        });
+      }
+    } else {
+      console.warn('No doctor data found in session storage.');
+    }
+  }
+  
 }

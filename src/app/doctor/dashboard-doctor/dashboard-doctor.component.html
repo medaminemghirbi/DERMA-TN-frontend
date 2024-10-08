@@ -113,6 +113,7 @@
                                                             src="{{appointment.patient.user_image_url}}" alt>
                                                         <h2>Mr. {{appointment.patient.firstname}}{{appointment.patient.lastname}} </h2>
                                                     </td>
+                                                    <td  class="appoint-time text-center"><h6>phone : {{appointment.patient.phone_number}}</h6></td>
                                                     <td class="appoint-time text-center">
                                                         <h6>Today at {{ appointment.appointment | date: 'HH:mm' }}
 

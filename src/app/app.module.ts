@@ -44,6 +44,8 @@ import { HeaderSettingsComponent } from './doctor/header-settings/header-setting
 import { SocialMediaComponent } from './doctor/social-media/social-media.component';
 import { NotificationSettingsComponent } from './doctor/notification-settings/notification-settings.component';
 import { NotifiacationAlertComponent } from './shared/notifiacation-alert/notifiacation-alert.component';
+import { MyPhoneNumbersComponent } from './doctor/my-phone-numbers/my-phone-numbers.component';
+import { DokumentsComponent } from './doctor/dokuments/dokuments.component';
 
 
 @NgModule({
@@ -80,6 +82,9 @@ import { NotifiacationAlertComponent } from './shared/notifiacation-alert/notifi
     SocialMediaComponent,
     NotificationSettingsComponent,
     NotifiacationAlertComponent,
+    MyPhoneNumbersComponent,
+    DokumentsComponent,
+
     
   ],
   imports: [
