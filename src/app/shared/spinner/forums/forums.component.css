@@ -1,0 +1,6 @@
+.comments-container {
+    max-height: auto; /* Adjust the height as necessary */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ddd; /* Optional: add a border */
+    padding: 10px; /* Optional: add some padding */
+}

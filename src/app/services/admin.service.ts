@@ -112,4 +112,7 @@ export class AdminService {
     return this.http.patch(`${environment.urlBackend}api/v1/maladies/${data.id}`, data);
   }
 
+  updateDocument(data:any){
+    return this.http.patch(`${environment.urlBackend}api/v1/documents/${data.id}`, data);
+  }
 }

@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 export class MyPhoneNumbersComponent implements OnInit {
   my_phones: any[] = [];
   currentUser: any;
-  newPhoneNumbers: { number: string; phone_type: string }[] = [];
+  newPhoneNumbers: { number: string; phone_type: string, is_primary: boolean }[] = [];
   editingPhoneIndex: number = -1; // Use -1 to indicate no phone is being edited
   messageErr = "";
 
@@ -24,6 +24,7 @@ export class MyPhoneNumbersComponent implements OnInit {
     this.doctorService.getMyPhoneNumbers(this.currentUser.id).subscribe(
       (data) => {
         this.my_phones = data;
+        console.log(this.my_phones)
       },
       (err: HttpErrorResponse) => {
         console.log(err);
@@ -34,7 +35,7 @@ export class MyPhoneNumbersComponent implements OnInit {
 
   // Add a new phone number field dynamically
   addNewPhoneNumberField() {
-    this.newPhoneNumbers.push({ number: '', phone_type: '' });
+    this.newPhoneNumbers.push({ number: '', phone_type: '', is_primary: false  });
   }
 
   // Create phone numbers for the current doctor
@@ -149,4 +150,29 @@ export class MyPhoneNumbersComponent implements OnInit {
   normalizePhoneNumber(phoneNumber: string): string {
     return phoneNumber.replace(/\s+/g, ' ').trim();
 }
+
+togglePrimary(index: number, currentValue: boolean): void {
+  const phoneId = this.my_phones[index].id; // Get the phone ID
+  // Toggle the current is_primary value
+  const updatedPhoneNumber = {
+      ...this.my_phones[index], // Keep existing phone data
+      is_primary: !currentValue // Toggle the is_primary value
+  };
+
+  // Call the backend to update the value of is_primary
+  this.doctorService.updatePhoneNumber(phoneId, updatedPhoneNumber).subscribe(
+      (data) => {
+          // Update the local state with the returned data from the server
+          this.my_phones[index] = { ...data }; // Update the specific phone number
+          console.log(`Phone ${this.my_phones[index].number} is now ${this.my_phones[index].is_primary ? 'primary' : 'not primary'}.`);
+      },
+      (err: HttpErrorResponse) => {
+          console.error(err);
+          // Optionally, you can revert the toggle if the update fails
+          this.my_phones[index].is_primary = currentValue; // Revert to original value
+      }
+  );
+}
+
+
 }

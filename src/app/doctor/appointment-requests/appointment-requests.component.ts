@@ -72,6 +72,7 @@ export class AppointmentRequestsComponent implements OnInit {
       });
     }
   }
+  
   updatedemande (f:any){
   
     let data=f.value
