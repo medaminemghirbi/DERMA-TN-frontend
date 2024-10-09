@@ -37,8 +37,11 @@ export class NotifiacationAlertComponent implements OnInit {
   initializeWebSocket() {
     if (this.ws) return; // Avoid creating multiple WebSocket connections
 
-    this.ws = new WebSocket('ws://localhost:3000/cable'); // Change this URL if needed
-
+    //this.ws = new WebSocket('ws://localhost:3000/cable'); // Change this URL if needed
+    this.ws = new WebSocket(
+      `${environment.urlBackend.replace(/^http(s)?:\/\//, (match) => match === 'https://' ? 'wss://' : 'ws://').replace(/\/$/, '')}/cable`
+    );
+    
     this.ws.onopen = () => {
       console.log('WebSocket connection established.');
       this.ws?.send(JSON.stringify({

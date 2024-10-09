@@ -54,22 +54,17 @@ export class DoctorSettingsComponent implements OnInit {
 
     // Check if both latitude and longitude exist
     if (latitude && longitude) {
-      this.http
-        .get<any>(
-          `http://localhost:3000/api/v1/location_details?latitude=${latitude}&longitude=${longitude}`
-        )
-        .subscribe(
-          (data) => {
-            // Safe navigation for 'data'
-            this.addressLine1 = data?.address;
-          },
-          (error) => {
-            console.error('Error fetching location details:', error);
-          }
-        );
+      this.doctorService.getLocationDetails(latitude, longitude).subscribe(
+        (data) => {
+          // Safe navigation for 'data'
+          this.addressLine1 = data?.address;
+        },
+        (error) => {
+          console.error('Error fetching location details:', error);
+        }
+      );
     }
   }
-
   extractAddressDetails(address: string | undefined) {
     // Use optional chaining to prevent splitting if address is undefined
     const addressParts = address?.split(',');
