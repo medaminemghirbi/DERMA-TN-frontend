@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -47,8 +48,9 @@ export class ForumsComponent implements OnInit {
   initializeWebSocket() {
     if (this.ws) return; // Avoid creating multiple WebSocket connections
 
-    this.ws = new WebSocket('ws://localhost:3000/cable');
-    this.ws.onopen = () => {
+    this.ws = new WebSocket(
+      `${environment.urlBackend.replace(/^http(s)?:\/\//, (match) => match === 'https://' ? 'wss://' : 'ws://').replace(/\/$/, '')}/cable`
+    );    this.ws.onopen = () => {
       this.ws?.send(JSON.stringify({
         command: 'subscribe',
         identifier: JSON.stringify({ channel: 'MessagesChannel' })
@@ -96,8 +98,8 @@ export class ForumsComponent implements OnInit {
       });
       formData.append('message[sender_id]', this.currentuser.id);
   
-      try {
-        await this.http.post('http://localhost:3000/api/v1/messages', formData).toPromise();
+      try { 
+        await this.http.post(environment.urlBackend + 'api/v1/messages', formData).toPromise();
         this.selectedFiles = []; // Clear selected files array
         this.fileInput.nativeElement.value = ''; // Reset file input
       } catch (error) {
@@ -109,7 +111,7 @@ export class ForumsComponent implements OnInit {
   }
 
   async fetchMessages() {
-    const url = `http://localhost:3000/api/v1/messages`;
+    const url = environment.urlBackend + 'api/v1/messages';
     try {
       const data = await this.http.get<any[]>(url).toPromise();
       this.setMessagesAndScrollDown(data || []);
