@@ -46,6 +46,10 @@ import { NotificationSettingsComponent } from './doctor/notification-settings/no
 import { NotifiacationAlertComponent } from './shared/notifiacation-alert/notifiacation-alert.component';
 import { MyPhoneNumbersComponent } from './doctor/my-phone-numbers/my-phone-numbers.component';
 import { DokumentsComponent } from './doctor/dokuments/dokuments.component';
+import { DashboardPatientComponent } from './patient/dashboard-patient/dashboard-patient.component';
+import { PatientSidebarComponent } from './patient/patient-sidebar/patient-sidebar.component';
+import { PatientHeaderComponent } from './patient/patient-header/patient-header.component';
+import { BlogsPatientComponent } from './patient/blogs-patient/blogs-patient.component';
 
 
 @NgModule({
@@ -84,6 +88,10 @@ import { DokumentsComponent } from './doctor/dokuments/dokuments.component';
     NotifiacationAlertComponent,
     MyPhoneNumbersComponent,
     DokumentsComponent,
+    DashboardPatientComponent,
+    PatientSidebarComponent,
+    PatientHeaderComponent,
+    BlogsPatientComponent,
 
     
   ],

@@ -8,6 +8,7 @@ import { PlanningComponent } from './admin/planning/planning.component';
 import { ForumsComponent } from './shared/spinner/forums/forums.component';
 import { BlogDetailsComponent } from './user/blog-details/blog-details.component';
 import { BlogsComponent } from './admin/blogs/blogs.component';
+
 import { GuardGuard } from './services/guard.guard';
 import { DashboardDoctorComponent } from './doctor/dashboard-doctor/dashboard-doctor.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
@@ -26,6 +27,8 @@ import { SocialMediaComponent } from './doctor/social-media/social-media.compone
 import { NotificationSettingsComponent } from './doctor/notification-settings/notification-settings.component';
 import { MyPhoneNumbersComponent } from './doctor/my-phone-numbers/my-phone-numbers.component';
 import { DokumentsComponent } from './doctor/dokuments/dokuments.component';
+import { DashboardPatientComponent } from './patient/dashboard-patient/dashboard-patient.component';
+import { BlogsPatientComponent } from './patient/blogs-patient/blogs-patient.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -53,6 +56,9 @@ const routes: Routes = [
   { path: 'doctor/settings/social-media', canActivate: [DoctorGuard], component: SocialMediaComponent },
   { path: 'doctor/settings/notifications', canActivate: [DoctorGuard], component: NotificationSettingsComponent },
   { path: 'doctor/settings/my-phone-numbers', canActivate: [DoctorGuard], component: MyPhoneNumbersComponent },
+  // Patient routes with guards
+  { path: 'patient/dashboard', component: DashboardPatientComponent },
+  { path: 'patient/blogs', component: BlogsPatientComponent },
 
 
   // Shared components

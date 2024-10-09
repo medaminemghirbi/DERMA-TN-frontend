@@ -39,7 +39,7 @@ export class PlanningDoctorComponent implements OnInit {
   
   currentEvents: EventApi[] = [];
   messageErr = "";
-
+  isLoading: boolean = false;
   constructor(
     private doctorSerivce: DoctorService,
     private auth: AuthService
@@ -49,11 +49,10 @@ export class PlanningDoctorComponent implements OnInit {
     this.currentUser = this.auth.getcurrentuser();
     this.doctorSerivce.fetchDoctorConsultations(this.currentUser.id).subscribe(
       (consultations) => {   
-        debugger
-
+        this.isLoading = true;
         const events = consultations.map(consultation => ({
           
-          title: `Consultation with Mr ${consultation.patient.firstname} ${consultation.patient.lastname}`, 
+          title: `=> Consultation with Mr ${consultation.patient.firstname} ${consultation.patient.lastname}`, 
           start: consultation.appointment, 
           end: this.addMinutesToDate(new Date(consultation.appointment), 30), 
           id: consultation.id,
@@ -62,6 +61,7 @@ export class PlanningDoctorComponent implements OnInit {
           }
         }));
         this.calendarOptions.events = events;
+        this.isLoading = false;
       },
       (err: HttpErrorResponse) => {
         console.error('Error fetching consultations:', err);
