@@ -38,8 +38,8 @@ import { DoctorSettingsComponent } from './doctor/doctor-settings/doctor-setting
 import { FirstKeyValuePipe } from './first-key-value.pipe';
 import { AppointmentRequestsComponent } from './doctor/appointment-requests/appointment-requests.component';
 import { FilterByStatusPipe } from './filter-by-status.pipe';
-import { MapPickerComponent } from './map-picker/map-picker.component';
-import { MyLocationComponent } from './doctor/my-location/my-location.component';
+import { MapPickerComponent } from './doctor/map-picker/map-picker.component';
+import { MyLocationComponent } from './shared/my-location/my-location.component';
 import { HeaderSettingsComponent } from './doctor/header-settings/header-settings.component';
 import { SocialMediaComponent } from './doctor/social-media/social-media.component';
 import { NotificationSettingsComponent } from './doctor/notification-settings/notification-settings.component';
@@ -50,6 +50,10 @@ import { DashboardPatientComponent } from './patient/dashboard-patient/dashboard
 import { PatientSidebarComponent } from './patient/patient-sidebar/patient-sidebar.component';
 import { PatientHeaderComponent } from './patient/patient-header/patient-header.component';
 import { BlogsPatientComponent } from './patient/blogs-patient/blogs-patient.component';
+import { MyRequestsComponent } from './patient/my-requests/my-requests.component';
+import { SettingsPatientComponent } from './patient/settings-patient/settings-patient.component';
+import { HeaderPatientSettingsComponent } from './patient/header-patient-settings/header-patient-settings.component';
+import { MapPickerPatientComponent } from './patient/map-picker-patient/map-picker-patient.component';
 
 
 @NgModule({
@@ -92,6 +96,10 @@ import { BlogsPatientComponent } from './patient/blogs-patient/blogs-patient.com
     PatientSidebarComponent,
     PatientHeaderComponent,
     BlogsPatientComponent,
+    MyRequestsComponent,
+    SettingsPatientComponent,
+    HeaderPatientSettingsComponent,
+    MapPickerPatientComponent,
 
     
   ],

@@ -1,16 +1,16 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { DoctorService } from '../services/doctor.service';
 import Swal from 'sweetalert2';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DoctorService } from '../../services/doctor.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-map-picker',
-  templateUrl: './map-picker.component.html',
-  styleUrls: ['./map-picker.component.css']
+  selector: 'app-map-picker-patient',
+  templateUrl: './map-picker-patient.component.html',
+  styleUrls: ['./map-picker-patient.component.css']
 })
-export class MapPickerComponent implements OnInit {
+export class MapPickerPatientComponent implements OnInit {
   @ViewChild('mapContainer', { static: false }) mapContainer!: ElementRef;
   map!: google.maps.Map;
   latitude: number = 0;
@@ -41,9 +41,8 @@ export class MapPickerComponent implements OnInit {
     // Retrieve the current user
     this.currenUser = this.auth.getcurrentuser();
     const geocoder = new google.maps.Geocoder();
-  
     // Ensure currentUser has an address
-    if (this.currenUser && this.currenUser.address) {
+    if (this.currenUser) {
       geocoder.geocode({ address: this.currenUser.address }, (results, status) => {
         if (status === google.maps.GeocoderStatus.OK) {
           const addressLatLng = results![0].geometry.location;
@@ -128,7 +127,7 @@ export class MapPickerComponent implements OnInit {
       // Call the service to update the location
       this.userService.update_location(this.currenUser.id, formData).subscribe(
         response => {
-          sessionStorage.setItem('doctordata', JSON.stringify(response));
+          sessionStorage.setItem('patientdata', JSON.stringify(response));
           // Set the flag to true after updating
           this.isLocationUpdated = true;
           
@@ -144,12 +143,12 @@ export class MapPickerComponent implements OnInit {
   }
 
   initializeMarkerFromSession() {
-    const storedDoctorData = sessionStorage.getItem('doctordata');
-    if (storedDoctorData) {
-      const doctorData = JSON.parse(storedDoctorData);
-      const storedLatitude = doctorData.latitude; // Assuming latitude is a property in doctordata
-      const storedLongitude = doctorData.longitude; // Assuming longitude is a property in doctordata
-      const storedLocation = doctorData.location; // Assuming location is a property in doctordata
+    const storedPatientData = sessionStorage.getItem('patientdata');
+    if (storedPatientData) {
+      const patientData = JSON.parse(storedPatientData);
+      const storedLatitude = patientData.latitude; // Assuming latitude is a property in patient
+      const storedLongitude = patientData.longitude; // Assuming longitude is a property in patient
+      const storedLocation = patientData.location; // Assuming location is a property in patient
       
       // Check if both latitude and longitude are available
       if (storedLatitude && storedLongitude) {
@@ -184,7 +183,7 @@ export class MapPickerComponent implements OnInit {
         });
       }
     } else {
-      console.warn('No doctor data found in session storage.');
+      console.warn('No patient data found in session storage.');
     }
   }
   

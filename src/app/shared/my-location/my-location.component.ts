@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-my-location',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-location.component.css']
 })
 export class MyLocationComponent implements OnInit {
-
-  constructor() { }
+  role :any
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
+   this.role =  this.auth.getRole();
   }
 
 }

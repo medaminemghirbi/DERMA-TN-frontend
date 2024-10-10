@@ -22,13 +22,15 @@ import { RegistrationComponent } from './registration/registration.component';
 import { DoctorSettingsComponent } from './doctor/doctor-settings/doctor-settings.component';
 import { PlanningDoctorComponent } from './doctor/planning-doctor/planning-doctor.component';
 import { AppointmentRequestsComponent } from './doctor/appointment-requests/appointment-requests.component';
-import { MyLocationComponent } from './doctor/my-location/my-location.component';
+import { MyLocationComponent } from './shared/my-location/my-location.component';
 import { SocialMediaComponent } from './doctor/social-media/social-media.component';
 import { NotificationSettingsComponent } from './doctor/notification-settings/notification-settings.component';
 import { MyPhoneNumbersComponent } from './doctor/my-phone-numbers/my-phone-numbers.component';
 import { DokumentsComponent } from './doctor/dokuments/dokuments.component';
 import { DashboardPatientComponent } from './patient/dashboard-patient/dashboard-patient.component';
 import { BlogsPatientComponent } from './patient/blogs-patient/blogs-patient.component';
+import { MyRequestsComponent } from './patient/my-requests/my-requests.component';
+import { SettingsPatientComponent } from './patient/settings-patient/settings-patient.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -52,13 +54,16 @@ const routes: Routes = [
   { path: 'doctor/dokuments', canActivate: [DoctorGuard], component: DokumentsComponent },
 
   { path: 'doctor/settings', canActivate: [DoctorGuard], component: DoctorSettingsComponent },
-  { path: 'doctor/settings/my-location', canActivate: [DoctorGuard], component: MyLocationComponent },
+  { path: 'settings/my-location', component: MyLocationComponent },
   { path: 'doctor/settings/social-media', canActivate: [DoctorGuard], component: SocialMediaComponent },
   { path: 'doctor/settings/notifications', canActivate: [DoctorGuard], component: NotificationSettingsComponent },
   { path: 'doctor/settings/my-phone-numbers', canActivate: [DoctorGuard], component: MyPhoneNumbersComponent },
   // Patient routes with guards
   { path: 'patient/dashboard', component: DashboardPatientComponent },
   { path: 'patient/blogs', component: BlogsPatientComponent },
+  { path: 'patient/settings', component: SettingsPatientComponent },
+
+  { path: 'patient/appointment-request', component: MyRequestsComponent },
 
 
   // Shared components

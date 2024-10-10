@@ -1,0 +1,105 @@
+<div class="main-wrapper">
+    <app-patient-header></app-patient-header>
+    <app-patient-sidebar></app-patient-sidebar>
+    <app-notifiacation-alert></app-notifiacation-alert>
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-6">
+                        <h4 class="header-title">All Requests ( )</h4>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal1">Add New Request</button>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="input-group input-group-sm">
+                            <input type="text" name="role" class="form-control form-control-sm"
+                                [(ngModel)]="searchedKeyword" placeholder="Search for...">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-control form-control-sm" id="statusDropdown">
+                            <option hidden value="" selected>Filter By State</option>
+                            <option value="pending">En Cours</option>
+                            <option value="approved">Accepted</option>
+                            <option value="rejected">Refused</option>
+                        </select>
+                    </div>
+                </div>
+                <table class="table border-0 custom-table comman-table datatable mb-0">
+                    <thead>
+                        <tr>
+                            <th>Rendez Vous Date</th>
+                            <th>Rendez vous type</th>
+                            <th>Doctor </th>
+                            <th>Patient</th>
+                            <th>Phone Number</th>
+                            <th>Created Date</th>
+                            <th>Status</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        </tr>
+                        <tr class="no-appointment-row">
+                            <td colspan="8" class="description-content no-appointment-text">
+                                No Appointment Request yet
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align:right;">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Request</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="row">
+                                    <div class="input-block local-forms cal-icon">
+                                        <select class="form-control" [(ngModel)]="selectedLocation" name="location"
+                                            id="department" (ngModelChange)="getDoctorsByLocation($event)">
+                                            <option hidden value="" selected>Select Gouvernement</option>
+                                            <option *ngFor="let item of locations" [value]="item">{{ item }}</option>
+                                        </select>
+                                    </div>
+
+                                        <div *ngIf="doctors.length" class="input-block local-forms cal-icon">
+                                            <select class="form-control" [(ngModel)]="selectedDoctorId" name="doctor"
+                                                id="doctor">
+                                                <option hidden value="" selected>
+                                                    Select Doctor in {{ selectedLocation }}
+                                                </option>
+                                                <option *ngFor="let doctor of doctors" [value]="doctor.id">
+                                                    Dr. {{ doctor.firstname }} {{ doctor.lastname }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

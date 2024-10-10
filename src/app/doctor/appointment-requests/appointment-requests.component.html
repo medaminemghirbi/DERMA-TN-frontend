@@ -80,11 +80,12 @@
                                         <span *ngIf="phone.is_primary" class="ms-2">{{ phone.number }}</span>
                                     </div>
                                 </div>
-                                <span *ngIf="!item.doctor.phone_numbers || item.doctor.phone_numbers.length === 0" style="color: rgb(255, 9, 9);">
+                                <span *ngIf="!item.doctor.phone_numbers || item.doctor.phone_numbers.length === 0"
+                                    style="color: rgb(255, 9, 9);">
                                     <i class="fa fa-ban" data-bs-toggle="tooltip" title="Not Provided"></i>
                                     Not Provided
                                 </span>
-                                
+
                             </td>
                             <td class="description-content">
                                 <a>{{item.created_at}}</a>
