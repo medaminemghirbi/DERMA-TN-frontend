@@ -57,6 +57,18 @@ export class AdminService {
       environment.urlBackend + 'api/v1/get_doctors_by_locations/' + location
     );
   }
+  getNearstDoctor(location: string, radius: number) {
+    return this.http.get(
+      environment.urlBackend + 'api/v1/nearest_doctors',
+      {
+        params: {
+          location: location,
+          radius: radius.toString()
+        }
+      }
+    );
+  }
+  
   getDoctorDetails(doctor_id: string): Observable<any> {
     return this.http.get<any>(
       environment.urlBackend + 'api/v1/doctor_consultations/' + doctor_id

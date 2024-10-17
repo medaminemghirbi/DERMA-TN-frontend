@@ -31,6 +31,7 @@ import { DashboardPatientComponent } from './patient/dashboard-patient/dashboard
 import { BlogsPatientComponent } from './patient/blogs-patient/blogs-patient.component';
 import { MyRequestsComponent } from './patient/my-requests/my-requests.component';
 import { SettingsPatientComponent } from './patient/settings-patient/settings-patient.component';
+import { AddNewRequestComponent } from './patient/add-new-request/add-new-request.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -62,6 +63,7 @@ const routes: Routes = [
   { path: 'patient/dashboard', component: DashboardPatientComponent },
   { path: 'patient/blogs', component: BlogsPatientComponent },
   { path: 'patient/settings', component: SettingsPatientComponent },
+  { path: 'patient/add-new-request', component: AddNewRequestComponent },
 
   { path: 'patient/appointment-request', component: MyRequestsComponent },
 

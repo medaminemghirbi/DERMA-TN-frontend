@@ -30,6 +30,7 @@ export class PlanningComponent implements OnInit {
     status: '',
     refus_reason: ''
   };
+  loading: boolean = false;
 
   constructor(private usersService: AdminService, private route: Router, private pdfService: ReportsService) { }
 
@@ -93,6 +94,8 @@ export class PlanningComponent implements OnInit {
     console.log("Selected Doctor ID:", this.selectedDoctorId);
 
     if (this.selectedDoctorId) {
+      this.loading = true;
+
       this.usersService.getDoctorDetails(this.selectedDoctorId).subscribe(
         (data) => {
           this.doctorAppointements = data.sort((a: any, b: any) => {
@@ -110,6 +113,8 @@ export class PlanningComponent implements OnInit {
             this.selectedDoctorName = '';
           }
           console.log("Doctor Details:", this.doctorAppointements);
+          this.loading = false;
+
         },
         (err: HttpErrorResponse) => {
           console.error("Error fetching doctor details:", err);

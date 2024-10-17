@@ -16,50 +16,84 @@
                             </div>
                             <div class="card-body pt-0">
                                 <form [formGroup]="upadate" #f="ngForm" (ngSubmit)="updateinformations(f)">
-                                    <div class="col-md-6">
-                                        <div class="input-block mb-3">
-                                            <label for="exampleFormControlSelect1" class="form-label">Civil
-                                                Status</label>
-                                            <select [(ngModel)]="currentUser.civil_status" name="civil_status"
-                                                formControlName="civil_status" class="form-control"
-                                                id="exampleFormControlSelect1">
+                                    <div class="row">
 
-                                                <option hidden value="" selected>Select civil status</option>
-                                                <option selected value="Mr">Mr</option>
-                                                <option value="Mrs">Mrs</option>
-                                                <option value="Mme">Mme</option>
-                                                <option value="other">Other</option>
-                                            </select>
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-block mb-3">
+                                                <label for="exampleFormControlSelect1"
+                                                    class="form-label">lastname</label>
+                                                <input type="text" [(ngModel)]="currentUser.lastname" name="lastname"
+                                                    formControlName="lastname" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-block mb-3">
+                                                <label for="exampleFormControlSelect1"
+                                                    class="form-label">firstname</label>
+                                                <input type="text" [(ngModel)]="currentUser.firstname" name="firstname"
+                                                    formControlName="firstname" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6 col-xl-6">
-                                        <div class="input-block select-gender">
-                                            <label class="gen-label">Date of Birth<span
-                                                    class="login-danger">*</span></label>
-                                            <div class="form-check-inline">
-                                                <input [(ngModel)]="currentUser.birthday" name="birthday"
-                                                    formControlName="birthday" class="form-control" type="date"
-                                                    value="24-11-2022">
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-block mb-3">
+                                                <label for="exampleFormControlSelect1" class="form-label">Civil
+                                                    Status</label>
+                                                <select [(ngModel)]="currentUser.civil_status" name="civil_status"
+                                                    formControlName="civil_status" class="form-control"
+                                                    id="exampleFormControlSelect1">
 
+                                                    <option hidden value="" selected>Select civil status</option>
+                                                    <option selected value="Mr">Mr</option>
+                                                    <option value="Mrs">Mrs</option>
+                                                    <option value="Mme">Mme</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-block">
+                                                <label for="exampleFormControlSelect1" class="form-label">Your
+                                                    Location</label>
+                                                <select class="form-control" [(ngModel)]="currentUser.location"
+                                                    name="location" formControlName="location" id="department">
+                                                    <option hidden value="" selected>Select Gouvernement</option>
+                                                    <option *ngFor="let item of locations" [value]="item">{{item}}
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6 col-xl-6">
-                                        <div class="input-block select-gender">
-                                            <label class="gen-label">Gender<span class="login-danger">*</span></label>
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input formControlName="gender" [(ngModel)]="currentUser.gender"
-                                                        [value]="'male'" type="radio" name="gender"
-                                                        class="form-check-input" checked>Male
-                                                </label>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-block mb-3">
+                                                <label for="exampleFormControlSelect1" class="form-label">Date of Birth
+                                                    <span
+                                                        class="login-danger">*</span></label>
+                                                <input type="date" [(ngModel)]="currentUser.birthday" name="birthday"
+                                                    formControlName="birthday" class="form-control"
+                                                    id="exampleFormControlSelect1"/>
                                             </div>
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="radio" [(ngModel)]="currentUser.gender"
-                                                        formControlName="gender" [value]="'female'" name="gender"
-                                                        class="form-check-input">Female
-                                                </label>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-6">
+                                            <div class="input-block select-gender">
+                                                <label class="gen-label">Gender<span
+                                                        class="login-danger">*</span></label>
+                                                <div class="form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input formControlName="gender" [(ngModel)]="currentUser.gender"
+                                                            [value]="'male'" type="radio" name="gender"
+                                                            class="form-check-input" checked>Male
+                                                    </label>
+                                                </div>
+                                                <div class="form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input type="radio" [(ngModel)]="currentUser.gender"
+                                                            formControlName="gender" [value]="'female'" name="gender"
+                                                            class="form-check-input">Female
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

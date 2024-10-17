@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-my-requests',
@@ -8,9 +9,9 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./my-requests.component.css']
 })
 export class MyRequestsComponent implements OnInit {
-  locations: any = [];
+  nearstdoctor: any = [];
   doctors: any = [];
-
+  currentUser : any
   messageErr=""
   searchedKeyword =""
   p:number = 1 ;
@@ -18,53 +19,17 @@ export class MyRequestsComponent implements OnInit {
   selectedDoctorId: string = '';
   selectedDoctorName!: string;
   message =""
-  constructor(private usersService: AdminService) { }
+  constructor(private usersService: AdminService, private auth: AuthService) {
+    this.currentUser = this.auth.getcurrentuser();
+   }
 
   async ngOnInit(): Promise<void> {
     try {
-      this.locations = await this.usersService.getAllLocations().toPromise();
-      this.locations.sort((a: any, b: any) => a.name.localeCompare(b.name));
+      this.nearstdoctor = await this.usersService.getNearstDoctor(this.currentUser.location, this.currentUser.radius).toPromise();
+      this.nearstdoctor.sort((a: any, b: any) => a.firstname.localeCompare(b.firstname));
+      console.log(this.nearstdoctor)
     } catch (error) {
-      this.messageErr = "We couldn't find any locations in our database.";
+      this.messageErr = "We couldn't find any nerst doctors in our database.";
     }
   }
-
-
-  getDoctorsByLocation(location: string): void {
-    this.selectedLocation = location;
-    debugger
-    console.log("Selected Location:", this.selectedLocation);
-    this.selectedDoctorName = '';
-    this.selectedDoctorId = '';  // Reset selected doctor
-  
-    if (this.selectedLocation) {
-      this.usersService.getDoctorsByLocation(this.selectedLocation).subscribe(
-        (data) => {
-          debugger
-          this.selectedDoctorName = '';
-          this.doctors = data;
-    
-          // Sort doctors safely
-          this.doctors.sort((a: any, b: any) => {
-            const nameA = a.name || ''; // Default to empty string if undefined
-            const nameB = b.name || ''; // Default to empty string if undefined
-            return nameA.localeCompare(nameB);
-          });
-    
-          if (this.doctors.length === 0) {
-            this.message = "No doctors available for the selected location.";
-          }
-          console.log("Doctors List:", this.doctors);
-        },
-        (err: HttpErrorResponse) => {
-          console.error("Error fetching doctors:", err);
-          this.doctors = [];
-        }
-      );
-    }else {
-      this.doctors = [];
-      this.selectedDoctorName = '';
-    }
-  }
-  
 }

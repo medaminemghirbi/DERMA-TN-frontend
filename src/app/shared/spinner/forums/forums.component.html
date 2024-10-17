@@ -66,7 +66,9 @@
                                                                     <div class="comment-block">
                                                                         <div class="comment-by">
                                                                             <div class="week-group">
-                                                                                <h5 class="blog-author-name">{{
+                                                                                <h5 class="blog-author-name">
+                                                                                    <span *ngIf="message.sender.type=='Doctor'">Dr.</span>
+                                                                                    {{
                                                                                     message.sender.firstname }} {{
                                                                                     message.sender.lastname }}</h5>
                                                                                 <span class="week-list">{{

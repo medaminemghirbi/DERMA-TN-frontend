@@ -46,5 +46,35 @@ toggleSystemNotifications(event: Event) {
         }
     });
 }
+toggleWorkingSaturday(event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.currentUser.working_saturday = isChecked;
 
+    // Call your service to update the user's preference in the backend
+    this.auth.updateworkinginsatudray(this.currentUser.id, isChecked).subscribe({
+        next: (response) => {
+            sessionStorage.setItem('doctordata', JSON.stringify(response));
+            console.log('Workin in saturday updated successfully!', response);
+        },
+        error: (error) => {
+            console.error('Failed to update Workin in saturday', error);
+        }
+    });
+}
+
+toggleSmsNotifications(event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.currentUser.is_smsable = isChecked;
+
+    // Call your service to update the user's preference in the backend
+    this.auth.updatetoggleSmsNotifications(this.currentUser.id, isChecked).subscribe({
+        next: (response) => {
+            sessionStorage.setItem('doctordata', JSON.stringify(response));
+            console.log('Workin in saturday updated successfully!', response);
+        },
+        error: (error) => {
+            console.error('Failed to update Workin in saturday', error);
+        }
+    });
+}
 }

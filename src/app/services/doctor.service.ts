@@ -84,6 +84,9 @@ export class DoctorService {
   update_location(id: string, newdata: FormData) {
     return this.http.patch(`${environment.urlBackend}api/v1/update_location/${id}`, newdata);
   }
+  update_location_map(newdata: FormData) {
+    return this.http.post(`${environment.urlBackend}api/v1/update_address/`, newdata);
+  }
   
   updatedoctorimage (id:string,newprofile:any){
     return this.http.patch(environment.urlBackend+'api/v1/updatedoctorimage/' + id , newprofile )

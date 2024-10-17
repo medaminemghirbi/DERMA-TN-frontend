@@ -19,34 +19,6 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6">
                                             <div class="input-block mb-3">
-                                                <label for="exampleFormControlSelect1" class="form-label">Civil
-                                                    Status</label>
-                                                <select [(ngModel)]="currentUser.civil_status" name="civil_status"
-                                                    formControlName="civil_status" class="form-control"
-                                                    id="exampleFormControlSelect1">
-                                                    <option hidden value="" selected>Select civil status</option>
-                                                    <option selected value="Mr">Mr</option>
-                                                    <option value="Mrs">Mrs</option>
-                                                    <option value="Mme">Mme</option>
-                                                    <option value="other">Other</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="input-block select-gender">
-                                                <label class="gen-label">Date of Birth<span
-                                                        class="login-danger">*</span></label>
-                                                <div class="form-check-inline">
-                                                    <input [(ngModel)]="currentUser.birthday" name="birthday"
-                                                        formControlName="birthday" class="form-control" type="date" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-
-                                        <div class="col-12 col-md-6">
-                                            <div class="input-block mb-3">
                                                 <label for="exampleFormControlSelect1"
                                                     class="form-label">lastname</label>
                                                 <input type="text" [(ngModel)]="currentUser.lastname" name="lastname"
@@ -62,25 +34,67 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6 col-xl-6">
-                                        <div class="input-block select-gender">
-                                            <label class="gen-label">Gender<span class="login-danger">*</span></label>
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input formControlName="gender" [(ngModel)]="currentUser.gender"
-                                                        [value]="'male'" type="radio" name="gender"
-                                                        class="form-check-input" checked>Male
-                                                </label>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-block mb-3">
+                                                <label for="exampleFormControlSelect1" class="form-label">Civil
+                                                    Status</label>
+                                                <select [(ngModel)]="currentUser.civil_status" name="civil_status"
+                                                    formControlName="civil_status" class="form-control"
+                                                    id="exampleFormControlSelect1">
+                                                    <option hidden value="" selected>Select civil status</option>
+                                                    <option selected value="Mr">Mr</option>
+                                                    <option value="Mrs">Mrs</option>
+                                                    <option value="Mme">Mme</option>
+                                                    <option value="other">Other</option>
+                                                </select>
                                             </div>
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="radio" [(ngModel)]="currentUser.gender"
-                                                        formControlName="gender" [value]="'female'" name="gender"
-                                                        class="form-check-input">Female
-                                                </label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-block mb-3">
+                                                <label for="exampleFormControlSelect1" class="form-label">Date of
+                                                    Birth</label>
+                                                <input type="date" [(ngModel)]="currentUser.birthday" name="birthday"
+                                                    formControlName="birthday" class="form-control"
+                                                    id="exampleFormControlSelect1" />
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-block">
+                                                <label for="exampleFormControlSelect1" class="form-label">Your
+                                                    Gouvernement</label>
+                                                <select class="form-control" [(ngModel)]="currentUser.location"
+                                                    name="location" formControlName="location" id="location">
+                                                    <option hidden value="" selected>Select Gouvernement</option>
+                                                    <option *ngFor="let item of locations" [value]="item">{{item}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-block select-gender">
+                                                <label class="gen-label">Gender</label>
+                                                <div class="form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input formControlName="gender" [(ngModel)]="currentUser.gender"
+                                                            [value]="'male'" type="radio" name="gender"
+                                                            class="form-check-input" checked>Male
+                                                    </label>
+                                                </div>
+                                                <div class="form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input type="radio" [(ngModel)]="currentUser.gender"
+                                                            formControlName="gender" [value]="'female'" name="gender"
+                                                            class="form-check-input">Female
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <div style="text-align: center;">
                                         <button type="submit" class="btn btn-primary px-4"
                                             style="background-color: rgb(38, 8, 158);">Update Informations</button>
@@ -125,39 +139,34 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Address Details From Google Maps</h5>
+                            <h5 class="card-title">Radius Params For Displaying doctors</h5>
                         </div>
                         <div class="card-body pt-0">
-                            <form>
-                                <div class="settings-form">
-                                    <div class="input-block">
-                                        <label>Address <span class="star-red">*</span></label>
-                                        <input disabled="true" type="text" name="addressLine1"
-                                            [(ngModel)]="addressLine1" class="form-control"
-                                            placeholder="Enter Address Line 1">
-                                    </div>
-                                    <div class="input-block">
-                                        <label>Location <span class="star-red">*</span></label>
-                                        <textarea disabled="true" class="form-control" name="address"
-                                            [(ngModel)]="currentUser.address" rows="4"></textarea>
-                                    </div>
+                            <form [formGroup]="upadate_radius" #f="ngForm" (ngSubmit)="updateradius(f)">
+                                <div class="input-block">
+                                    <input readonly
+                                        style="cursor: not-allowed; background-color: #f0f0f0; color: #6c757d;"
+                                        type="text" class="form-control" id="location"
+                                        [value]="currentUser?.location">
+                                </div>
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-block">
-                                                <label>Zip/Postal Code <span class="star-red">*</span></label>
-                                                <input disabled="true" type="text" class="form-control" name="zipCode"
-                                                    [(ngModel)]="currentUserLocation.zipCode">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-block">
-                                                <label>City <span class="star-red">*</span></label>
-                                                <input disabled="true" type="text" class="form-control" name="city"
-                                                    [(ngModel)]="currentUserLocation.city">
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="settings-form">
+                                    <label class="gen-label">Rayon</label>
+                                    <select [(ngModel)]="currentUser.radius" 
+                                        formControlName="radius" class="form-control"
+                                        id="exampleFormControlSelect1">
+                                        <option value="1">1 Kilométre</option>
+                                        <option value="5">5 Kilométre</option>
+                                        <option value="10">10 Kilométre</option>
+                                        <option value="20">20 Kilométre</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div #mapContainer style="height: 400px; width: 100%;"></div>
+                                <br>
+                                <div style="text-align: center;">
+                                    <button type="submit" class="btn btn-primary px-4"
+                                        style="background-color: rgb(38, 8, 158);">Update Radius</button>
                                 </div>
                             </form>
                         </div>

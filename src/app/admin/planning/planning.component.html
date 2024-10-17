@@ -1,7 +1,8 @@
 <div class="main-wrapper">
     <app-header-admin></app-header-admin>
     <app-sidebar-admin></app-sidebar-admin>
-
+    <app-spinner [isLoading]="loading"></app-spinner>
+    <ng-progress #progressBar></ng-progress>
     <div class="page-wrapper">
         <div class="content">
 
@@ -27,18 +28,19 @@
                             </select>
                         </div>
                     </div>
-                    <div  *ngIf="doctors.length"  class="col-12 col-md-6 col-xl-4">
+                    <div *ngIf="doctors.length" class="col-12 col-md-6 col-xl-4">
                         <div class="input-block local-forms cal-icon">
-                            <select class="form-control" [(ngModel)]="selectedDate" (ngModelChange)="filterByDate($event)">
+                            <select class="form-control" [(ngModel)]="selectedDate"
+                                (ngModelChange)="filterByDate($event)">
                                 <option hidden value="" selected>Select Date</option>
                                 <option value="">All Dates</option>
                                 <option *ngFor="let date of availableDates" [value]="date">
-                                   Le {{ date }}
+                                    Le {{ date }}
                                 </option>
                             </select>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="table-responsive">
@@ -79,7 +81,6 @@
                             <td>patient : {{item.patient.phone_number}}<br>
                                 doctor : <span *ngIf="item.doctor.phone_number"> {{item.doctor.phone_number}} </span>
                                 <span style="color: rgb(255, 9, 9);" *ngIf="!item.doctor.phone_number">
-
                                     <i style="color: rgb(255, 9, 9);" class="fa fa-ban" data-bs-toggle="tooltip"
                                         title="fa fa-check"></i>
                                     Not Provided </span>
@@ -88,7 +89,6 @@
                             <td class="description-reason"><a *ngIf="item.refus_reason">{{item.refus_reason}}</a>
                                 <a *ngIf="!item.refus_reason">-</a>
                             </td>
-
                             <td>
                                 <button *ngIf="item.status =='approved'"
                                     class="custom-badge status-green ">Accepted</button>
@@ -115,7 +115,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 </div>

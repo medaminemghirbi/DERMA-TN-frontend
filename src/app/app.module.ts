@@ -54,6 +54,7 @@ import { MyRequestsComponent } from './patient/my-requests/my-requests.component
 import { SettingsPatientComponent } from './patient/settings-patient/settings-patient.component';
 import { HeaderPatientSettingsComponent } from './patient/header-patient-settings/header-patient-settings.component';
 import { MapPickerPatientComponent } from './patient/map-picker-patient/map-picker-patient.component';
+import { AddNewRequestComponent } from './patient/add-new-request/add-new-request.component';
 
 
 @NgModule({
@@ -100,6 +101,7 @@ import { MapPickerPatientComponent } from './patient/map-picker-patient/map-pick
     SettingsPatientComponent,
     HeaderPatientSettingsComponent,
     MapPickerPatientComponent,
+    AddNewRequestComponent,
 
     
   ],

@@ -17,14 +17,12 @@ export class MapPickerComponent implements OnInit {
   longitude: number = 0;
   marker!: google.maps.Marker;
   currenUser: any;
-  isLocationUpdated: boolean = false; // Flag to track if location has been updated
   update!: FormGroup;
 
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef,
-    private auth: AuthService,
-    private userService: DoctorService
-  ) {
+  // Default location in Tunisia (center if no lat/long or address)
+  defaultLocation = { lat: 34.0, lng: 9.0 }; // Center of Tunisia
+
+  constructor(private auth: AuthService, private userService: DoctorService) {
     this.currenUser = this.auth.getcurrentuser();
     this.update = new FormGroup({
       latitude: new FormControl(''),
@@ -33,8 +31,6 @@ export class MapPickerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initializeMarkerFromSession(); // Initialize marker on component load
-    this.loadMap();
   }
 
   ngAfterViewInit(): void {
@@ -42,173 +38,125 @@ export class MapPickerComponent implements OnInit {
   }
 
   loadMap() {
-    // Retrieve the current user
-    this.currenUser = this.auth.getcurrentuser();
     const geocoder = new google.maps.Geocoder();
+    this.currenUser = this.auth.getcurrentuser();
 
-    // Ensure currentUser has an address
-    if (this.currenUser && this.currenUser.address) {
-      geocoder.geocode(
-        { address: this.currenUser.address },
-        (results, status) => {
-          if (status === google.maps.GeocoderStatus.OK) {
-            const addressLatLng = results![0].geometry.location;
-
-            const mapOptions: google.maps.MapOptions = {
-              center: addressLatLng,
-              zoom: 15,
-            };
-
-            this.map = new google.maps.Map(
-              this.mapContainer.nativeElement,
-              mapOptions
-            );
-
-            // Set a marker at the geocoded address
-            this.initializeMarkerFromSession();
-
-            // Add click event listener to map
-            this.map.addListener(
-              'click',
-              (event: google.maps.MapMouseEvent) => {
-                if (event.latLng) {
-                  this.showLocationConfirmation(event.latLng); // Show confirmation before setting marker
-                }
-              }
-            );
-          } else {
-            console.error(
-              'Geocode was not successful for the following reason: ' + status
-            );
-          }
+    // Check if the currentUser has latitude/longitude
+    if (this.currenUser.latitude && this.currenUser.longitude) {
+      this.latitude = parseFloat(this.currenUser.latitude);
+      this.longitude = parseFloat(this.currenUser.longitude);
+    } else if (this.currenUser.address) {
+      // If no lat/long, use the address to set the marker
+      geocoder.geocode({ address: this.currenUser.address }, (results, status) => {
+        if (status === google.maps.GeocoderStatus.OK) {
+          const addressLatLng = results![0].geometry.location;
+          this.latitude = addressLatLng.lat();
+          this.longitude = addressLatLng.lng();
+        } else {
+          console.error('Geocode failed: ' + status);
+          this.setDefaultMarker();
         }
-      );
-    } else {
-      console.error('No valid address found for the current user.');
-    }
-  }
-  showLocationConfirmation(
-    location: google.maps.LatLng | google.maps.LatLngLiteral
-  ) {
-    // Check if the new location is different from the current one
-    const newLatitude =
-      location.lat instanceof Function ? location.lat() : location.lat;
-    const newLongitude =
-      location.lng instanceof Function ? location.lng() : location.lng;
-
-    if (this.latitude === newLatitude && this.longitude === newLongitude) {
-      Swal.fire({
-        title: 'Location Unchanged',
-        text: 'You have selected the same location. No changes will be made.',
-        icon: 'info',
-        confirmButtonText: 'OK',
+        this.initMap(); // Initialize map after geocoding
       });
-      return; // Exit if the location hasn't changed
+      return; // Exit since we're waiting on geocode
+    } else if (this.currenUser.location) {
+      // If no lat/long and no address, use the location (e.g., gouvernament of Tunisia)
+      geocoder.geocode({ address: this.currenUser.location }, (results, status) => {
+        if (status === google.maps.GeocoderStatus.OK) {
+          const locationLatLng = results![0].geometry.location;
+          this.latitude = locationLatLng.lat();
+          this.longitude = locationLatLng.lng();
+        } else {
+          console.error('Geocode failed: ' + status);
+          this.setDefaultMarker();
+        }
+        this.initMap(); // Initialize map after geocoding
+      });
+      return; // Exit since we're waiting on geocode
+    } else {
+      this.setDefaultMarker(); // No lat/long, address, or location, set default marker
     }
 
-    // Prompt user for confirmation before updating location
-    Swal.fire({
-      title: 'Update Location?',
-      text: 'Are you sure you want to update your location?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, update it!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.setMarker(location); // Set marker and update lat/lng
+    this.initMap(); // Initialize the map when lat/long or default is set
+  }
+
+  initMap() {
+    const mapOptions: google.maps.MapOptions = {
+      center: { lat: this.latitude, lng: this.longitude },
+      zoom: 15,
+    };
+
+    this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+
+    // Set the initial marker
+    this.setMarker({ lat: this.latitude, lng: this.longitude });
+
+    // Add click event listener to map to update the marker
+    this.map.addListener('click', (event: google.maps.MapMouseEvent) => {
+      if (event.latLng) {
+        this.showLocationConfirmation(event.latLng);
       }
     });
   }
 
-  setMarker(location: google.maps.LatLng | google.maps.LatLngLiteral) {
+  setMarker(location: google.maps.LatLngLiteral) {
     // Remove existing marker if it exists
     if (this.marker) {
       this.marker.setMap(null);
     }
 
-    // Create a new marker at the clicked location
+    // Create a new marker at the specified location
     this.marker = new google.maps.Marker({
       position: location,
       map: this.map,
     });
 
-    // Update latitude and longitude from the clicked location
-    this.latitude =
-      location.lat instanceof Function ? location.lat() : location.lat;
-    this.longitude =
-      location.lng instanceof Function ? location.lng() : location.lng;
-
-    // Create FormData and append latitude and longitude
-    const formData = new FormData();
-    formData.append('latitude', String(this.latitude)); // Convert to string
-    formData.append('longitude', String(this.longitude)); // Convert to string
-
-    // Update the currentUser's location if not already updated
-    // Call the service to update the location
-    this.userService.update_location(this.currenUser.id, formData).subscribe(
-      (response) => {
-        sessionStorage.setItem('doctordata', JSON.stringify(response));
-        // Set the flag to true after updating
-        this.isLocationUpdated = true;
-      },
-      (error) => {
-        console.error('Error updating user location:', error);
-        // Handle the error appropriately (e.g., show a notification to the user)
-      }
-    );
-
-    // Manually trigger change detection to update the view
-    this.changeDetectorRef.detectChanges();
+    // Update latitude and longitude in the form
+    this.latitude = location.lat;
+    this.longitude = location.lng;
+    this.update.patchValue({
+      latitude: this.latitude,
+      longitude: this.longitude,
+    });
   }
 
-  initializeMarkerFromSession() {
-    const storedDoctorData = sessionStorage.getItem('doctordata');
-    if (storedDoctorData) {
-      const doctorData = JSON.parse(storedDoctorData);
-      const storedLatitude = doctorData.latitude; // Assuming latitude is a property in doctordata
-      const storedLongitude = doctorData.longitude; // Assuming longitude is a property in doctordata
-      const storedLocation = doctorData.location; // Assuming location is a property in doctordata
+  setDefaultMarker() {
+    this.latitude = this.defaultLocation.lat;
+    this.longitude = this.defaultLocation.lng;
+    this.initMap();
+  }
 
-      // Check if both latitude and longitude are available
-      if (storedLatitude && storedLongitude) {
-        const storedLatLng = {
-          lat: parseFloat(storedLatitude),
-          lng: parseFloat(storedLongitude),
-        };
-
-        // Set marker using stored coordinates
-        this.setMarker(storedLatLng);
-        return; // Exit the function after setting the marker
+  showLocationConfirmation(location: google.maps.LatLng) {
+    Swal.fire({
+      title: 'Update Location?',
+      text: 'Are you sure you want to update your location?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, update it!',
+      cancelButtonText: 'Cancel'
+    }).then(result => {
+      if (result.isConfirmed) {
+        this.setMarker(location.toJSON());
+        this.updateUserLocation();
       }
+    });
+  }
 
-      // If latitude and longitude are not available, check for location
-      if (storedLocation) {
-        const geocoder = new google.maps.Geocoder();
+  updateUserLocation() {
+    const formData = new FormData();
+    formData.append('latitude', String(this.latitude));
+    formData.append('longitude', String(this.longitude));
 
-        // Geocode the location string
-        geocoder.geocode({ address: storedLocation }, (results, status) => {
-          if (
-            status === google.maps.GeocoderStatus.OK &&
-            results &&
-            results.length > 0
-          ) {
-            const location = results[0].geometry.location;
-            const latLng = {
-              lat: location.lat(),
-              lng: location.lng(),
-            };
-
-            // Set the marker using the geocoded location
-            this.setMarker(latLng);
-          } else {
-            console.error('Geocoding failed: ' + status);
-          }
-        });
+    // Call the service to update the location
+    this.userService.update_location(this.currenUser.id, formData).subscribe(
+      response => {
+        sessionStorage.setItem('doctordata', JSON.stringify(response));
+        Swal.fire('Location updated!', '', 'success');
+      },
+      error => {
+        console.error('Error updating location:', error);
+        Swal.fire('Failed to update location', 'Please try again.', 'error');
       }
-    } else {
-      console.warn('No doctor data found in session storage.');
-    }
+    );
   }
 }
