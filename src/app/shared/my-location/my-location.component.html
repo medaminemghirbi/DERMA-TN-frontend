@@ -1,0 +1,18 @@
+<div class="main-wrapper">
+    <app-doctor-header></app-doctor-header>
+    <app-doctor-sidebar></app-doctor-sidebar>
+    <app-notifiacation-alert></app-notifiacation-alert>
+
+    <div class="page-wrapper">
+        <div class="content">
+            <div *ngIf="role == 'Doctor'">
+                <app-header-settings></app-header-settings>
+                <app-map-picker></app-map-picker>
+            </div>
+            <div *ngIf="role == 'Patient'">
+                <app-header-patient-settings></app-header-patient-settings>
+                <app-map-picker-patient></app-map-picker-patient>
+            </div>
+        </div>
+    </div>
+</div>

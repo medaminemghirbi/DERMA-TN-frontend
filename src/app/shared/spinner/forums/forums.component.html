@@ -7,7 +7,11 @@
         <app-doctor-header></app-doctor-header>
         <app-doctor-sidebar></app-doctor-sidebar>
     </div>
-    <div></div>
+    <div *ngIf="role =='Patient'">
+
+        <app-patient-header></app-patient-header>
+        <app-patient-sidebar></app-patient-sidebar>
+    </div>
 
 
     <ng-progress #progressBar></ng-progress>
@@ -62,7 +66,9 @@
                                                                     <div class="comment-block">
                                                                         <div class="comment-by">
                                                                             <div class="week-group">
-                                                                                <h5 class="blog-author-name">{{
+                                                                                <h5 class="blog-author-name">
+                                                                                    <span *ngIf="message.sender.type=='Doctor'">Dr.</span>
+                                                                                    {{
                                                                                     message.sender.firstname }} {{
                                                                                     message.sender.lastname }}</h5>
                                                                                 <span class="week-list">{{
@@ -88,14 +94,19 @@
                                                                                             class="fa fa-trash-alt m-r-5"
                                                                                             data-bs-toggle="tooltip"
                                                                                             title="fa fa-check"></i>
-                                                                                        Delete Message
+                                                                                        Delete  Message
                                                                                     </a>
-                                                                                    <div
-                                                                                        *ngIf="combinedImages(message)">
-                                                                                        <button
+                                                                                    <div *ngIf="combinedImages(message)">
+                                                                                        <a class="dropdown-item"
                                                                                             *ngFor="let image of combinedImages(message)"
-                                                                                            (click)="downloadImage(message.id, image.id)">Download
-                                                                                            Image</button>
+                                                                                            (click)="downloadImage(message.id, image.id)">
+                                                                                            <i style="color: rgb(39, 1, 29);"
+                                                                                            class="fa fa-download"
+                                                                                            data-bs-toggle="tooltip"
+                                                                                            title="fa fa-check"></i>
+                                                                                            
+                                                                                            Download
+                                                                                            Image</a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -103,6 +114,7 @@
                                                                         <p>{{ message.body }}</p>
                                                                         <div *ngIf="combinedImages(message)">
                                                                             <img *ngFor="let image of combinedImages(message)"
+                                                                                width="500px"
                                                                                 [src]="image.url" alt="message image"
                                                                                 class="img-fluid">
                                                                         </div>

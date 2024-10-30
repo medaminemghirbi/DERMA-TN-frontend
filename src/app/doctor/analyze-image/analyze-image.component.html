@@ -1,42 +1,63 @@
-<div class="main-wrapper"></div>
-<app-doctor-header></app-doctor-header>
-<app-doctor-sidebar></app-doctor-sidebar>
-<app-notifiacation-alert></app-notifiacation-alert>
+<div class="main-wrapper">
+  <app-doctor-header></app-doctor-header>
+  <app-doctor-sidebar></app-doctor-sidebar>
+  <app-notifiacation-alert></app-notifiacation-alert>
 
-<app-spinner [isLoading]="loading"></app-spinner>
+  <app-spinner [isLoading]="loading"></app-spinner>
 
-<div class="page-wrapper">
-  <div class="content container-fluid">
-    <div class="upload-container">
-      <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)">
-        <div class="panel panel-default">
-          <br>
-          <div class="panel-body text-center">
-            <input type="file" class="form-control" (change)="fileChange($event)" formControlName="file" required>
+  <div class="page-wrapper">
+    <div class="content container-fluid">
+      <div class="upload-container">
+        <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)">
+          <div class="panel panel-default">
+            <br>
+            <div class="panel-body text-center">
+              <input type="file" class="form-control" (change)="fileChange($event)" formControlName="file" required>
+            </div>
+            <br>
+            <div *ngIf="imageUrl" class="text-center">
+              <img [src]="imageUrl" alt="Uploaded Image" class="img-fluid" width="600">
+            </div>
+            <br>
+            <div style="text-align: center;">
+              <button type="submit" class="btn btn-primary px-4" style="background-color: rgb(38, 8, 158);">Anaylze
+                Image
+                With IA</button>
+            </div>
           </div>
-          <br>
-          <div *ngIf="imageUrl" class="text-center">
-            <img [src]="imageUrl" alt="Uploaded Image" class="img-fluid" width="600">
-          </div>
-          <br>
-          <div style="text-align: center;">
-            <button type="submit" class="btn btn-primary px-4" style="background-color: rgb(38, 8, 158);">Anaylze Image
-              With IA</button>
+        </form>
+
+        <!-- Loading Indicator -->
+        <div *ngIf="loading" class="loading-indicator">
+          <p>Loading...</p>
+        </div>
+
+        <!-- Display Result -->
+        <div *ngIf="result && !loading" class="result-display">
+          <h3>Prediction Result</h3>
+          <p><strong>Predicted Class:</strong> {{ result.predicted_class }}</p>
+          <p><strong>Probability:</strong> {{ result.probability }}</p>
+          <div class="card-body">
+            <p>{{ result.maladie.maladie_description }}</p>
+            <ul>
+              <li>
+                is cancer : <span *ngIf="result.maladie.is_cancer">Yes</span><span
+                  *ngIf="!result.maladie.is_cancer">No</span>
+              </li>
+
+
+              <li>Causes: {{ result.maladie.causes }} </li>
+              <li>Symptoms: {{ result.maladie.symptoms }} </li>
+              <li>Synonyms: {{ result.maladie.synonyms }} </li>
+              <li>Prevention: {{ result.maladie.prevention }} </li>
+              <li>Treatment: {{ result.maladie.treatments }} </li>
+            </ul>
+            <li>
+              Reference:
+              <a style="color: blue;" href="{{ result.maladie.references }}">{{ result.maladie.references }}</a>
+            </li>
           </div>
         </div>
-      </form>
-
-      <!-- Loading Indicator -->
-      <div *ngIf="loading" class="loading-indicator">
-        <p>Loading...</p>
-      </div>
-
-      <!-- Display Result -->
-      <div *ngIf="result && !loading" class="result-display">
-        <h3>Prediction Result</h3>
-        <p><strong>Predicted Class:</strong> {{ result.predicted_class }}</p>
-        <p><strong>Probability:</strong> {{ result.probability }}</p>
       </div>
     </div>
   </div>
-</div>

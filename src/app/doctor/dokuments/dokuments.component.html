@@ -78,7 +78,7 @@
                     <div class="bibliography-wrapper" style="overflow-y: auto; height: 75vh;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <h3>My Documents({{documents.length}})</h3>
-                            <button class="btn btn-info" (click)="deleteAllDocuments()">Delete All Documents</button>
+                            <button *ngIf="documents.length>0" class="btn btn-info" (click)="deleteAllDocuments()">Delete All Documents</button>
                         </div>
                         <br>
                         <table class="table table-bordered" style="width: 100%;">

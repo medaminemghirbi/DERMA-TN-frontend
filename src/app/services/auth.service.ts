@@ -73,9 +73,17 @@ export class AuthService {
   }
   updateEmailNotificationPreference(userId: string, isEmailable: boolean) {
     return this.http.put(environment.urlBackend+`api/v1/users/${userId}/email_notifications`, { is_emailable: isEmailable });
-}
-
-updateSystemNotificationPreference(userId: string, isNotifiable: boolean) {
-    return this.http.put(environment.urlBackend+`api/v1/users/${userId}/system_notifications`, { is_notifiable: isNotifiable });
-}
+  }
+  updateSystemNotificationPreference(userId: string, isNotifiable: boolean) {
+      return this.http.put(environment.urlBackend+`api/v1/users/${userId}/system_notifications`, { is_notifiable: isNotifiable });
+  }
+  updateworkinginsatudray(userId: string, working_saturday: boolean) {
+    return this.http.put(environment.urlBackend+`api/v1/users/${userId}/working_saturday`, { working_saturday: working_saturday });
+  }
+  updatetoggleSmsNotifications(userId: string, is_smsable: boolean) {
+    return this.http.put(environment.urlBackend+`api/v1/users/${userId}/sms_notifications`, { is_smsable: is_smsable });
+  }
+  updateWorkingOnLine(userId: string, working_on_line: boolean) {
+    return this.http.put(environment.urlBackend+`api/v1/users/${userId}/working_online`, { working_on_line: working_on_line });
+  }
 }

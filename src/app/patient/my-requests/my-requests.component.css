@@ -1,0 +1,41 @@
+.no-appointment-row {
+    background-color: #f9f9f9; /* Light background color to make it stand out */
+    height: 400px; /* Adjust height to center content vertically */
+}
+
+.no-appointment-text {
+    text-align: center; /* Center text horizontally */
+    vertical-align: middle; /* Center text vertically */
+    font-weight: bold; /* Make text bold */
+    color: #888; /* Light gray color for text */
+    padding: 20px; /* Add padding for better spacing */
+    font-size: 16px; /* Adjust font size */
+}
+
+/* Align doctor label with the first phone icon */
+.doctor-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Style for the phone list */
+.phone-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.phone-list ul li {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* Add some spacing between the icon and phone number */
+.phone-number-item i {
+    margin-right: 8px;
+}
+
+/* Style for unavailable phone numbers */
+.not-provided {
+    color: rgb(255, 9, 9);
+}

@@ -1,0 +1,36 @@
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+                <li routerLinkActive="active">
+                    <a routerLink="/patient/dashboard">
+                        <span class="menu-side"><img src="../../../assets/img/icons/landing-page-svgrepo-com.svg" alt></span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="/patient/appointment-request">
+                        <span class="menu-side"><img src="../../../assets/img/icons/reservation-smartphone-svgrepo-com.svg" alt></span>
+                        <span>Appointment Request</span>
+                    </a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="/forums"><span class="menu-side"><img
+                                src="../../../assets/img/icons/online-meeting-discussion-communication-svgrepo-com.svg" alt></span> <span>Forum with doctors</span></a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="/patient/blogs"><span class="menu-side"><img
+                                src="../../../assets/img/icons/read-news-learn-understand-paper-svgrepo-com.svg" alt></span> <span>Blogs</span></a>
+                </li>
+            </ul>
+            <div class="logout-btn">
+                <a href="#" (click)="logout(); $event.preventDefault();">
+                    <span class="menu-side">
+                        <img src="../../../assets/img/icons/logout-svgrepo-com.svg" alt="Logout Icon">
+                    </span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

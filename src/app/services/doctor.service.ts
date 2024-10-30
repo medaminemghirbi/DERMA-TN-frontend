@@ -20,6 +20,11 @@ export class DoctorService {
   }
   getDoctorStatistique(id: any) {
     return this.http.get(
+      environment.urlBackend + 'api/v1/patient_stats/' + id
+    );
+  }
+  getPatientStatistique(id: any) {
+    return this.http.get(
       environment.urlBackend + 'api/v1/doctor_stats/' + id
     );
   }
@@ -84,6 +89,9 @@ export class DoctorService {
   update_location(id: string, newdata: FormData) {
     return this.http.patch(`${environment.urlBackend}api/v1/update_location/${id}`, newdata);
   }
+  update_location_map(newdata: FormData) {
+    return this.http.post(`${environment.urlBackend}api/v1/update_address/`, newdata);
+  }
   
   updatedoctorimage (id:string,newprofile:any){
     return this.http.patch(environment.urlBackend+'api/v1/updatedoctorimage/' + id , newprofile )
@@ -97,5 +105,31 @@ export class DoctorService {
   getLocationDetails(latitude: number, longitude: number): Observable<any> {
     const url = `${environment.urlBackend}api/v1/location_details?latitude=${latitude}&longitude=${longitude}`;
     return this.http.get<any>(url);
+  }
+
+  getWeekDaysByDoctor(id: any) {
+    return this.http.get(
+      environment.urlBackend + 'weeks/' + id
+    );
+  }
+  getSelectedDoctor(id: any) {
+    return this.http.get(
+      environment.urlBackend + 'api/v1/doctors/' + id
+    );
+  }
+  getAvailableTimeSlots(id: any) {
+    return this.http.get(
+      environment.urlBackend + 'api/v1/doctors/' + id
+    );
+  }
+  getAvailableTimes(id: any, date: string) {
+    return this.http.get(`${environment.urlBackend}api/v1/available_time_slots/${date}/${id}`);
+  }
+
+  getAllEmail(id:any) {
+    return this.http.get(`${environment.urlBackend}api/v1/getAllEmails/${id}`);
+  }
+  deleteEmail(id: any) {
+    return this.http.delete(environment.urlBackend + 'api/v1/custom_mails/' + id);
   }
 }

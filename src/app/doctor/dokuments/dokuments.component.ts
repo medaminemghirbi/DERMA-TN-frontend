@@ -118,26 +118,33 @@ export class DokumentsComponent implements OnInit {
 
   togglePreview(document: any, event: MouseEvent) {
     event.preventDefault(); // Prevent the default behavior of the anchor tag
-    if (
-      this.selectedDocument &&
-      this.selectedDocument.title === document.title
-    ) {
+    if (this.selectedDocument && this.selectedDocument.title === document.title) {
       // If the same document is clicked again, hide the preview
-      this.selectedDocument =
-        this.selectedDocument === document ? null : document;
+      this.selectedDocument = this.selectedDocument === document ? null : document;
       this.previewUrl = null; // Reset the preview URL
     } else {
       this.selectedDocument = document; // Show the selected document
       this.fileType = document.file_type; // Assuming 'file_type' is in the document object
-
-      // Set the preview URL based on the document type
-      this.previewUrl = this.getSafeUrl(document.document_url);
+  
+      let documentUrl = document.document_url;
+  
+      // Check if the document is a PDF and append the `&embedded=true` parameter
+      if (this.fileType === 'application/pdf') {
+        documentUrl += '&embedded=true'; // Append embedded=true for PDFs
+      }
+      // Set the preview URL using the sanitized URL
+      this.previewUrl = this.getSafeUrl(documentUrl);
     }
   }
-
-  getSafeUrl(url: string): SafeResourceUrl {
+  
+  getSafeUrl(url: string) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
+  
+
+  // getSafeUrl(url: string): SafeResourceUrl {
+  //   return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  // }
   delete(id: any) {
     Swal.fire({
       title: 'Are you sure?',

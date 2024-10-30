@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DoctorService } from 'src/app/services/doctor.service';
 import Swal from 'sweetalert2';
@@ -11,6 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./doctor-settings.component.css'],
 })
 export class DoctorSettingsComponent implements OnInit {
+  locations: any = [];
   addressLine1: string = '';
   city: string = '';
   state: string = '';
@@ -18,7 +20,7 @@ export class DoctorSettingsComponent implements OnInit {
   image: any;
   imageupdate!: any;
   upadate! :  FormGroup;
-
+  messageErr =""
   messageSuccess =""
   country: string = '';
   currentUser: any;
@@ -30,6 +32,7 @@ export class DoctorSettingsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
+    private usersService: AdminService,
     private doctorService: DoctorService
   ) {
     this.imageupdate = new FormGroup({
@@ -37,15 +40,25 @@ export class DoctorSettingsComponent implements OnInit {
     });
     this.upadate = new FormGroup({
       civil_status: new FormControl('', [Validators.required]),
+      location: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
-      birthday: new FormControl('', [Validators.required])
+      birthday: new FormControl('', [Validators.required]),
+      firstname: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
+
     });
   }
 
-  ngOnInit(): void {
-    this.currentUser = this.auth.getcurrentuser();
-    this.autoFillAddress();
-    this.extractAddressDetails(this.currentUser.address);
+  async ngOnInit(): Promise<void> {
+    try{
+      this.currentUser = this.auth.getcurrentuser();
+      this.autoFillAddress();
+      this.extractAddressDetails(this.currentUser.address);
+      this.locations = await this.usersService.getAllLocations().toPromise();
+      this.locations.sort((a: any, b: any) => a.name.localeCompare(b.name));
+    }catch (error) {
+      this.messageErr = "We couldn't find any locations in our database.";
+    }
   }
 
   autoFillAddress() {
@@ -156,6 +169,9 @@ export class DoctorSettingsComponent implements OnInit {
     formData.append('gender', this.upadate.value.gender);
     formData.append('civil_status', this.upadate.value.civil_status);
     formData.append('birthday', this.upadate.value.birthday);
+    formData.append('location', this.upadate.value.location);
+    formData.append('firstname', this.upadate.value.firstname);
+    formData.append('lastname', this.upadate.value.lastname);
 
 
     Swal.fire({

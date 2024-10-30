@@ -1,0 +1,54 @@
+<div class="main-wrapper">
+    <app-patient-header></app-patient-header>
+    <app-patient-sidebar></app-patient-sidebar>
+    <app-notifiacation-alert></app-notifiacation-alert>
+
+    <div class="page-wrapper">
+        <div class="content">
+
+            <div class="good-morning-blk">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="morning-user">
+                            <h2>Good Morning, <span>
+                                
+                                <p *ngIf="currentuser.gener=='male' ">Mr.</p>
+                                <p *ngIf="currentuser.gener=='female' ">Mrs.</p> {{currentuser.lastname }}
+                                {{currentuser.lastname}} {{currentuser.firstname}}</span></h2>
+                        </div>
+                    </div>
+                    <div class="col-md-6 position-blk">
+                        <div class="morning-img">
+                            <img src="assets/img/morning-img-02.png" alt>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="doctor-list-blk">
+                <div class="row mb-4 clearfix">
+    
+                    <div class="col-xl-4 col-lg-12 col-md-12 feature-block">
+                        <div class="feature-block-two">
+                            <div class="inner-box">
+                                <div class="pattern">
+                                    <div class="pattern-1"
+                                        style="background-image: url(../../../assets/images1/shape/shape-83.png);">
+                                    </div>
+                                    <div class="pattern-2"
+                                        style="background-image: url(../../../assets/images1/shape/shape-84.png);">
+                                    </div>
+                                </div>
+                                <div class="icon-box"> <img class="icon-image" src="../../../assets/img/icons/calendar.svg"
+                                        alt></div>
+                                <h3>{{DoctorStats?.consultation}}</h3>
+                                <h5>Total Appointments</h5>
+                                <p>Scheduled patient appointments today.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

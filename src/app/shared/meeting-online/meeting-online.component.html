@@ -1,0 +1,25 @@
+<div class="main-wrapper">
+    <div *ngIf="role =='Admin'">
+        <app-header-admin></app-header-admin>
+        <app-sidebar-admin></app-sidebar-admin>
+    </div>
+    <div *ngIf="role =='Doctor'">
+        <app-doctor-header></app-doctor-header>
+        <app-doctor-sidebar></app-doctor-sidebar>
+    </div>
+    <div *ngIf="role =='Patient'">
+        <app-patient-header></app-patient-header>
+        <app-patient-sidebar></app-patient-sidebar>
+    </div>
+
+    <ng-progress #progressBar></ng-progress>
+
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="video-chat-container">
+                <div id="local-container" class="video-container"></div>
+                <div id="remote-container" class="video-container"></div>
+            </div>
+        </div>
+    </div>
+</div>

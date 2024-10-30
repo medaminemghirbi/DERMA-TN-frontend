@@ -8,23 +8,25 @@
         <div class="content">
 
             <div class="card-body">
-                <h4 class="header-title mb-4">All Patients Requests</h4>
+                <h4 class="header-title mb-4">All Patients Requests ({{filteredConsultations.length}})</h4>
                 <div class="row mb-3">
                     <!-- Search Input (Left side) -->
                     <div class="col-md-6">
                         <div class="input-group input-group-sm">
-                            <input type="text" name="role" class="form-control form-control-sm"
+                            <input type="text" name="role" class="form-control form-control-sm" (ngModelChange)="onSearchChange()" 
                                 [(ngModel)]="searchedKeyword" placeholder="Search for...">
                         </div>
                     </div>
 
                     <!-- Status Dropdown (Right side) -->
                     <div class="col-md-6">
-                        <select class="form-control form-control-sm" id="statusDropdown" [(ngModel)]="selectedStatus">
+                        <select class="form-control form-control-sm" id="statusDropdown"  [(ngModel)]="selectedStatus" (change)="onStatusChange()">
                             <option hidden value="" selected>Filter By State</option>
                             <option value="pending">En Cours</option>
                             <option value="approved">Accepted</option>
                             <option value="rejected">Refused</option>
+                            <option value="canceled">Canceled</option>
+
                         </select>
                     </div>
 
@@ -45,7 +47,7 @@
                     </thead>
                     <tbody>
                         <tr
-                            *ngFor="let item of allConsultations | paginate: { itemsPerPage: 10, currentPage: p } | filter: searchedKeyword | filterByStatus: selectedStatus; index as i">
+                            *ngFor="let item of filteredConsultations | paginate: { itemsPerPage: 10, currentPage: p } | filter: searchedKeyword | filterByStatus: selectedStatus; index as i">
                             <td class="description-content">
                                 <a>
                                     {{ item.appointment | date: 'EEEE'}}<br>
@@ -55,7 +57,7 @@
                                     at {{ item.appointment | date: 'HH:mm'}}
                                 </a>
                             </td>
-                            <td>coming soon</td>
+                            <td>Coming Soon</td>
                             <td class="profile-image">
                                 <a><img width="28" height="28" src="{{item.doctor.user_image_url}}"
                                         class="rounded-circle m-r-5" alt>
@@ -80,11 +82,12 @@
                                         <span *ngIf="phone.is_primary" class="ms-2">{{ phone.number }}</span>
                                     </div>
                                 </div>
-                                <span *ngIf="!item.doctor.phone_numbers || item.doctor.phone_numbers.length === 0" style="color: rgb(255, 9, 9);">
+                                <span *ngIf="!item.doctor.phone_numbers || item.doctor.phone_numbers.length === 0"
+                                    style="color: rgb(255, 9, 9);">
                                     <i class="fa fa-ban" data-bs-toggle="tooltip" title="Not Provided"></i>
                                     Not Provided
                                 </span>
-                                
+
                             </td>
                             <td class="description-content">
                                 <a>{{item.created_at}}</a>
@@ -96,6 +99,8 @@
                                     class="custom-badge status-orange">Pending</button>
                                 <button *ngIf="item.status == 'rejected'"
                                     class="custom-badge status-red">Rejected</button>
+                                <button *ngIf="item.status == 'canceled'"
+                                class="custom-badge status-blue">Canceled</button>
                             </td>
                             <td>
                                 <button class="btn btn-outline-secondary rounded-pill"

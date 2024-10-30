@@ -1,0 +1,160 @@
+<div class="main-wrapper">
+    <app-patient-header></app-patient-header>
+    <app-patient-sidebar></app-patient-sidebar>
+    <app-notifiacation-alert></app-notifiacation-alert>
+    <app-spinner [isLoading]="isLoading"></app-spinner>
+    <ng-progress #progressBar></ng-progress>
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="card-body">
+                <div class="row mb-4">
+
+                    <div class="col-6">
+                        <div class="doctor-search-blk">
+                            <div class="top-nav-search table-search-blk">
+                                <h4 class="header-title">All Requests ( {{filteredRequests?.length}} )</h4>
+                            </div>
+                            <div class="add-group">
+                                <a href="javascript:;"
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Reload Requests"
+                                class="btn btn-primary doctor-refresh ms-2" (click)="refreshRequests()">
+                                    <img src="assets/img/icons/re-fresh.svg" alt>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button type="button" class="btn btn-primary" routerLink="/patient/add-new-request">Add New
+                            Request</button>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="input-group input-group-sm">
+                            <input type="text" name="role" class="form-control form-control-sm"
+                                (ngModelChange)="searchAppointment()" [(ngModel)]="searchedKeyword"
+                                placeholder="Search for...">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-control form-control-sm" [(ngModel)]="selectedStatus"
+                            (change)="filterRequests()">
+                            <option hidden value="" selected>Filter By State</option>
+                            <option value="pending">En Cours</option>
+                            <option value="approved">Accepted</option>
+                            <option value="rejected">Refused</option>
+                            <option value="canceled">Canceled</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <table class="table border-0 custom-table comman-table datatable mb-0">
+                    <thead>
+                        <tr>
+                            <th>Rendez Vous Date</th>
+                            <th>Rendez vous type</th>
+                            <th>Doctor </th>
+                            <th>Patient</th>
+                            <th>Phone Number</th>
+                            <th>Created Date</th>
+                            <th>Refus Reason</th>
+                            <th>Status</th>
+                            <th>Manage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let item of filteredRequests |filter: searchedKeyword  | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                            <td class="description-content">
+                                <a>
+                                    {{ item.appointment | date: 'EEEE'}}<br>
+                                    {{ item.appointment | date: 'dd'}}
+                                    {{ item.appointment | date: 'MMMM'}}
+                                    {{ item.appointment | date: 'yyyy'}}<br>
+                                    at {{ item.appointment | date: 'HH:mm'}}
+                                </a>
+                            </td>
+                            <td>{{item.appointment_type}}</td>
+                            <td class="profile-image"><a><img width="28" height="28"
+                                        src="{{item.doctor.user_image_url}}" class="rounded-circle m-r-5" alt> Dr.
+                                    {{item.doctor.firstname}} {{item.doctor.lastname}}
+                                </a></td>
+                            <td class="profile-image"><a><img width="28" height="28"
+                                        src="{{item.patient.user_image_url}}" class="rounded-circle m-r-5" alt>Mr(s)
+                                    {{item.patient.firstname}} {{item.patient.lastname}}
+                                </a></td>
+                            <td>
+                                patient: {{item.patient.phone_number}}<br>
+                                doctor:
+                                <div *ngIf="item.doctor.phone_numbers && item.doctor.phone_numbers.length > 0"
+                                    class="phone-list">
+                                    <ul>
+                                        <li *ngFor="let phone of item.doctor.phone_numbers" class="phone-number-item">
+                                            <i *ngIf="phone.is_primary" class="fas" [ngClass]="{
+                                                    'fa-mobile-alt': phone.phone_type === 'personal', 
+                                                    'fa-home': phone.phone_type === 'home', 
+                                                    'fa-briefcase': phone.phone_type === 'fax'
+                                                }"></i>
+                                            <span *ngIf="phone.is_primary" class="ms-2">{{ phone.number }}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <span *ngIf="!item.doctor.phone_numbers || item.doctor.phone_numbers.length === 0"
+                                    style="color: rgb(255, 9, 9);">
+                                    <i class="fa fa-ban" data-bs-toggle="tooltip" title="Not Provided"></i>
+                                    Not Provided
+                                </span>
+                            </td>
+
+                            <td class="description-content"><a>{{item.created_at}}</a></td>
+                            <td class="description-reason">
+                                <a *ngIf="item.refus_reason">{{item.refus_reason}}</a>
+                                <a *ngIf="!item.refus_reason">-</a>
+                            </td>
+                            <td>
+                                <button *ngIf="item.status =='approved'"
+                                    class="custom-badge status-green ">Accepted</button>
+                                <button *ngIf="item.status =='pending'"
+                                    class="custom-badge status-orange ">Pending</button>
+                                <button *ngIf="item.status =='rejected'"
+                                    class="custom-badge status-red ">Rejected</button>
+                                <button *ngIf="item.status =='canceled'"
+                                    class="custom-badge status-blue">Canceled</button>
+                            </td>
+                            <td class="text-end">
+                                <div class="dropdown dropdown-action">
+                                    <a class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a  class="dropdown-item" *ngIf="item.status === 'finished'"><i class="feather-download m-r-5"></i> Download
+                                            Report</a>
+
+                                        <!-- Show "Cancel Appointment" only if status is "Pending" or "Approved" -->
+                                        <a class="dropdown-item"
+                                            *ngIf="item.status === 'pending' || item.status === 'approved'">
+                                            <i class="fa fa-trash-alt m-r-5"></i>
+                                            Cancel Appointment
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr *ngIf="myRequests == 0" class="no-appointment-row">
+                            <td colspan="8" class="description-content no-appointment-text">
+                                No Appointment Request yet
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align:right;">
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+
+        </div>
+    </div>
+</div>
