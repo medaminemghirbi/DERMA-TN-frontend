@@ -1,0 +1,90 @@
+<div class="main-wrapper">
+    <div *ngIf="role =='Admin'">
+        <app-header-admin></app-header-admin>
+        <app-sidebar-admin></app-sidebar-admin>
+    </div>
+    <div *ngIf="role =='Doctor'">
+        <app-doctor-header></app-doctor-header>
+        <app-doctor-sidebar></app-doctor-sidebar>
+    </div>
+    <div *ngIf="role =='Patient'">
+        <app-patient-header></app-patient-header>
+        <app-patient-sidebar></app-patient-sidebar>
+    </div>
+
+    <ng-progress #progressBar></ng-progress>
+
+    
+    <div class="page-wrapper">
+        <div class="content">
+            <div class="col-xl-8">
+                <div class="card chat-box mb-2">
+                    <div class="chat-search-group">
+                        <div class="chat-user-group mb-0 d-flex align-items-center">
+                            <div class="top-liv-search top-chat-search top-action-search">
+                                <form>
+                                    <div class="chat-search mb-0">
+                                        <div class="input-block me-2 mb-0">
+                                            <input type="text" class="form-control" placeholder="Search here">
+                                            <a class="btn"><img src="assets/img/icons/search-normal.svg" alt></a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="top-action-right">
+                            <ul class="nav">
+                                <li><a href="javascript:;"><img src="assets/img/icons/refresh-icon.svg" alt="img"></a>
+                                </li>
+                                <li><a href="javascript:;"><img src="assets/img/icons/trash.svg" alt="img"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="email-content">
+
+                    <div class="table-responsive">
+                        <table class="table table-inbox table-hover">
+                            <tbody>
+                                <tr class="unread clickable-row"
+                                *ngFor="let item of emails | paginate: { itemsPerPage: 10, currentPage: p }; index as i"
+                                [ngClass]="{'disabled-row': isButtonDisabled(item.sent_at)}"
+                                [attr.data-href]="isButtonDisabled(item.sent_at) ? null : 'mail-view.html'">
+                                <!-- Ribbon to indicate disabled state -->
+                                <td  class="name position-relative">
+                                    <!-- Conditional ribbon display if button is disabled -->
+                                    <div *ngIf="isButtonDisabled(item.sent_at)" class="disabled-ribbon">Expired</div>
+                            
+                                    <div class="email-img-blk">
+                                        <div class="email-img">
+                                            <img src="assets/images1/logo-3.png" alt="img">
+                                        </div>
+                                        <div class="send-user">
+                                            <h4>{{item.subject}} <span class="email-market">Room Consultation Link</span></h4>
+                                            <p [innerHTML]="safeEmailBodies[i]"></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="mail-date">
+                                    <img src="assets/img/icons/clip.svg" class="me-2" alt="img">
+                                    sent at : {{item.sent_at | date: 'dd MMM yyyy HH:mm'}}
+                                </td>
+
+                            </tr>
+                            
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                </div>
+                <div style="text-align:right;">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+                <br>
+                <h6  class="tip">
+                    PS: When <u> email is disabled</u>, the Appointment channel has been expired .
+                </h6>
+            </div>
+        </div>
+    </div>
+</div>

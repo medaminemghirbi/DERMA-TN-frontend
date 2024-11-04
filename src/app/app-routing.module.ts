@@ -32,6 +32,10 @@ import { BlogsPatientComponent } from './patient/blogs-patient/blogs-patient.com
 import { MyRequestsComponent } from './patient/my-requests/my-requests.component';
 import { SettingsPatientComponent } from './patient/settings-patient/settings-patient.component';
 import { AddNewRequestComponent } from './patient/add-new-request/add-new-request.component';
+import { SelectDateComponent } from './patient/select-date/select-date.component';
+import { BookNowComponent } from './patient/book-now/book-now.component';
+import { MailBoxComponent } from './shared/mail-box/mail-box.component';
+import { MeetingOnlineComponent } from './shared/meeting-online/meeting-online.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -64,12 +68,18 @@ const routes: Routes = [
   { path: 'patient/blogs', component: BlogsPatientComponent },
   { path: 'patient/settings', component: SettingsPatientComponent },
   { path: 'patient/add-new-request', component: AddNewRequestComponent },
+  { path: 'patient/:id/select-date', component: SelectDateComponent, },
+  { path: 'patient/:id/book-now/:appointment', component: BookNowComponent },
+
 
   { path: 'patient/appointment-request', component: MyRequestsComponent },
 
 
   // Shared components
   { path: 'forums', component: ForumsComponent },
+  { path: 'mail', component: MailBoxComponent },
+  { path: 'live/:code', component: MeetingOnlineComponent },
+
   { path: 'blog/:id', component: BlogDetailsComponent },
 
   // Wildcard route

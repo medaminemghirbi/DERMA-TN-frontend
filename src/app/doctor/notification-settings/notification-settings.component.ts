@@ -77,4 +77,20 @@ toggleSmsNotifications(event: Event) {
         }
     });
 }
+toggleWorkingOnLine(event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    this.currentUser.working_on_line = isChecked;
+
+    // Call your service to update the user's preference in the backend
+    this.auth.updateWorkingOnLine(this.currentUser.id, isChecked).subscribe({
+        next: (response) => {
+            sessionStorage.setItem('doctordata', JSON.stringify(response));
+            console.log('Workin on Line updated successfully!', response);
+        },
+        error: (error) => {
+            console.error('Failed to update Workin online', error);
+        }
+    });
+}
+
 }

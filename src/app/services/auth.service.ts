@@ -83,5 +83,7 @@ export class AuthService {
   updatetoggleSmsNotifications(userId: string, is_smsable: boolean) {
     return this.http.put(environment.urlBackend+`api/v1/users/${userId}/sms_notifications`, { is_smsable: is_smsable });
   }
-  
+  updateWorkingOnLine(userId: string, working_on_line: boolean) {
+    return this.http.put(environment.urlBackend+`api/v1/users/${userId}/working_online`, { working_on_line: working_on_line });
+  }
 }

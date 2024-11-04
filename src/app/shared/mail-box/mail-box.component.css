@@ -1,0 +1,36 @@
+.disabled-row {
+    pointer-events: none; /* Disable all interactions */
+    opacity: 0.6; /* Make it look faded */
+    cursor: not-allowed;
+    background-color: #f0f0f0;
+    color: #6c757d;
+}
+
+
+.tip {
+    color: #FF5733; /* A pleasant red color */
+    background-color: #F9F9F9; /* Light background for contrast */
+    padding: 10px; /* Add some padding for better spacing */
+    border-left: 4px solid #FF5733; /* Left border for emphasis */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 14px; /* Font size for readability */
+    margin-top: 10px; /* Space above the tip */
+    font-weight: 500; /* Slightly bolder text */
+}
+.disabled-ribbon {
+    position: absolute;
+    top: 10px;
+    left: -20px;
+    background: #d9534f; /* Red background for indication */
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    transform: rotate(-45deg);
+    z-index: 1;
+    text-transform: uppercase;
+    pointer-events: none; /* So it does not interfere with other elements */
+}
+td.position-relative { /* Add this class to make the `td` relative */
+    position: relative;
+}

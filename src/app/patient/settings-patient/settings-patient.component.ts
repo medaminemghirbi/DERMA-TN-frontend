@@ -333,7 +333,7 @@ export class SettingsPatientComponent implements OnInit {
       fillOpacity: 0.35,
       map: this.map,
       center: { lat: lat, lng: lng },
-      radius: this.currentUser.radius * 100, // Adjust the radius as needed
+      radius: this.currentUser.radius * 1000, // Adjust the radius as needed
     });
   }
 }

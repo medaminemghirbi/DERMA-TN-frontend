@@ -11,3 +11,31 @@
     padding: 20px; /* Add padding for better spacing */
     font-size: 16px; /* Adjust font size */
 }
+
+/* Align doctor label with the first phone icon */
+.doctor-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Style for the phone list */
+.phone-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.phone-list ul li {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* Add some spacing between the icon and phone number */
+.phone-number-item i {
+    margin-right: 8px;
+}
+
+/* Style for unavailable phone numbers */
+.not-provided {
+    color: rgb(255, 9, 9);
+}

@@ -1,0 +1,68 @@
+/* Card styling */
+.card {
+    margin: 1rem 0; /* Add vertical spacing between cards */
+    padding: 1rem; /* Add padding inside the card */
+    border: 1px solid #dee2e6; /* Border for card */
+    border-radius: 0.25rem; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Button styling */
+.accordion-button {
+    background-color: #f8f9fa; /* Light background for better visibility */
+    color: #343a40; /* Dark text for contrast */
+    font-weight: bold; /* Bold text for day and date */
+    transition: background-color 0.3s; /* Smooth background transition */
+    padding: 0.75rem 1.25rem; /* Increase button padding */
+    font-size: 1rem; /* Adjust font size for better readability */
+}
+
+.accordion-button:hover {
+    background-color: #e2e6ea; /* Darker on hover */
+}
+
+/* Body styling */
+.accordion-body {
+    background-color: #fff; /* White background for the body */
+    border: 1px solid #dee2e6; /* Subtle border for separation */
+    border-radius: 0.25rem; /* Rounded corners */
+    padding: 1rem; /* Add padding for body content */
+}
+
+/* Button outline primary styling */
+.btn-outline-primary {
+    border-color: #007bff; /* Primary color for outline buttons */
+    width: 100%; /* Make buttons full width */
+    padding: 0.5rem; /* Add padding to buttons */
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff; /* Primary color on hover */
+    color: white; /* White text on hover */
+}
+
+/* Text styling */
+.text-muted {
+    font-size: 0.9rem; /* Slightly smaller date text */
+}
+
+/* Accordion content styling */
+.accordion-content {
+    max-height: 0; /* Collapsed state */
+    overflow: hidden; /* Hide overflow content */
+    transition: max-height 0.5s ease-out; /* Control speed of the transition */
+    padding: 0; /* Reset padding for closed state */
+}
+
+.accordion-content.open {
+    max-height: 500px; /* Set to a value larger than expected content height */
+    transition: max-height 0.5s ease-in; /* Control speed of the opening transition */
+    padding: 1rem 0; /* Add padding for opened state */
+}
+
+/* Optional: You can add more styles to improve visibility */
+.accordion-content {
+    padding: 0 15px; /* Add some padding */
+    background-color: #f8f9fa; /* Light background for contrast */
+    border: 1px solid #dee2e6; /* Border for separation */
+}

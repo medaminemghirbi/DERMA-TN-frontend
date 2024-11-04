@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.confirmation-wrapper {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-title {
+    text-align: center;
+    color: #343a40;
+}
+
+.doctor-info {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background-color: #e9ecef;
+}
+
+.doctor-name {
+    font-size: 24px;
+    margin: 0;
+    color: #007bff;
+}
+
+.doctor-specialty {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.appointment-date,
+.appointment-time {
+    font-size: 16px;
+    margin: 3px 0;
+}
+
+.confirmation-message {
+    text-align: center;
+    font-size: 16px;
+    margin: 20px 0;
+    color: #495057;
+}
+
+.confirmation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-confirm,
+.btn-cancel {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-confirm {
+    background-color: #28a745; /* Green */
+    color: white;
+}
+
+.btn-confirm:hover {
+    background-color: #218838; /* Darker green */
+}
+
+.btn-cancel {
+    background-color: #dc3545; /* Red */
+    color: white;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333; /* Darker red */
+}
+

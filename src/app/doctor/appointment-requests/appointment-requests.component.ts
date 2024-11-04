@@ -38,6 +38,8 @@ export class AppointmentRequestsComponent implements OnInit {
     // Initialize the reactive form
     this.update = new FormGroup({
       status: new FormControl(''),
+      refus_reason: new FormControl(''),
+
     });
   }
 

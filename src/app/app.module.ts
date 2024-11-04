@@ -55,6 +55,11 @@ import { SettingsPatientComponent } from './patient/settings-patient/settings-pa
 import { HeaderPatientSettingsComponent } from './patient/header-patient-settings/header-patient-settings.component';
 import { MapPickerPatientComponent } from './patient/map-picker-patient/map-picker-patient.component';
 import { AddNewRequestComponent } from './patient/add-new-request/add-new-request.component';
+import { SelectDateComponent } from './patient/select-date/select-date.component';
+import { Spinner2Component } from './shared/spinner2/spinner2.component';
+import { BookNowComponent } from './patient/book-now/book-now.component';
+import { MailBoxComponent } from './shared/mail-box/mail-box.component';
+import { MeetingOnlineComponent } from './shared/meeting-online/meeting-online.component';
 
 
 @NgModule({
@@ -102,6 +107,11 @@ import { AddNewRequestComponent } from './patient/add-new-request/add-new-reques
     HeaderPatientSettingsComponent,
     MapPickerPatientComponent,
     AddNewRequestComponent,
+    SelectDateComponent,
+    Spinner2Component,
+    BookNowComponent,
+    MailBoxComponent,
+    MeetingOnlineComponent,
 
     
   ],

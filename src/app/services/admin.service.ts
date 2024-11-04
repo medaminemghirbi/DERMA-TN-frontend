@@ -127,4 +127,8 @@ export class AdminService {
   updateDocument(data:any){
     return this.http.patch(`${environment.urlBackend}api/v1/documents/${data.id}`, data);
   }
+  getMyReuqests(id: any) {
+    return this.http.get(environment.urlBackend + 'api/v1/patient_appointments/' + id);
+  }
+
 }
