@@ -6,12 +6,14 @@ import {
   EventClickArg,
   EventApi,
 } from '@fullcalendar/core';
-import interactionPlugin from '@fullcalendar/interaction';
+import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { AuthService } from 'src/app/services/auth.service';
 import { DoctorService } from 'src/app/services/doctor.service';
+import { Router, RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-planning-doctor',
@@ -20,6 +22,7 @@ import { DoctorService } from 'src/app/services/doctor.service';
 })
 export class PlanningDoctorComponent implements OnInit {
   calendarVisible = true;
+  modalVisible = false;
   consultations: any;
   currentUser: any;
   today = new Date();
@@ -27,10 +30,15 @@ export class PlanningDoctorComponent implements OnInit {
   currentEvents: EventApi[] = [];
   messageErr = '';
   isLoading: boolean = false;
+  selectedTime: Date | null = null; // To hold the selected time for the appointment
+  selectedDate: Date | null = null; // To hold the selected date for the appointment
+  bookedSlots: string[] = []; // Store booked time slots in a string array
 
   constructor(
     private doctorSerivce: DoctorService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +64,8 @@ export class PlanningDoctorComponent implements OnInit {
       height: 'auto',
       validRange: { start: this.formatDate(this.today) },
       allDaySlot: false,
+      selectable: true,
+      events: [] // To be populated after fetching consultations
     };
 
     this.loadConsultations();
@@ -74,6 +84,12 @@ export class PlanningDoctorComponent implements OnInit {
             patient: consultation.patient,
           },
         }));
+
+        // Create a set of booked time slots for easy lookup (just the start times)
+        this.bookedSlots = consultations.map((consultation) =>
+          this.formatDate(new Date(consultation.appointment)) + " " + new Date(consultation.appointment).toLocaleTimeString()
+        );
+
         this.calendarOptions.events = events;
         this.isLoading = false;
       },
@@ -94,4 +110,6 @@ export class PlanningDoctorComponent implements OnInit {
   addMinutesToDate(date: Date, minutes: number): Date {
     return new Date(date.getTime() + minutes * 60000);
   }
+
+
 }

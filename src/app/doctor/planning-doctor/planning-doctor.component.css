@@ -27,3 +27,60 @@
   font-size: 16px; /* Increase font size for better readability */
   padding: 5px; /* Optional padding */
 }
+
+/* Align button to the right */
+.text-end {
+  text-align: right;
+  margin-bottom: 20px; /* Optional, adds space below the button */
+}
+
+/* Ensure the calendar is below the button and fits within the container */
+.demo-app-main {
+  margin-top: 20px; /* Optional, to give space between the button and calendar */
+}
+
+/* You can add more custom styles for your layout */
+/* Optional: Styling for booked events */
+.fc-daygrid-day-number.disabled,
+.fc-timegrid-slot.disabled {
+  background-color: #f0f0f0 !important;  /* Lighter background for booked slots */
+  pointer-events: none !important;  /* Disable interaction */
+}
+
+/* Modal styling */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Background with some transparency */
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  text-align: center;
+}
+
+.close-btn {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

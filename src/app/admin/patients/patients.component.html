@@ -6,19 +6,15 @@
 
     <div class="page-wrapper">
         <div class="content">
-
-
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card card-table show-entire">
                         <div class="card-body">
-
-
                             <div class="page-table-header mb-2">
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <div class="doctor-table-blk">
-                                            <h3>Patients List</h3>
+                                            <h3>Patients List({{filterdPatients?.length}})</h3>
                                             <div class="doctor-search-blk">
                                                 <div class="top-nav-search table-search-blk">
                                                     <form>
@@ -56,7 +52,10 @@
                                             <th>Phone Number</th>
                                             <th>Email</th>
                                             <th>Email Confirmed</th>
-                                            <th> Joining Date</th>
+                                            <th (click)="sortByName()">
+                                                <img src="assets/img/icons/sort-icon-01.svg" alt>
+                                                <img src="assets/img/icons/sort-icon-02.svg" alt>Gouvernament</th>
+                                            <th>Joining Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,6 +81,8 @@
                                                 <i style="color: red;" class="fa fa-close" data-bs-toggle="tooltip"
                                                     title="fa fa-window-close"></i>
                                             </td>
+                                            <td>{{item.location}}</td>
+
                                             <td>{{item.created_at| date: 'yyyy-MM-dd'}}</td>
                                             <td class="text-end">
                                                 <div class="dropdown dropdown-action">
@@ -97,6 +98,11 @@
                                                             Activate Now</a>
                                                     </div>
                                                 </div>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="filterdPatients?.length == 0" class="no-appointment-row">
+                                            <td colspan="8" class="description-content no-appointment-text">
+                                                No Patient Found!!
                                             </td>
                                         </tr>
                                     </tbody>

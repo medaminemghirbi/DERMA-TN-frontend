@@ -6,8 +6,9 @@
   <ng-progress #progressBar></ng-progress>
   <div class="page-wrapper">
     <div class="content">
-      <div class='demo-app-main'>
-        <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
+      <div class="demo-app-main">
+        <!-- Full Calendar with click event to navigate to a route with the selected date -->
+        <full-calendar *ngIf="calendarVisible" [options]="calendarOptions">
           <ng-template #eventContent let-arg>
             <b>{{ arg.timeText }}</b>
             <i>{{ arg.event.title }}</i>
@@ -17,5 +18,3 @@
     </div>
   </div>
 </div>
-
-

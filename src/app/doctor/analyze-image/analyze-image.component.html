@@ -7,57 +7,94 @@
 
   <div class="page-wrapper">
     <div class="content container-fluid">
-      <div class="upload-container">
-        <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)">
-          <div class="panel panel-default">
-            <br>
-            <div class="panel-body text-center">
-              <input type="file" class="form-control" (change)="fileChange($event)" formControlName="file" required>
-            </div>
-            <br>
-            <div *ngIf="imageUrl" class="text-center">
-              <img [src]="imageUrl" alt="Uploaded Image" class="img-fluid" width="600">
-            </div>
-            <br>
-            <div style="text-align: center;">
-              <button type="submit" class="btn btn-primary px-4" style="background-color: rgb(38, 8, 158);">Anaylze
-                Image
-                With IA</button>
-            </div>
-          </div>
-        </form>
+      <div class="row">
 
-        <!-- Loading Indicator -->
-        <div *ngIf="loading" class="loading-indicator">
-          <p>Loading...</p>
-        </div>
+        <!-- Analysis Section -->
+        <div class="col-xxl-6">
+          <div class="card shadow-sm bg-light border-0">
+            
+            <h4 class="card-header text-center bg-primary text-white">Analyze Image with AI</h4>
+            <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)" class="p-4">
+              <!-- File Input -->
+              <div class="form-group mb-3 text-center"> your Currnet Tries are :
+              </div>
 
-        <!-- Display Result -->
-        <div *ngIf="result && !loading" class="result-display">
-          <h3>Prediction Result</h3>
-          <p><strong>Predicted Class:</strong> {{ result.predicted_class }}</p>
-          <p><strong>Probability:</strong> {{ result.probability }}</p>
-          <div class="card-body">
-            <p>{{ result.maladie.maladie_description }}</p>
-            <ul>
-              <li>
-                is cancer : <span *ngIf="result.maladie.is_cancer">Yes</span><span
-                  *ngIf="!result.maladie.is_cancer">No</span>
-              </li>
+              <!-- File Input -->
+              <div class="form-group mb-3 text-center">
+                <input type="file" class="form-control form-control-lg" (change)="fileChange($event)" accept="image/*"
+                  formControlName="file" required />
+              </div>
 
+              <!-- Display Uploaded Image Preview -->
+              <div *ngIf="imageUrl" class="text-center mb-3">
+                <img [src]="imageUrl" alt="Uploaded Image" class="img-fluid border" width="300"
+                  style="border-radius: 8px;">
+              </div>
 
-              <li>Causes: {{ result.maladie.causes }} </li>
-              <li>Symptoms: {{ result.maladie.symptoms }} </li>
-              <li>Synonyms: {{ result.maladie.synonyms }} </li>
-              <li>Prevention: {{ result.maladie.prevention }} </li>
-              <li>Treatment: {{ result.maladie.treatments }} </li>
-            </ul>
-            <li>
-              Reference:
-              <a style="color: blue;" href="{{ result.maladie.references }}">{{ result.maladie.references }}</a>
-            </li>
+              <!-- Submit Button -->
+              <div class="text-center">
+                <button type="submit" class="btn btn-success btn-lg">Analyze Image</button>
+              </div>
+
+              <!-- Loading Indicator -->
+              <div *ngIf="loading" class="loading-indicator text-center mt-4">
+                <p class="text-secondary">Processing Image...</p>
+              </div>
+
+            </form>
           </div>
         </div>
+
+        <!-- Results Section -->
+        <div class="col-xxl-6">
+          <div class="card shadow-sm bg-white border-0">
+            <h4 class="card-header text-center bg-info text-white">Prediction Result</h4>
+            <div *ngIf="result && !loading" class="result-display p-4">
+
+              <!-- Prediction Summary -->
+              <div class="row mb-3 text-center">
+                <div class="col-6">
+                  <p><strong>Predicted Class:</strong></p>
+                  <span class="badge bg-primary fs-5">{{ result.predicted_class }}</span>
+                </div>
+                <div class="col-6">
+                  <p><strong>Probability:</strong></p>
+                  <span class="badge bg-info fs-5">{{ result.probability | percent: '1.0-2' }}</span>
+                </div>
+              </div>
+              <hr>
+
+              <!-- Maladie Information in Data Grid -->
+              <div class="row g-2">
+                <div class="col-6"><strong>Is Cancer:</strong></div>
+                <div class="col-6">
+                  <span *ngIf="result.maladie.is_cancer" class="text-danger">Yes</span>
+                  <span *ngIf="!result.maladie.is_cancer" class="text-success">No</span>
+                </div>
+
+                <div class="col-6"><strong>Causes:</strong></div>
+                <div class="col-6">{{ result.maladie.causes }}</div>
+
+                <div class="col-6"><strong>Symptoms:</strong></div>
+                <div class="col-6">{{ result.maladie.symptoms }}</div>
+
+                <div class="col-6"><strong>Synonyms:</strong></div>
+                <div class="col-6">{{ result.maladie.synonyms }}</div>
+
+                <div class="col-6"><strong>Prevention:</strong></div>
+                <div class="col-6">{{ result.maladie.prevention }}</div>
+
+                <div class="col-6"><strong>Treatment:</strong></div>
+                <div class="col-6">{{ result.maladie.treatments }}</div>
+
+                <div class="col-6"><strong>Reference:</strong></div>
+                <div class="col-6"><a href="{{ result.maladie.references }}" target="_blank" class="text-primary">View Source</a></div>
+              </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
+</div>

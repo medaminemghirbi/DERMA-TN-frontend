@@ -60,6 +60,8 @@ import { Spinner2Component } from './shared/spinner2/spinner2.component';
 import { BookNowComponent } from './patient/book-now/book-now.component';
 import { MailBoxComponent } from './shared/mail-box/mail-box.component';
 import { MeetingOnlineComponent } from './shared/meeting-online/meeting-online.component';
+import { EmailNotificationComponent } from './shared/email-notification/email-notification.component';
+import { NotificationSettingComponent } from './patient/notification-setting/notification-setting.component';
 
 
 @NgModule({
@@ -112,6 +114,8 @@ import { MeetingOnlineComponent } from './shared/meeting-online/meeting-online.c
     BookNowComponent,
     MailBoxComponent,
     MeetingOnlineComponent,
+    EmailNotificationComponent,
+    NotificationSettingComponent,
 
     
   ],

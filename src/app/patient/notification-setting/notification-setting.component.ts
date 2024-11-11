@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-notification-settings',
-  templateUrl: './notification-settings.component.html',
-  styleUrls: ['./notification-settings.component.css']
+  selector: 'app-notification-setting',
+  templateUrl: './notification-setting.component.html',
+  styleUrls: ['./notification-setting.component.css']
 })
-export class NotificationSettingsComponent implements OnInit {
+export class NotificationSettingComponent implements OnInit {
   currentUser : any
-  paydata:any;
-
   constructor(private auth: AuthService) { 
     this.currentUser = this.auth.getcurrentuser();
   }
@@ -83,31 +81,16 @@ toggleWorkingOnLine(event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
     this.currentUser.working_on_line = isChecked;
 
-    // Call the backend to update working_on_line status
+    // Call your service to update the user's preference in the backend
     this.auth.updateWorkingOnLine(this.currentUser.id, isChecked).subscribe({
         next: (response) => {
             sessionStorage.setItem('doctordata', JSON.stringify(response));
-            console.log('Working online status updated successfully!', response);
+            console.log('Workin on Line updated successfully!', response);
         },
         error: (error) => {
-            console.error('Failed to update working online status', error);
+            console.error('Failed to update Workin online', error);
         }
     });
 }
-
-updateReceiverWallet() {
-    this.auth.updateUserWalletAndAmount(this.currentUser.id, {
-        amount: this.currentUser.amount
-    }).subscribe({
-        next: (response) => {
-            sessionStorage.setItem('doctordata', JSON.stringify(response));
-            console.log('Wallet and amount updated successfully!', response);
-        },
-        error: (error) => {
-            console.error('Failed to update wallet and amount', error);
-        }
-    });
-}
-
 
 }

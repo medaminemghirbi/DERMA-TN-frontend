@@ -15,9 +15,9 @@
                                 <h4 class="header-title">All Requests ( {{filteredRequests?.length}} )</h4>
                             </div>
                             <div class="add-group">
-                                <a href="javascript:;"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Reload Requests"
-                                class="btn btn-primary doctor-refresh ms-2" (click)="refreshRequests()">
+                                <a href="javascript:;" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Reload Requests" class="btn btn-primary doctor-refresh ms-2"
+                                    (click)="refreshRequests()">
                                     <img src="assets/img/icons/re-fresh.svg" alt>
                                 </a>
                             </div>
@@ -44,9 +44,13 @@
                             <option value="approved">Accepted</option>
                             <option value="rejected">Refused</option>
                             <option value="canceled">Canceled</option>
-
+                            <option value="finished">Finished</option>
                         </select>
                     </div>
+                    <h6  class="tip">PS: For Online Consultation You will not recive Online Consultation Link from
+                        <a routerLink="http://localhost:4200/patient/appointment-request"><u>DocPro.tn</u></a>
+                        if you did not proceed your payment In Dashboard.
+                    </h6>
                 </div>
 
                 <table class="table border-0 custom-table comman-table datatable mb-0">
@@ -54,9 +58,12 @@
                         <tr>
                             <th>Rendez Vous Date</th>
                             <th>Rendez vous type</th>
+                            <th>Payment Link</th>
+                            <th>Payment Status</th>
+
                             <th>Doctor </th>
                             <th>Patient</th>
-                            <th>Phone Number</th>
+                            <th>Phone Numbers</th>
                             <th>Created Date</th>
                             <th>Refus Reason</th>
                             <th>Status</th>
@@ -76,6 +83,40 @@
                                 </a>
                             </td>
                             <td>{{item.appointment_type}}</td>
+                            <td>
+                                <!-- Enabled "Pay Now" button only if online appointment and not yet paid -->
+                                <button *ngIf="item.appointment_type === 'online' && !item.is_payed && (item.status == 'approved')" 
+                                        (click)="pay(item.id)" 
+                                        class="btn btn-outline-warning">
+                                  Pay Now
+                                </button>
+                              
+                                <!-- Disabled "Pay Now" button if online appointment and already paid -->
+                                <button *ngIf="item.appointment_type === 'online' && item.is_payed && (item.status == 'pending' || item.status == 'rejected'  || item.status== 'canceled' || item.status== 'finished'  )" 
+                                        class="btn btn-outline-warning" 
+                                        disabled>
+                                  Pay Now
+                                </button>
+                              
+                                <!-- Display dash for onsite appointments -->
+                                <p *ngIf="item.appointment_type === 'onsite'"> - </p>
+                              </td>
+                              
+                            <td *ngIf="item.appointment_type=='online'">
+                                <div *ngIf="item.is_payed==true">
+                                    <i style="color: green;" class="fa fa-check" data-bs-toggle="tooltip"
+                                    title="payed"> Paied</i>
+                                </div>
+                                <div *ngIf="item.is_payed==false">
+                                    <i style="color: red;" class="fa fa-close" data-bs-toggle="tooltip"
+                                    title="Not Paied Yet">  Not Paied Yet</i>
+                                </div>
+                            </td>
+                            <td *ngIf="item.appointment_type=='onsite'">
+                                <i style="color: rgb(117, 10, 81);" class="fa fa-circle-xmark" data-bs-toggle="tooltip"
+                                title="Appointment On Site"><u><b>Not Considered</b> </u></i>
+
+                            </td>
                             <td class="profile-image"><a><img width="28" height="28"
                                         src="{{item.doctor.user_image_url}}" class="rounded-circle m-r-5" alt> Dr.
                                     {{item.doctor.firstname}} {{item.doctor.lastname}}
@@ -107,7 +148,7 @@
                                 </span>
                             </td>
 
-                            <td class="description-content"><a>{{item.created_at}}</a></td>
+                            <td class="description-content"><a>{{item.created_at | date: 'yyyy'}}</a></td>
                             <td class="description-reason">
                                 <a *ngIf="item.refus_reason">{{item.refus_reason}}</a>
                                 <a *ngIf="!item.refus_reason">-</a>
@@ -121,6 +162,8 @@
                                     class="custom-badge status-red ">Rejected</button>
                                 <button *ngIf="item.status =='canceled'"
                                     class="custom-badge status-blue">Canceled</button>
+                                <button *ngIf="item.status =='finished'"
+                                    class="custom-badge status-purple">Finished</button>
                             </td>
                             <td class="text-end">
                                 <div class="dropdown dropdown-action">
@@ -129,14 +172,20 @@
                                         <i class="fa fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a  class="dropdown-item" *ngIf="item.status === 'finished'"><i class="feather-download m-r-5"></i> Download
-                                            Report</a>
-
-                                        <!-- Show "Cancel Appointment" only if status is "Pending" or "Approved" -->
+                                        <a class="dropdown-item" *ngIf="item.status === 'finished'"><i
+                                                class="feather-star m-r-5"></i> Rate Doctor</a>
                                         <a class="dropdown-item"
-                                            *ngIf="item.status === 'pending' || item.status === 'approved'">
-                                            <i class="fa fa-trash-alt m-r-5"></i>
+                                        data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal1"
+                                            (click)="handleClick(item.status, item.id)"
+                                            *ngIf="(item.status === 'pending' || item.status === 'approved') && !isToday(item.appointment)">
+                                            <i class="fa fa-reply-alt m-r-5"></i>
                                             Cancel Appointment
+                                        </a>
+                                        <a class="dropdown-item"
+                                            *ngIf="(item.status === 'canceled')">
+                                            <i class="fa fa-trash-alt m-r-5"></i>
+                                            Delete Request
                                         </a>
                                     </div>
                                 </div>
@@ -157,4 +206,35 @@
 
         </div>
     </div>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"> 
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Demande</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="update" #f="ngForm" (ngSubmit)="updatedemande(f); f.reset()">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="nameBackdrop" class="form-label">Status Name</label>
+
+                            <select class="form-control" id="exampleFormControlSelect1"
+                                [(ngModel)]="datademande.status" required formControlName="status">
+                                <option value="canceled">Cancel Now</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 </div>

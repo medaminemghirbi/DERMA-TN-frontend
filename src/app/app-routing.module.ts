@@ -36,6 +36,7 @@ import { SelectDateComponent } from './patient/select-date/select-date.component
 import { BookNowComponent } from './patient/book-now/book-now.component';
 import { MailBoxComponent } from './shared/mail-box/mail-box.component';
 import { MeetingOnlineComponent } from './shared/meeting-online/meeting-online.component';
+import { NotificationSettingComponent } from './patient/notification-setting/notification-setting.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -63,6 +64,7 @@ const routes: Routes = [
   { path: 'doctor/settings/social-media', canActivate: [DoctorGuard], component: SocialMediaComponent },
   { path: 'doctor/settings/notifications', canActivate: [DoctorGuard], component: NotificationSettingsComponent },
   { path: 'doctor/settings/my-phone-numbers', canActivate: [DoctorGuard], component: MyPhoneNumbersComponent },
+
   // Patient routes with guards
   { path: 'patient/dashboard', component: DashboardPatientComponent },
   { path: 'patient/blogs', component: BlogsPatientComponent },
@@ -70,6 +72,7 @@ const routes: Routes = [
   { path: 'patient/add-new-request', component: AddNewRequestComponent },
   { path: 'patient/:id/select-date', component: SelectDateComponent, },
   { path: 'patient/:id/book-now/:appointment', component: BookNowComponent },
+  { path: 'patient/settings/notifications', component: NotificationSettingComponent },
 
 
   { path: 'patient/appointment-request', component: MyRequestsComponent },

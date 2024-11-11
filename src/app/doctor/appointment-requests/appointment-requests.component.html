@@ -26,6 +26,8 @@
                             <option value="approved">Accepted</option>
                             <option value="rejected">Refused</option>
                             <option value="canceled">Canceled</option>
+                            <option value="finished">Finished</option>
+
 
                         </select>
                     </div>
@@ -34,13 +36,14 @@
                 <table class="table border-0 custom-table comman-table datatable mb-0">
                     <thead>
                         <tr>
-                            <th>Rendez Vous Date</th>
-                            <th>Rendez vous type</th>
+                            <th>Appointment Date</th>
+                            <th>Appointment type</th>
                             <th>Doctor </th>
                             <th>Patient</th>
                             <th>Phone Number</th>
-                            <th>Created Date</th>
                             <th>Status</th>
+                            <th>Paied</th>
+
                             <th>Update</th>
 
                         </tr>
@@ -57,7 +60,7 @@
                                     at {{ item.appointment | date: 'HH:mm'}}
                                 </a>
                             </td>
-                            <td>Coming Soon</td>
+                            <td>{{item.appointment_type}}</td>
                             <td class="profile-image">
                                 <a><img width="28" height="28" src="{{item.doctor.user_image_url}}"
                                         class="rounded-circle m-r-5" alt>
@@ -89,9 +92,7 @@
                                 </span>
 
                             </td>
-                            <td class="description-content">
-                                <a>{{item.created_at}}</a>
-                            </td>
+
                             <td>
                                 <button *ngIf="item.status == 'approved'"
                                     class="custom-badge status-green">Accepted</button>
@@ -101,7 +102,27 @@
                                     class="custom-badge status-red">Rejected</button>
                                 <button *ngIf="item.status == 'canceled'"
                                 class="custom-badge status-blue">Canceled</button>
+                                <button *ngIf="item.status == 'finished'"
+                                class="custom-badge status-purple">Finished</button>
+
                             </td>
+                            <td *ngIf="item.appointment_type=='online'">
+                                <div *ngIf="item.is_payed==true">
+                                    <i style="color: green;" class="fa fa-check" data-bs-toggle="tooltip"
+                                    title="Payment Success 😀"> Paied</i>
+                                </div>
+                                <div *ngIf="item.is_payed==false">
+                                    <i style="color: red;" class="fa fa-close" data-bs-toggle="tooltip"
+                                    title="fa fa-window-close">Not Paied Yet</i>
+                                </div>
+                            </td>
+                            <td *ngIf="item.appointment_type=='onsite'">
+                                <i style="color: red;" class="fa fa-close" data-bs-toggle="tooltip"
+                                title="Appointment On Site"> Not Considered</i>
+
+                            </td>
+                            
+
                             <td>
                                 <button class="btn btn-outline-secondary rounded-pill"
                                     [disabled]="item.status !== 'pending'" data-bs-toggle="modal"

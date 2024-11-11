@@ -13,6 +13,7 @@
     </div>
 
     <ng-progress #progressBar></ng-progress>
+    <app-email-notification></app-email-notification>
 
     
     <div class="page-wrapper">
@@ -34,9 +35,8 @@
                         </div>
                         <div class="top-action-right">
                             <ul class="nav">
-                                <li><a href="javascript:;"><img src="assets/img/icons/refresh-icon.svg" alt="img"></a>
+                                <li><a (click)="refrechMail()"><img src="assets/img/icons/refresh-icon.svg" alt="img"></a>
                                 </li>
-                                <li><a href="javascript:;"><img src="assets/img/icons/trash.svg" alt="img"></a></li>
                             </ul>
                         </div>
                     </div>
