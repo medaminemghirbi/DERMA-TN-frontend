@@ -8,26 +8,24 @@
         <div class="content">
 
             <div class="card-body">
-                <h4 class="header-title mb-4">All Patients Requests ({{filteredConsultations.length}})</h4>
+                <h4 class="header-title mb-4">{{'Doctor_appointments.all_patients_requests' | translate}} ({{filteredConsultations.length}})</h4>
                 <div class="row mb-3">
                     <!-- Search Input (Left side) -->
                     <div class="col-md-6">
                         <div class="input-group input-group-sm">
                             <input type="text" name="role" class="form-control form-control-sm" (ngModelChange)="onSearchChange()" 
-                                [(ngModel)]="searchedKeyword" placeholder="Search for...">
+                                [(ngModel)]="searchedKeyword" placeholder="{{'Doctor_appointments.search_for' | translate}}">
                         </div>
                     </div>
 
                     <!-- Status Dropdown (Right side) -->
                     <div class="col-md-6">
                         <select class="form-control form-control-sm" id="statusDropdown"  [(ngModel)]="selectedStatus" (change)="onStatusChange()">
-                            <option hidden value="" selected>Filter By State</option>
-                            <option value="pending">En Cours</option>
-                            <option value="approved">Accepted</option>
-                            <option value="rejected">Refused</option>
-                            <option value="canceled">Canceled</option>
-                            <option value="finished">Finished</option>
-
+                            <option hidden value="" selected>{{'Doctor_appointments.filter_by_state.title' | translate}}</option>
+                            <option value="pending">{{'Doctor_appointments.filter_by_state.pending' | translate}}</option>
+                            <option value="approved">{{'Doctor_appointments.filter_by_state.accepted' | translate}}</option>
+                            <option value="rejected">{{'Doctor_appointments.filter_by_state.refused' | translate}}</option>
+                            <option value="canceled">{{'Doctor_appointments.filter_by_state.canceled' | translate}}</option>
 
                         </select>
                     </div>
@@ -36,16 +34,14 @@
                 <table class="table border-0 custom-table comman-table datatable mb-0">
                     <thead>
                         <tr>
-                            <th>Appointment Date</th>
-                            <th>Appointment type</th>
-                            <th>Doctor </th>
-                            <th>Patient</th>
-                            <th>Phone Number</th>
-                            <th>Status</th>
-                            <th>Paied</th>
-
-                            <th>Update</th>
-
+                            <th>{{'Doctor_appointments.rendez_vous_date' | translate}}</th>
+                            <th>{{'Doctor_appointments.rendez_vous_type' | translate}}</th>
+                            <th>{{'Doctor_appointments.doctor' | translate}}</th>
+                            <th>{{'Doctor_appointments.patient' | translate}}</th>
+                            <th>{{'Doctor_appointments.phone_number' | translate}}</th>
+                            <th>{{'Doctor_appointments.created_date' | translate}}</th>
+                            <th>{{'Doctor_appointments.status' | translate}}</th>
+                            <th>{{'Doctor_appointments.update' | translate}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -134,7 +130,7 @@
                         </tr>
                         <tr *ngIf="allConsultations?.length == 0" class="no-appointment-row">
                             <td colspan="8" class="description-content no-appointment-text">
-                                No Appointment Request yet
+                                {{'Doctor_appointments.no_appointmnet' | translate}}
                             </td>
                         </tr>
 

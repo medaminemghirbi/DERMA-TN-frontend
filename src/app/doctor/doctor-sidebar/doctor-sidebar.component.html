@@ -4,44 +4,63 @@
             <ul>
                 <li routerLinkActive="active">
                     <a routerLink="/doctor/dashboard">
-                        <span class="menu-side"><img src="../../../assets/img/icons/landing-page-svgrepo-com.svg" alt></span>
-                        <span>Dashboard</span>
+                        <span class="menu-side"><img src="../../../assets/img/icons/landing-page-svgrepo-com.svg"
+                                alt></span>
+                        <span>{{ 'Doctor_sidebar.dashboard' | translate }}</span>
                     </a>
                 </li>
                 <li routerLinkActive="active">
                     <a routerLink="/doctor/appointment-request">
-                        <span class="menu-side"><img src="../../../assets/img/icons/reservation-smartphone-svgrepo-com.svg" alt></span>
-                        <span>Appointment Request</span>
+                        <span class="menu-side"><img
+                                src="../../../assets/img/icons/reservation-smartphone-svgrepo-com.svg" alt></span>
+                        <span>{{ 'Doctor_sidebar.appointment_request' | translate }}</span>
                     </a>
                 </li>
+
                 <li routerLinkActive="active">
                     <a routerLink="/doctor/planning">
-                        <span class="menu-side"><img src="../../../assets/img/icons/event-edit-svgrepo-com.svg" alt></span>
-                        <span>Planning</span>
+                        <span class="menu-side"><img src="../../../assets/img/icons/event-edit-svgrepo-com.svg"
+                                alt></span>
+                        <span>{{ 'Doctor_sidebar.planning' | translate }}</span>
                     </a>
                 </li>
                 <li routerLinkActive="active">
                     <a routerLink="/forums"><span class="menu-side"><img
-                                src="../../../assets/img/icons/online-meeting-discussion-communication-svgrepo-com.svg" alt></span> <span>Forum</span></a>
+                                src="../../../assets/img/icons/online-meeting-discussion-communication-svgrepo-com.svg"
+                                alt></span> <span>
+                            <span>{{ 'Doctor_sidebar.forum' | translate }}</span>
+
+                        </span></a>
                 </li>
                 <li routerLinkActive="active">
                     <a routerLink="/mail"><span class="menu-side"><img
-                                src="../../../assets/img/icons/email-inbox-mail-svgrepo-com.svg" alt></span> <span>Email Box</span></a>
+                                src="../../../assets/img/icons/email-inbox-mail-svgrepo-com.svg" alt></span> <span>
+                            <span>{{ 'Doctor_sidebar.email_box' | translate }}</span>
+
+                        </span></a>
                 </li>
                 <li routerLinkActive="active">
                     <a routerLink="/doctor/dokuments"><span class="menu-side"><img
-                                src="../../../assets/img/icons/document-icon.svg" alt></span> <span>Documents</span></a>
+                                src="../../../assets/img/icons/document-icon.svg" alt></span> <span>
+                            <span>{{ 'Doctor_sidebar.documents' | translate }}</span>
+
+                        </span></a>
                 </li>
                 <li routerLinkActive="active">
                     <a routerLink="/doctor/blogs"><span class="menu-side"><img
-                                src="../../../assets/img/icons/read-news-learn-understand-paper-svgrepo-com.svg" alt></span> <span>Blogs</span></a>
+                                src="../../../assets/img/icons/read-news-learn-understand-paper-svgrepo-com.svg"
+                                alt></span> <span>
+                            <span>{{ 'Doctor_sidebar.blogs' | translate }}</span>
+
+                        </span></a>
                 </li>
                 <li routerLinkActive="active">
                     <a (click)="verifier_plan(); $event.preventDefault();">
                         <span class="menu-side">
                             <img src="../../../assets/img/icons/microscope-svgrepo-com.svg" alt="">
                         </span>
-                        <span>Analyze With IA</span>
+                        <span> <span>{{ 'Doctor_sidebar.analyze_with_ai' | translate }}</span>
+                        </span>
                     </a>
                 </li>
             </ul>
@@ -50,7 +69,8 @@
                     <span class="menu-side">
                         <img src="../../../assets/img/icons/logout-svgrepo-com.svg" alt="Logout Icon">
                     </span>
-                    <span>Logout</span>
+                    <span> <span>{{ 'Doctor_sidebar.logout' | translate }}</span>
+                    </span>
                 </a>
             </div>
         </div>

@@ -143,4 +143,7 @@ export class AdminService {
   Generate_payment_link(formData: any): Observable<any> {
     return this.http.post(environment.urlBackend + 'api/v1/payments/generate', formData);
   }
+  getDefaultLanguage(id: any) {
+    return this.http.get(environment.urlBackend + 'api/v1/get_defaut_language/' + id);
+  }
 }

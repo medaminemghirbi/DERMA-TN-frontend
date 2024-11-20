@@ -10,7 +10,7 @@
                 <div class="col-lg-6 col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Social Link Settings</h5>
+                            <h5 class="card-title">{{ 'Doctor_social_links.title' | translate }}</h5>
                         </div>
                         <div class="card-body pt-0">
                             <form [formGroup]="upadate" #f="ngForm" (ngSubmit)="updateadminprofil(f)">
@@ -90,7 +90,7 @@
                                     <div class="settings-btns">
                                         <button type="submit" class="border-0 btn-primary px-4 btn-rounded"
                                             style="background-color: rgb(38, 8, 158);"
-                                            class="border-0 btn btn-primary btn-gradient-primary btn-rounded">Submit</button>
+                                            class="border-0 btn btn-primary btn-gradient-primary btn-rounded">{{ 'Doctor_social_links.submit' | translate }}</button>
                                     </div>
                                 </div>
                             </form>

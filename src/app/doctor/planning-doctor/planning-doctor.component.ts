@@ -65,7 +65,8 @@ export class PlanningDoctorComponent implements OnInit {
       validRange: { start: this.formatDate(this.today) },
       allDaySlot: false,
       selectable: true,
-      events: [] // To be populated after fetching consultations
+      events: [],// To be populated after fetching consultations
+      locale: this.currentUser.language
     };
 
     this.loadConsultations();

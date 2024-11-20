@@ -97,4 +97,7 @@ paywithkonnect(data:any){
   return this.http.post<any>("https://api.preprod.konnect.network/api/v2/payments/init-payment",data,options)
 
 }
+  ChangeDefaultLanguage(id: string, newdata: FormData) {
+    return this.http.put(`${environment.urlBackend}api/v1/users/${id}/changeLanguage`, newdata);
+  }
 }
