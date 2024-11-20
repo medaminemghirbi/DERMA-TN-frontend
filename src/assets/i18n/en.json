@@ -68,7 +68,8 @@
         "zip_postal_code": "Zip/Postal Code",
         "city": "City",
         "update_informations": "Update Informations",
-        "update_image": "Update Image"
+        "update_image": "Update Image",
+        "recommended_image_size": "Image Size "
     },
     "Doctor_social_links": {
         "title": "Paramètres des liens sociaux",
@@ -97,7 +98,8 @@
         "no_appointmnet": "No upcoming appointments",
         "no_plan": "You dont have  IA Plan",
         "plan_comment": "Images processed with AI system.",
-        "plan_is": "Your IA Plan is"
+        "plan_is": "Your IA Plan is",
+        "today": "Today at"
     },
     "Doctor_appointments": {
         "all_patients_requests": "All patients requests",
@@ -121,7 +123,34 @@
     },
     "real_time_chat": "Real-time Chat",
     "enter_your_message": "Enter your message",
+    "no_message": "No Message yet..",
     "delete_all": "Delete All",
-    "mail_note": "PS: When email is disabled, the Appointment RTC channel has been expired ."
-
+    "mail_note": "PS: When email is disabled, the Appointment RTC channel has been expired .",
+    "Doctor_documents": {
+        "title": "Title",
+        "file_type": "File Type",
+        "file_size": "File Size",
+        "actions": "Actions",
+        "delete_all": "Delete All Documents",
+        "add_new": "Upload New Document",
+        "show": "View",
+        "download": "Download",
+        "rename": "Rename",
+        "delete": "Delete",
+        "preview": "Document Preview"
+    },
+    "Doctor_blogs": {
+        "title": "Blogs Section",
+        "all_verified": "All DocPro Verified Blogs",
+        "my_blogs": "My Blogs",
+        "add_new": "Create New Blog ",
+        "read_more": "Read More",
+        "create_new_blog": {
+            "title": "Create a Blog Post",
+            "select_diseas": "Select diseas ",
+            "blog_title": "Blog Title",
+            "content": "Write your content here ..",
+            "submit": "Create Blog"
+        }
+    }
 }

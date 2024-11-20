@@ -97,7 +97,8 @@
         "no_appointmnet": "Aucun rendez-vous à venir",
         "no_plan": "Vous n'avez pas de Plan IA",
         "plan_comment": "Images traitées avec un système d'IA.",
-        "plan_is": "Votre Plan IA est"
+        "plan_is": "Votre Plan IA est",
+        "today": "Aujourd'hui à"
     },
     "Doctor_appointments": {
         "all_patients_requests": "Toutes les demandes des patients",
@@ -121,7 +122,34 @@
     },
     "real_time_chat": "Chat en temps réel",
     "enter_your_message": "Saisissez votre message",
+    "no_message": "Pas de message..",
     "delete_all": "Supprimer Tous",
-    "mail_note": "note: Lorsque la messagerie électronique est désactivée, le canal Rendez-vous RTC a expiré."
-
+    "mail_note": "note: Lorsque la messagerie électronique est désactivée, le canal Rendez-vous RTC a expiré.",
+    "Doctor_documents": {
+        "title": "Titre",
+        "file_type": "Type de fichier",
+        "file_size": "Taille du fichier",
+        "actions": "Actions",
+        "delete_all": "Supprimer tous les documents",
+        "add_new": "Téléverser un nouveau document",
+        "show": "Visualiser",
+        "download": "Télécharger",
+        "rename": "Renommer",
+        "delete": "Supprimer",
+        "preview": "Aperçu du document"
+    },
+    "Doctor_blogs": {
+        "title": "Section des Articles",
+        "all_verified": "Tous les Articles vérifiés par DocPro",
+        "my_blogs": "Mes Articles",
+        "add_new": "Créer un nouveau blog",
+        "read_more": "En savoir plus",
+        "create_new_blog": {
+            "title": "Créer un article de blog",
+            "select_diseas": "Sélectionner une maladie",
+            "blog_title": "Titre du blog",
+            "content": "Écrivez votre contenu ici ..",
+            "submit": "créer l'Article"
+        }
+    }
 }
