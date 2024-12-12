@@ -151,4 +151,10 @@ export class AppointmentRequestsComponent implements OnInit {
       }
     });
   }
+  isButtonDisabled(appointment: string): boolean {
+    const emailDate = new Date(appointment);
+    const now = new Date();
+    const oneHourLater = new Date(emailDate.getTime() + 60 * 60 * 1000);
+    return now > oneHourLater;
+  }
 }

@@ -62,7 +62,6 @@ export class PlanningDoctorComponent implements OnInit {
       slotMaxTime: '17:00:00',
       dayMaxEvents: true,
       height: 'auto',
-      validRange: { start: this.formatDate(this.today) },
       allDaySlot: false,
       selectable: true,
       events: [],// To be populated after fetching consultations
@@ -77,7 +76,7 @@ export class PlanningDoctorComponent implements OnInit {
       (consultations) => {
         this.isLoading = true;
         const events = consultations.map((consultation) => ({
-          title: `=> Consultation with Mr ${consultation.patient.firstname} ${consultation.patient.lastname}`,
+          title: `=> Consultation with Mr ${consultation.patient.firstname} ${consultation.patient.lastname} (${consultation.appointment_type === 'online' ? 'Online' : 'onsite'})`,
           start: consultation.appointment,
           end: this.addMinutesToDate(new Date(consultation.appointment), 30),
           id: consultation.id,

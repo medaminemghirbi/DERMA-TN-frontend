@@ -112,23 +112,20 @@ updateReceiverWallet() {
 toggleLanguage(event: any) {
     const selectedLanguage = event.target.value;
 
-
-
-
     const formData = new FormData();
     formData.append('language', String(selectedLanguage));
 
     // Call the service to update the location
     this.auth.ChangeDefaultLanguage(this.currentUser.id, formData).subscribe(
-      response => {
+    response => {
         sessionStorage.setItem('doctordata', JSON.stringify(response));
         Swal.fire('Language updated!', '', 'success');
         this.translate.use(selectedLanguage); 
-      },
-      error => {
+    },
+    error => {
         console.error('Error updating Language:', error);
         Swal.fire('Failed to update Language', 'Please try again later .', 'error');
-      }
+    }
     );
     }
 }

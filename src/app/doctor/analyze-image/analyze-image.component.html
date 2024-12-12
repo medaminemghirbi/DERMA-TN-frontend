@@ -9,86 +9,115 @@
     <div class="content container-fluid">
       <div class="row">
 
-        <!-- Analysis Section -->
+        <!-- Section d'analyse -->
         <div class="col-xxl-6">
           <div class="card shadow-sm bg-light border-0">
             
-            <h4 class="card-header text-center bg-primary text-white">Analyze Image with AI</h4>
+            <h4 class="card-header text-center bg-primary text-white">
+              {{ 'Doctor_IA_section.title' | translate }}
+            </h4>
             <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)" class="p-4">
-              <!-- File Input -->
-              <div class="form-group mb-3 text-center"> your Currnet Tries are :
+              <!-- Indicateur d'essais -->
+              <div class="form-group mb-3 text-center">
+                {{ 'Doctor_IA_section.current_tries' | translate }}
               </div>
 
-              <!-- File Input -->
+              <!-- Input de fichier -->
               <div class="form-group mb-3 text-center">
                 <input type="file" class="form-control form-control-lg" (change)="fileChange($event)" accept="image/*"
                   formControlName="file" required />
               </div>
 
-              <!-- Display Uploaded Image Preview -->
+              <!-- Aperçu de l'image téléchargée -->
               <div *ngIf="imageUrl" class="text-center mb-3">
                 <img [src]="imageUrl" alt="Uploaded Image" class="img-fluid border" width="300"
                   style="border-radius: 8px;">
               </div>
 
-              <!-- Submit Button -->
+              <!-- Bouton de soumission -->
               <div class="text-center">
-                <button type="submit" class="btn btn-success btn-lg">Analyze Image</button>
+                <button type="submit" class="btn btn-success btn-lg">
+                  {{ 'Doctor_IA_section.processing_image' | translate }}
+                </button>
               </div>
 
-              <!-- Loading Indicator -->
+              <!-- Indicateur de chargement -->
               <div *ngIf="loading" class="loading-indicator text-center mt-4">
-                <p class="text-secondary">Processing Image...</p>
+                <p class="text-secondary">{{ 'Doctor_IA_section.processing_image' | translate }}</p>
               </div>
 
             </form>
           </div>
         </div>
 
-        <!-- Results Section -->
+        <!-- Section des résultats -->
         <div class="col-xxl-6">
           <div class="card shadow-sm bg-white border-0">
-            <h4 class="card-header text-center bg-info text-white">Prediction Result</h4>
+            <h4 class="card-header text-center bg-info text-white">
+              {{ 'Doctor_IA_section.prediction_result.header' | translate }}
+            </h4>
             <div *ngIf="result && !loading" class="result-display p-4">
 
-              <!-- Prediction Summary -->
+              <!-- Résumé de la prédiction -->
               <div class="row mb-3 text-center">
                 <div class="col-6">
-                  <p><strong>Predicted Class:</strong></p>
+                  <p><strong>{{ 'Doctor_IA_section.prediction_result.predicted_class' | translate }}</strong></p>
                   <span class="badge bg-primary fs-5">{{ result.predicted_class }}</span>
                 </div>
                 <div class="col-6">
-                  <p><strong>Probability:</strong></p>
+                  <p><strong>{{ 'Doctor_IA_section.prediction_result.probability' | translate }}</strong></p>
                   <span class="badge bg-info fs-5">{{ result.probability | percent: '1.0-2' }}</span>
                 </div>
               </div>
               <hr>
 
-              <!-- Maladie Information in Data Grid -->
+              <!-- Informations sur la maladie -->
               <div class="row g-2">
-                <div class="col-6"><strong>Is Cancer:</strong></div>
                 <div class="col-6">
-                  <span *ngIf="result.maladie.is_cancer" class="text-danger">Yes</span>
-                  <span *ngIf="!result.maladie.is_cancer" class="text-success">No</span>
+                  <strong>{{ 'Doctor_IA_section.prediction_result.is_cancer' | translate }}</strong>
+                </div>
+                <div class="col-6">
+                  <span *ngIf="result.maladie.is_cancer" class="text-danger">
+                    {{ 'Doctor_IA_section.prediction_result.yes' | translate }}
+                  </span>
+                  <span *ngIf="!result.maladie.is_cancer" class="text-success">
+                    {{ 'Doctor_IA_section.prediction_result.no' | translate }}
+                  </span>
                 </div>
 
-                <div class="col-6"><strong>Causes:</strong></div>
+                <div class="col-6">
+                  <strong>{{ 'Doctor_IA_section.prediction_result.causes' | translate }}</strong>
+                </div>
                 <div class="col-6">{{ result.maladie.causes }}</div>
 
-                <div class="col-6"><strong>Symptoms:</strong></div>
+                <div class="col-6">
+                  <strong>{{ 'Doctor_IA_section.prediction_result.symptoms' | translate }}</strong>
+                </div>
                 <div class="col-6">{{ result.maladie.symptoms }}</div>
 
-                <div class="col-6"><strong>Synonyms:</strong></div>
+                <div class="col-6">
+                  <strong>{{ 'Doctor_IA_section.prediction_result.synonyms' | translate }}</strong>
+                </div>
                 <div class="col-6">{{ result.maladie.synonyms }}</div>
 
-                <div class="col-6"><strong>Prevention:</strong></div>
+                <div class="col-6">
+                  <strong>{{ 'Doctor_IA_section.prediction_result.prevention' | translate }}</strong>
+                </div>
                 <div class="col-6">{{ result.maladie.prevention }}</div>
 
-                <div class="col-6"><strong>Treatment:</strong></div>
+                <div class="col-6">
+                  <strong>{{ 'Doctor_IA_section.prediction_result.treatment' | translate }}</strong>
+                </div>
                 <div class="col-6">{{ result.maladie.treatments }}</div>
 
-                <div class="col-6"><strong>Reference:</strong></div>
-                <div class="col-6"><a href="{{ result.maladie.references }}" target="_blank" class="text-primary">View Source</a></div>
+                <div class="col-6">
+                  <strong>{{ 'Doctor_IA_section.prediction_result.reference' | translate }}</strong>
+                </div>
+                <div class="col-6">
+                  <a href="{{ result.maladie.references }}" target="_blank" class="text-primary">
+                    {{ 'Doctor_IA_section.prediction_result.view_source' | translate }}
+                  </a>
+                </div>
               </div>
 
           </div>

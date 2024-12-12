@@ -47,158 +47,156 @@
                             <option value="finished">Finished</option>
                         </select>
                     </div>
-                    <h6  class="tip">PS: For Online Consultation You will not recive Online Consultation Link from
+                    <h6 class="tip">PS: For Online Consultation You will not recive Online Consultation Link from
                         <a routerLink="http://localhost:4200/patient/appointment-request"><u>DocPro.tn</u></a>
                         if you did not proceed your payment In Dashboard.
                     </h6>
                 </div>
+                <div class="table-wrapper">
 
-                <table class="table border-0 custom-table comman-table datatable mb-0">
-                    <thead>
-                        <tr>
-                            <th>Rendez Vous Date</th>
-                            <th>Rendez vous type</th>
-                            <th>Payment Link</th>
-                            <th>Payment Status</th>
-
-                            <th>Doctor </th>
-                            <th>Patient</th>
-                            <th>Phone Numbers</th>
-                            <th>Created Date</th>
-                            <th>Refus Reason</th>
-                            <th>Status</th>
-                            <th>Manage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            *ngFor="let item of filteredRequests |filter: searchedKeyword  | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-                            <td class="description-content">
-                                <a>
-                                    {{ item.appointment | date: 'EEEE'}}<br>
-                                    {{ item.appointment | date: 'dd'}}
-                                    {{ item.appointment | date: 'MMMM'}}
-                                    {{ item.appointment | date: 'yyyy'}}<br>
-                                    at {{ item.appointment | date: 'HH:mm'}}
-                                </a>
-                            </td>
-                            <td>{{item.appointment_type}}</td>
-                            <td>
-                                <!-- Enabled "Pay Now" button only if online appointment and not yet paid -->
-                                <button *ngIf="item.appointment_type === 'online' && !item.is_payed && (item.status == 'approved')" 
-                                        (click)="pay(item.id)" 
-                                        class="btn btn-outline-warning">
-                                  Pay Now
-                                </button>
-                              
-                                <!-- Disabled "Pay Now" button if online appointment and already paid -->
-                                <button *ngIf="item.appointment_type === 'online' && item.is_payed && (item.status == 'pending' || item.status == 'rejected'  || item.status== 'canceled' || item.status== 'finished'  )" 
-                                        class="btn btn-outline-warning" 
-                                        disabled>
-                                  Pay Now
-                                </button>
-                              
-                                <!-- Display dash for onsite appointments -->
-                                <p *ngIf="item.appointment_type === 'onsite'"> - </p>
-                              </td>
-                              
-                            <td *ngIf="item.appointment_type=='online'">
-                                <div *ngIf="item.is_payed==true">
-                                    <i style="color: green;" class="fa fa-check" data-bs-toggle="tooltip"
-                                    title="payed"> Paied</i>
-                                </div>
-                                <div *ngIf="item.is_payed==false">
-                                    <i style="color: red;" class="fa fa-close" data-bs-toggle="tooltip"
-                                    title="Not Paied Yet">  Not Paied Yet</i>
-                                </div>
-                            </td>
-                            <td *ngIf="item.appointment_type=='onsite'">
-                                <i style="color: rgb(117, 10, 81);" class="fa fa-circle-xmark" data-bs-toggle="tooltip"
-                                title="Appointment On Site"><u><b>Not Considered</b> </u></i>
-
-                            </td>
-                            <td class="profile-image"><a><img width="28" height="28"
-                                        src="{{item.doctor.user_image_url}}" class="rounded-circle m-r-5" alt> Dr.
-                                    {{item.doctor.firstname}} {{item.doctor.lastname}}
-                                </a></td>
-                            <td class="profile-image"><a><img width="28" height="28"
-                                        src="{{item.patient.user_image_url}}" class="rounded-circle m-r-5" alt>Mr(s)
-                                    {{item.patient.firstname}} {{item.patient.lastname}}
-                                </a></td>
-                            <td>
-                                patient: {{item.patient.phone_number}}<br>
-                                doctor:
-                                <div *ngIf="item.doctor.phone_numbers && item.doctor.phone_numbers.length > 0"
-                                    class="phone-list">
-                                    <ul>
-                                        <li *ngFor="let phone of item.doctor.phone_numbers" class="phone-number-item">
-                                            <i *ngIf="phone.is_primary" class="fas" [ngClass]="{
-                                                    'fa-mobile-alt': phone.phone_type === 'personal', 
-                                                    'fa-home': phone.phone_type === 'home', 
-                                                    'fa-briefcase': phone.phone_type === 'fax'
-                                                }"></i>
-                                            <span *ngIf="phone.is_primary" class="ms-2">{{ phone.number }}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <span *ngIf="!item.doctor.phone_numbers || item.doctor.phone_numbers.length === 0"
-                                    style="color: rgb(255, 9, 9);">
-                                    <i class="fa fa-ban" data-bs-toggle="tooltip" title="Not Provided"></i>
-                                    Not Provided
-                                </span>
-                            </td>
-
-                            <td class="description-content"><a>{{item.created_at | date: 'yyyy'}}</a></td>
-                            <td class="description-reason">
-                                <a *ngIf="item.refus_reason">{{item.refus_reason}}</a>
-                                <a *ngIf="!item.refus_reason">-</a>
-                            </td>
-                            <td>
-                                <button *ngIf="item.status =='approved'"
-                                    class="custom-badge status-green ">Accepted</button>
-                                <button *ngIf="item.status =='pending'"
-                                    class="custom-badge status-orange ">Pending</button>
-                                <button *ngIf="item.status =='rejected'"
-                                    class="custom-badge status-red ">Rejected</button>
-                                <button *ngIf="item.status =='canceled'"
-                                    class="custom-badge status-blue">Canceled</button>
-                                <button *ngIf="item.status =='finished'"
-                                    class="custom-badge status-purple">Finished</button>
-                            </td>
-                            <td class="text-end">
-                                <div class="dropdown dropdown-action">
-                                    <a class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="fa fa-ellipsis-v"></i>
+                    <table class="table border-0 custom-table comman-table datatable mb-0">
+                        <thead>
+                            <tr>
+                                <th>Rendez Vous Date</th>
+                                <th>Rendez vous type</th>
+                                <th>Payment Link</th>
+                                <th>Payment Status</th>
+                                <th>Persons</th>
+                                <th>Phone Numbers</th>
+                                <th>Created Date</th>
+                                <th>Status</th>
+                                <th>Manage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let item of filteredRequests | filter: searchedKeyword | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                <td class="description-content">
+                                    <a>
+                                        {{ item.appointment | date: 'EEEE'}}<br>
+                                        {{ item.appointment | date: 'dd'}}
+                                        {{ item.appointment | date: 'MMMM'}}
+                                        {{ item.appointment | date: 'yyyy'}}<br>
+                                        at {{ item.appointment | date: 'HH:mm'}}
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" *ngIf="item.status === 'finished'"><i
-                                                class="feather-star m-r-5"></i> Rate Doctor</a>
-                                        <a class="dropdown-item"
-                                        data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal1"
-                                            (click)="handleClick(item.status, item.id)"
-                                            *ngIf="(item.status === 'pending' || item.status === 'approved') && !isToday(item.appointment)">
-                                            <i class="fa fa-reply-alt m-r-5"></i>
-                                            Cancel Appointment
-                                        </a>
-                                        <a class="dropdown-item"
-                                            *ngIf="(item.status === 'canceled')">
-                                            <i class="fa fa-trash-alt m-r-5"></i>
-                                            Delete Request
-                                        </a>
+                                </td>
+                                <td>{{ item.appointment_type }}</td>
+                                <td>
+                                    <button
+                                        *ngIf="item.appointment_type === 'online' && !item.is_payed && (item.status === 'approved')"
+                                        (click)="pay(item.id)" class="btn btn-outline-warning">
+                                        Pay Now
+                                    </button>
+                                    <button
+                                        *ngIf="item.appointment_type === 'online' && item.is_payed && (item.status === 'pending' || item.status === 'rejected' || item.status === 'canceled' || item.status === 'finished')"
+                                        class="btn btn-outline-warning" disabled>
+                                        Pay Now
+                                    </button>
+                                    <p *ngIf="item.appointment_type === 'onsite'"> - </p>
+                                </td>
+                                <td *ngIf="item.appointment_type === 'online'">
+                                    <div *ngIf="item.is_payed">
+                                        <i style="color: green;" class="fa fa-check" data-bs-toggle="tooltip"
+                                            title="Paid"> Paid</i>
                                     </div>
+                                    <div *ngIf="!item.is_payed">
+                                        <i style="color: red;" class="fa fa-close" data-bs-toggle="tooltip"
+                                            title="Not Paid Yet"> Not Paid Yet</i>
+                                    </div>
+                                </td>
+                                <td *ngIf="item.appointment_type === 'onsite'">
+                                    <i style="color: rgb(117, 10, 81);" class="fa fa-circle-xmark"
+                                        data-bs-toggle="tooltip" title="Appointment On Site"><u><b>Not Considered</b>
+                                        </u></i>
+                                </td>
+                                <td class="profile-image">
+                                    <a><img width="28" height="28" src="{{ item.doctor.user_image_url }}" class="rounded-circle m-r-5" alt></a>
+                                    <h6>Dr. {{ item.doctor.firstname }} {{ item.doctor.lastname }}</h6>
+                                </td>
+                                
+                                <td class="profile-image">
+                                    <a><img width="28" height="28" src="{{ item.patient.user_image_url }}"
+                                            class="rounded-circle m-r-5" alt>Mr(s) {{ item.patient.firstname }} {{
+                                        item.patient.lastname }}</a>
+                                </td>
+                                <td>
+                                    patient: {{ item.patient.phone_number }}<br>
+                                    doctor:
+                                    <div *ngIf="item.doctor.phone_numbers && item.doctor.phone_numbers.length > 0"
+                                        class="phone-list">
+                                        <ul>
+                                            <li *ngFor="let phone of item.doctor.phone_numbers"
+                                                class="phone-number-item">
+                                                <i *ngIf="phone.is_primary" class="fas" [ngClass]="{
+                                                'fa-mobile-alt': phone.phone_type === 'personal',
+                                                'fa-home': phone.phone_type === 'home',
+                                                'fa-briefcase': phone.phone_type === 'fax'
+                                            }"></i>
+                                                <span *ngIf="phone.is_primary" class="ms-2">{{ phone.number }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <span *ngIf="!item.doctor.phone_numbers || item.doctor.phone_numbers.length === 0"
+                                        style="color: rgb(255, 9, 9);">
+                                        <i class="fa fa-ban" data-bs-toggle="tooltip" title="Not Provided"></i> Not
+                                        Provided
+                                    </span>
+                                </td>
+                                <td class="description-content"><a>{{ item.created_at | date: 'yyyy' }}</a></td>
+                                <td>
+                                    <button *ngIf="item.status === 'approved'" class="custom-badge status-green">
+                                        Accepted
+                                    </button>
+                                    <button *ngIf="item.status === 'pending'" class="custom-badge status-orange">
+                                        Pending
+                                    </button>
+                                    <button 
+                                    *ngIf="item.status === 'rejected'" 
+                                    class="custom-badge status-red" 
+                                    (click)="item.showReason = !item.showReason">
+                                    Refused
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                                <div *ngIf="item.showReason" class="refus-reason">
+                                    {{ item.refus_reason || 'No reason provided' }}
                                 </div>
-                            </td>
-
-                        </tr>
-                        <tr *ngIf="myRequests == 0" class="no-appointment-row">
-                            <td colspan="8" class="description-content no-appointment-text">
-                                No Appointment Request yet
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                    <button *ngIf="item.status === 'canceled'" class="custom-badge status-blue">
+                                        Canceled
+                                    </button>
+                                    <button *ngIf="item.status === 'finished'" class="custom-badge status-purple">
+                                        Finished
+                                    </button>
+                                </td>
+                                
+                                <td class="text-end">
+                                    <div class="dropdown dropdown-action">
+                                        <a class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a class="dropdown-item" *ngIf="item.status === 'finished'"><i
+                                                    class="feather-star m-r-5"></i> Rate Doctor</a>
+                                            <a class="dropdown-item" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal1"
+                                                (click)="handleClick(item.status, item.id)"
+                                                *ngIf="(item.status === 'pending' || item.status === 'approved') && !isToday(item.appointment)">
+                                                <i class="fa fa-reply-alt m-r-5"></i> Cancel Appointment
+                                            </a>
+                                            <a class="dropdown-item" *ngIf="(item.status === 'canceled')">
+                                                <i class="fa fa-trash-alt m-r-5"></i> Delete Request
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="myRequests == 0" class="no-appointment-row">
+                                <td colspan="8" class="description-content no-appointment-text">No Appointment Request
+                                    yet</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div style="text-align:right;">
                 <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -206,35 +204,33 @@
 
         </div>
     </div>
-    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content"> 
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Demande</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form [formGroup]="update" #f="ngForm" (ngSubmit)="updatedemande(f); f.reset()">
-                    <div class="row">
-                        <div class="col mb-3">
-                            <label for="nameBackdrop" class="form-label">Status Name</label>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Demande</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="update" #f="ngForm" (ngSubmit)="updatedemande(f); f.reset()">
+                        <div class="row">
+                            <div class="col mb-3">
+                                <label for="nameBackdrop" class="form-label">Status Name</label>
 
-                            <select class="form-control" id="exampleFormControlSelect1"
-                                [(ngModel)]="datademande.status" required formControlName="status">
-                                <option value="canceled">Cancel Now</option>
-                            </select>
+                                <select class="form-control" id="exampleFormControlSelect1"
+                                    [(ngModel)]="datademande.status" required formControlName="status">
+                                    <option value="canceled">Cancel Now</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
 
+            </div>
         </div>
     </div>
-</div>
 </div>

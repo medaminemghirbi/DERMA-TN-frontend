@@ -37,6 +37,7 @@ import { BookNowComponent } from './patient/book-now/book-now.component';
 import { MailBoxComponent } from './shared/mail-box/mail-box.component';
 import { MeetingOnlineComponent } from './shared/meeting-online/meeting-online.component';
 import { NotificationSettingComponent } from './patient/notification-setting/notification-setting.component';
+import { ChangeImageComponent } from './patient/change-image/change-image.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -73,6 +74,7 @@ const routes: Routes = [
   { path: 'patient/:id/select-date', component: SelectDateComponent, },
   { path: 'patient/:id/book-now/:appointment', component: BookNowComponent },
   { path: 'patient/settings/notifications', component: NotificationSettingComponent },
+  { path: 'patient/settings/change-image', component: ChangeImageComponent },
 
 
   { path: 'patient/appointment-request', component: MyRequestsComponent },

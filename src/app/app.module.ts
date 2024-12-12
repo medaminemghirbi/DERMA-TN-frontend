@@ -64,6 +64,7 @@ import { EmailNotificationComponent } from './shared/email-notification/email-no
 import { NotificationSettingComponent } from './patient/notification-setting/notification-setting.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ChangeImageComponent } from './patient/change-image/change-image.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -120,6 +121,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MeetingOnlineComponent,
     EmailNotificationComponent,
     NotificationSettingComponent,
+    ChangeImageComponent,
 
     
   ],

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-notification-setting',
@@ -8,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NotificationSettingComponent implements OnInit {
   currentUser : any
-  constructor(private auth: AuthService) { 
+  constructor(private auth: AuthService, private translate: TranslateService) { 
     this.currentUser = this.auth.getcurrentuser();
   }
 
@@ -92,5 +94,24 @@ toggleWorkingOnLine(event: Event) {
         }
     });
 }
+toggleLanguage(event: any) {
+    const selectedLanguage = event.target.value;
+
+    const formData = new FormData();
+    formData.append('language', String(selectedLanguage));
+
+    // Call the service to update the location
+    this.auth.ChangeDefaultLanguage(this.currentUser.id, formData).subscribe(
+    response => {
+        sessionStorage.setItem('doctordata', JSON.stringify(response));
+        Swal.fire('Language updated!', '', 'success');
+        this.translate.use(selectedLanguage); 
+    },
+    error => {
+        console.error('Error updating Language:', error);
+        Swal.fire('Failed to update Language', 'Please try again later .', 'error');
+    }
+    );
+    }
 
 }

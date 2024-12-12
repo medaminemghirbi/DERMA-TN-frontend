@@ -8,9 +8,32 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
-                        <h1 class="card-title"><b> * Notifications System</b></h1>
+                        <h1 class="card-title"><b> * {{ 'Doctor_settings.language_system' | translate }}</b></h1>
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4 class="card-title">Enable Sms Notifications</h4>
+                            <h4 class="card-title">{{ 'Doctor_settings.default_language' | translate }}</h4>
+                            <div class="status-toggle d-flex justify-content-between align-items-center">
+                                <div class="language-selector d-flex align-items-center">
+                                    <select id="language_select" class="form-select me-2"
+                                        [(ngModel)]="currentUser.language" (change)="toggleLanguage($event)">
+                                        <option value="en">{{'languages.en' | translate}}</option>
+                                        <option value="fr">{{'languages.fr' | translate}}</option>
+                                        <option value="ar">{{'languages.ar' | translate}}</option>
+
+                                    </select>
+                                    <img [src]="currentUser.language === 'fr' ? '../../../assets/icons/fr.png' 
+                                        : currentUser.language === 'ar' ? '../../../assets/icons/ar2.png' 
+                                        : '../../../assets/icons/us.png'" class="flag" alt="Selected Language Flag">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h1 class="card-title"><b> * {{ 'Doctor_settings.notifications_system.title' | translate }}</b>
+                        </h1>
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4 class="card-title">{{ 'Doctor_settings.notifications_system.enable_sms' | translate }}
+                            </h4>
                             <div class="status-toggle d-flex justify-content-between align-items-center">
                                 <input type="checkbox" id="sms_notifications" class="check"
                                     [checked]="currentUser.is_smsable" (change)="toggleSmsNotifications($event)">
@@ -18,7 +41,8 @@
                             </div>
                         </div>
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4 class="card-title">Enable Email Notifications</h4>
+                            <h4 class="card-title">{{ 'Doctor_settings.notifications_system.enable_email' | translate }}
+                            </h4>
                             <div class="status-toggle d-flex justify-content-between align-items-center">
                                 <input type="checkbox" id="email_notifications" class="check"
                                     [checked]="currentUser.is_emailable" (change)="toggleEmailNotifications($event)">
@@ -26,14 +50,14 @@
                             </div>
                         </div>
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4 class="card-title">Enable System Notifications</h4>
+                            <h4 class="card-title">{{ 'Doctor_settings.notifications_system.enable_system' | translate
+                                }}</h4>
                             <div class="status-toggle d-flex justify-content-between align-items-center">
                                 <input type="checkbox" id="system_notifications" class="check"
                                     [checked]="currentUser.is_notifiable" (change)="toggleSystemNotifications($event)">
                                 <label for="system_notifications" class="checktoggle">checkbox</label>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

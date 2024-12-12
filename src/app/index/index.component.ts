@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-index',
@@ -21,7 +22,7 @@ export class IndexComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(6)])  // Password field with required and min length validation
   });
 
-  constructor(private Auth: AuthService, private route: Router, private toastr: ToastrService) {}
+  constructor(private Auth: AuthService, private route: Router, private toastr: ToastrService, private translate: TranslateService) {}
 
   ngOnInit(): void {}
 
@@ -76,6 +77,7 @@ export class IndexComponent implements OnInit {
       sessionStorage.setItem('access_token', token);
       sessionStorage.setItem('user_type', type);
       this.toastr.success('Vous êtes maintenant connecté.');
+      this.translate.use(user.language);
       this.route.navigate([userTypes[type]]);
     } else {
       this.showError('Email or Password is incorrect!');

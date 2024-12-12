@@ -29,7 +29,8 @@
         "social_links": "Social Links",
         "my_location": "My Location",
         "my_phone_numbers": "My Phone Numbers",
-        "other_settings": "Other Settings"
+        "other_settings": "Other Settings",
+        "change_image": "Change Image"
     },
     "Doctor_sidebar": {
         "dashboard": "Dashboard",
@@ -69,7 +70,7 @@
         "city": "City",
         "update_informations": "Update Informations",
         "update_image": "Update Image",
-        "recommended_image_size": "Image Size "
+        "recommended_image_size": "Recommended image size is "
     },
     "Doctor_social_links": {
         "title": "Paramètres des liens sociaux",
@@ -117,7 +118,7 @@
         "patient": "Patient",
         "phone_number": "Phone numbers",
         "created_date": "Created date",
-        "status": "Status",
+        "status": "Paiement Status",
         "update": "Update",
         "no_appointmnet": "No upcoming appointments"
     },
@@ -126,6 +127,7 @@
     "no_message": "No Message yet..",
     "delete_all": "Delete All",
     "mail_note": "PS: When email is disabled, the Appointment RTC channel has been expired .",
+    "submit":"Submit",
     "Doctor_documents": {
         "title": "Title",
         "file_type": "File Type",
@@ -152,5 +154,50 @@
             "content": "Write your content here ..",
             "submit": "Create Blog"
         }
+    },
+    "Doctor_IA_section": {
+        "title": "Analyze Image with AI",
+        "current_tries": "Your Current Tries are:",
+        "processing_image": "Processing Image...",
+        "prediction_result": {
+            "header": "Prediction Result",
+            "predicted_class": "Predicted Class:",
+            "probability": "Probability:",
+            "is_cancer": "Is Cancer:",
+            "yes": "Yes",
+            "no": "No",
+            "causes": "Causes:",
+            "symptoms": "Symptoms:",
+            "synonyms": "Synonyms:",
+            "prevention": "Prevention:",
+            "treatment": "Treatment:",
+            "reference": "Reference:",
+            "view_source": "View Source"
+        }
+    },
+    "Patient_image_change": {
+        "title": "Patient Image Details",
+        "logo": "Logo",
+        "recommended_image_size": "Recommended image size is ",
+        "update_button": "Add/Update Image"
+    },
+    "Patient_sidebar": {
+        "dashboard": "Dashboard",
+        "appointment_request": "Appointment Request",
+        "forum_with_doctors": "Forum with Doctors",
+        "email_box": "Email Box",
+        "blogs": "Blogs",
+        "logout": "Logout"
+    },
+    "header_patient": {
+        "welcome_message": "Welcome",
+        "mr": "Mr.",
+        "mrs": "Mrs.",
+        "settings": "Settings"
+    },
+    "languages": {
+        "fr": "French",
+        "en": "English",
+        "ar": "Arabic"
     }
 }
