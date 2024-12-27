@@ -7,21 +7,21 @@
     <!--  -->
     <div class="card">
         <div class="card-body">
-            <h4 class="header-title mb-4">Blogs Section</h4>
+            <h4 class="header-title mb-4"> {{'Doctor_blogs.title' | translate}}</h4>
             <ul class="nav nav-pills navtab-bg nav-justified">
                 <li class="nav-item">
                     <a href="#All-Blogs" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                        All DocPro Verified Blogs
+                        {{'Doctor_blogs.all_verified' | translate}}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#My-Blogs" data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
-                        My Blogs
+                        {{'Doctor_blogs.my_blogs' | translate}}
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#Create-blogs" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                        Create New Blog
+                        {{'Doctor_blogs.add_new' | translate}}
                     </a>
                 </li>
             </ul>
@@ -71,7 +71,7 @@
                                         <a [routerLink]="['/blog', item.id]">{{item.title}}</a>
                                     </h3>
                                     <p>{{item.content}}</p>
-                                    <a [routerLink]="['/blog', item.id]" class="read-more d-flex"> Read more <i
+                                    <a [routerLink]="['/blog', item.id]" class="read-more d-flex"> {{'Doctor_blogs.read_more' | translate}} <i
                                             class="fa fa-long-arrow-right ms-2"></i></a>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                                             <a [routerLink]="['/blog', item.id]">{{item.title}}</a>
                                         </h3>
                                         <p>{{item.content}}</p>
-                                        <a [routerLink]="['/blog', item.id]" class="read-more d-flex"> Read more <i
+                                        <a [routerLink]="['/blog', item.id]" class="read-more d-flex"> {{'Doctor_blogs.read_more' | translate}} <i
                                                 class="fa fa-long-arrow-right ms-2"></i></a>
                                     </div>
                                 </div>
@@ -139,24 +139,24 @@
                 </div>
                 <div class="tab-pane" id="Create-blogs">
                     <div class="content container-fluid">
-                        <h2>Create a Blog Post</h2><br><br>
+                        <h2>{{'Doctor_blogs.create_new_blog.title' | translate}}</h2><br><br>
                         <form [formGroup]="blogForm" (ngSubmit)="onSubmit()" class="blog-form">
                             <div class="input-block local-forms">
                                 <select formControlName="maladieId" class="form-control" required>
-                                    <option hidden value="">Select Disease</option>
+                                    <option hidden value="">{{'Doctor_blogs.create_new_blog.select_diseas' | translate}}</option>
                                     <option *ngFor="let item of allMaladies" [value]="item.id">{{ item.maladie_name }}
                                     </option>
                                 </select>
                             </div>
 
                             <div class="input-block local-forms">
-                                <input type="text" formControlName="title" class="form-control" placeholder="Blog Title"
+                                <input type="text" formControlName="title" class="form-control" placeholder="{{'Doctor_blogs.create_new_blog.blog_title' | translate}}"
                                     required>
                             </div>
 
                             <div class="input-block local-forms">
                                 <textarea formControlName="content" class="form-control" rows="5"
-                                    placeholder="Write your content here..." required></textarea>
+                                    placeholder="{{'Doctor_blogs.create_new_blog.content' | translate}}" required></textarea>
                             </div>
 
                             <div class="input-block local-forms">
@@ -164,7 +164,7 @@
                             </div>
 
                             <div class="input-block local-forms">
-                                <button type="submit" class="btn btn-primary">Create Blog</button>
+                                <button type="submit" class="btn btn-primary">{{'Doctor_blogs.create_new_blog.submit' | translate}}</button>
                             </div>
                         </form>
                     </div>

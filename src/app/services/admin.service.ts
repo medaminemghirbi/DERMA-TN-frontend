@@ -40,6 +40,10 @@ export class AdminService {
     );
   }
 
+  getConsultation(code: any) {
+    return this.http.get(environment.urlBackend + 'api/v1/find_consultation_by_code/' + code );
+  }
+
   /////////////////////// Patients  */////////////////
   getPatients() {
     return this.http.get(`${environment.urlBackend}` + 'api/v1/patients/');
@@ -131,4 +135,25 @@ export class AdminService {
     return this.http.get(environment.urlBackend + 'api/v1/patient_appointments/' + id);
   }
 
+
+  sendMessage(message: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl, { message });
+  }
+
+  Generate_payment_link(formData: any): Observable<any> {
+    return this.http.post(environment.urlBackend + 'api/v1/payments/generate', formData);
+  }
+  getDefaultLanguage(id: any) {
+    return this.http.get(environment.urlBackend + 'api/v1/get_defaut_language/' + id);
+  }
+
+
+
+  getNotifications(id:any): Observable<any[]> {
+    return this.http.get<any[]>(environment.urlBackend + 'api/v1/notifications/' + id);
+  }
+
+  // markAsRead(notificationId: number): Observable<any> {
+  //   return this.http.patch(`${this.apiUrl}/${notificationId}/mark_as_read`, {});
+  // }
 }

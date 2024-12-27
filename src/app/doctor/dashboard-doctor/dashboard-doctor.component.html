@@ -10,8 +10,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="morning-user">
-                            <h2>Good Morning, <span>Dr. {{currentuser.lastname}} {{currentuser.firstname}}</span></h2>
-                            <p>Have a nice day at work</p>
+                            <h2>    {{ 'Doctor_dashboard.welcome' | translate }} <span>Dr. {{currentuser.lastname}} {{currentuser.firstname}}</span></h2>
+                            <p>    {{ 'Doctor_dashboard.greeting' | translate }}</p>
                         </div>
                     </div>
                     <div class="col-md-6 position-blk">
@@ -38,8 +38,8 @@
                                 <div class="icon-box"> <img class="icon-image" src="../../../assets/img/icons/calendar.svg"
                                         alt></div>
                                         <h3>{{DoctorStats?.consultation}}</h3>
-                                        <h5>Total Appointments</h5>
-                                <p>Scheduled patient appointments today.</p>
+                                        <h5>    {{ 'Doctor_dashboard.appointment' | translate }}</h5>
+                                <p>{{ 'Doctor_dashboard.appointment_comments' | translate }}</p>
                             </div>
                         </div>
                     </div>
@@ -58,16 +58,16 @@
                                         alt>
                                 </div>
                                 <h3 *ngIf="currentuser.plan == 'no_plan'">-</h3>
-                                <h3 *ngIf="currentuser.plan == 'basic'"> 3 time</h3>
+                                <h3 *ngIf="currentuser.plan == 'basic'"> 3     {{ 'Doctor_dashboard.nbr' | translate }}</h3>
 
                                 <h3 *ngIf="currentuser.plan == 'premium'"> +  <i class="fas fa-solid fa-infinity"></i></h3>
                                 <h3 *ngIf="currentuser.plan == 'custom'">{{currentuser.custom_limit}} time</h3>
                                 <br>
-                                <h5 *ngIf="currentuser.plan == 'no_plan'">You dont have  IA Plan </h5>
-                                <h5 *ngIf="currentuser.plan == 'basic'">Your IA Plan is  <u style="color: blue;"><b>Basic</b></u>   </h5>
-                                <h5 *ngIf="currentuser.plan == 'premium'"> Your IA Plan is  <u style="color: blue;"><b>Premium</b></u> </h5>
-                                <h5 *ngIf="currentuser.plan == 'custom'"> Your IA Plan is <u style="color: blue;"><b>custom</b></u> </h5>
-                                <p>Images processed with AI system.</p>
+                                <h5 *ngIf="currentuser.plan == 'no_plan'">    {{ 'Doctor_dashboard.no_plan' | translate }} </h5>
+                                <h5 *ngIf="currentuser.plan == 'basic'"> {{ 'Doctor_dashboard.plan_is' | translate }}  <u style="color: blue;"><b>Basic</b></u>   </h5>
+                                <h5 *ngIf="currentuser.plan == 'premium'">  {{ 'Doctor_dashboard.plan_is' | translate }}  <u style="color: blue;"><b>Premium</b></u> </h5>
+                                <h5 *ngIf="currentuser.plan == 'custom'">  {{ 'Doctor_dashboard.plan_is' | translate }} <u style="color: blue;"><b>custom</b></u> </h5>
+                                <p>{{ 'Doctor_dashboard.plan_comment' | translate }}</p>
                             </div>
                         </div>
                     </div>
@@ -85,8 +85,8 @@
                                 <div class="icon-box"> <img class="icon-image"
                                         src="../../../assets/img/icons/dep-icon-04.svg" alt></div>
                                 <h3>{{DoctorStats?.ia_usage}}</h3>
-                                <h5>Disease Count for IA Plan</h5>
-                                <p>Procced Image by AI.</p><br>
+                                <h5>    {{ 'Doctor_dashboard.diseas' | translate }}</h5>
+                                <p>{{ 'Doctor_dashboard.diseas_comment' | translate }}.</p><br>
                             </div>
                         </div>
                     </div>
@@ -99,9 +99,9 @@
                         <div class="col-12 col-md-12  col-xl-8">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title d-inline-block">Today Appointments {{this.now |
-                                                    date:'dd MMM yyyy'}}</h4> <a
-                                        routerLink="/doctor/planning" class="patient-views float-end">Show all</a>
+                                    <h4 class="card-title d-inline-block">{{ 'Doctor_dashboard.appointment_comments' | translate }} {{this.now |
+                                                    date:'dd MMM yyyy'}} .</h4> <a
+                                        routerLink="/doctor/planning" class="patient-views float-end">{{ 'Doctor_dashboard.display' | translate }}</a>
                                 </div>
                                 <div class="card-body p-0 table-dash">
                                     <div class="table-responsive">
@@ -115,7 +115,7 @@
                                                     </td>
                                                     <td  class="appoint-time text-center"><h6>phone : {{appointment.patient.phone_number}}</h6></td>
                                                     <td class="appoint-time text-center">
-                                                        <h6>Today at {{ appointment.appointment | date: 'HH:mm' }}
+                                                        <h6>{{'Doctor_dashboard.today' | translate}} {{ appointment.appointment | date: 'HH:mm' }}
 
                                                         </h6>
                                                     </td>
@@ -138,12 +138,12 @@
                                     </div>
                                 </div>
                                 <div class="main-limit">
-                                    <p>Next Appointment in</p>
+                                    <p>{{ 'Doctor_dashboard.Next_appointment' | translate }}</p>
                                     <h4 *ngIf="nextAppointment; else noAppointment">
                                         {{ remainingHours }}h:{{ remainingMinutes }}m
                                     </h4>
                                     <ng-template #noAppointment>
-                                        <p>No upcoming appointments</p>
+                                        <p>{{ 'Doctor_dashboard.no_appointmnet' | translate }}</p>
                                     </ng-template>
                                 </div>
                             </div>

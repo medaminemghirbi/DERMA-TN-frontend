@@ -18,8 +18,6 @@ export class SettingsPatientComponent implements OnInit {
   city: string = '';
   state: string = '';
   postalCode: string = '';
-  image: any;
-  imageupdate!: any;
   upadate!: FormGroup;
   upadate_radius!: FormGroup;
 
@@ -51,9 +49,6 @@ export class SettingsPatientComponent implements OnInit {
     private doctorService: DoctorService,
     private usersService: AdminService
   ) {
-    this.imageupdate = new FormGroup({
-      avatar: new FormControl('', [Validators.required]),
-    });
     this.upadate = new FormGroup({
       civil_status: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
@@ -61,6 +56,9 @@ export class SettingsPatientComponent implements OnInit {
       lastname: new FormControl('', [Validators.required]),
       firstname: new FormControl('', [Validators.required]),
       location: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      phone_number: new FormControl('', [Validators.required]),
+
     });
     this.upadate_radius = new FormGroup({
       radius: new FormControl('', [Validators.required]),
@@ -114,48 +112,6 @@ export class SettingsPatientComponent implements OnInit {
       this.currentUserLocation.city = city || '';
     }
   }
-
-  fileChange(event: any) {
-    this.image = event.target.files[0];
-    debugger;
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.currentUser.user_image_url = e.target.result;
-    };
-    reader.readAsDataURL(this.image);
-  }
-  updateimage(f: any) {
-    let data = f.value;
-    const imageformadata = new FormData();
-    imageformadata.append('avatar', this.image);
-    Swal.fire({
-      title: 'Do you want to save the changes?',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Save',
-      denyButtonText: `Don't save`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        console.log(data);
-
-        this.doctorService
-          .updatedoctorimage(this.currentUser.id, imageformadata)
-          .subscribe(
-            (response) => {
-              sessionStorage.setItem('doctordata', JSON.stringify(response));
-              window.location.reload();
-            },
-            (err: HttpErrorResponse) => {}
-          );
-        //   this.route.navigate(['/dashbord-freelancer']);
-        Swal.fire('Saved!', '', 'success');
-      } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info');
-      }
-    });
-  }
-
   updateadminprofil(f: any) {
     let data = f.value;
     const formData = new FormData();
@@ -195,6 +151,10 @@ export class SettingsPatientComponent implements OnInit {
     formData.append('lastname', this.upadate.value.lastname);
     formData.append('firstname', this.upadate.value.firstname);
     formData.append('location', this.upadate.value.location);
+    formData.append('email', this.upadate.value.email);
+    formData.append('phone_number', this.upadate.value.phone_number);
+
+    
 
     Swal.fire({
       title: 'Do you want to save the changes?',

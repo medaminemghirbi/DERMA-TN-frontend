@@ -37,6 +37,7 @@ export class RegistrationComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(6)]],
         password_confirmation: ['', Validators.required],
         type: ['', Validators.required],
+        gender: ['', Validators.required],
         location: ['', Validators.required],
       },
       { validators: this.passwordMatchValidator } // Apply custom validator here
@@ -66,6 +67,8 @@ export class RegistrationComponent implements OnInit {
           password: formData.password,
           password_confirmation: formData.password_confirmation,
           type: formData.type,
+          gender: formData.gender,
+
           location: formData.location,
         },
       };

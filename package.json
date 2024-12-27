@@ -26,6 +26,8 @@
     "@fullcalendar/list": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
     "@ng-select/ng-select": "^9.0.0",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "@types/googlemaps": "^3.43.3",
     "file-saver": "^2.0.5",
     "http-client": "^4.3.1",

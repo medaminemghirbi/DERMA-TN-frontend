@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-notification-settings',
@@ -8,7 +10,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NotificationSettingsComponent implements OnInit {
   currentUser : any
-  constructor(private auth: AuthService) { 
+  paydata:any;
+
+  constructor(private auth: AuthService, private translate: TranslateService) { 
     this.currentUser = this.auth.getcurrentuser();
   }
 
@@ -81,16 +85,47 @@ toggleWorkingOnLine(event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
     this.currentUser.working_on_line = isChecked;
 
-    // Call your service to update the user's preference in the backend
+    // Call the backend to update working_on_line status
     this.auth.updateWorkingOnLine(this.currentUser.id, isChecked).subscribe({
         next: (response) => {
             sessionStorage.setItem('doctordata', JSON.stringify(response));
-            console.log('Workin on Line updated successfully!', response);
+            console.log('Working online status updated successfully!', response);
         },
         error: (error) => {
-            console.error('Failed to update Workin online', error);
+            console.error('Failed to update working online status', error);
         }
     });
 }
+updateReceiverWallet() {
+    this.auth.updateUserWalletAndAmount(this.currentUser.id, {
+        amount: this.currentUser.amount
+    }).subscribe({
+        next: (response) => {
+            sessionStorage.setItem('doctordata', JSON.stringify(response));
+            console.log('Wallet and amount updated successfully!', response);
+        },
+        error: (error) => {
+            console.error('Failed to update wallet and amount', error);
+        }
+    });
+}
+toggleLanguage(event: any) {
+    const selectedLanguage = event.target.value;
 
+    const formData = new FormData();
+    formData.append('language', String(selectedLanguage));
+
+    // Call the service to update the location
+    this.auth.ChangeDefaultLanguage(this.currentUser.id, formData).subscribe(
+    response => {
+        sessionStorage.setItem('doctordata', JSON.stringify(response));
+        Swal.fire('Language updated!', '', 'success');
+        this.translate.use(selectedLanguage); 
+    },
+    error => {
+        console.error('Error updating Language:', error);
+        Swal.fire('Failed to update Language', 'Please try again later .', 'error');
+    }
+    );
+    }
 }

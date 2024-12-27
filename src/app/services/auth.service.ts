@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -85,5 +85,19 @@ export class AuthService {
   }
   updateWorkingOnLine(userId: string, working_on_line: boolean) {
     return this.http.put(environment.urlBackend+`api/v1/users/${userId}/working_online`, { working_on_line: working_on_line });
+  }
+
+  updateUserWalletAndAmount(userId: number, data: {  amount: string }) {
+    return this.http.put(environment.urlBackend+`/api/v1/users/${userId}/update_wallet_amount`, data);
+}
+
+paywithkonnect(data:any){
+  let headers = new HttpHeaders({'x-api-key':'672de5dabe3490452069964a:Ne4ehQWwQbDgDOqBpFxzyKj8VEjkbeN'});
+  let options = { headers: headers };
+  return this.http.post<any>("https://api.preprod.konnect.network/api/v2/payments/init-payment",data,options)
+
+}
+  ChangeDefaultLanguage(id: string, newdata: FormData) {
+    return this.http.put(`${environment.urlBackend}api/v1/users/${id}/changeLanguage`, newdata);
   }
 }

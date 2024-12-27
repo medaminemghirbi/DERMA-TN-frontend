@@ -27,7 +27,7 @@
                     <p class="appointment-time"><strong>Time:</strong> {{ appointmentTime }}</p>
                 </div>
 
-                <div class="card-header d-flex justify-content-between align-items-center">
+                <div *ngIf="selectedDoctorData.working_on_line" class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="card-title">Online Appointment?</h4>
                     <div class="status-toggle d-flex justify-content-between align-items-center">
                         <input type="checkbox" id="online" class="check" [checked]="online" (change)="isonline($event)">

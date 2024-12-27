@@ -1,0 +1,34 @@
+.video-chat-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px; /* Adds spacing between the video and chat */
+}
+
+.video-container {
+    width: 48%; /* Ensures that the video containers take up almost half the space */
+    height: 400px; /* Set appropriate height for the video containers */
+    background-color: #333; /* A placeholder background color for video containers */
+}
+
+.chat-container {
+    width: 48%; /* Ensures chat takes up the remaining space */
+    height: 400px;
+    overflow-y: auto; /* Allows scrolling if the content is too long */
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 15px;
+}
+
+.comments-container {
+    max-height: 300px;
+    overflow-y: auto; /* Ensures chat doesn't overflow out of its container */
+}
+
+.comment {
+    margin-bottom: 15px;
+}
+
+.input-group {
+    margin-top: 10px;
+}

@@ -42,10 +42,10 @@ export class PatientsComponent implements OnInit {
   }
   sortByName(): void {
     if (this.sortOrder === 'asc') {
-      this.filterdPatients.sort((a: { firstname:string }, b: { firstname:string }) => a.firstname.localeCompare(b.firstname));
+      this.filterdPatients.sort((a: { location: string,firstname:string }, b: { location: string, firstname:string }) => a.firstname.localeCompare(b.firstname));
       this.sortOrder = 'desc';
     } else {
-      this.filterdPatients.sort((a: { firstname:string }, b: { firstname:string }) => b.firstname.localeCompare(a.firstname));
+      this.filterdPatients.sort((a: { location: string, firstname:string }, b: { location: string, firstname:string }) => b.firstname.localeCompare(a.firstname));
       this.sortOrder = 'asc';
     }
   }

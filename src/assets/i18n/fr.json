@@ -1,0 +1,204 @@
+{
+    "blog": {
+        "title": "Titre",
+        "content": "Contenu",
+        "create": "Créer un blog",
+        "update": "Mettre à jour le blog",
+        "destroy": "Supprimer le blog",
+        "show": "Voir le blog",
+        "all_blogs": "Tous les blogs"
+    },
+    "Doctor_settings": {
+        "language_system": "Système de Langue DocPro",
+        "default_language": "Langue par Défaut",
+        "notifications_system": {
+            "title": "Système de Notifications",
+            "enable_sms": "Activer les Notifications par SMS",
+            "enable_email": "Activer les Notifications par Email",
+            "enable_system": "Activer les Notifications Système"
+        },
+        "other_settings": {
+            "title": "Autres Paramètres",
+            "working_saturday": "Activer le Travail le Samedi",
+            "working_online": "Activer le Travail en Ligne",
+            "working_online_note": "Lorsque le Travail en Ligne est activé, le canal de rendez-vous sera généré par DocPro, et un lien pour la communication en temps réel (RTC) sera créé et envoyé dans la boîte mail 10 minutes avant le rendez-vous. Restez à l'écoute 😀."
+
+        }
+    },
+    "Doctor_settings_header": {
+        "general_settings": "Paramètres Généraux",
+        "social_links": "Liens Sociaux",
+        "my_location": "Ma Localisation",
+        "my_phone_numbers": "Mes Numéros de Téléphone",
+        "other_settings": "Autres Paramètres",
+        "change_image": "changer d'image"
+    },
+    "Doctor_sidebar": {
+        "dashboard": "Tableau de Bord",
+        "appointment_request": "Rendez-vous",
+        "planning": "Planification",
+        "forum": "Forum",
+        "email_box": "Boîte Mail",
+        "documents": "Documents",
+        "blogs": "Blogs",
+        "analyze_with_ai": "Analyser avec IA",
+        "logout": "Déconnexion"
+    },
+    "Doctor_information": {
+        "title": "Informations du Médecin",
+        "lastname": "Nom de Famille",
+        "firstname": "Prénom",
+        "civil_status": {
+            "title": "État Civil",
+            "mrs": "Madame",
+            "mr": "Monsieur",
+            "mme": "mademoiselle",
+            "other": "Autre"
+        },
+        "your_location": "Votre gouvernement",
+        "date_of_birth": "Date de Naissance",
+        "gender": {
+            "title": "Genre",
+            "female": "femelle",
+            "male": "male"
+        },
+        "doctor_image_details": "Détails de l'image du Médecin",
+        "address_details": "Détails de l'Adresse depuis Google Maps",
+        "address": "Adresse",
+        "address_line_1": "Entrez la ligne d'adresse 1",
+        "location": "Emplacement",
+        "zip_postal_code": "Code Postal",
+        "city": "Ville",
+        "update_informations": "Mettre A jour",
+        "update_image": "Modifier Image",
+        "recommended_image_size": "La taille d'image recommandée est "
+    },
+    "Doctor_social_links": {
+        "title": "Paramètres des liens sociaux",
+        "submit": "soumettre"
+    },
+    "Doctor_phone_number": {
+        "title": "Mes Numéros de Téléphone",
+        "add_new": "Ajouter un Autre Numéro de Téléphone",
+        "save": "Ajouter un Autre Numéro de Téléphone",
+        "existing": "Numéros de Téléphone Existants :",
+        "default": "Par Défaut",
+        "update": "Mettre à Jour",
+        "delete": "Supprimer"
+    },
+    "Doctor_dashboard": {
+        "welcome": "Bonjour, ",
+        "nbr": "fois ",
+        "greeting": "Passez une bonne journée de travail",
+        "appointment": "Total des Rendez-vous",
+        "appointment_comments": "Rendez-vous programmés aujourd'hui le",
+        "diseas": "Nombre de Maladies pour le Plan IA",
+        "diseas_comment": "Image traitée par IA.",
+        "appointment_today": "Rendez-vous du jour",
+        "Next_appointment": "Prochain Rendez-vous dans",
+        "display": "Afficher Tout",
+        "no_appointmnet": "Aucun rendez-vous à venir",
+        "no_plan": "Vous n'avez pas de Plan IA",
+        "plan_comment": "Images traitées avec un système d'IA.",
+        "plan_is": "Votre Plan IA est",
+        "today": "Aujourd'hui à"
+    },
+    "Doctor_appointments": {
+        "all_patients_requests": "Toutes les rendez-vous des patients",
+        "search_for": "Rechercher...",
+        "filter_by_state": {
+            "title": "Filtrer par état",
+            "pending": "En attente",
+            "accepted": "Accepté",
+            "refused": "Refusé",
+            "canceled": "Annulé"
+        },
+        "rendez_vous_date": "Date du rendez-vous",
+        "rendez_vous_type": "Type de rendez-vous",
+        "doctor": "Médecin",
+        "patient": "Patient",
+        "phone_number": "Numéros de téléphone",
+        "created_date": "Date de création",
+        "status": "statut de paiement",
+        "update": "Mettre à jour",
+        "no_appointmnet": "Aucun rendez-vous à venir"
+    },
+    "real_time_chat": "Chat en temps réel",
+    "enter_your_message": "Saisissez votre message",
+    "no_message": "Pas de message..",
+    "delete_all": "Supprimer Tous",
+    "mail_note": "note: Lorsque la messagerie électronique est désactivée, le canal Rendez-vous RTC a expiré.",
+    "submit":"Envoyer",
+    "Doctor_documents": {
+        "title": "Titre",
+        "file_type": "Type de fichier",
+        "file_size": "Taille du fichier",
+        "actions": "Actions",
+        "delete_all": "Supprimer tous les documents",
+        "add_new": "Téléverser un nouveau document",
+        "show": "Visualiser",
+        "download": "Télécharger",
+        "rename": "Renommer",
+        "delete": "Supprimer",
+        "preview": "Aperçu du document"
+    },
+    "Doctor_blogs": {
+        "title": "Section des Articles",
+        "all_verified": "Tous les Articles vérifiés par DocPro",
+        "my_blogs": "Mes Articles",
+        "add_new": "Créer un nouveau blog",
+        "read_more": "En savoir plus",
+        "create_new_blog": {
+            "title": "Créer un article de blog",
+            "select_diseas": "Sélectionner une maladie",
+            "blog_title": "Titre du blog",
+            "content": "Écrivez votre contenu ici ..",
+            "submit": "créer l'Article"
+        }
+    },
+    "Doctor_IA_section": {
+        "title": "Analyser l'image avec l'IA",
+        "current_tries": "Vos essais actuels sont :",
+        "processing_image": "Traitement de l'image...",
+        "prediction_result": {
+            "header": "Résultat de la Prédiction",
+            "predicted_class": "Classe Prédite :",
+            "probability": "Probabilité :",
+            "is_cancer": "Est-ce un cancer :",
+            "yes": "Oui",
+            "no": "Non",
+            "causes": "Causes :",
+            "symptoms": "Symptômes :",
+            "synonyms": "Synonymes :",
+            "prevention": "Prévention :",
+            "treatment": "Traitement :",
+            "reference": "Référence :",
+            "view_source": "Voir la source"
+        }
+    },
+    "Patient_image_change": {
+        "title": "Détails de l'image du patient",
+        "logo": "Logo",
+        "recommended_image_size": "La taille d'image recommandée est",
+        "update_button": "Ajouter/mettre à jour une image"
+    },
+    "Patient_sidebar": {
+        "dashboard": "Dashboard",
+        "appointment_request": "Appointment Request",
+        "forum_with_doctors": "Forum with Doctors",
+        "email_box": "Email Box",
+        "blogs": "Blogs",
+        "logout": "Logout"
+    },
+    "header_patient": {
+        "welcome_message": "Bienvenue",
+        "mr": "M.",
+        "mrs": "Mme",
+        "settings": "Paramètres"
+    },
+    "languages":{
+        "fr":"français",
+        "en":"Anglais",
+        "ar":"Arabe"
+    }
+}

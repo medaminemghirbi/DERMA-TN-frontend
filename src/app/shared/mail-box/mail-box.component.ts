@@ -35,8 +35,17 @@ export class MailBoxComponent implements OnInit {
   ngOnInit(): void {
     this.role = this.Auth.getRole();
     this.currentUser = this.Auth.getcurrentuser();
+    this.loadData();
 
-    this.doctorService.getAllEmail(this.currentUser.id).subscribe(
+  }
+  isButtonDisabled(sentAt: string): boolean {
+    const emailDate = new Date(sentAt);
+    const now = new Date();
+    const oneHourLater = new Date(emailDate.getTime() + 60 * 60 * 1000);
+    return now > oneHourLater;
+  }
+  loadData(){
+    this.doctorService.getAllEmail(this.role,this.currentUser.id).subscribe(
       (data) => {
         this.emails = data;
         console.log(this.emails);
@@ -51,12 +60,6 @@ export class MailBoxComponent implements OnInit {
         this.messageErr = "We didn't find any phone numbers in our database.";
       }
     );
-  }
-  isButtonDisabled(sentAt: string): boolean {
-    const emailDate = new Date(sentAt);
-    const now = new Date();
-    const oneHourLater = new Date(emailDate.getTime() + 60 * 60 * 1000);
-    return now > oneHourLater; // Returns true if current time is more than 1 hour after sentAt
   }
 
   delete(id: any, i: number) {
@@ -91,5 +94,8 @@ export class MailBoxComponent implements OnInit {
         );
       }
     });
+  }
+  refrechMail(){
+    this.loadData();
   }
 }

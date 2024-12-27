@@ -20,6 +20,24 @@
                                         <div class="col-12 col-md-6">
                                             <div class="input-block mb-3">
                                                 <label for="exampleFormControlSelect1"
+                                                    class="form-label">Email</label>
+                                                <input type="text" [(ngModel)]="currentUser.email" name="email"
+                                                    formControlName="email" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-block mb-3">
+                                                <label for="exampleFormControlSelect1"
+                                                    class="form-label">Phone Number</label>
+                                                <input type="text" [(ngModel)]="currentUser.phone_number" name="phone_number"
+                                                    formControlName="phone_number" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <div class="input-block mb-3">
+                                                <label for="exampleFormControlSelect1"
                                                     class="form-label">lastname</label>
                                                 <input type="text" [(ngModel)]="currentUser.lastname" name="lastname"
                                                     formControlName="lastname" class="form-control">
@@ -100,35 +118,6 @@
                                             style="background-color: rgb(38, 8, 158);">Update Informations</button>
                                     </div>
                                 </form>
-
-                                <div class="card-header">
-                                    <h5 class="card-title">Doctor Image Details</h5>
-                                </div>
-                                <div class="card-body pt-0">
-                                    <form [formGroup]="imageupdate" #f="ngForm" (ngSubmit)="updateimage(f)">
-                                        <p class="settings-label">Logo <span class="star-red">*</span></p>
-                                        <div class="settings-btn">
-                                            <input type="file" accept="image/*" formControlName="avatar" id="file"
-                                                (change)="fileChange($event)" class="hide-input" />
-                                            <label for="file" class="upload">
-                                                <i class="feather-upload"></i>
-                                            </label>
-                                        </div>
-                                        <h6 class="settings-size">Recommended image size is <span>150px x 150px</span>
-                                        </h6>
-                                        <div class="upload-images">
-                                            <img [src]="currentUser.user_image_url || 'assets/img/logo-dark.png'"
-                                                alt="Image" />
-                                            <a href="javascript:void(0);" class="btn-icon logo-hide-btn">
-                                                <i class="feather-x-circle"></i>
-                                            </a>
-                                        </div>
-                                        <div style="text-align: center;">
-                                            <button type="submit" class="btn btn-primary px-4"
-                                                style="background-color: rgb(38, 8, 158);">Update Image</button>
-                                        </div>
-                                    </form>
-                                </div>
                             </div>
 
                         </div>

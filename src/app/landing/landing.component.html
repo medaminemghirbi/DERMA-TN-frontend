@@ -30,7 +30,14 @@
                             </div>
                         </nav>
                     </div> -->
-                    <div class="btn-box"><a routerLink="/login" class="theme-btn-one"><i class="icon-image"></i>Login / Sign Up</a></div>
+                    <div class="btn-box">
+                        <a *ngIf="!currentUser" routerLink="/login" class="theme-btn-one">
+                            <i class="icon-image"></i>Login / Sign Up
+                        </a>
+                        <a *ngIf="currentUser" (click)="goToDashboard()" class="theme-btn-one">
+                            <i class="icon-image"></i>Go to Dashboard
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,15 +47,21 @@
             <div class="auto-container">
                 <div class="outer-box">
                     <div class="logo-box">
-                        <figure class="logo"><a><img src="../../assets/images1/small-logo.png"
-                                    alt=""></a></figure>
+                        <figure class="logo"><a><img src="../../assets/images1/small-logo.png" alt=""></a></figure>
                     </div>
                     <div class="menu-area">
                         <nav class="main-menu clearfix">
                             <!--Keep This Empty / Menu will come through Javascript-->
                         </nav>
                     </div>
-                    <div class="btn-box"><a routerLink="/login" class="theme-btn-one"><i class="icon-image"></i>Login / Sign Up</a></div>
+                    <div class="btn-box">
+                        <a *ngIf="!currentUser" routerLink="/login" class="theme-btn-one">
+                            <i class="icon-image"></i>Login / Sign Up
+                        </a>
+                        <a *ngIf="currentUser" (click)="goToDashboard()" class="theme-btn-one">
+                            <i class="icon-image"></i>Go to Dashboard
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -94,7 +107,10 @@
                 <div class="col-lg-6 col-md-12 col-sm-12 content-column">
                     <div class="content-box">
                         <h1>Find The Best Doctor.</h1>
-                        <p>Expert dermatologists for your skin health.</p>
+                        <p>Expert dermatologists for your skin health
+                        <br>
+                        First Platform For Doctors to Predict Skin Cancer Diseases  Wirh IA.
+                        </p>
 
                     </div>
                 </div>
@@ -120,16 +136,16 @@
         <div class="auto-container">
             <div class="auto-container">
                 <div class="clients-carousel owl-carousel owl-theme owl-nav-none owl-dots-none">
-                    <figure class="clients-logo-box"><a><img
-                                src="../../assets/images1/clients/clients-logo-1.png" alt=""></a></figure>
-                    <figure class="clients-logo-box"><a><img
-                                src="../../assets/images1/clients/clients-logo-2.png" alt=""></a></figure>
-                    <figure class="clients-logo-box"><a><img
-                                src="../../assets/images1/clients/clients-logo-3.png" alt=""></a></figure>
-                    <figure class="clients-logo-box"><a><img
-                                src="../../assets/images1/clients/clients-logo-4.png" alt=""></a></figure>
-                    <figure class="clients-logo-box"><a><img
-                                src="../../assets/images1/clients/clients-logo-5.png" alt=""></a></figure>
+                    <figure class="clients-logo-box"><a><img src="../../assets/images1/clients/clients-logo-1.png"
+                                alt=""></a></figure>
+                    <figure class="clients-logo-box"><a><img src="../../assets/images1/clients/clients-logo-2.png"
+                                alt=""></a></figure>
+                    <figure class="clients-logo-box"><a><img src="../../assets/images1/clients/clients-logo-3.png"
+                                alt=""></a></figure>
+                    <figure class="clients-logo-box"><a><img src="../../assets/images1/clients/clients-logo-4.png"
+                                alt=""></a></figure>
+                    <figure class="clients-logo-box"><a><img src="../../assets/images1/clients/clients-logo-5.png"
+                                alt=""></a></figure>
                 </div>
             </div>
         </div>
@@ -158,8 +174,8 @@
                             <figure class="icon-box"><img src="../../assets/images1/icons/icon-1.png" alt=""></figure>
                             <p>Appointment With</p>
                             <h3>Nearest Doctor</h3>
-                            <div class="link"><a href="appointment.html"><i class="icon-Arrow-Right"></i></a></div>
-                            <div class="btn-box"><a href="appointment.html" class="theme-btn-one">Chat now<i
+                            <div class="link"><a href="/login"><i class="icon-Arrow-Right"></i></a></div>
+                            <div class="btn-box"><a href="/login" class="theme-btn-one">Chat now<i
                                         class="icon-Arrow-Right"></i></a></div>
                         </div>
                     </div>
@@ -176,9 +192,9 @@
                             </div>
                             <figure class="icon-box"><img src="../../assets/images1/icons/icon-2.png" alt=""></figure>
                             <p>Live Chat With</p>
-                            <h3>Doctor</h3>
-                            <div class="link"><a href="appointment.html"><i class="icon-Arrow-Right"></i></a></div>
-                            <div class="btn-box"><a href="appointment.html" class="theme-btn-one">Chat now<i
+                            <h3>Doctors</h3>
+                            <div class="link"><a href="/login"><i class="icon-Arrow-Right"></i></a></div>
+                            <div class="btn-box"><a href="/login" class="theme-btn-one">Chat now<i
                                         class="icon-Arrow-Right"></i></a></div>
                         </div>
                     </div>
@@ -195,9 +211,9 @@
                             </div>
                             <figure class="icon-box"><img src="../../assets/images1/icons/icon-3.png" alt=""></figure>
                             <p>Appoinment With Top</p>
-                            <h3>Specialist</h3>
-                            <div class="link"><a href="appointment.html"><i class="icon-Arrow-Right"></i></a></div>
-                            <div class="btn-box"><a href="appointment.html" class="theme-btn-one">Chat now<i
+                            <h3>Dermatologues</h3>
+                            <div class="link"><a href="/login"><i class="icon-Arrow-Right"></i></a></div>
+                            <div class="btn-box"><a href="/login" class="theme-btn-one">Chat now<i
                                         class="icon-Arrow-Right"></i></a></div>
                         </div>
                     </div>
@@ -214,9 +230,9 @@
                             </div>
                             <figure class="icon-box"><img src="../../assets/images1/icons/icon-4.png" alt=""></figure>
                             <p>24/7 Active Support</p>
-                            <h3>Help Support</h3>
-                            <div class="link"><a href="appointment.html"><i class="icon-Arrow-Right"></i></a></div>
-                            <div class="btn-box"><a href="appointment.html" class="theme-btn-one">Chat now<i
+                            <h3>Ticket Tools</h3>
+                            <div class="link"><a href="/login"><i class="icon-Arrow-Right"></i></a></div>
+                            <div class="btn-box"><a href="/login" class="theme-btn-one">Chat now<i
                                         class="icon-Arrow-Right"></i></a></div>
                         </div>
                     </div>
@@ -767,8 +783,7 @@
                             <div class="lower-content">
                                 <h3><a href="blog-details.html">Baking can be done with a few things.</a></h3>
                                 <ul class="post-info">
-                                    <li><img src="../../assets/images1/news/admin-2.png" alt=""><a
-                                        >George
+                                    <li><img src="../../assets/images1/news/admin-2.png" alt=""><a>George
                                             Clooney</a></li>
                                     <li>April 09, 2020</li>
                                 </ul>
@@ -793,8 +808,7 @@
                             <div class="lower-content">
                                 <h3><a href="blog-details.html">Great food is not just eating energy.</a></h3>
                                 <ul class="post-info">
-                                    <li><img src="../../assets/images1/news/admin-3.png" alt=""><a
-                                        >George
+                                    <li><img src="../../assets/images1/news/admin-3.png" alt=""><a>George
                                             Clooney</a></li>
                                     <li>April 08, 2020</li>
                                 </ul>
@@ -825,8 +839,8 @@
                     <div class="row clearfix">
                         <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
                             <div class="footer-widget logo-widget">
-                                <figure class="footer-logo"><a><img
-                                            src="../../assets/images1/footer-logo.png" alt=""></a></figure>
+                                <figure class="footer-logo"><a><img src="../../assets/images1/footer-logo.png"
+                                            alt=""></a></figure>
                                 <div class="text">
                                     <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and
                                         publishing .</p>

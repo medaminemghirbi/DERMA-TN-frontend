@@ -79,8 +79,16 @@ export class ForumsComponent implements OnInit {
   }
   onFilesSelected(event: Event) {
     const input = event.target as HTMLInputElement;
+    const allowedExtensions = ['image/png', 'image/jpeg', 'image/jpg' ];
     if (input.files) {
       this.selectedFiles = Array.from(input.files);
+      this.selectedFiles = Array.from(input.files).filter(file =>
+        allowedExtensions.includes(file.type)
+      );
+      if (this.selectedFiles.length === 0) {
+        input.value = '';
+        this.toastr.error('Pls Provied  Only Images!', 'Error Loading Image! ');
+      }
     }
   }
 

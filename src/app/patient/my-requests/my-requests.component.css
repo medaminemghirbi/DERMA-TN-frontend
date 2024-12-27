@@ -39,3 +39,69 @@
 .not-provided {
     color: rgb(255, 9, 9);
 }
+
+.tip {
+    color: #dd0404; /* A pleasant red color */
+    background-color: #F9F9F9; /* Light background for contrast */
+    padding: 10px; /* Add some padding for better spacing */
+    border-left: 4px solid #f82d00; /* Left border for emphasis */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 14px; /* Font size for readability */
+    margin-top: 10px; /* Space above the tip */
+    font-weight: 500; /* Slightly bolder text */
+}
+.table-wrapper {
+    overflow-x: auto; /* Allows horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile devices */
+    margin-bottom: 20px;
+}
+
+.table {
+    min-width: 1200px; /* Ensure the table has a minimum width so that horizontal scrolling is needed */
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #f2f2f2;
+}
+.profile-image {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.profile-image a {
+    margin-right: 10px; /* Adds space between the image and the name */
+}
+
+.profile-image img {
+    max-width: 28px;
+    max-height: 28px;
+    object-fit: cover; /* Ensure the image fits the defined size */
+}
+
+.profile-image h6 {
+    margin: 0; /* Removes default margin on <h6> */
+    font-size: 16px; /* Adjust the font size */
+    color: #333; /* Optional: Adjust text color if needed */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Hides overflowed text */
+    text-overflow: ellipsis; /* Adds ellipsis if the text is too long */
+}
+
+.refus-reason {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #721c24;
+    background-color: #f8d7da;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+}

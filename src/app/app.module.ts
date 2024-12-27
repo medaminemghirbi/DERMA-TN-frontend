@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardAdminComponent } from './admin/dashboard-admin/dashboard-admin.component';
 import { IndexComponent } from './index/index.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './services/token.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderAdminComponent } from './admin/header-admin/header-admin.component';
@@ -60,8 +60,16 @@ import { Spinner2Component } from './shared/spinner2/spinner2.component';
 import { BookNowComponent } from './patient/book-now/book-now.component';
 import { MailBoxComponent } from './shared/mail-box/mail-box.component';
 import { MeetingOnlineComponent } from './shared/meeting-online/meeting-online.component';
+import { EmailNotificationComponent } from './shared/email-notification/email-notification.component';
+import { NotificationSettingComponent } from './patient/notification-setting/notification-setting.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ChangeImageComponent } from './patient/change-image/change-image.component';
+import { NotificationsComponent } from './shared/notifications/notifications.component';
 
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -112,6 +120,10 @@ import { MeetingOnlineComponent } from './shared/meeting-online/meeting-online.c
     BookNowComponent,
     MailBoxComponent,
     MeetingOnlineComponent,
+    EmailNotificationComponent,
+    NotificationSettingComponent,
+    ChangeImageComponent,
+    NotificationsComponent,
 
     
   ],
@@ -136,7 +148,14 @@ import { MeetingOnlineComponent } from './shared/meeting-online/meeting-online.c
     }),
     NgProgressHttpModule,
     ReactiveFormsModule,
-    FullCalendarModule
+    FullCalendarModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     {

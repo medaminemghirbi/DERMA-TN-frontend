@@ -9,7 +9,7 @@
             <div class="text-end mb-3">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#uploadDocumentModal">
-                    Upload New Document
+                    {{'Doctor_documents.add_new' | translate}}
                 </button>
             </div>
 
@@ -19,7 +19,7 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="uploadDocumentLabel">Upload New Document</h5>
+                            <h5 class="modal-title" id="uploadDocumentLabel"> {{'Doctor_documents.add_new' | translate}}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -78,15 +78,15 @@
                     <div class="bibliography-wrapper" style="overflow-y: auto; height: 75vh;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <h3>My Documents({{documents.length}})</h3>
-                            <button *ngIf="documents.length>0" class="btn btn-info" (click)="deleteAllDocuments()">Delete All Documents</button>
+                            <button *ngIf="documents.length>0" class="btn btn-info" (click)="deleteAllDocuments()"> {{'Doctor_documents.delete_all' | translate}}</button>
                         </div>
                         <br>
                         <table class="table table-bordered" style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>File Type</th>
-                                    <th>File Size</th>
+                                    <th> {{'Doctor_documents.title' | translate}}</th>
+                                    <th> {{'Doctor_documents.file_type' | translate}}</th>
+                                    <th> {{'Doctor_documents.file_size' | translate}}</th>
 
                                     <th style="display: flex; justify-content: center; gap: 10px;">Actions</th>
                                 </tr>
@@ -105,16 +105,16 @@
                                     </td>
                                     <td style="display: flex; justify-content: center; gap: 10px;">
                                         <a (click)="togglePreview(document, $event)"
-                                            class="btn btn-success">Visualiser</a>
+                                            class="btn btn-success"> {{'Doctor_documents.show' | translate}}</a>
 
                                         <a (click)="downloadDocument(document.title,document.id)"
-                                            class="btn btn-primary">Download</a>
+                                            class="btn btn-primary"> {{'Doctor_documents.download' | translate}}</a>
                                         <a class="btn btn-info" data-bs-toggle="modal"
                                             data-bs-target="#renameDocumentModal"
-                                            (click)="getdata(document)">Renommer</a>
+                                            (click)="getdata(document)"> {{'Doctor_documents.rename' | translate}}</a>
 
 
-                                        <a (click)="delete(document.id)" class="btn btn-danger">Delete</a>
+                                        <a (click)="delete(document.id)" class="btn btn-danger"> {{'Doctor_documents.delete' | translate}}</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -128,7 +128,7 @@
                 <div class="col-md-4">
                     <div class="preview-wrapper" *ngIf="selectedDocument"
                         style="height: 75vh; border: 1px solid #ccc; padding: 10px; overflow: auto;">
-                        <h4>Document Preview</h4><br>
+                        <h4> {{'Doctor_documents.preview' | translate}}</h4><br>
                         <div *ngIf="previewUrl">
                             <div *ngIf="fileType.includes('image')">
                                 <img [src]="previewUrl" alt="Image Preview" style="max-width: 100%; height: auto;" />

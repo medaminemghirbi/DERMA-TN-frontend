@@ -30,8 +30,7 @@
                                                 <div class="col-lg-8 col-md-12 col-sm-12 content-side">
                                                     <div class="wrapper list">
                                                         <div class="clinic-list-content list-item">
-                                                            <div class="clinic-block-one"
-                                                                *ngFor="let item of nearstdoctor  | filter: searchedKeyword | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                                                            <div *ngFor="let item of nearstdoctor  | filter: searchedKeyword | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" class="clinic-block-one" >
                                                                 <div class="inner-box">
                                                                     <div class="pattern">
                                                                         <div class="pattern-1"
@@ -41,40 +40,45 @@
                                                                             style="background-image: url(../../../assets/images1/shape/shape-25.png);">
                                                                         </div>
                                                                     </div>
-                                                                    <figure class="image-box"><img
-                                                                            src="{{item.user_image_url}}" alt="">
+                                                                    <figure class="image-box"><img src="{{item.user_image_url}}" alt="">
                                                                     </figure>
                                                                     <div class="content-box">
+                                                                        <div class="like-box"><a ><i
+                                                                                    class="far fa-heart"></i></a></div>
                                                                         <ul class="name-box clearfix">
                                                                             <li class="name">
-                                                                                <h3><a href="doctors-details.html">Dr.
-                                                                                        {{item.firstname}}
-                                                                                        {{item.lastname}}</a>
-                                                                                </h3>
+                                                                                <h3><a >Dr. {{item.firstname}} {{item.lastname}}</a></h3>
                                                                             </li>
-                                                                            <li><i *ngIf="item.email_confirmed == true"
-                                                                                    class="icon-Trust-1"></i>
-                                                                            </li>
+                                                                            <li *ngIf="item.email_confirmed == true"><i class="icon-Trust-1"></i></li>
+                                                                            <li *ngIf="item.email_confirmed == true"><i class="icon-Trust-2"></i></li>
                                                                         </ul>
+                                                                        <span class="designation">Med Doctor , Dermatologue, TN</span>
                                                                         <div class="text">
-                                                                            <p>{{item.description}}</p>
-                                                                        </div>
-                                                                        <div class="location-box">
-                                                                            <p><i
-                                                                                    class="fas fa-map-marker-alt"></i>{{item.location}}
-                                                                            </p>
+                                                                            <p>{{item.description}}.</p>
                                                                         </div>
                                                                         <div class="rating-box clearfix">
-                                                                            <br>
-                                                                        </div>
+                                                                            <ul class="rating clearfix">
+                                                                                <li><i class="icon-Star"></i></li>
+                                                                                <li><i class="icon-Star"></i></li>
+                                                                                <li><i class="icon-Star"></i></li>
+                                                                                <li><i class="icon-Star"></i></li>
+                                                                                <li><i class="icon-Star"></i></li>
+                                                                                <li><a >(17)</a></li>
+                                                                            </ul>
+                                                                            <div class="link">
+                                                                            <a *ngIf="item.working_on_line == true">Available Online</a>
+                                                                            <a *ngIf="item.working_on_line == false">Not Available Online</a>
 
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="location-box">
+                                                                            <p><i class="fas fa-map-marker-alt"></i>{{item.location}}, Tunisia</p>
+                                                                        </div>
                                                                         <div class="btn-box"><a
-                                                                                [routerLink]="['/patient', item.id, 'select-date']"
-                                                                                href="doctors-details.html">Select
-                                                                                Doctor</a></div>
+                                                                            [routerLink]="['/patient', item.id, 'select-date']">Select
+                                                                            Doctor</a></div>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                             <router-outlet></router-outlet>
 

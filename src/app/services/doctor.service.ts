@@ -126,10 +126,21 @@ export class DoctorService {
     return this.http.get(`${environment.urlBackend}api/v1/available_time_slots/${date}/${id}`);
   }
 
-  getAllEmail(id:any) {
-    return this.http.get(`${environment.urlBackend}api/v1/getAllEmails/${id}`);
+  getAllEmail(type:string,id:any) {
+    return this.http.get(`${environment.urlBackend}api/v1/getAllEmails/${type}/${id}`);
   }
   deleteEmail(id: any) {
     return this.http.delete(environment.urlBackend + 'api/v1/custom_mails/' + id);
   }
+
+  loadPlan(id: any) {
+    return this.http.get(
+      environment.urlBackend + 'api/v1/load_tries/' + id
+    );
+  }
+
+  getDoctorPatients(id: any) {
+    return this.http.get(environment.urlBackend + 'api/v1/doctors/' + id + '/patients');
+  }
+  
 }

@@ -36,7 +36,7 @@
                                         <div class="row g-0">
                                             <div class="col-12 col-lg-7 col-xl-9">
                                                 <div class="widget blog-comments clearfix">
-                                                    <h3 class="d-inline-block">RealTime Chat</h3>
+                                                    <h3 class="d-inline-block">{{'real_time_chat' | translate}}</h3>
                                                     <div *ngIf="role =='Admin'"
                                                         class="dropdown d-inline-block float-end">
                                                         <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -48,7 +48,7 @@
                                                             aria-labelledby="dropdownMenuButton">
                                                             <li>
                                                                 <button class="dropdown-item"
-                                                                    (click)="delete_all()">Delete All</button>
+                                                                    (click)="delete_all()">{{'delete_all' | translate}}</button>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -123,6 +123,11 @@
                                                             </li>
                                                         </ul>
                                                     </div>
+                                                    <div *ngIf="messages?.length == 0" class="no-appointment-row">
+                                                        <div colspan="8" class="description-content no-appointment-text">
+                                                            {{'no_message' | translate}}
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="flex-grow-0 py-3 px-4 border-top">
@@ -131,11 +136,11 @@
                                                             class="d-flex align-items-center">
                                                             <input class="form-control form-control-sm me-2"
                                                                 name="message" #messageInput type="text"
-                                                                placeholder="Enter your message" required>
+                                                                placeholder="{{'enter_your_message' | translate}}" required>
                                                             <input type="file" class="form-control form-control-sm me-2"
                                                                 (change)="onFilesSelected($event)" multiple #fileInput>
                                                             <button class="btn btn-primary"
-                                                                type="submit">Submit</button>
+                                                                type="submit">{{'submit' |translate}}</button>
                                                         </form>
 
                                                     </div>
