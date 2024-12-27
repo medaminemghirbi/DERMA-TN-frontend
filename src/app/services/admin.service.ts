@@ -146,4 +146,14 @@ export class AdminService {
   getDefaultLanguage(id: any) {
     return this.http.get(environment.urlBackend + 'api/v1/get_defaut_language/' + id);
   }
+
+
+
+  getNotifications(id:any): Observable<any[]> {
+    return this.http.get<any[]>(environment.urlBackend + 'api/v1/notifications/' + id);
+  }
+
+  // markAsRead(notificationId: number): Observable<any> {
+  //   return this.http.patch(`${this.apiUrl}/${notificationId}/mark_as_read`, {});
+  // }
 }

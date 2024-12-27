@@ -29,6 +29,7 @@
                     </div>
                     <div class="inner">
                         <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
                             <div class="form-group">
                                 <label>First name</label>
                                 <input autocomplete="new-firstname" type="text" formControlName="firstname"
@@ -46,6 +47,15 @@
                                     *ngIf="registrationForm.get('lastname')?.invalid && registrationForm.get('lastname')?.touched">
                                     Last name is required
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Your Gender</label>
+                                <select class="form-select" formControlName="gender" required
+                                    aria-label=".form-select-lg example">
+                                    <option hidden value="" selected> Gender </option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Femelle</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
