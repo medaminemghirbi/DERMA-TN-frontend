@@ -152,7 +152,9 @@ export class AdminService {
   getNotifications(id:any): Observable<any[]> {
     return this.http.get<any[]>(environment.urlBackend + 'api/v1/notifications/' + id);
   }
-
+  updatePrediction(data:any){
+    return this.http.patch(`${environment.urlBackend}predictions/${data.id}`, data);
+  }
   // markAsRead(notificationId: number): Observable<any> {
   //   return this.http.patch(`${this.apiUrl}/${notificationId}/mark_as_read`, {});
   // }

@@ -1,0 +1,111 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+}
+
+.file-list-container {
+    flex: 9;
+    overflow-x: auto;
+}
+
+.details-container { /* Container for all details */
+    flex: 3;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column; /* Stack details vertically */
+}
+
+.details {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px; /* Space between details sections */
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.actions {
+    margin-bottom: 20px;
+}
+
+.actions button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.file-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.file-list th, .file-list td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.file-list tr:nth-child(even) {
+    background-color: transparent;
+}
+.file-list tr:hover {
+    background-color: #e0f2f7;/*Light blue highlight on hover */
+    cursor: pointer;
+}
+.actions button {
+    margin: 5px;
+}
+.file-list .file-icon {
+    width: 30px;
+    text-align: center;
+}
+
+.file-list .file-icon img {
+    max-width: 20px;
+}
+
+.details h2 {
+    margin-top: 0;
+}
+
+.details dl {
+    margin-bottom: 20px;
+}
+
+.details dt {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.details dd {
+    margin-left: 0;
+    margin-bottom: 10px;
+}
+
+.details .checkbox-group {
+    margin-bottom: 10px;
+}
+
+.details label {
+    display: block;
+    margin-bottom: 5px;
+}
+.selected {
+    background-color: #47bb11; /* Light blue highlight */
+}

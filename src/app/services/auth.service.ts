@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -100,4 +99,10 @@ paywithkonnect(data:any){
   ChangeDefaultLanguage(id: string, newdata: FormData) {
     return this.http.put(`${environment.urlBackend}api/v1/users/${id}/changeLanguage`, newdata);
   }
+
+
+updateUserPhoneNumber(userId: number, data: {  phone_number: string }) {
+  return this.http.put(environment.urlBackend+`/api/v1/users/${userId}/update_phone_number`, data);
+}
+
 }

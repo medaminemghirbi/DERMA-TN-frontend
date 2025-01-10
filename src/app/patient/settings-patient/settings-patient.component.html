@@ -12,25 +12,20 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-header">
-                                <h5 class="card-title">Patient Informations</h5>
+                                <h5 class="card-title">{{'patient_settings.title' | translate}}</h5>
                             </div>
                             <div class="card-body pt-0">
                                 <form [formGroup]="upadate" #f="ngForm" (ngSubmit)="updateinformations(f)">
                                     <div class="row">
-                                        <div class="col-12 col-md-6">
+                                        <div class="col-12 col-md-12">
                                             <div class="input-block mb-3">
                                                 <label for="exampleFormControlSelect1"
-                                                    class="form-label">Email</label>
-                                                <input type="text" [(ngModel)]="currentUser.email" name="email"
+                                                    class="form-label">{{'patient_settings.email' | translate}}</label>
+                                                <input
+                                                readonly
+                                        style="cursor: not-allowed; background-color: #f0f0f0; color: #6c757d;"
+                                                type="text" [(ngModel)]="currentUser.email" name="email"
                                                     formControlName="email" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="input-block mb-3">
-                                                <label for="exampleFormControlSelect1"
-                                                    class="form-label">Phone Number</label>
-                                                <input type="text" [(ngModel)]="currentUser.phone_number" name="phone_number"
-                                                    formControlName="phone_number" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -38,7 +33,7 @@
                                         <div class="col-12 col-md-6">
                                             <div class="input-block mb-3">
                                                 <label for="exampleFormControlSelect1"
-                                                    class="form-label">lastname</label>
+                                                    class="form-label">{{'patient_settings.lastname' | translate}}</label>
                                                 <input type="text" [(ngModel)]="currentUser.lastname" name="lastname"
                                                     formControlName="lastname" class="form-control">
                                             </div>
@@ -46,7 +41,7 @@
                                         <div class="col-12 col-md-6">
                                             <div class="input-block mb-3">
                                                 <label for="exampleFormControlSelect1"
-                                                    class="form-label">firstname</label>
+                                                    class="form-label">{{'patient_settings.firstname' | translate}}</label>
                                                 <input type="text" [(ngModel)]="currentUser.firstname" name="firstname"
                                                     formControlName="firstname" class="form-control">
                                             </div>
@@ -55,23 +50,23 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6">
                                             <div class="input-block mb-3">
-                                                <label for="exampleFormControlSelect1" class="form-label">Civil
-                                                    Status</label>
+                                                <label for="exampleFormControlSelect1" class="form-label">
+                                                    {{'patient_settings.CivilStatus' | translate}}</label>
                                                 <select [(ngModel)]="currentUser.civil_status" name="civil_status"
                                                     formControlName="civil_status" class="form-control"
                                                     id="exampleFormControlSelect1">
-                                                    <option hidden value="" selected>Select civil status</option>
-                                                    <option selected value="Mr">Mr</option>
-                                                    <option value="Mrs">Mrs</option>
-                                                    <option value="Mme">Mme</option>
-                                                    <option value="other">Other</option>
+                                                    <option hidden value="" selected>{{'Doctor_information.title' |translate}}</option>
+                                                    <option selected value="Mr">{{'Doctor_information.civil_status.mr' |translate}}</option>
+                                                    <option value="Mrs">{{'Doctor_information.civil_status.mrs' |translate}}</option>
+                                                    <option value="Mme">{{'Doctor_information.civil_status.mme' |translate}}</option>
+                                                    <option value="other">{{'Doctor_information.civil_status.other' |translate}}</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="input-block mb-3">
-                                                <label for="exampleFormControlSelect1" class="form-label">Date of
-                                                    Birth</label>
+                                                <label for="exampleFormControlSelect1" class="form-label">
+                                                    {{'patient_settings.DateofBirth' | translate}}</label>
                                                 <input type="date" [(ngModel)]="currentUser.birthday" name="birthday"
                                                     formControlName="birthday" class="form-control"
                                                     id="exampleFormControlSelect1" />
@@ -81,8 +76,8 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6">
                                             <div class="input-block">
-                                                <label for="exampleFormControlSelect1" class="form-label">Your
-                                                    Gouvernement</label>
+                                                <label for="exampleFormControlSelect1" class="form-label">
+                                                    {{'patient_settings.DateofBirth' | translate}}</label>
                                                 <select class="form-control" [(ngModel)]="currentUser.location"
                                                     name="location" formControlName="location" id="location">
                                                     <option hidden value="" selected>Select Gouvernement</option>
@@ -93,7 +88,7 @@
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="input-block select-gender">
-                                                <label class="gen-label">Gender</label>
+                                                <label class="gen-label">{{'patient_settings.DateofBirth' | translate}}</label>
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
                                                         <input formControlName="gender" [(ngModel)]="currentUser.gender"
@@ -115,7 +110,7 @@
 
                                     <div style="text-align: center;">
                                         <button type="submit" class="btn btn-primary px-4"
-                                            style="background-color: rgb(38, 8, 158);">Update Informations</button>
+                                            style="background-color: rgb(38, 8, 158);">{{'patient_settings.button_info' | translate}}</button>
                                     </div>
                                 </form>
                             </div>
@@ -128,7 +123,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Radius Params For Displaying doctors By Gouvernament</h5>
+                            <h5 class="card-title">{{'patient_settings.radius_gouv' | translate}}</h5>
                         </div>
                         <div class="card-body pt-0">
                             <form [formGroup]="upadate_radius" #f="ngForm" (ngSubmit)="updateradius(f)">
@@ -140,7 +135,7 @@
                                 </div>
 
                                 <div class="settings-form">
-                                    <label class="gen-label">Rayon</label>
+                                    <label class="gen-label">{{'patient_settings.rayon' | translate}}</label>
                                     <select [(ngModel)]="currentUser.radius" 
                                         formControlName="radius" class="form-control"
                                         id="exampleFormControlSelect1">
@@ -158,7 +153,7 @@
                                 <br>
                                 <div style="text-align: center;">
                                     <button type="submit" class="btn btn-primary px-4"
-                                        style="background-color: rgb(38, 8, 158);">Update Radius</button>
+                                        style="background-color: rgb(38, 8, 158);">{{'patient_settings.button_map' | translate}}</button>
                                 </div>
                             </form>
                         </div>

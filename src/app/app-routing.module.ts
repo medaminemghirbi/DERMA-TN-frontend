@@ -9,7 +9,6 @@ import { ForumsComponent } from './shared/spinner/forums/forums.component';
 import { BlogDetailsComponent } from './user/blog-details/blog-details.component';
 import { BlogsComponent } from './admin/blogs/blogs.component';
 
-import { GuardGuard } from './services/guard.guard';
 import { DashboardDoctorComponent } from './doctor/dashboard-doctor/dashboard-doctor.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { DoctorGuard } from './guards/doctor.guard';
@@ -38,6 +37,7 @@ import { MailBoxComponent } from './shared/mail-box/mail-box.component';
 import { MeetingOnlineComponent } from './shared/meeting-online/meeting-online.component';
 import { NotificationSettingComponent } from './patient/notification-setting/notification-setting.component';
 import { ChangeImageComponent } from './patient/change-image/change-image.component';
+import { ReportsComponent } from './doctor/analyze-image/reports/reports.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -55,6 +55,8 @@ const routes: Routes = [
   // Doctor routes with guards
   { path: 'doctor/dashboard', canActivate: [DoctorGuard], component: DashboardDoctorComponent },
   { path: 'doctor/analyze-image', canActivate: [DoctorGuard], component: AnalyzeImageComponent },
+  { path: 'doctor/analyze-image/reports', canActivate: [DoctorGuard], component: ReportsComponent },
+
   { path: 'doctor/blogs', canActivate: [DoctorGuard], component: DoctorBlogsComponent },
   { path: 'doctor/planning', canActivate: [DoctorGuard], component: PlanningDoctorComponent },
   { path: 'doctor/appointment-request', canActivate: [DoctorGuard], component: AppointmentRequestsComponent },

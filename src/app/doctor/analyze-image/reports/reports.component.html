@@ -1,0 +1,71 @@
+<div class="main-wrapper">
+  <app-doctor-header></app-doctor-header>
+  <app-doctor-sidebar></app-doctor-sidebar>
+  <app-notifiacation-alert></app-notifiacation-alert>
+
+  <div class="page-wrapper">
+    <div class="content container-fluid">
+      <div class="mt-3">
+        <button class="btn btn-success" routerLink="/doctor/analyze-image">
+          <i class="fas fa-arrow-left"></i> Go Back
+        </button>
+      </div>
+      <div class="container">
+        <div class="file-list-container">
+          <h1>Bibliothèque des rapports ({{ predictions.length }})</h1>
+
+          <div class="actions" *ngIf="selectedPrediction">
+            <button (click)="downloadDocument(selectedPrediction.title,selectedPrediction.id)" type="button"
+              class="btn btn-rounded btn-outline-info">
+              <i class="fa fa-download"></i> Télécharger
+            </button>
+
+          </div>
+
+          <table class="file-list">
+            <thead>
+              <tr>
+                <th class="file-icon"></th>
+                <th>Report de maladie</th>
+                <th>date de création</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let prediction of predictions | paginate: { itemsPerPage: 5, currentPage: p }; index as i"
+                (click)="selectPrediction(prediction)" [class.selected]="selectedPrediction === prediction">
+                <td class="file-icon"><img src="../../../../assets/images1/PDF_icon.png" alt="PDF Icon"></td>
+                <td>{{ prediction.title }}</td>
+                <td>{{ prediction.created_at | date:' HH:mm dd MMM yyyy'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="text-align: right;">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+          </div>
+        </div>
+
+        <div class="details-container" *ngIf="selectedPrediction">
+          <div class="details">
+            <h2>{{ selectedPrediction.title }}</h2>
+            <dl>
+              <dt>Taille du fichier</dt>
+              <dd>217 KB</dd>
+              <dt>Création</dt>
+              <dd>
+                {{ selectedPrediction.created_at | date:'dd MMM yyyy' }}
+                à {{ selectedPrediction.created_at | date:'hh:mm a' }}
+              </dd>
+
+              <dt>Créateur</dt>
+              <dd>{{ selectedPrediction.createur }}</dd>
+              <dt>Téléchargé</dt>
+              <dd>{{ selectedPrediction.download_count }} fois</dd>
+              <dd></dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
