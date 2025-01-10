@@ -66,6 +66,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ChangeImageComponent } from './patient/change-image/change-image.component';
 import { NotificationsComponent } from './shared/notifications/notifications.component';
+import { ReportsComponent } from './doctor/analyze-image/reports/reports.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -124,6 +125,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotificationSettingComponent,
     ChangeImageComponent,
     NotificationsComponent,
+    ReportsComponent,
 
     
   ],

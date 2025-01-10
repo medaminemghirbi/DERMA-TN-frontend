@@ -30,16 +30,7 @@
                     </div>
                     <div class="card">
                         <h1 class="card-title"><b> * {{ 'Doctor_settings.notifications_system.title' | translate }}</b>
-                        </h1>
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4 class="card-title">{{ 'Doctor_settings.notifications_system.enable_sms' | translate }}
-                            </h4>
-                            <div class="status-toggle d-flex justify-content-between align-items-center">
-                                <input type="checkbox" id="sms_notifications" class="check"
-                                    [checked]="currentUser.is_smsable" (change)="toggleSmsNotifications($event)">
-                                <label for="sms_notifications" class="checktoggle">checkbox</label>
-                            </div>
-                        </div>
+                        </h1>            
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h4 class="card-title">{{ 'Doctor_settings.notifications_system.enable_email' | translate }}
                             </h4>
@@ -56,6 +47,29 @@
                                 <input type="checkbox" id="system_notifications" class="check"
                                     [checked]="currentUser.is_notifiable" (change)="toggleSystemNotifications($event)">
                                 <label for="system_notifications" class="checktoggle">checkbox</label>
+                            </div>
+                        </div>
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4 class="card-title">{{ 'Doctor_settings.notifications_system.enable_sms' | translate }}
+                            </h4>
+                            <div class="status-toggle d-flex justify-content-between align-items-center">
+                                <input type="checkbox" id="sms_notifications" class="check"
+                                    [checked]="currentUser.is_smsable" (change)="toggleSmsNotifications($event)">
+                                <label for="sms_notifications" class="checktoggle">checkbox</label>
+                            </div>
+                        </div>
+                        <div *ngIf="currentUser.is_smsable"class="form-group">
+                            <label for="phone_number"> * {{ 'Doctor_settings.message_phone' |translate}} </label>
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">+216</span>
+                                </div>
+                                <input type="text" id="phone_number" class="form-control" 
+                                    [(ngModel)]="currentUser.phone_number" 
+                                    name="phone_number" 
+                                    [disabled]="!currentUser.is_smsable"
+                                    placeholder="Enter phone number"
+                                    (change)="updateUserPhoneNumber()">
                             </div>
                         </div>
                     </div>

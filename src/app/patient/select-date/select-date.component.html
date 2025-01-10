@@ -11,9 +11,13 @@
                         <i class="fas fa-arrow-left"></i> Go Back
                     </button>
                 </div>
-                
+                <div class="col-auto float-end ms-auto">
+                    <a href="#" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#scrollable-modal"><i
+                            class="fa-solid fa-power-off"></i> Display Holidays</a>
+                </div>
+
                 <div class="d-flex justify-content-between mt-3 mb-3">
-                    
+
                     <button class="btn btn-primary" (click)="previous()" [disabled]="currentWeekIndex === 0">
                         Previous
                     </button>
@@ -30,8 +34,13 @@
                                     <strong>{{ day.day }}</strong>
                                     <br>
                                     <span class="text-muted">{{ day.date }}</span>
+                                    <br>
+                                    <small *ngIf="getHolidayName(day)" class="text-danger">
+                                        {{ getHolidayName(day) }}
+                                    </small>
                                 </h5>
-                                <button class="btn btn-outline-primary" (click)="handleAccordionToggle(day, i)">
+                                <button [disabled]="isHoliday(day)" [ngClass]="{'disabled-btn': isHoliday(day)}"
+                                    class="btn btn-outline-primary" (click)="handleAccordionToggle(day, i)">
                                     {{ openedAccordionIndex === i ? 'Hide' : 'Show' }} Available Times
                                 </button>
                                 <div class="accordion-content" [ngClass]="{ 'open': openedAccordionIndex === i }">
@@ -40,7 +49,9 @@
                                             <ng-container *ngFor="let item of TimesLines?.available_slots">
                                                 <div class="col-6 mb-2">
                                                     <button (click)="display(day, item.time)"
-                                                        class="btn btn-outline-primary w-100">
+                                                        class="btn btn-outline-primary w-100"
+                                                        [disabled]="isTimeDisabled(day, item.time)"
+                                                        [ngClass]="{'disabled-btn': isTimeDisabled(day, item.time)}">
                                                         {{ item.time }}
                                                     </button>
                                                 </div>
@@ -56,3 +67,48 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="scrollable-modal" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scrollableModalTitle">Holidays (2024/2025)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-striped custom-table mb-0 datatable">
+                        <thead>
+                            <tr>
+                                <th>Holiday Name</th>
+                                <th>Holiday Date</th>
+                                <th>Day</th>
+                                <th>Finished ?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr
+                                *ngFor="let item of AllHoliday | paginate: { itemsPerPage: 20, currentPage: p }| filter:searchedKeyword ; index as i">
+                                <td> {{ i + 1 }} - {{item.holiday_name}}</td>
+                                <td>{{item.holiday_date}}</td>
+                                <td>{{item.day_of_week}}</td>
+                                <td *ngIf="isPastHoliday(item.holiday_date)">
+                                    <i style="color: green;" class="fa fa-check" data-bs-toggle="tooltip"
+                                        title="fa fa-check"></i>
+                                </td>
+                                <td *ngIf="!(isPastHoliday(item.holiday_date))">
+
+                                    <i style="color: red;" class="fa fa-close" data-bs-toggle="tooltip"
+                                        title="fa fa-window-close"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="text-align:right;">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -66,3 +66,8 @@
     background-color: #f8f9fa; /* Light background for contrast */
     border: 1px solid #dee2e6; /* Border for separation */
 }
+/* Add this to your component's CSS file */
+.disabled-btn {
+    cursor: not-allowed; background-color: #f0f0f0; color: #6c757d;
+}
+

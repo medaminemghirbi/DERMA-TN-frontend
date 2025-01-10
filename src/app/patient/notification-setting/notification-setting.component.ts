@@ -113,5 +113,18 @@ toggleLanguage(event: any) {
     }
     );
     }
-
+                        
+    updateUserPhoneNumber() {
+        this.auth.updateUserPhoneNumber(this.currentUser.id, {
+            phone_number: this.currentUser.phone_number
+        }).subscribe({
+            next: (response) => {
+                sessionStorage.setItem('doctordata', JSON.stringify(response));
+                console.log('pohne number updated successfully!', response);
+            },
+            error: (error) => {
+                console.error('Failed to update phone number', error);
+            }
+        });
+    }
 }

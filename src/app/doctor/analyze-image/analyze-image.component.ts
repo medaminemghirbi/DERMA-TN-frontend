@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class AnalyzeImageComponent implements OnInit {
   currentuser: any;
-
+  dataPlan: { display_remaining_tries?: number } = {}; 
   image: any;
   imageupdate: FormGroup;
   loading: boolean = false;
@@ -28,7 +28,9 @@ export class AnalyzeImageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadPlan();
+  }
 
   fileChange(event: any) {
     const input = event.target as HTMLInputElement;
@@ -94,6 +96,17 @@ export class AnalyzeImageComponent implements OnInit {
       (err: HttpErrorResponse) => {
         this.loading = false; // Hide loading indicator
         Swal.fire('Error!', err.error.error + '<br>'+'Contact: superadmin@example.com', 'error');
+      }
+    );
+  }
+
+  loadPlan(){
+    this.doctorService.getDoctorTry(this.currentuser.id ).subscribe(
+      (response) => {
+        this.dataPlan = response;
+      },
+      (err: HttpErrorResponse) => {
+      Swal.fire('Error!', err.error.error + '<br>'+'Contact: superadmin@example.com', 'error');
       }
     );
   }

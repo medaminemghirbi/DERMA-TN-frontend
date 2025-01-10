@@ -23,7 +23,8 @@
             "working_online": "Activer le Travail en Ligne",
             "working_online_note": "Lorsque le Travail en Ligne est activé, le canal de rendez-vous sera généré par DocPro, et un lien pour la communication en temps réel (RTC) sera créé et envoyé dans la boîte mail 10 minutes avant le rendez-vous. Restez à l'écoute 😀."
 
-        }
+        },
+        "message_phone": "Numéro de Téléphone Pour les Notifications Sms"
     },
     "Doctor_settings_header": {
         "general_settings": "Paramètres Généraux",
@@ -173,7 +174,9 @@
             "prevention": "Prévention :",
             "treatment": "Traitement :",
             "reference": "Référence :",
-            "view_source": "Voir la source"
+            "view_source": "Voir la source",
+            "download_report": "Télécharger le Rapport"
+
         }
     },
     "Patient_image_change": {
@@ -200,5 +203,20 @@
         "fr":"français",
         "en":"Anglais",
         "ar":"Arabe"
-    }
+    },
+    "patient_settings": {
+    "title": "Informations du Patient",
+    "email": "Email",
+    "lastname": "Nom de famille",
+    "firstname": "Prénom",
+    "CivilStatus": "État civil",
+    "Your Gouvernement": "Votre Gouvernorat",
+    "Gender": "Genre",
+    "DateofBirth": "Date de naissance",
+    "radius_gouv": "Paramètres de rayon pour afficher les médecins par gouvernorat",
+    "rayon": "Rayon",
+    "button_map": "Mettre à jour le rayon",
+    "button_info": "Mettre à jour les informations"
+}
+
 }

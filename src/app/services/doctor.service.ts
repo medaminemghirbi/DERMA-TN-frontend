@@ -143,4 +143,10 @@ export class DoctorService {
     return this.http.get(environment.urlBackend + 'api/v1/doctors/' + id + '/patients');
   }
   
+  getDoctorTry(id: any) {
+    return this.http.get(environment.urlBackend + 'api/v1/doctors/' + id);
+  }
+  getAllHoliday(){
+    return this.http.get(environment.urlBackend + 'api/v1/holidays/');
+  }
 }
