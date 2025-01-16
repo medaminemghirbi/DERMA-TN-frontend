@@ -12,7 +12,12 @@
                     <div class="col-6">
                         <div class="doctor-search-blk">
                             <div class="top-nav-search table-search-blk">
-                                <h4 class="header-title">All Requests ( {{filteredRequests?.length}} )</h4>
+                                <h4 class="header-title">{{'patient_request.all_request' | translate}} ( {{filteredRequests?.length}} )</h4>
+                            </div>
+                            <div class="add-group">
+                                <select id="itemsPerPage" [(ngModel)]="itemsPerPage" class="form-control form-control-sm">
+                                    <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+                                  </select>
                             </div>
                             <div class="add-group">
                                 <a href="javascript:;" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -24,8 +29,7 @@
                         </div>
                     </div>
                     <div class="col-6 text-end">
-                        <button type="button" class="btn btn-primary" routerLink="/patient/add-new-request">Add New
-                            Request</button>
+                        <button type="button" class="btn btn-primary" routerLink="/patient/add-new-request">{{'patient_request.add_new' | translate}}</button>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -33,23 +37,22 @@
                         <div class="input-group input-group-sm">
                             <input type="text" name="role" class="form-control form-control-sm"
                                 (ngModelChange)="searchAppointment()" [(ngModel)]="searchedKeyword"
-                                placeholder="Search for...">
+                                placeholder="{{'Doctor_appointments.search_for' | translate}}">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <select class="form-control form-control-sm" [(ngModel)]="selectedStatus"
                             (change)="filterRequests()">
-                            <option hidden value="" selected>Filter By State</option>
-                            <option value="pending">En Cours</option>
-                            <option value="approved">Accepted</option>
-                            <option value="rejected">Refused</option>
-                            <option value="canceled">Canceled</option>
-                            <option value="finished">Finished</option>
+                            <option hidden value="" selected>{{'Doctor_appointments.filter_by_state.title' | translate}}</option>
+                            <option value="pending">{{'Doctor_appointments.filter_by_state.pending' | translate}}</option>
+                            <option value="approved">{{'Doctor_appointments.filter_by_state.accepted' | translate}}</option>
+                            <option value="rejected">{{'Doctor_appointments.filter_by_state.refused' | translate}}</option>
+                            <option value="canceled">{{'Doctor_appointments.filter_by_state.canceled' | translate}}</option>
+                            <option value="finished">{{'Doctor_appointments.filter_by_state.finished' | translate}}</option>
                         </select>
                     </div>
-                    <h6 class="tip">PS: For Online Consultation You will not recive Online Consultation Link from
-                        <a routerLink="http://localhost:4200/patient/appointment-request"><u>DocPro.tn</u></a>
-                        if you did not proceed your payment In Dashboard.
+                    <h6 class="tip">
+                        {{'patient_request.message' | translate}}
                     </h6>
                 </div>
                 <div class="table-wrapper">
@@ -57,20 +60,26 @@
                     <table class="table border-0 custom-table comman-table datatable mb-0">
                         <thead>
                             <tr>
-                                <th>Rendez Vous Date</th>
-                                <th>Rendez vous type</th>
-                                <th>Payment Link</th>
-                                <th>Payment Status</th>
-                                <th>Persons</th>
-                                <th>Phone Numbers</th>
-                                <th>Created Date</th>
-                                <th>Status</th>
-                                <th>Manage</th>
+                                <th>{{'patient_request.RendezVousDate' | translate}}</th>
+                                <th>{{'patient_request.Rendezvoustype' | translate}}</th>
+                                <th>{{'patient_request.PaymentLink' | translate}}</th>
+                                <th>{{'patient_request.OnlinePaymentStatus' | translate}}</th>
+                                <th>{{'patient_request.Persons' | translate}}</th>
+                                <th>{{'patient_request.PhoneNumbers' | translate}}</th>
+                                <th>{{'patient_request.CreatedDate' | translate}}</th>
+                                <th>{{'patient_request.Status' | translate}}</th>
+                                <th>{{'patient_request.Manage' | translate}}</th>
+
                             </tr>
                         </thead>
                         <tbody>
+                            <tr *ngIf="isLoading">
+                                <td colspan="100%" class="text-center">
+                                    <loaders-css [loader]="loader" [scale]="3" [color]="color"></loaders-css>
+                                </td>
+                              </tr>
                             <tr
-                                *ngFor="let item of filteredRequests | filter: searchedKeyword | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                *ngFor="let item of filteredRequests | filter: searchedKeyword | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
                                 <td class="description-content">
                                     <a>
                                         {{ item.appointment | date: 'EEEE'}}<br>
@@ -80,17 +89,31 @@
                                         at {{ item.appointment | date: 'HH:mm'}}
                                     </a>
                                 </td>
-                                <td>{{ item.appointment_type }}</td>
+                                <td>
+
+                                    <span *ngIf="item.appointment_type === 'online'"
+                                        class="badge rounded-pill badge-outline-success">
+                                        <i class="fa fa-wifi" data-bs-toggle="tooltip" title="fa fa-wifi"></i>
+
+                                        {{ item.appointment_type }}
+                                    </span>
+                                    <span *ngIf="item.appointment_type === 'onsite'"
+                                        class="badge rounded-pill badge-outline-info">
+                                        <i class="fa fa-briefcase" data-bs-toggle="tooltip" title="fa fa-briefcase"></i>
+                                        {{ item.appointment_type }}
+                                    </span>
+                                </td>
                                 <td>
                                     <button
                                         *ngIf="item.appointment_type === 'online' && !item.is_payed && (item.status === 'approved')"
                                         (click)="pay(item.id)" class="btn btn-outline-warning">
-                                        Pay Now
+                                        {{'patient_request.pay_now'|translate}}
                                     </button>
-                                    <button
+                                    <button readonly
+                                        style="cursor: not-allowed; background-color: #f0f0f0; color: #6c757d;"
                                         *ngIf="item.appointment_type === 'online' && item.is_payed && (item.status === 'pending' || item.status === 'rejected' || item.status === 'canceled' || item.status === 'finished')"
-                                        class="btn btn-outline-warning" disabled>
-                                        Pay Now
+                                        class="btn btn-outline-warning">
+                                        {{'patient_request.paid'|translate}}
                                     </button>
                                     <p *ngIf="item.appointment_type === 'onsite'"> - </p>
                                 </td>
@@ -110,18 +133,19 @@
                                         </u></i>
                                 </td>
                                 <td class="profile-image">
-                                    <a><img width="28" height="28" src="{{ item.doctor.user_image_url }}" class="rounded-circle m-r-5" alt></a>
+                                    <a><img width="28" height="28" src="{{ item.doctor.user_image_url }}"
+                                            class="rounded-circle m-r-5" alt></a>
                                     <h6>Dr. {{ item.doctor.firstname }} {{ item.doctor.lastname }}</h6>
                                 </td>
-                                
+
                                 <td class="profile-image">
                                     <a><img width="28" height="28" src="{{ item.patient.user_image_url }}"
                                             class="rounded-circle m-r-5" alt>Mr(s) {{ item.patient.firstname }} {{
                                         item.patient.lastname }}</a>
                                 </td>
                                 <td>
-                                    patient: {{ item.patient.phone_number }}<br>
-                                    doctor:
+                                    {{'patient_request.patient' | translate}}: {{ item.patient.phone_number }}<br>
+                                    {{'patient_request.docteur' | translate}}:
                                     <div *ngIf="item.doctor.phone_numbers && item.doctor.phone_numbers.length > 0"
                                         class="phone-list">
                                         <ul>
@@ -150,16 +174,14 @@
                                     <button *ngIf="item.status === 'pending'" class="custom-badge status-orange">
                                         Pending
                                     </button>
-                                    <button 
-                                    *ngIf="item.status === 'rejected'" 
-                                    class="custom-badge status-red" 
-                                    (click)="item.showReason = !item.showReason">
-                                    Refused
-                                    <i class="fas fa-info-circle"></i>
-                                </button>
-                                <div *ngIf="item.showReason" class="refus-reason">
-                                    {{ item.refus_reason || 'No reason provided' }}
-                                </div>
+                                    <button *ngIf="item.status === 'rejected'" class="custom-badge status-red"
+                                        (click)="item.showReason = !item.showReason">
+                                        Refused
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                    <div *ngIf="item.showReason" class="refus-reason">
+                                        {{ item.refus_reason || 'No reason provided' }}
+                                    </div>
                                     <button *ngIf="item.status === 'canceled'" class="custom-badge status-blue">
                                         Canceled
                                     </button>
@@ -167,7 +189,7 @@
                                         Finished
                                     </button>
                                 </td>
-                                
+
                                 <td class="text-end">
                                     <div class="dropdown dropdown-action">
                                         <a class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
@@ -175,8 +197,11 @@
                                             <i class="fa fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" *ngIf="item.status === 'finished'"><i
-                                                    class="feather-star m-r-5"></i> Rate Doctor</a>
+                                            <a class="dropdown-item" *ngIf="item.status === 'finished'" type="button"
+                                                data-bs-toggle="modal" data-bs-target="#rate-doctor-modal"
+                                                (click)="openRatingModal(item)">
+                                                <i class="feather-star m-r-5"></i> Rate Doctor
+                                            </a>
                                             <a class="dropdown-item" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal1"
                                                 (click)="handleClick(item.status, item.id)"
@@ -191,8 +216,7 @@
                                 </td>
                             </tr>
                             <tr *ngIf="myRequests == 0" class="no-appointment-row">
-                                <td style="text-align: center;" colspan="9" >No Appointment Request
-                                    yet</td>
+                                <td style="text-align: center;" colspan="9">{{'patient_request.no_appointment'| translate}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -230,6 +254,37 @@
                     </form>
                 </div>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="rate-doctor-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div *ngIf="ratingExists" class="alert alert-info">
+            You have already rated this consultation. Rating is disabled.
+          </div>
+          
+        <div *ngIf="!ratingExists" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">     <i class="feather-star m-r-5"></i> Rate Doctor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Please select a rating for Dr. {{ selectedDoctor?.firstname }} {{ selectedDoctor?.lastname }} on your consultation 
+                    on {{selectedConsultation?.appointment| date: 'dd MMMM yyyy'}} at {{selectedConsultation?.appointment| date: ' HH:mm'}}</p>
+                <div class="rating-stars">
+                    <ng-container *ngFor="let star of stars; let i = index">
+                        <i [class]="star <= selectedRating ? 'feather-star filled' : 'feather-star outline'"
+                            (click)="selectRating(i + 1)">
+                        </i>
+                    </ng-container>
+                </div>
+                <textarea class="form-control mt-3" [(ngModel)]="feedback" placeholder="Leave a comment..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="submitRating()">Submit Rating</button>
             </div>
         </div>
     </div>

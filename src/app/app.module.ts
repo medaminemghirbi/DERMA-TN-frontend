@@ -67,6 +67,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ChangeImageComponent } from './patient/change-image/change-image.component';
 import { NotificationsComponent } from './shared/notifications/notifications.component';
 import { ReportsComponent } from './doctor/analyze-image/reports/reports.component';
+import { NgxLoadersCssModule } from 'ngx-loaders-css';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -139,6 +140,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     Ng2SearchPipeModule,
     NgProgressModule,
     FullCalendarModule,
+    NgxLoadersCssModule,
     NgProgressModule.withConfig({
       color: "#003d99"
     }),

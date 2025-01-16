@@ -51,7 +51,6 @@ const routes: Routes = [
   { path: 'admin/planning', canActivate: [AdminGuard], component: PlanningComponent },
   { path: 'admin/blogs', canActivate: [AdminGuard], component: BlogsComponent },
   { path: 'admin/maladies', canActivate: [AdminGuard], component: MaladieComponent },
-
   // Doctor routes with guards
   { path: 'doctor/dashboard', canActivate: [DoctorGuard], component: DashboardDoctorComponent },
   { path: 'doctor/analyze-image', canActivate: [DoctorGuard], component: AnalyzeImageComponent },
@@ -60,6 +59,7 @@ const routes: Routes = [
   { path: 'doctor/blogs', canActivate: [DoctorGuard], component: DoctorBlogsComponent },
   { path: 'doctor/planning', canActivate: [DoctorGuard], component: PlanningDoctorComponent },
   { path: 'doctor/appointment-request', canActivate: [DoctorGuard], component: AppointmentRequestsComponent },
+
   { path: 'doctor/dokuments', canActivate: [DoctorGuard], component: DokumentsComponent },
 
   { path: 'doctor/settings', canActivate: [DoctorGuard], component: DoctorSettingsComponent },

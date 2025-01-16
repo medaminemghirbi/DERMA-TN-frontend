@@ -111,7 +111,8 @@
             "pending": "Pending",
             "accepted": "Accepted",
             "refused": "Refused",
-            "canceled": "Canceled"
+            "canceled": "Canceled",
+            "finished": "Annulé"
         },
         "rendez_vous_date": "appointment date",
         "rendez_vous_type": "appointment type",
@@ -119,7 +120,7 @@
         "patient": "Patient",
         "phone_number": "Phone numbers",
         "created_date": "Created date",
-        "status": "Paiement Status",
+        "status": "Online Paiement Status",
         "update": "Update",
         "no_appointmnet": "No upcoming appointments"
     },
@@ -216,5 +217,25 @@
         "rayon":"Rayon",
         "button_map":"Update Radius",
         "button_info":"Update Informations"
+    },
+    "patient_request": {
+        "all_request": "All Requests",
+        "add_new": "Add New Request",
+        "RendezVousDate": "Appointment Date",
+        "Rendezvoustype": "Appointment Type",
+        "PaymentLink": "Payment Link",
+        "OnlinePaymentStatus": "Online Payment Status",
+        "Persons": "Persons",
+        "PhoneNumbers": "Phone Numbers",
+        "CreatedDate": "Created Date",
+        "Status": "Status",
+        "Manage": "Manage",
+        "message": "PS: For Online Consultation, you will not receive the Online Consultation Link from DocPro.tn if you did not proceed with your payment in the Dashboard.",
+        "patient":"patient",
+        "docteur":"Doctor",
+        "pay_now": "Pay Now",
+        "paid": "Paid",
+        "no_appointmnet":"No Appointment Request yet"
+
     }
 }

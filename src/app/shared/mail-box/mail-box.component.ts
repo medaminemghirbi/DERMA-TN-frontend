@@ -95,6 +95,42 @@ export class MailBoxComponent implements OnInit {
       }
     });
   }
+
+  deleteExpiredMails(){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Archive it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.doctorService.deleteEmails(this.role,this.currentUser.id).subscribe(
+          response => {
+
+            Swal.fire(
+              'Deleted!',
+              'Mail has been deleted.',
+              'success'
+            ).then(() => {
+              location.reload(); // Reload the page
+            });
+            
+          },
+          error => {
+            // If there's an error, display the error message
+            Swal.fire(
+              'Error!',
+              'You can\'t archvie this',
+              'error'
+            );
+          }
+        );
+      }
+    });
+  }
   refrechMail(){
     this.loadData();
   }
