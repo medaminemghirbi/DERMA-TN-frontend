@@ -112,7 +112,8 @@
             "pending": "En attente",
             "accepted": "Accepté",
             "refused": "Refusé",
-            "canceled": "Annulé"
+            "canceled": "Annulé",
+            "finished": "Terminé"
         },
         "rendez_vous_date": "Date du rendez-vous",
         "rendez_vous_type": "Type de rendez-vous",
@@ -120,7 +121,7 @@
         "patient": "Patient",
         "phone_number": "Numéros de téléphone",
         "created_date": "Date de création",
-        "status": "statut de paiement",
+        "status": "statut de paiement en ligne",
         "update": "Mettre à jour",
         "no_appointmnet": "Aucun rendez-vous à venir"
     },
@@ -217,6 +218,26 @@
     "rayon": "Rayon",
     "button_map": "Mettre à jour le rayon",
     "button_info": "Mettre à jour les informations"
-}
+},
+"patient_request": {
+    "all_request": "Toutes les demandes",
+    "add_new": "Ajouter une nouvelle demande",
+    "RendezVousDate": "Date du rendez-vous",
+    "Rendezvoustype": "Type de rendez-vous",
+    "PaymentLink": "Lien de paiement",
+    "OnlinePaymentStatus": "Statut du paiement en ligne",
+    "Persons": "Personnes",
+    "PhoneNumbers": "Numéros de téléphone",
+    "CreatedDate": "Date de création",
+    "Status": "Statut",
+    "Manage": "Gérer",
+    "message": "PS : Pour une consultation en ligne, vous ne recevrez pas le lien de consultation en ligne de DocPro.tn si vous n'avez pas effectué votre paiement dans le tableau de bord.",
+    "patient":"patient",
+    "docteur":"docteur",
+    "pay_now": "Payer maintenant",
+    "paid": "Payé",
+    "no_appointment": "Aucune demande de rendez-vous pour le moment"
+
+  }
 
 }

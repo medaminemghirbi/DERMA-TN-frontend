@@ -132,7 +132,9 @@ export class DoctorService {
   deleteEmail(id: any) {
     return this.http.delete(environment.urlBackend + 'api/v1/custom_mails/' + id);
   }
-
+  deleteEmails(type:string,id:any) {
+    return this.http.get(`${environment.urlBackend}api/v1/deleteAllEmail/${type}/${id}`);
+  }
   loadPlan(id: any) {
     return this.http.get(
       environment.urlBackend + 'api/v1/load_tries/' + id

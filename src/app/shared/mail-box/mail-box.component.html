@@ -19,6 +19,10 @@
     <div class="page-wrapper">
         <div class="content">
             <div class="col-xl-8">
+                <br>
+                <h6  class="tip">
+                    {{'mail_note' | translate}}
+                </h6>
                 <div class="card chat-box mb-2">
                     <div class="chat-search-group">
                         <div class="chat-user-group mb-0 d-flex align-items-center">
@@ -35,7 +39,10 @@
                         </div>
                         <div class="top-action-right">
                             <ul class="nav">
-                                <li><a (click)="refrechMail()"><img src="assets/img/icons/refresh-icon.svg" alt="img"></a>
+                                <li><a (click)="refrechMail()">
+                                    <img src="assets/img/icons/refresh-icon.svg"
+                                            alt="img"></a></li>
+                                <li><a (click)="deleteExpiredMails()"><img src="assets/img/icons/trash.svg" alt="img"></a>
                                 </li>
                             </ul>
                         </div>
@@ -80,10 +87,7 @@
                 <div style="text-align:right;">
                     <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
-                <br>
-                <h6  class="tip">
-                    {{'mail_note' | translate}}
-                </h6>
+
             </div>
         </div>
     </div>
