@@ -21,7 +21,8 @@
             "title": "Autres Paramètres",
             "working_saturday": "Activer le Travail le Samedi",
             "working_online": "Activer le Travail en Ligne",
-            "working_online_note": "Lorsque le Travail en Ligne est activé, le canal de rendez-vous sera généré par DocPro, et un lien pour la communication en temps réel (RTC) sera créé et envoyé dans la boîte mail 10 minutes avant le rendez-vous. Restez à l'écoute 😀."
+            "working_online_note": "Lorsque le Travail en Ligne est activé, le canal de rendez-vous sera généré par DocPro, et un lien pour la communication en temps réel (RTC) sera créé et envoyé dans la boîte mail 10 minutes avant le rendez-vous. Restez à l'écoute 😀.",
+            "parcours": "Parcours Academique"
 
         },
         "message_phone": "Numéro de Téléphone Pour les Notifications Sms"
@@ -64,6 +65,8 @@
             "male": "male"
         },
         "doctor_image_details": "Détails de l'image du Médecin",
+        "doctor_image_bg_details": "Détails de l'image de couverture du Médecin",
+
         "address_details": "Détails de l'Adresse depuis Google Maps",
         "address": "Adresse",
         "address_line_1": "Entrez la ligne d'adresse 1",
@@ -71,8 +74,11 @@
         "zip_postal_code": "Code Postal",
         "city": "Ville",
         "update_informations": "Mettre A jour",
-        "update_image": "Modifier Image",
-        "recommended_image_size": "La taille d'image recommandée est "
+        "update_image": "Modifier Photo Personel",
+        "recommended_image_size": "La taille d'image recommandée est ",
+        "doctor_about":"À propos de moi / Ma Bio",
+        "update__background_image": "Modifier Photo de couverture"
+
     },
     "Doctor_social_links": {
         "title": "Paramètres des liens sociaux",

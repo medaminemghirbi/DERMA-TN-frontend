@@ -29,7 +29,9 @@ export class AdminService {
       `${environment.urlBackend}` + 'api/v1/reload_data/'
     );
   }
-
+  getDoctor(id: any) {
+    return this.http.get(environment.urlBackend + 'api/v1/doctors/' + id);
+  }
   ArchiveDoctor(id: any) {
     return this.http.delete(environment.urlBackend + 'api/v1/doctors/' + id);
   }
@@ -91,6 +93,7 @@ export class AdminService {
   getAllBlogs() {
     return this.http.get(environment.urlBackend + 'api/v1/blogs/');
   }
+  
   getVerfiedBlogs() {
     return this.http.get(environment.urlBackend + 'api/v1/verified_blogs/');
   }

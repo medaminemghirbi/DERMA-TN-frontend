@@ -68,6 +68,9 @@ import { ChangeImageComponent } from './patient/change-image/change-image.compon
 import { NotificationsComponent } from './shared/notifications/notifications.component';
 import { ReportsComponent } from './doctor/analyze-image/reports/reports.component';
 import { NgxLoadersCssModule } from 'ngx-loaders-css';
+import { DoctorProfilComponent } from './shared/doctor-profil/doctor-profil.component';
+import { NgxEditorModule } from 'ngx-editor';
+import { ParcoursAcademiqueComponent } from './doctor/parcours-academique/parcours-academique.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -127,6 +130,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ChangeImageComponent,
     NotificationsComponent,
     ReportsComponent,
+    DoctorProfilComponent,
+    ParcoursAcademiqueComponent,
 
     
   ],
@@ -141,6 +146,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgProgressModule,
     FullCalendarModule,
     NgxLoadersCssModule,
+    NgxEditorModule,
     NgProgressModule.withConfig({
       color: "#003d99"
     }),
