@@ -38,6 +38,7 @@ import { MeetingOnlineComponent } from './shared/meeting-online/meeting-online.c
 import { NotificationSettingComponent } from './patient/notification-setting/notification-setting.component';
 import { ChangeImageComponent } from './patient/change-image/change-image.component';
 import { ReportsComponent } from './doctor/analyze-image/reports/reports.component';
+import { DoctorProfilComponent } from './shared/doctor-profil/doctor-profil.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -88,6 +89,8 @@ const routes: Routes = [
   { path: 'live/:code', component: MeetingOnlineComponent },
 
   { path: 'blog/:id', component: BlogDetailsComponent },
+  { path: 'doctor/:id', component: DoctorProfilComponent },
+
 
   // Wildcard route
   { path: '**', component: UnauthorizedComponent } // or PageNotFoundComponent for 404 scenarios

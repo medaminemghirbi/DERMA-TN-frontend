@@ -1,103 +1,107 @@
 <div class="main-wrapper">
-    <div *ngIf="role =='Admin'">
-        <app-header-admin></app-header-admin>
-        <app-sidebar-admin></app-sidebar-admin>
+    <div *ngIf="role == 'Admin'">
+      <app-header-admin></app-header-admin>
+      <app-sidebar-admin></app-sidebar-admin>
     </div>
-    <div *ngIf="role =='Doctor'">
-        <app-doctor-header></app-doctor-header>
-        <app-doctor-sidebar></app-doctor-sidebar>
+    <div *ngIf="role == 'Doctor'">
+      <app-doctor-header></app-doctor-header>
+      <app-doctor-sidebar></app-doctor-sidebar>
     </div>
-    <div></div>
+    <div *ngIf="role == 'Patient'">
+      <app-patient-header></app-patient-header>
+      <app-patient-sidebar></app-patient-sidebar>
+    </div>
+    
     <ng-progress #progressBar></ng-progress>
-    <div class="main-wrapper">
-        <div class="page-wrapper">
-            <div class="content">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="blog-view">
-                            <article class="blog blog-single-post">
-                                <h3 class="blog-title">{{ blogDetail?.title }}</h3>
-                                <h6>Maladie : {{ blogDetail?.maladie?.maladie_name }}</h6>
-                                <div class="blog-image">
-                                    <div class="card">
-                                        <div class="card-body card-buttons">
-                                            <div class="blog-content">
-                                                <div class="blog-grp-blk">
-                                                    <div class="blog-img-blk">
-                                                        <a [routerLink]="['/profile', blogDetail?.doctor?.id]">
-                                                            <img class="img-fluid"
-                                                                [src]="blogDetail?.doctor?.user_image_url"
-                                                                alt="Doctor Image">
-                                                        </a>
-                                                        <div class="content-blk-blog ms-2">
-                                                            <h4>
-                                                                <a [routerLink]="['/profile', blogDetail?.doctor?.id]">
-                                                                    Dr. {{ blogDetail?.doctor?.firstname }} {{
-                                                                    blogDetail?.doctor?.lastname }}
-                                                                </a>
-                                                            </h4>
-                                                            <h5>Dermatologue</h5>
-                                                        </div>
-                                                    </div>
-                                                    <span><i class="feather-calendar me-1"></i>{{ blogDetail?.created_at
-                                                        |
-                                                        date:'dd MMM yyyy' }}</span>
-                                                </div>
-                                            </div>
-                                            <div id="carouselExampleIndicators" class="carousel slide carousel-fade"
-                                                data-bs-ride="carousel">
-                                                <ol class="carousel-indicators">
-                                                    <li *ngFor="let image of blogDetail?.image_urls; let i = index"
-                                                        [class.active]="i === 0" [attr.data-bs-slide-to]="i"></li>
-                                                </ol>
-                                                <div class="carousel-inner" role="listbox">
-                                                    <div *ngFor="let image of blogDetail?.image_urls; let i = index"
-                                                        [class.active]="i === 0" class="carousel-item">
-                                                        <img class="d-block img-fluid" [src]="image"
-                                                            alt="Slide {{ i + 1 }}">
-                                                    </div>
-                                                </div>
-                                                <a class="carousel-control-prev" href="#carouselExampleIndicators"
-                                                    role="button" data-bs-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Previous</span>
-                                                </a>
-                                                <a class="carousel-control-next" href="#carouselExampleIndicators"
-                                                    role="button" data-bs-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Next</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="blog-content">
-          
-                                    <h1>{{ blogDetail?.content }}</h1><br>
-                                    <p>{{ blogDetail?.maladie?.maladie_description }}</p>
-                                    <ul>
-                                        <li>
-                                            is cancer : <span *ngIf="blogDetail?.maladie?.is_cancer">Yes</span><span
-                                                *ngIf="!blogDetail?.maladie?.is_cancer">No</span>
-                                        </li>
-                                        <li>Causes : {{ blogDetail?.maladie?.causes }} </li>
-                                        <li>Symptomes : {{ blogDetail?.maladie?.symptoms }} </li>
-
-                                        <li> Synonyms : {{ blogDetail?.maladie?.synonyms }} </li>
-
-                                        <li> Prevention : {{ blogDetail?.maladie?.prevention }} </li>
-                                        <li> Treatement : {{ blogDetail?.maladie?.treatments }} </li>
-                                    </ul>
-                                    <li> Read More: <a style="color: blue;"
-                                            href="{{ blogDetail?.maladie?.references }}">{{
-                                            blogDetail?.maladie?.references }}</a>
-                                    </li>
-                                </div>
-                            </article>
+  
+    <div class="page-wrapper">
+      <div class="content">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="blog-view">
+              <article class="blog blog-single-post">
+                <h3 class="blog-title">{{ blogDetail?.title }}</h3>
+                <h6>Maladie : {{ blogDetail?.maladie?.maladie_name }}</h6>
+  
+                <!-- Blog Image and Doctor Info -->
+                <div class="blog-image">
+                  <div class="card">
+                    <div class="card-body card-buttons">
+                      <div class="blog-content">
+                        <div class="blog-grp-blk">
+                          <div class="blog-img-blk">
+                            <a [routerLink]="['/profile', blogDetail?.doctor?.id]">
+                              <img class="img-fluid" [src]="blogDetail?.doctor?.user_image_url" alt="Doctor Image">
+                            </a>
+                            <div class="content-blk-blog ms-2">
+                              <h4>
+                                <a [routerLink]="['/profile', blogDetail?.doctor?.id]">
+                                  Dr. {{ blogDetail?.doctor?.firstname }} {{ blogDetail?.doctor?.lastname }}
+                                </a>
+                              </h4>
+                              <h5>Dermatologue</h5>
+                            </div>
+                          </div>
+                          <span><i class="feather-calendar me-1"></i>{{ blogDetail?.created_at | date:'dd MMM yyyy' }}</span>
                         </div>
+                      </div>
+  
+                      <!-- Carousel for Images -->
+                      <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <ol class="carousel-indicators">
+                          <li *ngFor="let image of blogDetail?.image_urls; let i = index"
+                              [class.active]="i === 0" [attr.data-bs-slide-to]="i"></li>
+                        </ol>
+                        <div class="carousel-inner" role="listbox">
+                          <div *ngFor="let image of blogDetail?.image_urls; let i = index"
+                               [class.active]="i === 0" class="carousel-item">
+                            <img class="d-block img-fluid" [src]="image" alt="Slide {{ i + 1 }}">
+                          </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </a>
+                      </div>
                     </div>
+                  </div>
                 </div>
+  
+                <!-- Blog Content and Information -->
+                <div class="blog-content">
+                  <h1>{{ blogDetail?.content }}</h1><br>
+                  <p>{{ blogDetail?.maladie?.maladie_description }}</p>
+                  <ul>
+                    <li>is cancer: <span *ngIf="blogDetail?.maladie?.is_cancer">Yes</span><span *ngIf="!blogDetail?.maladie?.is_cancer">No</span></li>
+                    <li>Causes: {{ blogDetail?.maladie?.causes }}</li>
+                    <li>Symptoms: {{ blogDetail?.maladie?.symptoms }}</li>
+                    <li>Synonyms: {{ blogDetail?.maladie?.synonyms }}</li>
+                    <li>Prevention: {{ blogDetail?.maladie?.prevention }}</li>
+                    <li>Treatment: {{ blogDetail?.maladie?.treatments }}</li>
+                  </ul>
+                  <li>Read More: <a style="color: blue;" href="{{ blogDetail?.maladie?.references }}">{{ blogDetail?.maladie?.references }}</a></li>
+                  
+                  <!-- Reaction Buttons -->
+                  <div class="reaction-buttons">
+                    <button class="btn btn-success me-2" (click)="onReact(blogDetail, 'like')">
+                      <i class="fas fa-thumbs-up"></i> &nbsp; Like 
+                      <span class="badge bg-primary">{{ blogDetail?.likes_count }}</span>
+                    </button>
+                    <button class="btn btn-danger" (click)="onReact(blogDetail, 'dislike')">
+                      <i class="fas fa-thumbs-down"></i> &nbsp; Dislike 
+                      <span class="badge bg-secondary">{{ blogDetail?.dislikes_count }}</span>
+                    </button>
+                  </div>
+                </div>
+              </article>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+  

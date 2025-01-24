@@ -64,6 +64,8 @@
             "male": "male"
         },
         "doctor_image_details": "Détails de l'image du Médecin",
+        "doctor_image_bg_details": "Détails de l'image de couverture du Médecin",
+
         "address_details": "Détails de l'Adresse depuis Google Maps",
         "address": "Adresse",
         "address_line_1": "Entrez la ligne d'adresse 1",
@@ -71,8 +73,11 @@
         "zip_postal_code": "Code Postal",
         "city": "Ville",
         "update_informations": "Mettre A jour",
-        "update_image": "Modifier Image",
-        "recommended_image_size": "La taille d'image recommandée est "
+        "update_image": "Modifier Photo Personel",
+        "recommended_image_size": "La taille d'image recommandée est ",
+        "doctor_about":"À propos de moi / Ma Bio",
+        "update__background_image": "Modifier Photo de couverture"
+
     },
     "Doctor_social_links": {
         "title": "Paramètres des liens sociaux",
@@ -105,7 +110,7 @@
         "today": "Aujourd'hui à"
     },
     "Doctor_appointments": {
-        "all_patients_requests": "Toutes les rendez-vous des patients",
+        "all_patients_requests": "Toutes les rendez-vous faits  des patients",
         "search_for": "Rechercher...",
         "filter_by_state": {
             "title": "Filtrer par état",
@@ -120,10 +125,12 @@
         "doctor": "Médecin",
         "patient": "Patient",
         "phone_number": "Numéros de téléphone",
-        "created_date": "Date de création",
+        "status_demande": "etat de demande",
         "status": "statut de paiement en ligne",
         "update": "Mettre à jour",
-        "no_appointmnet": "Aucun rendez-vous à venir"
+        "no_appointmnet": "Aucun rendez-vous à venir",
+        "tip": "PS: statut de paiement en ligne pour les rendez-vous en ligne seulements"
+
     },
     "real_time_chat": "Chat en temps réel",
     "enter_your_message": "Saisissez votre message",
@@ -238,6 +245,11 @@
     "paid": "Payé",
     "no_appointment": "Aucune demande de rendez-vous pour le moment"
 
-  }
+  },
+  "doctor_parcours":{
+    "parcours":"Parcours universitaire",
+    "certifications": "Certifications",
+    "langues":"Languages"
+}
 
 }

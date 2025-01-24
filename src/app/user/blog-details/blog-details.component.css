@@ -1,0 +1,97 @@
+.main-wrapper {
+    margin-top: 20px;
+  }
+  
+  .page-wrapper {
+    padding: 20px;
+  }
+  
+  .blog-view {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .blog-content {
+    margin-top: 20px;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  .card-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .reaction-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .reaction-buttons button {
+    display: flex;
+    align-items: center;
+  }
+  
+  .reaction-buttons .badge {
+    margin-left: 10px;
+    font-size: 1.1rem;
+  }
+  
+  .carousel-inner img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .content-blk-blog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 15px;
+  }
+  
+  .blog-grp-blk {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .blog-img-blk {
+    display: flex;
+  }
+  
+  .feather-calendar {
+    margin-right: 8px;
+  }
+  
+  ul li {
+    margin: 8px 0;
+    font-size: 1.1rem;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  

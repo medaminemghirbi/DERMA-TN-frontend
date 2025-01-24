@@ -63,6 +63,8 @@
             "male": "male"
         },
         "doctor_image_details": "Doctor Image Details",
+        "doctor_image_bg_details": "Details of the Doctor's cover image",
+
         "address_details": "Address Details From Google Maps",
         "address": "Address",
         "address_line_1": "Enter Address Line 1",
@@ -71,7 +73,11 @@
         "city": "City",
         "update_informations": "Update Informations",
         "update_image": "Update Image",
-        "recommended_image_size": "Recommended image size is "
+        "recommended_image_size": "Recommended image size is ",
+        "doctor_about":"About Me / My Bio",
+        "update__background_image": "change the cover photo"
+
+
     },
     "Doctor_social_links": {
         "title": "Paramètres des liens sociaux",
@@ -119,10 +125,13 @@
         "doctor": "Doctor",
         "patient": "Patient",
         "phone_number": "Phone numbers",
-        "created_date": "Created date",
+        "status_demande": "request status",
         "status": "Online Paiement Status",
         "update": "Update",
-        "no_appointmnet": "No upcoming appointments"
+        "no_appointmnet": "No upcoming appointments",
+        "tip": "PS: Online payment status for online appointments only"
+
+        
     },
     "real_time_chat": "Real-time Chat",
     "enter_your_message": "Enter your message",
@@ -237,5 +246,11 @@
         "paid": "Paid",
         "no_appointmnet":"No Appointment Request yet"
 
-    }
+    },
+    "doctor_parcours": {
+    "parcours": "University Background",
+    "certifications": "Certifications",
+    "langues": "Languages"
+}
+
 }

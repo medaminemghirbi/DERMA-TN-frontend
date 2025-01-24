@@ -168,6 +168,34 @@
                             </form>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ 'Doctor_information.doctor_about' | translate }}</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <form [formGroup]="upadate_bio" #f="ngForm" (ngSubmit)="updateBioinformations(f)">
+                                <div class="settings-form">
+                                    <div class="NgxEditor__Wrapper">
+                                        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                                        <ngx-editor
+                                          [editor]="editor"
+                                          [ngModel]="html"
+                                          [(ngModel)]="currentUser.about_me"
+                                          formControlName="about_me"
+
+                                          [disabled]="false"
+                                          [placeholder]="'Type here...'"
+                                        ></ngx-editor>
+                                      </div>
+                                </div>
+                                <br>
+                                <div style="text-align: center;">
+                                    <button type="submit" class="btn btn-primary px-4"
+                                        style="background-color: rgb(38, 8, 158);">{{ 'Doctor_information.update_informations' | translate }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

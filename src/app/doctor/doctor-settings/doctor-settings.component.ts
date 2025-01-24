@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Editor } from 'ngx-editor';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DoctorService } from 'src/app/services/doctor.service';
@@ -13,6 +14,8 @@ import Swal from 'sweetalert2';
 })
 export class DoctorSettingsComponent implements OnInit {
   locations: any = [];
+  editor!: Editor;
+  html!: '';
   addressLine1: string = '';
   city: string = '';
   state: string = '';
@@ -20,6 +23,7 @@ export class DoctorSettingsComponent implements OnInit {
   image: any;
   imageupdate!: any;
   upadate! :  FormGroup;
+  upadate_bio! :  FormGroup;
   messageErr =""
   messageSuccess =""
   country: string = '';
@@ -45,11 +49,18 @@ export class DoctorSettingsComponent implements OnInit {
       birthday: new FormControl('', [Validators.required]),
       firstname: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
+      about_me: new FormControl('', [Validators.required]),
 
+
+    });
+    this.upadate_bio = new FormGroup({
+      about_me: new FormControl('', [Validators.required]),
     });
   }
 
   async ngOnInit(): Promise<void> {
+    this.editor = new Editor();
+
     try{
       this.currentUser = this.auth.getcurrentuser();
       this.autoFillAddress();
@@ -77,6 +88,9 @@ export class DoctorSettingsComponent implements OnInit {
         }
       );
     }
+  }
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
   extractAddressDetails(address: string | undefined) {
     // Use optional chaining to prevent splitting if address is undefined
@@ -162,7 +176,32 @@ export class DoctorSettingsComponent implements OnInit {
       }
     })
   }
+  updateBioinformations(f:any){
+    let data=f.value
+    const formData = new FormData();
+    formData.append('about_me', this.upadate_bio.value.about_me);
 
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+    this.doctorService.updatedoctorinformations(this.currentUser.id,formData).subscribe(
+      (response) => {
+        sessionStorage.setItem('doctordata', JSON.stringify(response));
+        window.location.reload();
+      },
+      (err: HttpErrorResponse) => {})
+        Swal.fire('Saved!', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+  }
   updateinformations(f:any){
     let data=f.value
     const formData = new FormData();
@@ -172,7 +211,7 @@ export class DoctorSettingsComponent implements OnInit {
     formData.append('location', this.upadate.value.location);
     formData.append('firstname', this.upadate.value.firstname);
     formData.append('lastname', this.upadate.value.lastname);
-
+    formData.append('about_me', this.upadate.value.about_me);
 
     Swal.fire({
       title: 'Do you want to save the changes?',
