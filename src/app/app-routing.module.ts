@@ -39,7 +39,6 @@ import { NotificationSettingComponent } from './patient/notification-setting/not
 import { ChangeImageComponent } from './patient/change-image/change-image.component';
 import { ReportsComponent } from './doctor/analyze-image/reports/reports.component';
 import { DoctorProfilComponent } from './shared/doctor-profil/doctor-profil.component';
-import { ParcoursAcademiqueComponent } from './doctor/parcours-academique/parcours-academique.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -69,7 +68,6 @@ const routes: Routes = [
   { path: 'doctor/settings/social-media', canActivate: [DoctorGuard], component: SocialMediaComponent },
   { path: 'doctor/settings/notifications', canActivate: [DoctorGuard], component: NotificationSettingsComponent },
   { path: 'doctor/settings/my-phone-numbers', canActivate: [DoctorGuard], component: MyPhoneNumbersComponent },
-  { path: 'doctor/settings/parcours', canActivate: [DoctorGuard], component: ParcoursAcademiqueComponent },
 
   // Patient routes with guards
   { path: 'patient/dashboard', component: DashboardPatientComponent },
