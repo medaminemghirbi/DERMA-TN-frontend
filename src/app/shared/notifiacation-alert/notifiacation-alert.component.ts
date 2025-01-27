@@ -44,12 +44,13 @@ export class NotifiacationAlertComponent implements OnInit {
     
     this.ws.onopen = () => {
       console.log('WebSocket connection established.');
+      const userId = this.currentuser.id; // Send the current user's ID when subscribing
       this.ws?.send(JSON.stringify({
         command: 'subscribe',
-        identifier: JSON.stringify({ channel: 'ConsultationChannel' })
+        identifier: JSON.stringify({ channel: 'ConsultationChannel', user_id: userId })
       }));
     };
-
+    
     this.ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (data.type === 'confirm_subscription') {
@@ -57,8 +58,7 @@ export class NotifiacationAlertComponent implements OnInit {
       } else {
         this.handleNewNotification(data);
       }
-    };
-
+    };    
     this.ws.onclose = () => {
       console.log('WebSocket connection closed. Attempting to reconnect...');
       setTimeout(() => this.initializeWebSocket(), 1000); // Reconnect after 1 second

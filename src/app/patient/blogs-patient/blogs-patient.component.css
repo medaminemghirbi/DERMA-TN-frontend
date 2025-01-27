@@ -1,0 +1,44 @@
+.no-blogs-message {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center;
+    align-items: center;
+    min-height: 300px; /* Increased height for better visual balance */
+    background-color: #fff;
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Stronger shadow */
+    padding: 30px;
+    text-align: center;
+    color: #777;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 1px solid #eee; /* Subtle border */
+}
+
+.no-blogs-message:hover {
+    transform: scale(1.02); /* Slight scale up on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.no-blogs-icon {
+    font-size: 4rem; /* Larger icon */
+    color: #aaa;
+    margin-bottom: 20px;
+    opacity: 0.7; /* Slightly transparent icon */
+    animation: pulse 2s infinite; /* Add a subtle pulse animation */
+}
+
+.no-blogs-message p {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.no-blogs-subtext {
+    font-size: 1rem;
+    color: #999;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}

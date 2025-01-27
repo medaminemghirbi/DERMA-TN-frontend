@@ -12,12 +12,15 @@
                     <div class="col-6">
                         <div class="doctor-search-blk">
                             <div class="top-nav-search table-search-blk">
-                                <h4 class="header-title">{{'patient_request.all_request' | translate}} ( {{filteredRequests?.length}} )</h4>
+                                <h4 class="header-title">{{'patient_request.all_request' | translate}} (
+                                    {{filteredRequests?.length}} )</h4>
                             </div>
                             <div class="add-group">
-                                <select id="itemsPerPage" [(ngModel)]="itemsPerPage" class="form-control form-control-sm">
-                                    <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
-                                  </select>
+                                <select id="itemsPerPage" [(ngModel)]="itemsPerPage"
+                                    class="form-control form-control-sm">
+                                    <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}
+                                    </option>
+                                </select>
                             </div>
                             <div class="add-group">
                                 <a href="javascript:;" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -29,7 +32,8 @@
                         </div>
                     </div>
                     <div class="col-6 text-end">
-                        <button type="button" class="btn btn-primary" routerLink="/patient/add-new-request">{{'patient_request.add_new' | translate}}</button>
+                        <button type="button" class="btn btn-primary"
+                            routerLink="/patient/add-new-request">{{'patient_request.add_new' | translate}}</button>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -43,12 +47,18 @@
                     <div class="col-md-6">
                         <select class="form-control form-control-sm" [(ngModel)]="selectedStatus"
                             (change)="filterRequests()">
-                            <option hidden value="" selected>{{'Doctor_appointments.filter_by_state.title' | translate}}</option>
-                            <option value="pending">{{'Doctor_appointments.filter_by_state.pending' | translate}}</option>
-                            <option value="approved">{{'Doctor_appointments.filter_by_state.accepted' | translate}}</option>
-                            <option value="rejected">{{'Doctor_appointments.filter_by_state.refused' | translate}}</option>
-                            <option value="canceled">{{'Doctor_appointments.filter_by_state.canceled' | translate}}</option>
-                            <option value="finished">{{'Doctor_appointments.filter_by_state.finished' | translate}}</option>
+                            <option hidden value="" selected>{{'Doctor_appointments.filter_by_state.title' | translate}}
+                            </option>
+                            <option value="pending">{{'Doctor_appointments.filter_by_state.pending' | translate}}
+                            </option>
+                            <option value="approved">{{'Doctor_appointments.filter_by_state.accepted' | translate}}
+                            </option>
+                            <option value="rejected">{{'Doctor_appointments.filter_by_state.refused' | translate}}
+                            </option>
+                            <option value="canceled">{{'Doctor_appointments.filter_by_state.canceled' | translate}}
+                            </option>
+                            <option value="finished">{{'Doctor_appointments.filter_by_state.finished' | translate}}
+                            </option>
                         </select>
                     </div>
                     <h6 class="tip">
@@ -77,7 +87,7 @@
                                 <td colspan="100%" class="text-center">
                                     <loaders-css [loader]="loader" [scale]="3" [color]="color"></loaders-css>
                                 </td>
-                              </tr>
+                            </tr>
                             <tr
                                 *ngFor="let item of filteredRequests | filter: searchedKeyword | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index">
                                 <td class="description-content">
@@ -118,10 +128,13 @@
                                     <p *ngIf="item.appointment_type === 'onsite'"> - </p>
                                 </td>
                                 <td *ngIf="item.appointment_type === 'online'">
-                                    <div *ngIf="item.is_payed">
-                                        <i style="color: green;" class="fa fa-check" data-bs-toggle="tooltip"
-                                            title="Paid"> Paid</i>
-                                    </div>
+                                    <div *ngIf="item.is_payed === true">
+                                        <i style="color: green;" class="fa fa-check" data-bs-toggle="tooltip" title="Payment Success 😀">
+                                          Paied
+                                        </i>
+                                      </div>
+                                      
+
                                     <div *ngIf="!item.is_payed">
                                         <i style="color: red;" class="fa fa-close" data-bs-toggle="tooltip"
                                             title="Not Paid Yet"> Not Paid Yet</i>
@@ -211,12 +224,17 @@
                                             <a class="dropdown-item" *ngIf="(item.status === 'canceled')">
                                                 <i class="fa fa-trash-alt m-r-5"></i> Delete Request
                                             </a>
+
+                                            <a  (click)="generateFacture(item)" class="dropdown-item" *ngIf="item.appointment_type === 'online' && item.is_payed === true">
+                                                <i class="fa fa-file-alt m-r-5"></i> Generate facture
+                                            </a> 
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr *ngIf="myRequests == 0" class="no-appointment-row">
-                                <td style="text-align: center;" colspan="9">{{'patient_request.no_appointment'| translate}}</td>
+                                <td style="text-align: center;" colspan="9">{{'patient_request.no_appointment'|
+                                    translate}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -263,16 +281,18 @@
     <div class="modal-dialog modal-md">
         <div *ngIf="ratingExists" class="alert alert-info">
             You have already rated this consultation. Rating is disabled.
-          </div>
-          
+        </div>
+
         <div *ngIf="!ratingExists" class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">     <i class="feather-star m-r-5"></i> Rate Doctor</h5>
+                <h5 class="modal-title"> <i class="feather-star m-r-5"></i> Rate Doctor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <p>Please select a rating for Dr. {{ selectedDoctor?.firstname }} {{ selectedDoctor?.lastname }} on your consultation 
-                    on {{selectedConsultation?.appointment| date: 'dd MMMM yyyy'}} at {{selectedConsultation?.appointment| date: ' HH:mm'}}</p>
+                <p>Please select a rating for Dr. {{ selectedDoctor?.firstname }} {{ selectedDoctor?.lastname }} on your
+                    consultation
+                    on {{selectedConsultation?.appointment| date: 'dd MMMM yyyy'}} at
+                    {{selectedConsultation?.appointment| date: ' HH:mm'}}</p>
                 <div class="rating-stars">
                     <ng-container *ngFor="let star of stars; let i = index">
                         <i [class]="star <= selectedRating ? 'feather-star filled' : 'feather-star outline'"

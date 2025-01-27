@@ -9,7 +9,7 @@
         "all_blogs": "جميع المدونات"
     },
     "Doctor_settings": {
-        "language_system": "نظام لغة DocPro",
+        "language_system": "نظام لغة DermaPro",
         "default_language": "اللغة الافتراضية",
         "notifications_system": {
             "title": "نظام الإشعارات",
@@ -154,7 +154,7 @@
     },
     "Doctor_blogs": {
         "title": "قسم المدونات",
-        "all_verified": "جميع المدونات المعتمدة من DocPro",
+        "all_verified": "جميع المدونات المعتمدة من DermaPro",
         "my_blogs": "مدوناتي",
         "add_new": "إنشاء مدونة جديدة",
         "read_more": "قراءة المزيد",
@@ -251,7 +251,14 @@
     "parcours": "المسار الجامعي",
     "certifications": "الشهادات",
     "langues": "اللغات"
-}
+},      
+    "no_blogs_title": "لا توجد مدونات في الوقت الحالي.",
+    "no_blogs_contenu": "عد لاحقًا لاكتشاف مقالات جديدة."
+
+
+
+
+
 
 
 }

@@ -29,15 +29,6 @@
                         <h1 class="card-title"><b> * {{ 'Doctor_settings.notifications_system.title' | translate }}</b>
                         </h1>
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h4 class="card-title">{{ 'Doctor_settings.notifications_system.enable_sms' | translate }}
-                            </h4>
-                            <div class="status-toggle d-flex justify-content-between align-items-center">
-                                <input type="checkbox" id="sms_notifications" class="check"
-                                    [checked]="currentUser.is_smsable" (change)="toggleSmsNotifications($event)">
-                                <label for="sms_notifications" class="checktoggle">checkbox</label>
-                            </div>
-                        </div>
-                        <div class="card-header d-flex justify-content-between align-items-center">
                             <h4 class="card-title">{{ 'Doctor_settings.notifications_system.enable_email' | translate }}
                             </h4>
                             <div class="status-toggle d-flex justify-content-between align-items-center">

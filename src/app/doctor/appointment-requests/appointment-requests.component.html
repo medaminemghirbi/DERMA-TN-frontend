@@ -82,7 +82,7 @@
                                         {{ item.appointment_type }}
                                     </span> <br>
                                     <button type="button" class="btn btn-rounded btn-primary"
-                                    [routerLink]="['/live', item.room_code]" *ngIf="item.appointment_type == 'online'"
+                                    [routerLink]="['/live', item.room_code]" *ngIf="item.appointment_type === 'online' && item.code_room"
                                     [ngClass]="{'disabled-button': isButtonDisabled(item.sentAt)}"
                                     [attr.disabled]="isButtonDisabled(item.appointment) ? true : null">
                                     Link RTC

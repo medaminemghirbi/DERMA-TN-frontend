@@ -9,7 +9,7 @@
         "all_blogs": "Tous les blogs"
     },
     "Doctor_settings": {
-        "language_system": "Système de Langue DocPro",
+        "language_system": "Système de Langue DermaPro",
         "default_language": "Langue par Défaut",
         "notifications_system": {
             "title": "Système de Notifications",
@@ -21,7 +21,7 @@
             "title": "Autres Paramètres",
             "working_saturday": "Activer le Travail le Samedi",
             "working_online": "Activer le Travail en Ligne",
-            "working_online_note": "Lorsque le Travail en Ligne est activé, le canal de rendez-vous sera généré par DocPro, et un lien pour la communication en temps réel (RTC) sera créé et envoyé dans la boîte mail 10 minutes avant le rendez-vous. Restez à l'écoute 😀."
+            "working_online_note": "Lorsque le Travail en Ligne est activé, le canal de rendez-vous sera généré par DermaPro, et un lien pour la communication en temps réel (RTC) sera créé et envoyé dans la boîte mail 10 minutes avant le rendez-vous. Restez à l'écoute 😀."
 
         },
         "message_phone": "Numéro de Téléphone Pour les Notifications Sms"
@@ -153,7 +153,7 @@
     },
     "Doctor_blogs": {
         "title": "Section des Articles",
-        "all_verified": "Tous les Articles vérifiés par DocPro",
+        "all_verified": "Tous les Articles vérifiés par DermaPro",
         "my_blogs": "Mes Articles",
         "add_new": "Créer un nouveau blog",
         "read_more": "En savoir plus",
@@ -238,7 +238,7 @@
     "CreatedDate": "Date de création",
     "Status": "Statut",
     "Manage": "Gérer",
-    "message": "PS : Pour une consultation en ligne, vous ne recevrez pas le lien de consultation en ligne de DocPro.tn si vous n'avez pas effectué votre paiement dans le tableau de bord.",
+    "message": "PS : Pour une consultation en ligne, vous ne recevrez pas le lien de consultation en ligne de DermaPro.tn si vous n'avez pas effectué votre paiement dans le tableau de bord.",
     "patient":"patient",
     "docteur":"docteur",
     "pay_now": "Payer maintenant",
@@ -250,6 +250,7 @@
     "parcours":"Parcours universitaire",
     "certifications": "Certifications",
     "langues":"Languages"
-}
-
+    },
+    "no_blogs_title":"Pas de blogs pour le moment.",
+    "no_blogs_contenu":"Revenez plus tard pour découvrir de nouveaux articles."
 }
