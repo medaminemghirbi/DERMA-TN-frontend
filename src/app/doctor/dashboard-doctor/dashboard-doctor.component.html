@@ -58,7 +58,7 @@
                                         alt>
                                 </div>
                                 <h3 *ngIf="currentuser.plan == 'no_plan'">-</h3>
-                                <h3 *ngIf="currentuser.plan == 'basic'"> 3     {{ 'Doctor_dashboard.nbr' | translate }}</h3>
+                                <h3 *ngIf="currentuser.plan == 'basic'"> {{DoctorStats?.doctor.display_remaining_tries}}</h3>
 
                                 <h3 *ngIf="currentuser.plan == 'premium'"> +  <i class="fas fa-solid fa-infinity"></i></h3>
                                 <h3 *ngIf="currentuser.plan == 'custom'">{{currentuser.custom_limit}} time</h3>

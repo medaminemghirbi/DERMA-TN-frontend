@@ -6,7 +6,7 @@
     <ng-progress #progressBar></ng-progress>
     <div class="page-wrapper">
         <div class="content">
- 
+
             <div class="card-body">
                 <h4 class="header-title mb-4">{{'Doctor_appointments.all_patients_requests' | translate}}
                     ({{filteredConsultations.length}})</h4>
@@ -40,7 +40,7 @@
                     </div>
 
                 </div>
-                <h6  class="tip">{{'Doctor_appointments.tip' | translate}}
+                <h6 class="tip">{{'Doctor_appointments.tip' | translate}}
                 </h6>
                 <table class="table border-0 custom-table comman-table datatable mb-0">
                     <thead>
@@ -68,26 +68,27 @@
                                     at {{ item.appointment | date: 'HH:mm'}}
                                 </a>
                             </td>
-                                <td>
+                            <td>
 
-                                    <span *ngIf="item.appointment_type === 'online'"
-                                        class="badge rounded-pill badge-outline-success">
-                                        <i class="fa fa-wifi" data-bs-toggle="tooltip" title="fa fa-wifi"></i>
+                                <span *ngIf="item.appointment_type === 'online'"
+                                    class="badge rounded-pill badge-outline-success">
+                                    <i class="fa fa-wifi" data-bs-toggle="tooltip" title="fa fa-wifi"></i>
 
-                                        {{ item.appointment_type }}
-                                    </span>
-                                    <span *ngIf="item.appointment_type === 'onsite'"
-                                        class="badge rounded-pill badge-outline-info">
-                                        <i class="fa fa-briefcase" data-bs-toggle="tooltip" title="fa fa-briefcase"></i>
-                                        {{ item.appointment_type }}
-                                    </span> <br>
-                                    <button type="button" class="btn btn-rounded btn-primary"
-                                    [routerLink]="['/live', item.room_code]" *ngIf="item.appointment_type === 'online' && item.code_room"
+                                    {{ item.appointment_type }}
+                                </span>
+                                <span *ngIf="item.appointment_type === 'onsite'"
+                                    class="badge rounded-pill badge-outline-info">
+                                    <i class="fa fa-briefcase" data-bs-toggle="tooltip" title="fa fa-briefcase"></i>
+                                    {{ item.appointment_type }}
+                                </span> <br>
+                                <button type="button" class="btn btn-rounded btn-primary"
+                                    [routerLink]="['/live', item.room_code]"
+                                    *ngIf="item.appointment_type === 'online' && item.code_room"
                                     [ngClass]="{'disabled-button': isButtonDisabled(item.sentAt)}"
                                     [attr.disabled]="isButtonDisabled(item.appointment) ? true : null">
                                     Link RTC
                                 </button>
-                                </td>
+                            </td>
 
 
 

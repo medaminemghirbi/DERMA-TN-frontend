@@ -22,7 +22,7 @@
                         </div>
                         <br>
                         <div class="blog-image">
-                            <a href="blog-details.html">
+                            <a [routerLink]="['/blog', item.id]">
                                 <img class="img-fluid" [src]="item?.image_urls[0]" alt="First image"
                                     class="custom-image-size">
                             </a>
@@ -31,10 +31,10 @@
                         <div class="blog-content">
                             <div class="blog-grp-blk">
                                 <div class="blog-img-blk">
-                                    <a href="profile.html"><img class="img-fluid" src="{{item.doctor.user_image_url}}"
+                                    <a [routerLink]="['/doctor', item.doctor.id]"><img class="img-fluid" src="{{item.doctor.user_image_url}}"
                                             alt></a>
                                     <div class="content-blk-blog ms-2">
-                                        <h4><a href="profile.html">Dr. {{item.doctor.firstname}} {{item.doctor.lastname}}</a></h4>
+                                        <h4><a [routerLink]="['/doctor', item.doctor.id]">Dr. {{item.doctor.firstname}} {{item.doctor.lastname}}</a></h4>
                                         <h5>Dermatologue</h5>
                                         
                                     </div>
@@ -50,7 +50,7 @@
 
                                 </span>
                             </div>
-                            <h3 class="blog-title"><a href="blog-details.html">{{item.title}}</a></h3>
+                            <h3 class="blog-title"><a [routerLink]="['/blog', item.id]">{{item.title}}</a></h3>
                             <p>{{item.content}}</p>
                             <a [routerLink]="['/blog', item.id]" class="read-more d-flex"> Read more <i
                                     class="fa fa-long-arrow-right ms-2"></i></a>

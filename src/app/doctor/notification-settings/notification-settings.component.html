@@ -70,7 +70,7 @@
                             </div>
                         </div>                        
                         <div *ngIf="currentUser.working_on_line"class="form-group">
-                            <label for="amount"> * Online Consultation Price</label>
+                            <label for="amount"> * {{ 'Doctor_settings.other_settings.working_online_price' | translate }}</label>
                             <div class="input-group">
                                 <input type="text" id="amount" class="form-control" 
                                     [(ngModel)]="currentUser.amount" 
@@ -79,7 +79,7 @@
                                     placeholder="Enter amount"
                                     (change)="updateReceiverWallet()">
                                 <div class="input-group-append">
-                                    <span class="input-group-text">TND</span>
+                                    <span class="input-group-text">{{ 'Doctor_settings.other_settings.tnd' | translate }}</span>
                                 </div>
                             </div>
                         </div>
@@ -93,6 +93,45 @@
                     </div>
 
                 </div>
+                <div *ngIf="currentUser.working_on_line" class="col-md-6 p-3 rounded bg-light shadow-sm">
+                    <h5 class="text-primary font-weight-bold mb-3">
+                        {{ 'Doctor_settings.platform_earnings_calculation.title' | translate }}
+                    </h5>
+                    <p class="mb-3 text-secondary">
+                        {{ 'Doctor_settings.platform_earnings_calculation.description' | translate }}
+                    </p>
+                    <div class="border rounded p-3 bg-white">
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>{{ 'Doctor_settings.platform_earnings_calculation.table.headers.description' | translate }}                                    </th>
+                                    <th class="text-right">{{ 'Doctor_settings.platform_earnings_calculation.table.headers.amount' | translate }} </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>{{ 'Doctor_settings.platform_earnings_calculation.table.rows.total_paid' | translate }}</strong></td>
+                                    <td class="text-right">{{ currentUser.amount }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>{{ 'Doctor_settings.platform_earnings_calculation.table.rows.platform_fee' | translate }}</strong></td>
+                                    <td class="text-right">{{ (currentUser.amount * 0.1) | number : '1.2-2' }}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>{{ 'Doctor_settings.platform_earnings_calculation.table.rows.doctor_earnings' | translate }}</strong></td>
+                                    <td class="text-right">{{ (currentUser.amount * 0.9) | number : '1.2-2' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="alert alert-info p-2 mt-3">
+                            <strong>{{ 'Doctor_settings.platform_earnings_calculation.formule_title' | translate }}  </strong> 
+                            <code>{{ 'Doctor_settings.platform_earnings_calculation.formula' | translate }} </code>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
             </div>
         </div>
     </div>

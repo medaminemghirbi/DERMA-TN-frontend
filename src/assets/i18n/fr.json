@@ -21,8 +21,26 @@
             "title": "Autres Paramètres",
             "working_saturday": "Activer le Travail le Samedi",
             "working_online": "Activer le Travail en Ligne",
-            "working_online_note": "Lorsque le Travail en Ligne est activé, le canal de rendez-vous sera généré par DermaPro, et un lien pour la communication en temps réel (RTC) sera créé et envoyé dans la boîte mail 10 minutes avant le rendez-vous. Restez à l'écoute 😀."
-
+            "working_online_note": "Lorsque le Travail en Ligne est activé, le canal de rendez-vous sera généré par DermaPro, et un lien pour la communication en temps réel (RTC) sera créé et envoyé dans la boîte mail 10 minutes avant le rendez-vous. Restez à l'écoute 😀.",
+            "working_online_price": "Prix de la consultation en ligne",
+            "tnd":"TND"
+        },
+        "platform_earnings_calculation": {
+            "title": "Système de calcul des gains de la plateforme",
+            "description": "Le montant total gagné par la plateforme et le docteur est calculé selon la formule suivante :",
+            "table": {
+                "headers": {
+                    "description": "Description",
+                    "amount": "Montant (TND)"
+                },
+                "rows": {
+                    "total_paid": "Montant total payé",
+                    "platform_fee": "Commission de la plateforme (10%)",
+                    "doctor_earnings": "Montant gagné par le docteur (90%)"
+                }
+            },
+            "formule_title":"Formule : ",
+            "formula": "Montant gagné par le docteur = Montant total - (Montant total × 10%)"
         },
         "message_phone": "Numéro de Téléphone Pour les Notifications Sms"
     },

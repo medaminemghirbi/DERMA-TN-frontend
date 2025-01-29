@@ -71,6 +71,9 @@ import { NgxLoadersCssModule } from 'ngx-loaders-css';
 import { DoctorProfilComponent } from './shared/doctor-profil/doctor-profil.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { DoctorsListComponent } from './doctors-list/doctors-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -131,6 +134,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotificationsComponent,
     ReportsComponent,
     DoctorProfilComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    DoctorsListComponent,
 
     
   ],

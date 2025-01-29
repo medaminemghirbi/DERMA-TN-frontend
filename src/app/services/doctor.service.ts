@@ -20,12 +20,12 @@ export class DoctorService {
   }
   getDoctorStatistique(id: any) {
     return this.http.get(
-      environment.urlBackend + 'api/v1/patient_stats/' + id
+      environment.urlBackend + 'api/v1/doctor_stats/' + id
     );
   }
   getPatientStatistique(id: any) {
     return this.http.get(
-      environment.urlBackend + 'api/v1/doctor_stats/' + id
+      environment.urlBackend + 'api/v1/patient_stats/' + id
     );
   }
   anaylzeImage(newprofile: any) {

@@ -39,6 +39,9 @@ import { NotificationSettingComponent } from './patient/notification-setting/not
 import { ChangeImageComponent } from './patient/change-image/change-image.component';
 import { ReportsComponent } from './doctor/analyze-image/reports/reports.component';
 import { DoctorProfilComponent } from './shared/doctor-profil/doctor-profil.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { DoctorsListComponent } from './doctors-list/doctors-list.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -90,7 +93,9 @@ const routes: Routes = [
 
   { path: 'blog/:id', component: BlogDetailsComponent },
   { path: 'doctor/:id', component: DoctorProfilComponent },
-
+  {path:':token/reset', component: ResetPasswordComponent},
+  {path:'forgot-password',component:ForgotPasswordComponent},
+  {path:'doctors-list',component:DoctorsListComponent},
 
   // Wildcard route
   { path: '**', component: UnauthorizedComponent } // or PageNotFoundComponent for 404 scenarios
