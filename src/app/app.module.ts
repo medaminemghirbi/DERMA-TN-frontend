@@ -74,6 +74,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { DoctorsListComponent } from './doctors-list/doctors-list.component';
+import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
+import { LandingHeaderComponent } from './landing-header/landing-header.component';
+import { LandingFooterComponent } from './landing-footer/landing-footer.component';
+import { TestdragComponent } from './testdrag/testdrag.component';
+import { DoctorServicesComponent } from './doctor/doctor-services/doctor-services.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -137,6 +142,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     ForgotPasswordComponent,
     ResetPasswordComponent,
     DoctorsListComponent,
+    DoctorDetailsComponent,
+    LandingHeaderComponent,
+    LandingFooterComponent,
+    TestdragComponent,
+    DoctorServicesComponent,
 
     
   ],

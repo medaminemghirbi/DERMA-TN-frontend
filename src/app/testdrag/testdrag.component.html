@@ -1,0 +1,23 @@
+<div class="drag-container">
+    <h2>Kanban Board - Drag and Drop</h2>
+  
+    <!-- Available Items Column -->
+    <div class="kanban-column">
+      <h3>Available Items</h3>
+      <div class="kanban-card" *ngFor="let item of items; let i = index" 
+           [attr.draggable]="true" 
+           (dragstart)="onDragStart(i)">
+        <h4>{{ item.title }}</h4>
+        <p>{{ item.description }}</p>
+      </div>
+    </div>
+  
+    <!-- Completed Column -->
+    <div class="kanban-column" (dragover)="onDragOver($event)" (drop)="onDrop()">
+      <h3>Completed</h3>
+      <div class="kanban-card" *ngFor="let completedItem of completedItems">
+        <h4>{{ completedItem.title }}</h4>
+        <p>{{ completedItem.description }}</p>
+      </div>
+    </div>
+</div>

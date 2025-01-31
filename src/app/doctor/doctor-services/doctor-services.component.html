@@ -1,0 +1,122 @@
+<div class="main-wrapper">
+    <app-doctor-header></app-doctor-header>
+    <app-doctor-sidebar></app-doctor-sidebar>
+
+    <div class="page-wrapper">
+        <div class="content">
+            <app-header-settings></app-header-settings>
+            <app-notifiacation-alert></app-notifiacation-alert>
+            <div class="col-12 d-flex justify-content-between align-items-center">
+                <div class="doctor-search-blk d-flex justify-content-between align-items-center">
+                    <div class="top-nav-search table-search-blk">
+                        <h4 class="header-title">Tous Mes Services ({{services?.length}})</h4>
+                    </div>
+                </div>
+                <div class="col-auto float-end ms-auto">
+                    <a href="#" class="btn btn-rounded btn-success" data-bs-toggle="modal" data-bs-target="#scrollable-modal">
+                        <i class="fa-solid fa-power-off"></i> Display All DermaPro Services
+                    </a>
+
+                </div>
+            </div>
+            <br>
+            <div class="table-wrapper">
+                <table class="table border-0 custom-table comman-table datatable mb-0">
+                    <thead>
+                        <tr>
+                            <th>Service Name</th>
+                            <th>Service Description</th>
+                            <th>Range Price</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let service of services; let i = index">
+                            <td>
+                                {{ service.name }}
+                            </td>
+                            <td  class="description-cell">
+                                {{ service.description }}
+                            </td>
+                            <td>
+                                {{ service.price }}
+                            </td>
+                            <td>
+                                <i class="fa fa-trash-alt m-r-5" (click)="deleteService(service.doctor_service_id, i)"></i>
+                            </td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="scrollable-modal" tabindex="-1" role="dialog" aria-labelledby="scrollableModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scrollableModalTitle">All Official Services</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Table Wrapper -->
+                <div class="table-responsive" style="max-height: 700px; overflow-y: auto;">
+                    <table class="table table-striped custom-table mb-0 datatable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" [(ngModel)]="selectAll" (change)="toggleSelectAll()" />
+
+                                </th>
+                                <th>Service Name</th>
+                                <th>Service Description</th>
+                                <th>Range Price</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr 
+                                *ngFor="let item of AllServices | paginate: { itemsPerPage: 20, currentPage: p } | filter: searchedKeyword; index as i">
+                                <td>
+                                    <!-- <input type="checkbox" [(ngModel)]="item.selected"
+                                        (change)="checkIfAllSelected()" /> -->
+
+                                        <input type="checkbox" [(ngModel)]="item.selected" [disabled]="item.disabled" (change)="checkIfAllSelected()" />
+                                </td>
+                                <td>{{ i + 1 }} - {{ item.name }}</td>
+                                <td class="description-cell">
+                                    <span>{{ item.description }}</span>
+                                </td>
+                                <td>{{ item.price }}</td>
+                            </tr>
+                            <tr *ngIf="AllServices?.length == 0" class="no-appointment-row">
+                                <td colspan="8" class="description-content no-appointment-text">
+                                    No Service Available Contact Webmaster 😅
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination and Button Row -->
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <!-- Pagination Controls - Centered -->
+                    <div style="flex: 1; text-align: center;">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+
+                    <!-- Button - Right-aligned -->
+                    <div>
+                        <button type="submit" (click)="AddService()" class="btn btn-primary px-4" style="background-color: rgb(38, 8, 158);">
+                            Add  Services
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,45 +2,7 @@
     <header class="main-header style-one">
 
 
-        <!-- header-lower -->
-        <div class="header-lower">
-            <div class="auto-container">
-                <div class="outer-box">
-                    <div class="logo-box">
-                        <div class="pattern" style="background-image: url(../../assets/images1/shape/shape-1.png);">
-                        </div>
-                        <div class="bg-color"></div>
-                        <figure class="logo"><a><img src="../../assets/images1/logo_with_beta.png" alt=""></a>
-                        </figure>
-                    </div>
-                    <div class="menu-area">
-                        <div class="mobile-nav-toggler">
-                            <i class="icon-bar"></i>
-                            <i class="icon-bar"></i>
-                            <i class="icon-bar"></i>
-                        </div>
-                        <nav class="main-menu navbar-expand-md navbar-light">
-                            <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
-                                <ul class="navigation clearfix">
-                                    <li><a routerLink="">Home</a></li>
-                                    <li><a routerLink="/doctors-list">Doctors</a></li>
- 
-                                    <li><a>Blogs</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                    <div class="btn-box">
-                        <a *ngIf="!currentUser" routerLink="/login" class="theme-btn-one">
-                            <i class="icon-image"></i>Login / Sign Up
-                        </a>
-                        <a *ngIf="currentUser" (click)="goToDashboard()" class="theme-btn-one">
-                            <i class="icon-image"></i>Go to Dashboard
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <app-landing-header></app-landing-header>
 
         <!--sticky Header-->
         <div class="sticky-header">
