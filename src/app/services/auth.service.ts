@@ -105,4 +105,11 @@ updateUserPhoneNumber(userId: number, data: {  phone_number: string }) {
   return this.http.put(environment.urlBackend+`/api/v1/users/${userId}/update_phone_number`, data);
 }
 
+sendresetlink (email:any)  {
+  return this.http.post(environment.urlBackend+'api/v1/password_resets/',email) ;
+}
+resetpassword(token:string,email:any){
+  return this.http.put(environment.urlBackend+'api/v1/password_resets/'+token,email);
+}
+
 }

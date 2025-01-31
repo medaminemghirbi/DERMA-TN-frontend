@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Editor } from 'ngx-editor';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
@@ -22,6 +22,8 @@ export class ForumsComponent implements OnInit {
   currentuser: any;
   role: any;
   imageUrls: string[] = [];
+  editor!: Editor;
+  html!: '';
 
   addmessage = this.fb.group({
     text: ['', [Validators.required]],
@@ -37,6 +39,7 @@ export class ForumsComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.currentuser = this.Auth.getcurrentuser();
+    this.editor = new Editor();
     this.role = this.Auth.getRole();
   }
 
@@ -44,7 +47,9 @@ export class ForumsComponent implements OnInit {
     this.initializeWebSocket();
     this.fetchMessages();
   }
-
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
   initializeWebSocket() {
     if (this.ws) return; // Avoid creating multiple WebSocket connections
 

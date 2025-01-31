@@ -20,6 +20,9 @@ export class AdminService {
   getDoctors() {
     return this.http.get(`${environment.urlBackend}` + 'api/v1/doctors/');
   }
+  getDoctorsIndex() {
+    return this.http.get(`${environment.urlBackend}` + 'api/v1/index_home/');
+  }
   last_run() {
     return this.http.get(`${environment.urlBackend}` + 'api/v1/last_run/');
   }

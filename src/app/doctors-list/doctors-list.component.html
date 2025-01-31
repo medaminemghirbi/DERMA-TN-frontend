@@ -1,0 +1,235 @@
+<app-spinner [isLoading]="isLoading"></app-spinner>
+<ng-progress #progressBar></ng-progress>
+
+<div class="boxed_wrapper">
+    <header class="main-header style-one">
+        <div class="header-lower">
+            <div class="auto-container">
+                <div class="outer-box">
+                    <div class="logo-box">
+                        <div class="pattern" style="background-image: url(../../assets/images1/shape/shape-1.png);">
+                        </div>
+                        <div class="bg-color"></div>
+                        <figure class="logo"><a><img src="../../assets/images1/logo_with_beta.png" alt=""></a>
+                        </figure>
+                    </div>
+                    <div class="menu-area">
+                        <div class="mobile-nav-toggler">
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                        </div>
+                        <nav class="main-menu navbar-expand-md navbar-light">
+                            <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                <ul class="navigation clearfix">
+                                    <li><a routerLink="">Home</a></li>
+                                    <li><a routerLink="/doctors-list">Doctors</a></li>
+
+                                    <li><a>Blogs</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="btn-box">
+                        <a *ngIf="!currentUser" routerLink="/login" class="theme-btn-one">
+                            <i class="icon-image"></i>Login / Sign Up
+                        </a>
+                        <a *ngIf="currentUser" (click)="goToDashboard()" class="theme-btn-one">
+                            <i class="icon-image"></i>Go to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-header">
+            <div class="auto-container">
+                <div class="outer-box">
+                    <div class="logo-box">
+                        <figure class="logo"><a><img src="../../assets/images1/logo_with_beta.png" alt=""></a></figure>
+                    </div>
+                    <div class="menu-area">
+                        <nav class="main-menu clearfix">
+                        </nav>
+                    </div>
+                    <div class="btn-box">
+                        <a *ngIf="!currentUser" routerLink="/login" class="theme-btn-one">
+                            <i class="icon-image"></i>Login / Sign Up
+                        </a>
+                        <a *ngIf="currentUser" (click)="goToDashboard()" class="theme-btn-one">
+                            <i class="icon-image"></i>Go to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="mobile-menu">
+        <div class="menu-backdrop"></div>
+        <div class="close-btn"><i class="fas fa-times"></i></div>
+
+        <nav class="menu-box">
+            <div class="nav-logo"><a href="index.html"><img src="../../assets/images1/logo-2.png" alt="" title=""></a>
+            </div>
+            <div class="menu-outer">
+            </div>
+            <div class="contact-info">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li>Chicago 12, Melborne City, USA</li>
+                    <li><a href="tel:+8801682648101">+88 01682648101</a></li>
+                    <li><a href="mailto:info@example.com">info@example.com</a></li>
+                </ul>
+            </div>
+            <div class="social-links">
+                <ul class="clearfix">
+                    <li><a href="index.html"><span class="fab fa-twitter"></span></a></li>
+                    <li><a href="index.html"><span class="fab fa-facebook-square"></span></a></li>
+                    <li><a href="index.html"><span class="fab fa-pinterest-p"></span></a></li>
+                    <li><a href="index.html"><span class="fab fa-instagram"></span></a></li>
+                    <li><a href="index.html"><span class="fab fa-youtube"></span></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <section class="page-title-two">
+        <div class="title-box centred bg-color-2">
+            <div class="pattern-layer">
+                <div class="pattern-1" style="background-image: url(../../assets/images1/shape/shape-70.png);"></div>
+                <div class="pattern-2" style="background-image: url(../../assets/images1/shape/shape-71.png);"></div>
+            </div>
+            <div class="auto-container">
+                <div class="title">
+                    <h1>DermaPro Doctors List({{filteredDoctors.length}})</h1>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <div class="select-field bg-color-3">
+        <div class="auto-container">
+            <div class="content-box">
+                <div class="form-inner clearfix">
+                    <ul class="select-box clearfix">
+                        <form>
+                            <div class="form-group clearfix">
+                                <input type="text" name="name" [(ngModel)]="searchedKeyword"
+                                    placeholder="Ex. Doctor Name, Location..." (input)="searchDoctors()" required="">
+
+                                <button type="submit">
+                                    <i class="fa fa-search-plus" data-bs-toggle="tooltip"
+                                        title="search for a doctor"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="clinic-section doctors-page-section">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 content-side">
+                    <div class="item-shorting clearfix">
+                        <div class="left-column pull-left">
+                            <select class="form-control" [(ngModel)]="selectedLocation"
+                                (change)="searchDoctorsbylocation()">
+                                <option hidden value="">Select by Gouvernement</option>
+                                <option *ngFor="let item of locations" [value]="item">{{ item }}</option>
+                            </select>
+
+                        </div>
+                        <div class="right-column pull-right clearfix">
+                            <div class="short-box clearfix">
+                                <div class="select-box">
+                                    <select id="itemsPerPage" [(ngModel)]="itemsPerPage"
+                                        class="form-control form-control-sm">
+                                        <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="menu-box">
+                                <button class="list-view on"><i class="icon-List"></i></button>
+                                <div class="add-group">
+                                    <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2"
+                                        data-bs-toggle="tooltip" title="reset filters" (click)="resetFilters()">
+                                        <img src="assets/img/icons/re-fresh.svg" alt>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="wrapper list">
+                        <div class="clinic-list-content list-item">
+                            <div *ngFor="let item of filteredDoctors | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index"
+                                class="clinic-block-one">
+                                <div class="inner-box">
+                                    <div class="pattern">
+                                        <div class="pattern-1"
+                                            style="background-image: url(../../assets/images1/shape/shape-24.png);">
+                                        </div>
+                                        <div class="pattern-2"
+                                            style="background-image: url(../../assets/images1/shape/shape-25.png);">
+                                        </div>
+                                    </div>
+                                    <figure class="image-box"><img src="{{item.user_image_url}}" alt="">
+                                    </figure>
+                                    <div class="content-box">
+                                        <div class="like-box"><a href="doctors-details.html"><i
+                                                    class="far fa-heart"></i></a></div>
+                                        <ul class="name-box clearfix">
+                                            <li class="name">
+                                                <h3><a>Dr. {{item.firstname}} {{item.lastname}}</a></h3>
+                                            </li>
+                                            <li *ngIf="item.email_confirmed == true"><i class="icon-Trust-1"></i></li>
+                                            <li *ngIf="item.email_confirmed == true"><i class="icon-Trust-2"></i></li>
+                                        </ul>
+                                        <span class="designation">Med Doctor , Dermatologue, TN</span>
+                                        <div class="text">
+                                            <p [innerHTML]="item.about_me"></p>
+                                        </div>
+                                        <div class="rating-box clearfix">
+                                            <ul class="rating clearfix">
+                                                <li
+                                                    *ngFor="let star of generateStars(item.total_rating_value, item.rating_count)">
+                                                    <i class="icon-Star" [class.filled]="star.filled"></i>
+                                                </li>
+                                                <li><a href="doctors-details.html">({{item.rating_count}})</a></li>
+                                            </ul>
+                                            <div class="link">
+                                                <a *ngIf="item.working_on_line == true">Available Online</a>
+                                                <a style="color: red;" *ngIf="item.working_on_line == false">Not
+                                                    Available Online</a>
+                                            </div>
+                                        </div>
+                                        <div class="location-box">
+                                            <p *ngIf="item.address"><i class="fas fa-map-marker-alt"></i>
+                                                {{item.address}}</p>
+                                            <p *ngIf="!item.address"><i class="fas fa-map-marker-alt"></i>
+                                                Address Not provided</p>
+                                        </div>
+                                        <div class="location-box">
+                                            <p *ngIf="item.location">
+                                                Gouvernement : {{item.location}}</p>
+                                        </div>
+                                        <div class="btn-box"><a [routerLink]="['/doctor-details', item.id]">Visit
+                                                Now</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="filteredDoctors.length === 0" class="alert alert-danger text-center">
+                                No doctors found.
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align:right;">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>

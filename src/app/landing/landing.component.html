@@ -2,45 +2,7 @@
     <header class="main-header style-one">
 
 
-        <!-- header-lower -->
-        <div class="header-lower">
-            <div class="auto-container">
-                <div class="outer-box">
-                    <div class="logo-box">
-                        <div class="pattern" style="background-image: url(../../assets/images1/shape/shape-1.png);">
-                        </div>
-                        <div class="bg-color"></div>
-                        <figure class="logo"><a><img src="../../assets/images1/logo_with_beta.png" alt=""></a>
-                        </figure>
-                    </div>
-                    <!-- <div class="menu-area">
-                        <div class="mobile-nav-toggler">
-                            <i class="icon-bar"></i>
-                            <i class="icon-bar"></i>
-                            <i class="icon-bar"></i>
-                        </div>
-                        <nav class="main-menu navbar-expand-md navbar-light">
-                            <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
-                                <ul class="navigation clearfix">
-                                    <li><a>Home</a></li>
-                                    <li><a>Doctors</a></li>
- 
-                                    <li><a>Blogs</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div> -->
-                    <div class="btn-box">
-                        <a *ngIf="!currentUser" routerLink="/login" class="theme-btn-one">
-                            <i class="icon-image"></i>Login / Sign Up
-                        </a>
-                        <a *ngIf="currentUser" (click)="goToDashboard()" class="theme-btn-one">
-                            <i class="icon-image"></i>Go to Dashboard
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <app-landing-header></app-landing-header>
 
         <!--sticky Header-->
         <div class="sticky-header">
@@ -174,8 +136,8 @@
                             <figure class="icon-box"><img src="../../assets/images1/icons/icon-1.png" alt=""></figure>
                             <p>Appointment With</p>
                             <h3>Nearest Doctor</h3>
-                            <div class="link"><a href="/login"><i class="icon-Arrow-Right"></i></a></div>
-                            <div class="btn-box"><a href="/login" class="theme-btn-one">Chat now<i
+                            <div class="link"><a routerLink="/login"><i class="icon-Arrow-Right"></i></a></div>
+                            <div class="btn-box"><a routerLink="/login" class="theme-btn-one">Chat now<i
                                         class="icon-Arrow-Right"></i></a></div>
                         </div>
                     </div>
@@ -193,8 +155,8 @@
                             <figure class="icon-box"><img src="../../assets/images1/icons/icon-2.png" alt=""></figure>
                             <p>Live Chat With</p>
                             <h3>Doctors</h3>
-                            <div class="link"><a href="/login"><i class="icon-Arrow-Right"></i></a></div>
-                            <div class="btn-box"><a href="/login" class="theme-btn-one">Chat now<i
+                            <div class="link"><a routerLink="/login"><i class="icon-Arrow-Right"></i></a></div>
+                            <div class="btn-box"><a routerLink="/login" class="theme-btn-one">Chat now<i
                                         class="icon-Arrow-Right"></i></a></div>
                         </div>
                     </div>
@@ -212,8 +174,8 @@
                             <figure class="icon-box"><img src="../../assets/images1/icons/icon-3.png" alt=""></figure>
                             <p>Appoinment With Top</p>
                             <h3>Dermatologues</h3>
-                            <div class="link"><a href="/login"><i class="icon-Arrow-Right"></i></a></div>
-                            <div class="btn-box"><a href="/login" class="theme-btn-one">Chat now<i
+                            <div class="link"><a routerLink="/login"><i class="icon-Arrow-Right"></i></a></div>
+                            <div class="btn-box"><a routerLink="/login" class="theme-btn-one">Chat now<i
                                         class="icon-Arrow-Right"></i></a></div>
                         </div>
                     </div>
@@ -231,8 +193,8 @@
                             <figure class="icon-box"><img src="../../assets/images1/icons/icon-4.png" alt=""></figure>
                             <p>24/7 Active Support</p>
                             <h3>Ticket Tools</h3>
-                            <div class="link"><a href="/login"><i class="icon-Arrow-Right"></i></a></div>
-                            <div class="btn-box"><a href="/login" class="theme-btn-one">Chat now<i
+                            <div class="link"><a routerLink="/login"><i class="icon-Arrow-Right"></i></a></div>
+                            <div class="btn-box"><a routerLink="/login" class="theme-btn-one">Chat now<i
                                         class="icon-Arrow-Right"></i></a></div>
                         </div>
                     </div>
@@ -266,7 +228,7 @@
                     <div class="content_block_1">
                         <div class="content-box">
                             <div class="sec-title">
-                                <p>About Docpro</p>
+                                <p>About DermaPro</p>
                                 <h2>Bring care to your home with one click</h2>
                             </div>
                             <div class="text">
@@ -743,7 +705,7 @@
         <div class="auto-container">
             <div class="sec-title centred">
                 <p>News & Article</p>
-                <h2>Stay Update With Docpro</h2>
+                <h2>Stay Update With DermaPro</h2>
             </div>
             <div class="row clearfix">
                 <div class="col-lg-4 col-md-6 col-sm-12 news-block">
@@ -909,7 +871,7 @@
             <div class="auto-container">
                 <div class="inner-box clearfix">
                     <div class="copyright pull-left">
-                        <p><a>Docpro</a> &copy; 2025 All Right Reserved</p>
+                        <p><a>DermaPro</a> &copy; 2025 All Right Reserved</p>
                     </div>
                     <ul class="footer-nav pull-right clearfix">
                         <li><a>Terms of Service</a></li>

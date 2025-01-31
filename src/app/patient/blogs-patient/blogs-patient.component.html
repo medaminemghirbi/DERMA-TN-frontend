@@ -46,5 +46,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-12" *ngIf="allBlogs.length == 0">
+                    <div class="no-blogs-message">
+                        <div class="no-blogs-icon">
+                            <img width="100"
+                                src="../../../assets/img/icons/read-news-learn-understand-paper-svgrepo-com.svg"
+                                alt> </div>
+                        <p>{{'no_blogs_title' | translate}}</p>
+                        <div class="no-blogs-subtext">{{'no_blogs_contenu' | translate}}</div>
+                    </div>
+                </div>
             </div>
         </div>

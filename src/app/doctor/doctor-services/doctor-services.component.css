@@ -1,0 +1,192 @@
+
+/* Header Styling */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.page-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+/* Service Card */
+.service-card {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Header */
+.card-header {
+    font-size: 18px;
+    font-weight: 600;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+/* Card Body */
+.card-body p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Card Footer (Price) */
+.card-footer {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.price {
+    font-weight: bold;
+    color: #27ae60;
+    font-size: 16px;
+}
+
+/* Description Styling - Cleaner Look */
+.description-cell {
+    max-width: 300px; /* Adjust width as needed */
+    padding: 8px; /* Slightly reduced padding */
+    border-bottom: 1px solid #ddd; /* Only bottom border */
+    font-size: 14px;
+    color: #333;
+    white-space: pre-wrap; /* Makes the text wrap */
+    word-wrap: break-word; /* Breaks long words to avoid overflow */
+    height: 100px; /* Set a fixed height for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+  }
+  
+  .description-cell:hover {
+      background-color: #f5f5f5; /* Light background on hover */
+      cursor: pointer; /* Indicate it's clickable */
+  }
+  
+  /* Optional: Style the table rows for better spacing */
+  .table-striped tbody tr {
+    border-bottom: 1px solid #eee; /* Subtle row separator */
+  }
+  
+  .table-striped tbody tr:last-of-type {
+      border-bottom: none; /* Remove border from last row */
+  }
+  
+  /* Optional: Add a hover effect to rows */
+  .table-striped tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  /* Style the modal body to remove extra padding */
+  .modal-body {
+      padding: 20px; /* Adjust as needed */
+  }
+  
+  /* Style the modal content to remove rounded corners */
+  .modal-content {
+      border-radius: 0;
+  }
+  
+  /* Style the modal header */
+  .modal-header {
+      border-bottom: 1px solid #eee;
+      padding: 15px 20px;
+  }
+  
+  /* Style the modal title */
+  .modal-title {
+      font-weight: 600;
+  }
+  
+  /* Style the modal close button */
+  .btn-close {
+      opacity: 0.5;
+  }
+  
+  .btn-close:hover {
+      opacity: 0.75;
+  }
+  
+  /* Pagination Styling - Center and improve appearance*/
+  .pagination-controls {
+      display: flex;
+      justify-content: center;
+  }
+  
+  .pagination-controls ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+  }
+  
+  .pagination-controls li {
+      margin: 0 5px;
+  }
+  
+  .pagination-controls a, .pagination-controls span {
+      padding: 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #333;
+      background-color: #fff;
+  }
+  
+  .pagination-controls .current {
+      background-color: #007bff; /* Or your primary color */
+      color: #fff;
+      border-color: #007bff;
+  }
+  
+  .pagination-controls a:hover {
+      background-color: #f0f0f0;
+  }
+  
+  /* Button Styling */
+  .btn-primary {
+    border-radius: 4px; /* Slightly rounded corners */
+    padding: 8px 16px; /* Adjust padding */
+    font-weight: 500;
+  }
+  
+  .btn-primary:hover {
+      background-color: #0069d9; /* Darker shade on hover */
+      border-color: #0062cc;
+  }
+.no-appointment-row {
+    background-color: #f9f9f9; /* Light background color to make it stand out */
+    height: 400px; /* Adjust height to center content vertically */
+  }
+  
+  .no-appointment-text {
+    text-align: center; /* Center text horizontally */
+    vertical-align: middle; /* Center text vertically */
+    font-weight: bold; /* Make text bold */
+    color: #888; /* Light gray color for text */
+    padding: 20px; /* Add padding for better spacing */
+    font-size: 16px; /* Adjust font size */
+  }
+  

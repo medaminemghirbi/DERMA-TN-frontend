@@ -32,13 +32,11 @@ export class DashboardDoctorComponent implements OnInit {
     this.doctorService.getDoctorAppointmentOfTheDay(this.currentuser.id).subscribe(
       (data) => {
         this.AppointmentOfTheDay = data;
-        console.log(this.AppointmentOfTheDay);
 
         // Call calculateNextAppointment after data is loaded
         this.calculateNextAppointment();
       },
       (err: HttpErrorResponse) => {
-        console.log(err);
         this.messageErr = "We couldn't find any appointments for today";
       }
     );
@@ -47,7 +45,6 @@ export class DashboardDoctorComponent implements OnInit {
         this.DoctorStats = data;
         console.log(this.DoctorStats);},
       (err: HttpErrorResponse) => {
-        console.log(err);
         this.messageErr = "We couldn't find any stats for today";
       }
     );
@@ -55,11 +52,9 @@ export class DashboardDoctorComponent implements OnInit {
 
   calculateNextAppointment() {
     const now = moment(); // Current time in local time zone
-    console.log("Current time:", now.format());
 
     if (!this.AppointmentOfTheDay || this.AppointmentOfTheDay.length === 0) {
       this.nextAppointment = null;
-      console.log("No appointments for today.");
       return;
     }
 
@@ -73,7 +68,6 @@ export class DashboardDoctorComponent implements OnInit {
     const upcomingAppointments = todayAppointments
       .filter((app: { appointment: string; }) => {
         const appointmentTime = moment(app.appointment);
-        console.log("Appointment start time:", appointmentTime.format()); // Debug log
 
         // Check if the appointment time is after the current time
         return appointmentTime.isAfter(now); // Check if appointment time is after the current time
@@ -88,8 +82,6 @@ export class DashboardDoctorComponent implements OnInit {
     } else {
       this.nextAppointment = null;
       this.show = true
-      console.log(this.show)
-      console.log("No upcoming appointments.");
     }
   }
 

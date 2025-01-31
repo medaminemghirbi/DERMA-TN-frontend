@@ -20,12 +20,12 @@ export class DoctorService {
   }
   getDoctorStatistique(id: any) {
     return this.http.get(
-      environment.urlBackend + 'api/v1/patient_stats/' + id
+      environment.urlBackend + 'api/v1/doctor_stats/' + id
     );
   }
   getPatientStatistique(id: any) {
     return this.http.get(
-      environment.urlBackend + 'api/v1/doctor_stats/' + id
+      environment.urlBackend + 'api/v1/patient_stats/' + id
     );
   }
   anaylzeImage(newprofile: any) {
@@ -154,5 +154,15 @@ export class DoctorService {
   }
   getAllHoliday(){
     return this.http.get(environment.urlBackend + 'api/v1/holidays/');
+  }
+  getAllServices(){
+    return this.http.get(environment.urlBackend + 'api/v1/services/');
+  }
+  getDoctorServices(id: any){
+    return this.http.get(environment.urlBackend + 'api/v1/doctor_services/' +id);
+  }
+
+  ArchiveService(id: any) {
+    return this.http.delete(environment.urlBackend + 'api/v1/doctor_services/' + id);
   }
 }

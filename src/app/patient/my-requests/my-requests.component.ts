@@ -312,7 +312,7 @@ export class MyRequestsComponent implements OnInit {
     this.http.post(apiUrl, ratingData).subscribe(
       (response) => {
         console.log('Rating submitted successfully:', response);
-        Swal.fire('Thank you for rating this doctor through  DocPro! Your feedback helps us improve our services.', '', 'success').then(() => {
+        Swal.fire('Thank you for rating this doctor through  DermaPro! Your feedback helps us improve our services.', '', 'success').then(() => {
           // Find the index of the user and update the corresponding row
           window.location.reload()
         });
@@ -328,5 +328,11 @@ export class MyRequestsComponent implements OnInit {
     );
   }
 
+  generateFacture(item: any): void {
+    const url = `http://127.0.0.1:3000/api/v1/payments/${item.id}/generate_facture`;
+  
+    window.open(url, "_blank");
+  }
+  
   
 }

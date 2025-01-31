@@ -39,6 +39,12 @@ import { NotificationSettingComponent } from './patient/notification-setting/not
 import { ChangeImageComponent } from './patient/change-image/change-image.component';
 import { ReportsComponent } from './doctor/analyze-image/reports/reports.component';
 import { DoctorProfilComponent } from './shared/doctor-profil/doctor-profil.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { DoctorsListComponent } from './doctors-list/doctors-list.component';
+import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
+import { TestdragComponent } from './testdrag/testdrag.component';
+import { DoctorServicesComponent } from './doctor/doctor-services/doctor-services.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -68,6 +74,7 @@ const routes: Routes = [
   { path: 'doctor/settings/social-media', canActivate: [DoctorGuard], component: SocialMediaComponent },
   { path: 'doctor/settings/notifications', canActivate: [DoctorGuard], component: NotificationSettingsComponent },
   { path: 'doctor/settings/my-phone-numbers', canActivate: [DoctorGuard], component: MyPhoneNumbersComponent },
+  { path: 'doctor/settings/doctor-services', component: DoctorServicesComponent },
 
   // Patient routes with guards
   { path: 'patient/dashboard', component: DashboardPatientComponent },
@@ -90,7 +97,12 @@ const routes: Routes = [
 
   { path: 'blog/:id', component: BlogDetailsComponent },
   { path: 'doctor/:id', component: DoctorProfilComponent },
+  { path: 'doctor-details/:id', component: DoctorDetailsComponent },
 
+  {path:':token/reset', component: ResetPasswordComponent},
+  {path:'forgot-password',component:ForgotPasswordComponent},
+  {path:'doctors-list',component:DoctorsListComponent},
+  {path:'drag',component:TestdragComponent},
 
   // Wildcard route
   { path: '**', component: UnauthorizedComponent } // or PageNotFoundComponent for 404 scenarios

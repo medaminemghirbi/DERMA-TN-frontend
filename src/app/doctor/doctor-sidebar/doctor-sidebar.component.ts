@@ -31,7 +31,7 @@ export class DoctorSidebarComponent implements OnInit {
       this.router.navigate(['/doctor/analyze-image']);
     } else {
       // Show an error message
-      this.toastr.error('You Can\'t Access It!', 'Fonctionality not Allowed Please Contact DocPro!');
+      this.toastr.error('You Can\'t Access It!', 'Fonctionality not Allowed Please Contact DermaPro!');
     }
   }
   alert(){
