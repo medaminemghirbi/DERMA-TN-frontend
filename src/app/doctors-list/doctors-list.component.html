@@ -24,7 +24,6 @@
                                 <ul class="navigation clearfix">
                                     <li><a routerLink="">Home</a></li>
                                     <li><a routerLink="/doctors-list">Doctors</a></li>
-
                                     <li><a>Blogs</a></li>
                                 </ul>
                             </div>
@@ -177,7 +176,7 @@
                                     <figure class="image-box"><img src="{{item.user_image_url}}" alt="">
                                     </figure>
                                     <div class="content-box">
-                                        <div class="like-box"><a href="doctors-details.html"><i
+                                        <div *ngIf="currentUser && role === 'Patient'" class="like-box"><a href="doctors-details.html"><i
                                                     class="far fa-heart"></i></a></div>
                                         <ul class="name-box clearfix">
                                             <li class="name">
@@ -214,8 +213,12 @@
                                             <p *ngIf="item.location">
                                                 Gouvernement : {{item.location}}</p>
                                         </div>
-                                        <div class="btn-box"><a [routerLink]="['/doctor-details', item.id]">Visit
-                                                Now</a></div>
+                                        <div *ngIf="currentUser && role === 'Patient'" class="btn-box">
+                                            <a [routerLink]="['/patient', item.id, 'select-date']">Book Now</a>
+                                        </div>
+                                        <div *ngIf="!currentUser" class="btn-box">
+                                            <a href="#" (click)="redirectToLogin($event)">Book Now</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

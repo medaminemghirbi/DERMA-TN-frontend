@@ -11,7 +11,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Appointment Request Information</h4>
+                            <h4 class="card-title mb-0">{{'patient_request.header'| translate}}</h4>
                         </div>
                         <div class="card-body">
                             <div class="wizard">
@@ -21,7 +21,8 @@
                                         <div class="mb-4">
                                             <form class="d-flex">
                                                 <input type="text" name="role" class="form-control"
-                                                    [(ngModel)]="searchedKeyword" placeholder="Search for a Doctor">
+                                                    (input)="searchDoctors()" [(ngModel)]="searchedKeyword"
+                                                    placeholder="{{'patient_request.search'| translate}}">
                                                 <a class="btn"><img src="assets/img/icons/search-normal.svg" alt></a>
                                             </form>
                                         </div>
@@ -30,7 +31,8 @@
                                                 <div class="col-lg-8 col-md-12 col-sm-12 content-side">
                                                     <div class="wrapper list">
                                                         <div class="clinic-list-content list-item">
-                                                            <div *ngFor="let item of nearstdoctor  | filter: searchedKeyword | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" class="clinic-block-one" >
+                                                            <div *ngFor="let item of nearstdoctor  | filter: searchedKeyword | paginate: { itemsPerPage: 5, currentPage: p }; let i = index"
+                                                                class="clinic-block-one">
                                                                 <div class="inner-box">
                                                                     <div class="pattern">
                                                                         <div class="pattern-1"
@@ -40,51 +42,67 @@
                                                                             style="background-image: url(../../../assets/images1/shape/shape-25.png);">
                                                                         </div>
                                                                     </div>
-                                                                    <figure class="image-box"><img src="{{item.user_image_url}}" alt="">
+                                                                    <figure class="image-box"><img
+                                                                            src="{{item.user_image_url}}" alt="">
                                                                     </figure>
                                                                     <div class="content-box">
-                                                                        <div class="like-box"><a ><i
+                                                                        <div class="like-box"><a><i
                                                                                     class="far fa-heart"></i></a></div>
                                                                         <ul class="name-box clearfix">
                                                                             <li class="name">
-                                                                                <h3><a >Dr. {{item.firstname}} {{item.lastname}}</a></h3>
+                                                                                <h3><a>Dr. {{item.firstname}}
+                                                                                        {{item.lastname}}</a></h3>
                                                                             </li>
-                                                                            <li *ngIf="item.email_confirmed == true"><i class="icon-Trust-1"></i></li>
-                                                                            <li *ngIf="item.email_confirmed == true"><i class="icon-Trust-2"></i></li>
+                                                                            <li *ngIf="item.email_confirmed == true"><i
+                                                                                    class="icon-Trust-1"></i></li>
+                                                                            <li *ngIf="item.email_confirmed == true"><i
+                                                                                    class="icon-Trust-2"></i></li>
                                                                         </ul>
-                                                                        <span class="designation">Med Doctor , Dermatologue, TN</span>
+                                                                        <span class="designation">Med Doctor ,
+                                                                            Dermatologue, TN</span>
                                                                         <div class="text">
-                                                                            <p>{{item.description}}.</p>
+                                                                            <p [innerHTML]="item.about_me"></p>
+                                                                        </div>
+                                                                        <div class="text">
+                                                                            <p>{{item.description}}</p>
                                                                         </div>
                                                                         <div class="rating-box clearfix">
                                                                             <ul class="rating clearfix">
-                                                                                <li><i class="icon-Star"></i></li>
-                                                                                <li><i class="icon-Star"></i></li>
-                                                                                <li><i class="icon-Star"></i></li>
-                                                                                <li><i class="icon-Star"></i></li>
-                                                                                <li><i class="icon-Star"></i></li>
-                                                                                <li><a >(17)</a></li>
+                                                                                <li
+                                                                                    *ngFor="let star of generateStars(item.total_rating_value, item.rating_count)">
+                                                                                    <i class="icon-Star"
+                                                                                        [class.filled]="star.filled"></i>
+                                                                                </li>
+                                                                                <li><a
+                                                                                        href="doctors-details.html">({{item.rating_count}})</a>
+                                                                                </li>
                                                                             </ul>
                                                                             <div class="link">
-                                                                            <a *ngIf="item.working_on_line == true">Available Online</a>
-                                                                            <a *ngIf="item.working_on_line == false">Not Available Online</a>
+                                                                                <a *ngIf="item.working_on_line == true">{{'patient_request.available'| translate}}</a>
+                                                                                <a
+                                                                                    *ngIf="item.working_on_line == false">{{'patient_request.not_avaliable'| translate}}</a>
 
                                                                             </div>
                                                                         </div>
                                                                         <div class="location-box">
-                                                                            <p><i class="fas fa-map-marker-alt"></i>{{item.location}}, Tunisia</p>
+                                                                            <p><i
+                                                                                    class="fas fa-map-marker-alt"></i>{{item.location}},
+                                                                                Tunisia</p>
                                                                         </div>
+                                                                        <br>
                                                                         <div class="btn-box"><a
-                                                                            [routerLink]="['/patient', item.id, 'select-date']">Select
-                                                                            Doctor</a></div>
+                                                                                [routerLink]="['/patient', item.id, 'select-date']">{{'patient_request.select_doctor'| translate}}</a></div>
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                            <div *ngIf="nearstdoctor.length === 0"
+                                                                class="alert alert-danger text-center">
+                                                                No doctors found.
                                                             </div>
                                                             <router-outlet></router-outlet>
 
                                                         </div>
-                                                        <h6  class="tip">PS: You
-                                                            Can Change Displaying doctors by Gouvernament or by Kilométrage in <a
+                                                        <h6 class="tip">{{'patient_request.tips'| translate}} <a
                                                                 routerLink="/patient/settings"><u>Settings</u></a>
                                                         </h6>
                                                         <div style="text-align:right;">
@@ -107,4 +125,3 @@
         </div>
     </div>
 </div>
-

@@ -10,7 +10,7 @@ import { DoctorService } from 'src/app/services/doctor.service';
 })
 export class SelectDateComponent implements OnInit {
   searchedKeyword!:string;
-
+  currentYear: number = new Date().getFullYear();
   selectedDoctorData : any
   AllHoliday:any
   selectedDoctorId: string | null = null; // Doctor's ID
@@ -149,4 +149,9 @@ export class SelectDateComponent implements OnInit {
     const holiday = this.AllHoliday.find((h: { holiday_date: any; }) => h.holiday_date === day.date);
     return holiday ? holiday.holiday_name : null;
   }
+  isToday(day: any): boolean {
+    const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+    return day.date === today; // Compare with the given day's date
+}
+
 }

@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/services/admin.service';
+import Swal from 'sweetalert2';
 interface PdfFile {
   name: string;
   url: string;
@@ -30,15 +31,16 @@ interface Prediction {
 })
 export class ReportsComponent implements OnInit {
   pdfFiles: PdfFile[] = [];
-  selectedPrediction: Prediction | null = null;
-
+  selectedPrediction: any;
+  selectedPatient: any;
   p:number = 1 ;
   filteredDocuments: { title: string }[] = []; // To store filtered documents
-
+  sent_report_form!: FormGroup;
   newTitle: string = ''; // Property for the new title
   currentDocumentId: any; // To store the ID of the document being renamed
   dataDocument: any = {};
   predictions: any[] = [];
+  patients :any
   currentUser: any;
   document = {
     title: '',
@@ -60,11 +62,32 @@ export class ReportsComponent implements OnInit {
     this.update = new FormGroup({
       title: new FormControl(''),
     });
+    this.sent_report_form = new FormGroup({
+      patient_id: new FormControl(''),
+      prediction_id: new FormControl('')
+    });
   }
 
   ngOnInit(): void {
     this.currentUser = this.auth.getcurrentuser();
     this.fetchPredictionsReports();
+    this.userService.getPatients().subscribe(
+      (data) => {
+        this.patients = data;
+  
+        // Sort doctors safely
+        this.patients.sort((a: any, b: any) => {
+          const nameA = a.name || ''; // Default to empty string if undefined
+          const nameB = b.name || ''; // Default to empty string if undefined
+          return nameA.localeCompare(nameB);
+        });
+
+      },
+      (err: HttpErrorResponse) => {
+        console.error("Error fetching patients:", err);
+        this.patients = [];
+      }
+    );
   }
   fetchPredictionsReports() {
     this.http
@@ -81,6 +104,49 @@ export class ReportsComponent implements OnInit {
         }
       );
   }
+
+  sent_report(patientId: any) {
+    console.log("Prediction ID:", this.selectedPrediction.id);
+    console.log("Patient ID:", patientId);
+  
+    this.http
+      .post<any>(
+        `${environment.urlBackend}sent_report/${patientId}/${this.selectedPrediction.id}`,
+        {}
+      )
+      .subscribe(
+        (response) => {
+          this.predictions = response;
+          console.log(this.predictions);
+  
+          // Show success message
+          Swal.fire({
+            icon: 'success',
+            title: 'Report Sent Successfully',
+            text: 'The report has been sent to the patient.',
+            timer: 1500, // Message duration before it disappears
+            showConfirmButton: false,
+          });
+  
+          // Refresh page after 1 second (1000ms)
+          setTimeout(() => {
+            location.reload(); // Refresh the page
+          }, 1000);
+        },
+        (error) => {
+          console.error("Error sending report:", error);
+  
+          // Show error message
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'There was an issue sending the report. Please try again.',
+          });
+        }
+      );
+  }
+  
+  
   selectPrediction(prediction: Prediction) {
     this.selectedPrediction = prediction;
   }

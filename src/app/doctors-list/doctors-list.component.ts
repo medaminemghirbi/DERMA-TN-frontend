@@ -105,4 +105,9 @@ export class DoctorsListComponent implements OnInit {
       this.isLoading = false;
     }, 500);
   }
+
+  redirectToLogin(event: Event) {
+    event.preventDefault(); // Prevent default <a> click behavior
+    this.router.navigate(['/login'], { state: { message: 'You should log in to visit doctor' } });
+  }
 }

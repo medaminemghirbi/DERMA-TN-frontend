@@ -42,7 +42,6 @@ import { DoctorProfilComponent } from './shared/doctor-profil/doctor-profil.comp
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { DoctorsListComponent } from './doctors-list/doctors-list.component';
-import { DoctorDetailsComponent } from './doctor-details/doctor-details.component';
 import { TestdragComponent } from './testdrag/testdrag.component';
 import { DoctorServicesComponent } from './doctor/doctor-services/doctor-services.component';
 
@@ -97,8 +96,6 @@ const routes: Routes = [
 
   { path: 'blog/:id', component: BlogDetailsComponent },
   { path: 'doctor/:id', component: DoctorProfilComponent },
-  { path: 'doctor-details/:id', component: DoctorDetailsComponent },
-
   {path:':token/reset', component: ResetPasswordComponent},
   {path:'forgot-password',component:ForgotPasswordComponent},
   {path:'doctors-list',component:DoctorsListComponent},
