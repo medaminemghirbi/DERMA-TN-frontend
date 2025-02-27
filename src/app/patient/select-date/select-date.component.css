@@ -71,3 +71,8 @@
     cursor: not-allowed; background-color: #f0f0f0; color: #6c757d;
 }
 
+
+.today-card {
+    background-color: #ffeb99 !important; /* Light Yellow */
+    border: 1px solid #ffc107; /* Yellow Border */
+}

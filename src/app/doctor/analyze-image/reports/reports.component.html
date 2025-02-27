@@ -61,10 +61,56 @@
               <dd>{{ selectedPrediction.createur }}</dd>
               <dt>Téléchargé</dt>
               <dd>{{ selectedPrediction.download_count }} fois</dd>
-              <dd></dd>
+              <dt>Date Envoie
+                <ul>
+                  <li *ngIf="selectedPrediction.sent_at">
+                    <span class="badge bg-success">Envoyé le {{selectedPrediction.sent_at | date: 'dd-MM-yyyy'}}
+                      at {{selectedPrediction.sent_at | date: 'hh:mm a'}} </span>
+
+                  </li>
+
+                  <li *ngIf="!selectedPrediction.sent_at">
+                    <span class="badge bg-danger">Rapport n'est pas envoyé encore Aux patient </span>
+                      <button *ngIf="!selectedPrediction.sent_at" data-bs-toggle="modal" data-bs-target="#standard-modal"
+                  class="btn btn-rounded btn-success">Envoyer Au Patient Par Mail</button>
+                  </li>
+
+                </ul>
+              </dt>
             </dl>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="standard-modalLabel">Envoyer le rapport Par Mail</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="col-12">
+            <div class="input-block local-forms cal-icon">
+              <select class="form-control" [(ngModel)]="selectedPatient" name="patient">
+                <option hidden value="" selected>Select Patient</option>
+                <option *ngFor="let patient of patients" [value]="patient.id">
+                  Mr. {{ patient.firstname }} {{ patient.lastname }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <hr>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="sent_report(selectedPatient)" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

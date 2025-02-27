@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
@@ -15,16 +15,43 @@ import { TranslateService } from '@ngx-translate/core';
 export class IndexComponent implements OnInit {
   public connecte: boolean = false;
   messageError: any;
-
+  currentUser: any;
+  role:any
   // Define the form group with validation
   registerForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),  // Email field with required and email format validation
     password: new FormControl('', [Validators.required, Validators.minLength(6)])  // Password field with required and min length validation
   });
 
-  constructor(private Auth: AuthService, private route: Router, private toastr: ToastrService, private translate: TranslateService) {}
+  constructor(private Auth: AuthService, private route: Router, private actrou: ActivatedRoute, private toastr: ToastrService, private translate: TranslateService) {
+    this.currentUser = this.Auth.getcurrentuser();
+    this.role = this.Auth.getRole();
 
-  ngOnInit(): void {}
+  }
+
+  ngOnInit(): void {
+    this.actrou.queryParams.subscribe(params => {
+      const state = history.state;
+      if (state?.message) {
+        this.toastr.error(state.message, 'Access Denied'); // Show toaster notification
+      }
+    });
+  }
+  goToDashboard(): void {
+    const userTypes: { [key: string]: string } = {
+      'Admin': 'admin/dashboard',
+      'Doctor': 'doctor/dashboard',
+      'Patient': 'patient/dashboard'
+    };
+
+    // Navigate based on the role if it exists in userTypes
+    if (this.role && userTypes[this.role]) {
+      this.toastr.success('Welcome back!');
+      this.route.navigate([userTypes[this.role]]);
+    } else {
+      this.toastr.error('Access denied. Please contact support.');
+    }
+  }
 
   // Login method
   login() {

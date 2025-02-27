@@ -91,3 +91,20 @@
     margin-top: 10px; /* Space above the tip */
     font-weight: 500; /* Slightly bolder text */
 }
+
+.icon-Star {
+    font-size: 20px;
+    color: #ddd; /* Empty star color */
+  }
+  
+  .icon-Star.filled {
+    color: #FFD700; /* Filled star color (gold) */
+  }
+  
+  .icon-Star.partial {
+    background: linear-gradient(to right, #FFD700 50%, #ddd 50%);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  

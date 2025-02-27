@@ -9,12 +9,12 @@
         <div class="content">
             <div class="mt-3">
                 <button class="btn btn-success" [routerLink]="['/patient', selectedDoctorData?.id, 'select-date']">
-                    <i class="fas fa-arrow-left"></i> Go Back
+                    <i class="fas fa-arrow-left"></i>  {{'select_date.back'| translate}}
                 </button>
             </div>
 
             <div class="confirmation-wrapper">
-                <h1 class="confirmation-title">Appointment Confirmation</h1>
+                <h1 class="confirmation-title"> {{'book_now.confirmation'| translate}}</h1>
 
                 <div class="doctor-info">
                     <div class="profile-img">
@@ -23,12 +23,12 @@
                     </div>
                     <h2 class="doctor-name">Dr. {{ selectedDoctorData?.firstname }} {{ selectedDoctorData?.lastname }}
                     </h2>
-                    <p class="appointment-date"><strong>Date:</strong> {{ appointmentDay }} {{ appointmentDate }}</p>
-                    <p class="appointment-time"><strong>Time:</strong> {{ appointmentTime }}</p>
+                    <p class="appointment-date"><strong>{{'book_now.date'| translate}}:</strong> {{ appointmentDay }} {{ appointmentDate }}</p>
+                    <p class="appointment-time"><strong>{{'book_now.time'| translate}}:</strong> {{ appointmentTime }}</p>
                 </div>
 
                 <div *ngIf="selectedDoctorData.working_on_line" class="card-header d-flex justify-content-between align-items-center">
-                    <h4 class="card-title">Online Appointment?</h4>
+                    <h4 class="card-title">{{'book_now.online'| translate}}</h4>
                     <div class="status-toggle d-flex justify-content-between align-items-center">
                         <input type="checkbox" id="online" class="check" [checked]="online" (change)="isonline($event)">
                         <label for="online" class="checktoggle">checkbox</label>
@@ -37,7 +37,7 @@
                 <br>
 
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h4 class="card-title">Add Note To Doctor</h4>
+                    <h4 class="card-title">{{'book_now.add_note'| translate}}</h4>
                     <div class="status-toggle d-flex justify-content-between align-items-center">
                         <input type="checkbox" id="sms_notifications" class="check" [checked]="note_active"
                             (change)="toggleSmsNotifications($event)">
@@ -49,20 +49,20 @@
                 <!-- Note field only visible when note_active is true -->
                 <div *ngIf="note_active" class="col-12 col-sm-12">
                     <div class="input-block local-forms">
-                        <label>Notes <span class="login-danger">*</span></label>
+                        <label>{{'book_now.note'| translate}} <span class="login-danger">*</span></label>
                         <textarea class="form-control" rows="3" [(ngModel)]="note"></textarea>
                     </div>
                 </div>
 
                 <div class="confirmation-message">
-                    <p>Thank you for choosing our services. Please confirm your appointment with Dr. {{
+                    <p>{{'book_now.tip'| translate}} Dr.{{
                         selectedDoctorData?.firstname }} {{ selectedDoctorData?.lastname }}.</p>
                 </div>
 
                 <div class="confirmation-buttons">
-                    <button class="btn-confirm" id="registerButton" (click)="confirmAppointment()">Confirm
-                        Appointment</button>
-                    <button class="btn-cancel" (click)="cancelAppointment()">Cancel</button>
+                    <button class="btn-confirm" id="registerButton" (click)="confirmAppointment()">
+                        {{'book_now.confirm'| translate}}</button>
+                    <button class="btn-cancel" (click)="cancelAppointment()">{{'book_now.cancel'| translate}}</button>
                 </div>
 
             </div>
