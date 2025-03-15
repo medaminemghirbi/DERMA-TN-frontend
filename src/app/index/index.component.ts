@@ -76,7 +76,7 @@ export class IndexComponent implements OnInit {
       (response: any) => {
         if (response.status === 401) {
           this.showError('User Not Found Or Invalid Credentials');
-        } else if (response.user.email_confirmed) {
+        } else if (response.user.confirmed_at) {
           this.handleLoginSuccess(response);
         } else {
           this.showError('Account created but not confirmed! Check your email.');
