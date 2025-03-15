@@ -76,7 +76,6 @@
                                 <th>{{'patient_request.OnlinePaymentStatus' | translate}}</th>
                                 <th>{{'patient_request.Persons' | translate}}</th>
                                 <th>{{'patient_request.PhoneNumbers' | translate}}</th>
-                                <th>{{'patient_request.CreatedDate' | translate}}</th>
                                 <th>{{'patient_request.Status' | translate}}</th>
                                 <th>{{'patient_request.Manage' | translate}}</th>
 
@@ -179,7 +178,6 @@
                                         Provided
                                     </span>
                                 </td>
-                                <td class="description-content"><a>{{ item.created_at | date: 'yyyy' }}</a></td>
                                 <td>
                                     <button *ngIf="item.status === 'approved'" class="custom-badge status-green">
                                         Accepted

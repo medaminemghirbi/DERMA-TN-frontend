@@ -15,11 +15,11 @@ export class AuthService {
 
   // Login method, assumes backend sets token in response
   login(data: any): Observable<any> {
-    return this.http.post(environment.urlBackend + 'sessions', data);
+    return this.http.post(environment.urlBackend + 'api/sign_in', data);
   }
 
   register(data: any): Observable<any> {
-    return this.http.post(environment.urlBackend + 'registrations', data);
+    return this.http.post(environment.urlBackend + 'api/sign_up', data);
   }
   logout() {
     this.connecte = false;
