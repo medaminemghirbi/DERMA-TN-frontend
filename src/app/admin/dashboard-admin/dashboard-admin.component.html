@@ -2,366 +2,49 @@
     <app-header-admin></app-header-admin>
     <app-sidebar-admin></app-sidebar-admin>
     <div class="page-wrapper">
-        <div class="content">
-            <br>
-
-            <div class="good-morning-blk">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="morning-user">
-                            <h2>Good Morning, <span>Mr {{admindata.firstname}} {{admindata.lastname}}</span></h2>
-                            <p>you are logged in as <span style="color: #2e37a4;"> <b> {{userType}} </b></span>Have a
-                                nice day at work.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 position-blk">
-                        <div class="morning-img">
-                            <img src="../../../assets/img/morning-img-01.png" alt>
-                        </div>
-                    </div>
-                </div>
+      <div class="content">
+        <br>
+  
+        <div class="good-morning-blk">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="morning-user">
+                <h2>Good Morning, <span>Mr {{admindata.firstname}} {{admindata.lastname}}</span></h2>
+                <p>
+                  You are logged in as
+                  <span style="color: #2e37a4;">
+                    <b>{{ userType }}</b>
+                  </span> Have a nice day at work.
+                </p>
+              </div>
             </div>
-            <div class="feature-content">
-                <!-- First row of feature blocks -->
-                <div class="row mb-4 clearfix">
-                    <div class="col-xl-4 col-lg-12 col-md-12 feature-block">
-                        <div class="feature-block-two">
-                            <div class="inner-box">
-                                <div class="pattern">
-                                    <div class="pattern-1"   
-                                        style="background-image: url(../../../assets/images1/shape/shape-79.png);">
-                                    </div>
-                                    <div class="pattern-2"
-                                        style="background-image: url(../../../assets/images1/shape/shape-80.png);">
-                                    </div>
-                                </div>
-                                <div class="icon-box"> <img class="icon-image" src="../../../assets/img/icons/dep-icon-01.svg" alt></div>
-                                <h3>{{doctors_count}}</h3>
-                                <h5>Total Doctors</h5>
-                                <p>Doctor availability and service.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-12 col-md-12 feature-block">
-                        <div class="feature-block-two">
-                            <div class="inner-box">
-                                <div class="pattern">
-                                    <div class="pattern-1"
-                                        style="background-image: url(../../../assets/images1/shape/shape-81.png);">
-                                    </div>
-                                    <div class="pattern-2"
-                                        style="background-image: url(../../../assets/images1/shape/shape-82.png);">
-                                    </div>
-                                </div>
-                                <div class="icon-box"> <img class="icon-image" src="../../../assets/img/icons/empty-wallet.svg" alt></div>
-                                <h3>{{BLogs_count}}</h3>
-                                <h5>Total Blogs</h5>
-                                <p>Latest updates and articles posted.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-12 col-md-12 feature-block">
-                        <div class="feature-block-two">
-                            <div class="inner-box">
-                                <div class="pattern">
-                                    <div class="pattern-1"
-                                        style="background-image: url(../../../assets/images1/shape/shape-83.png);">
-                                    </div>
-                                    <div class="pattern-2"
-                                        style="background-image: url(../../../assets/images1/shape/shape-84.png);">
-                                    </div>
-                                </div>
-                                <div class="icon-box"> <img class="icon-image" src="../../../assets/img/icons/calendar.svg" alt></div>
-                                <h3>{{appointement_count}}</h3>
-                                <h5>New Appointments</h5>
-                                <p>Scheduled patient appointments today.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Second row of feature blocks -->
-                <div class="row mb-4 clearfix">
-                    <div class="col-xl-4 col-lg-12 col-md-12 feature-block">
-                        <div class="feature-block-two">
-                            <div class="inner-box">
-                                <div class="pattern">
-                                    <div class="pattern-1"
-                                        style="background-image: url(../../../assets/images1/shape/shape-83.png);">
-                                    </div>
-                                    <div class="pattern-2"
-                                        style="background-image: url(../../../assets/images1/shape/shape-84.png);">
-                                    </div>
-                                </div>
-                                <div class="icon-box"> <img class="icon-image" src="../../../assets/img/icons/profile.svg" alt></div>
-                                <h3>{{patient_count}}</h3>
-                                <h5>Total Patients</h5>
-                                <p>Current registered patient count.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-12 col-md-12 feature-block">
-                        <div class="feature-block-two">
-                            <div class="inner-box">
-                                <div class="pattern">
-                                    <div class="pattern-1"
-                                        style="background-image: url(../../../assets/images1/shape/shape-5.png);">
-                                    </div>
-                                    <div class="pattern-2"
-                                        style="background-image: url(../../../assets/images1/shape/shape-9.png);">
-                                    </div>
-                                </div>
-                                <div class="icon-box"> <img  class="icon-image" src="../../../assets/img/icons/scissor.svg" alt></div>
-                                <h3>{{scanned_count}}</h3>
-                                <h5>IA Processed Images</h5>
-                                <p>Images processed with AI system.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-12 col-md-12 feature-block">
-                        <div class="feature-block-two">
-                            <div class="inner-box">
-                                <div class="pattern">
-                                    <div class="pattern-1"
-                                        style="background-image: url(../../../assets/images1/shape/shape-7.png);">
-                                    </div>
-                                    <div class="pattern-2"
-                                        style="background-image: url(../../../assets/images1/shape/shape-11.png);">
-                                    </div>
-                                </div>
-                                <div class="icon-box"> <img  class="icon-image" src="../../../assets/img/icons/dep-icon-04.svg" alt></div>
-                                <h3>{{maladies_count}}</h3>
-                                <h5>Disease Count for IA</h5>
-                                <p>Disease data processed by AI.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-6 position-blk">
+              <div class="morning-img">
+                <img src="../../../assets/img/morning-img-01.png" alt />
+              </div>
             </div>
-
+          </div>
         </div>
-        <div class="notification-box">
-            <div class="msg-sidebar notifications msg-noti">
-                <div class="topnav-dropdown-header">
-                    <span>Messages</span>
-                </div>
-                <div class="drop-scroll msg-list-scroll" id="msg_list">
-                    <ul class="list-box">
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">R</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Richard Miles </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item new-message">
-                                    <div class="list-left">
-                                        <span class="avatar">J</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">John Doe</span>
-                                        <span class="message-time">1 Aug</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">T</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Tarah Shropshire </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">M</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Mike Litorus</span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">C</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Catherine Manseau </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">D</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Domenic Houston </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">B</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Buster Wigton </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">R</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Rolland Webber </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">C</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author"> Claire Mapes </span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">M</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Melita Faucher</span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">J</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Jeffery Lalor</span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">L</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Loren Gatlin</span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="list-item">
-                                    <div class="list-left">
-                                        <span class="avatar">T</span>
-                                    </div>
-                                    <div class="list-body">
-                                        <span class="message-author">Tarah Shropshire</span>
-                                        <span class="message-time">12:28 AM</span>
-                                        <div class="clearfix"></div>
-                                        <span class="message-content">Lorem ipsum dolor sit amet, consectetur
-                                            adipiscing</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="topnav-dropdown-footer">
-                    <a href="#">See all messages</a>
-                </div>
-            </div>
+  
+        <!-- Dropdown to dynamically switch chart type -->
+        <div class="chart-options">
+          <label for="chart-type">Select Chart Type: </label>
+          <select id="chart-type" class="form-control form-small select" [(ngModel)]="chartType">
+            <option value="doughnut">Doughnut</option>
+            <option value="bar">Bar Chart</option>
+            <option value="pie">Pie Chart</option>
+          </select>
         </div>
+  
+        <!-- Centered canvas for the chart -->
+        <div class="canvas-container" *ngIf="chartReady">
+          <canvas mdbChart [chartType]="chartType" [datasets]="chartDatasets" [labels]="chartLabels"
+            [colors]="chartColors" [options]="chartOptions" [legend]="true" (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+          </canvas>
+        </div>
+      </div>
     </div>
-</div>
-<div class="sidebar-overlay" data-reff></div>
+  </div>
+  <div class="sidebar-overlay" data-reff></div>
+  

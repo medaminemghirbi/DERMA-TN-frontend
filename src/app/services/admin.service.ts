@@ -14,7 +14,7 @@ export class AdminService {
 
   /////////////////////// Dcotors  */////////////////
 
-  statistique() {
+  statistique() : Observable<any> {
     return this.http.get(`${environment.urlBackend}` + 'api/v1/statistique/');
   }
   getDoctors() {

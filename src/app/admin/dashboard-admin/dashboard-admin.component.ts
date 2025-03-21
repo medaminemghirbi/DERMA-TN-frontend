@@ -21,25 +21,95 @@ export class DashboardAdminComponent implements OnInit {
   doctors_count: any
   scanned_count: any
   maladies_count: any
-  constructor( private route: Router , private auth: AuthService,private usersService: AdminService ) { }
+
+  chartType: any;
+  chartOptions: any
+  chartDatasets: any = [];
+  chartLabels: any = [];
+  chartColors: any = [];
+  chartReady = false;
+
+  
+  constructor( private route: Router , private auth: AuthService,private usersService: AdminService ) { 
+    this.chartType = 'bar';
+    this.chartLabels = ['Consultation', 'Patient', 'Blogs', 'Doctors', 'Number of diseases trained by AI', 'Scanned Image With IA'];
+    this.chartColors = [
+      {
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(135, 107, 28, 0.2)',
+          'rgba(28, 13, 236, 0.2)',
+
+          'rgba(243, 215, 55, 0.2)',
+
+
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(135, 107, 28, 1)',
+          'rgba(28, 13, 236, 0.2)',
+          'rgba(243, 215, 55, 0.2)',
+
+
+
+        ],
+        borderWidth: 2,
+      }
+    ];
+    this.chartOptions = {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            precision: 0
+          }
+        }]
+      },
+      barPercentage: 0.6,
+      categoryPercentage: 0.8
+    };
+
+  }
 
   ngOnInit(): void {
-    this.admindata = JSON.parse( sessionStorage.getItem('admindata') !) ;
+    this.admindata = JSON.parse(sessionStorage.getItem('admindata')!);
     this.userType = sessionStorage.getItem('user_type') || 'Guest';
+  
+    this.usersService.statistique().subscribe(
+      (data) => {
+        // Extract values from the API response correctly
+        this.chartDatasets = [
+          { 
+            data: [
+              data.apointements, 
+              data.patients, 
+              data.blogs, 
+              data.doctors, 
+              data.maladies,
+              data.scanned
 
-    this.usersService.statistique().subscribe(data => {
-      this.statistique = data;
-      this.appointement_count =  this.statistique.apointements;
-      this.patient_count = this.statistique.patients;
-      this.BLogs_count =  this.statistique.blogs;
-      this.doctors_count =  this.statistique.doctors;
+            ], 
+            label: 'DermaPro Officiel statistic' 
+          }
+        ];
+        this.chartReady = true;
+      }, 
+      (err: HttpErrorResponse) => {
+        this.messageErr = "We didn't find any data in our database.";
+      }
+    );
+  }
+  
+  chartClicked(event: any): void {
+  }
 
-      this.scanned_count =  this.statistique.scanned;
-
-      this.maladies_count =  this.statistique.maladies;
-
-    }, (err: HttpErrorResponse) => {
-      this.messageErr = "We don't found any demande in our database";
-    });
+  chartHovered(event: any): void {
   }
 }

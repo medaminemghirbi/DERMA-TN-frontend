@@ -30,6 +30,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "@types/googlemaps": "^3.43.3",
+    "angular-bootstrap-md": "^14.0.0",
     "file-saver": "^2.0.5",
     "http-client": "^4.3.1",
     "httpclient": "^0.1.0",

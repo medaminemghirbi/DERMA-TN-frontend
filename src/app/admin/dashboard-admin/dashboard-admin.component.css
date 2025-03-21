@@ -4,3 +4,16 @@
     display: block;
     margin: 10px auto 0; /* Add 20px space at the top */
 }
+/* Parent container styling for centering */
+.canvas-container {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    height: 60vh;             /* Takes 60% of viewport height */
+    margin: 0 auto;           /* Center content */
+}
+
+canvas {
+    max-width: 100%;          /* Responsive canvas width */
+    max-height: 100%;         /* Responsive canvas height */
+}
