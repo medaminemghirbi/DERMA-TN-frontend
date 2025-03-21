@@ -78,6 +78,7 @@ import { LandingHeaderComponent } from './landing-header/landing-header.componen
 import { LandingFooterComponent } from './landing-footer/landing-footer.component';
 import { TestdragComponent } from './testdrag/testdrag.component';
 import { DoctorServicesComponent } from './doctor/doctor-services/doctor-services.component';
+import { ChartsModule } from 'angular-bootstrap-md';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -161,6 +162,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxLoadersCssModule,
     NgxEditorModule,
     NgSelectModule,
+    ChartsModule,
     NgProgressModule.withConfig({
       color: "#003d99"
     }),
